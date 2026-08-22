@@ -55,7 +55,7 @@ export default function CareerDetailPage() {
         </Link>
 
         <h1 className="font-heading text-3xl md:text-4xl font-bold text-secondary-950 mb-4">{career.title}</h1>
-        <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-secondary-500 mb-8 pb-6 border-b border-slate-100">
+        <div className="flex flex-wrap items-center gap-4 text-xs sm:text-sm text-secondary-500 mb-8 pb-6 border-b border-industrial-100">
           {career.department && <span className="flex items-center gap-1.5"><Briefcase size={15} className="text-primary-600" /> {career.department}</span>}
           {career.location && <span className="flex items-center gap-1.5"><MapPin size={15} className="text-primary-600" /> {career.location}</span>}
           {career.type && <span className="flex items-center gap-1.5"><Clock size={15} className="text-primary-600" /> {career.type}</span>}
@@ -80,8 +80,8 @@ export default function CareerDetailPage() {
         )}
 
         {/* Application Form */}
-        <div className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/80 shadow-card">
-          <h3 className="font-heading text-xl font-bold text-secondary-950 mb-6 pb-2 border-b border-slate-100">
+        <div className="bg-white rounded-3xl p-8 sm:p-10 border border-industrial-200/80 shadow-card">
+          <h3 className="font-heading text-xl font-bold text-secondary-950 mb-6 pb-2 border-b border-industrial-100">
             Apply for this Position
           </h3>
           {status === "success" ? (

@@ -24,7 +24,6 @@ export default function ServicePageTemplate({ service }) {
         description={service.hero.description}
         primaryCTA={{ label: service.hero.cta, href: "/schedule-pickup" }}
         secondaryCTA={{ label: "Talk to Our Team", href: "/contact" }}
-        minHeight="min-h-[70vh]"
       />
 
       {/* Challenge / Context Section (Centered) */}
@@ -63,7 +62,7 @@ export default function ServicePageTemplate({ service }) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.3, delay: index * 0.04 }}
-                  className="flex items-center gap-3 bg-white rounded-xl px-4 py-3.5 border border-slate-200/80 shadow-xs hover:border-primary-300 hover:shadow-sm transition-all"
+                  className="flex items-center gap-3 bg-white rounded-xl px-4 py-3.5 border border-industrial-200 shadow-xs hover:border-primary-300 hover:shadow-sm transition-all"
                 >
                   <CheckCircle2 size={18} className="text-primary-600 shrink-0" />
                   <span className="text-secondary-800 text-sm font-medium">{item}</span>
@@ -105,7 +104,7 @@ export default function ServicePageTemplate({ service }) {
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.4, delay: index * 0.05 }}
-                  className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs hover:border-primary-300 hover:shadow-card transition-all flex flex-col justify-between text-left"
+                  className="bg-white rounded-2xl p-6 border border-industrial-200 shadow-xs hover:border-primary-300 hover:shadow-card transition-all flex flex-col justify-between text-left"
                 >
                   <div>
                     <div className="w-10 h-10 rounded-xl bg-primary-50 flex items-center justify-center mb-4 border border-primary-200/60 text-primary-600 font-bold">

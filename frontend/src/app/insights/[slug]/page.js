@@ -60,7 +60,7 @@ export default function BlogDetailPage() {
           {blog.title}
         </h1>
 
-        <div className="flex items-center gap-4 text-xs sm:text-sm text-secondary-500 mb-8 pb-6 border-b border-slate-100">
+        <div className="flex items-center gap-4 text-xs sm:text-sm text-secondary-500 mb-8 pb-6 border-b border-industrial-100">
           {blog.publishedAt && (
             <span className="flex items-center gap-1.5"><Calendar size={14} className="text-primary-600" /> {formatDate(blog.publishedAt)}</span>
           )}
@@ -70,7 +70,7 @@ export default function BlogDetailPage() {
         </div>
 
         {blog.thumbnail && (
-          <img src={blog.thumbnail} alt={blog.title} className="w-full rounded-3xl mb-8 aspect-video object-cover shadow-card border border-slate-200/80" />
+          <img src={blog.thumbnail} alt={blog.title} className="w-full rounded-3xl mb-8 aspect-video object-cover shadow-card border border-industrial-200/80" />
         )}
 
         <div className="prose prose-lg max-w-none text-secondary-600 leading-relaxed space-y-4" dangerouslySetInnerHTML={{ __html: blog.content }} />

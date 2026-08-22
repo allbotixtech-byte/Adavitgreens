@@ -15,7 +15,6 @@ export default function ServicesPage() {
         description="From certified e-waste dismantling to cryptographic data destruction and EPR compliance, we provide responsible resource management for forward-thinking organizations."
         primaryCTA={{ label: "Schedule a Pickup", href: "/schedule-pickup" }}
         secondaryCTA={{ label: "Talk to Our Team", href: "/contact" }}
-        minHeight="min-h-[70vh]"
       />
 
       <section className="section-padding">

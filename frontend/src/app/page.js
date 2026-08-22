@@ -124,14 +124,14 @@ export default function HomePage() {
 
                   <div className="grid grid-cols-2 gap-4">
                     <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-                      <p className="text-xs text-slate-400 uppercase tracking-wider mb-1">Recovery Rate</p>
+                      <p className="text-xs text-industrial-400 uppercase tracking-wider mb-1">Recovery Rate</p>
                       <p className="font-heading text-2xl font-bold text-primary-300">95%+</p>
-                      <p className="text-[11px] text-slate-300 mt-1">Material diverted to recycling streams</p>
+                      <p className="text-[11px] text-industrial-300 mt-1">Material diverted to recycling streams</p>
                     </div>
                     <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-                      <p className="text-xs text-slate-400 uppercase tracking-wider mb-1">Compliance</p>
+                      <p className="text-xs text-industrial-400 uppercase tracking-wider mb-1">Compliance</p>
                       <p className="font-heading text-2xl font-bold text-primary-300">100%</p>
-                      <p className="text-[11px] text-slate-300 mt-1">Authorized handling and tracking</p>
+                      <p className="text-[11px] text-industrial-300 mt-1">Authorized handling and tracking</p>
                     </div>
                   </div>
 
@@ -182,14 +182,14 @@ export default function HomePage() {
               transition={{ duration: 0.7 }}
               className="relative"
             >
-              <div className="rounded-3xl p-8 sm:p-10 bg-gradient-to-br from-secondary-950 via-slate-900 to-secondary-950 text-white border border-slate-800 shadow-xl">
+              <div className="rounded-3xl p-8 sm:p-10 bg-gradient-to-br from-secondary-950 via-industrial-900 to-secondary-950 text-white border border-industrial-800 shadow-xl">
                 <div className="w-14 h-14 rounded-2xl bg-primary-500/20 border border-primary-400/40 flex items-center justify-center mb-6">
                   <Leaf size={28} className="text-primary-400" />
                 </div>
                 <h3 className="text-white font-heading text-2xl font-bold mb-4">
                   The Sustainable Path Forward
                 </h3>
-                <p className="text-slate-300 text-sm leading-relaxed mb-6 font-normal">
+                <p className="text-industrial-300 text-sm leading-relaxed mb-6 font-normal">
                   Our structured process transforms end-of-life electronic waste into valuable secondary resources:
                 </p>
                 <div className="space-y-3">
@@ -204,7 +204,7 @@ export default function HomePage() {
                       <div className="w-2 h-2 rounded-full bg-primary-400 mt-1.5 shrink-0" />
                       <div>
                         <p className="text-sm font-semibold text-primary-200">{s.step}</p>
-                        <p className="text-xs text-slate-400">{s.desc}</p>
+                        <p className="text-xs text-industrial-400">{s.desc}</p>
                       </div>
                     </div>
                   ))}
@@ -277,7 +277,7 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.08 }}
-                className="bg-white rounded-2xl p-7 border border-slate-200/80 text-center hover:border-primary-300 hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between"
+                className="bg-white rounded-2xl p-7 border border-industrial-200/80 text-center hover:border-primary-300 hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between"
               >
                 <div>
                   <div className="w-14 h-14 bg-gradient-to-br from-primary-50 to-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-5 border border-primary-200/60">
@@ -366,10 +366,10 @@ export default function HomePage() {
               <h2 className="font-heading text-3xl sm:text-4xl font-bold text-white mb-6 leading-tight tracking-tight">
                 Your Data Should Never Become Someone Else&apos;s Data.
               </h2>
-              <p className="text-slate-300 leading-relaxed mb-4 font-normal">
+              <p className="text-industrial-300 leading-relaxed mb-4 font-normal">
                 Retiring enterprise IT hardware is as much a cybersecurity requirement as a recycling challenge. Storage drives, magnetic media, servers, and employee workstations carry proprietary corporate records.
               </p>
-              <p className="text-slate-300 leading-relaxed mb-8 font-normal">
+              <p className="text-industrial-300 leading-relaxed mb-8 font-normal">
                 ADVAIT GREEN RECYCLING PRIVATE LIMITED provides degaussing, physical shredding, and cryptographic wipe workflows accompanied by tamper-proof Certificates of Destruction.
               </p>
               <Link
@@ -527,7 +527,7 @@ export default function HomePage() {
             ].map((item, index) => (
               <div
                 key={index}
-                className="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-xs hover:border-primary-300 hover:shadow-card transition-all text-center flex flex-col justify-between"
+                className="bg-white rounded-3xl p-8 border border-industrial-200/80 shadow-xs hover:border-primary-300 hover:shadow-card transition-all text-center flex flex-col justify-between"
               >
                 <div>
                   <span className="inline-block px-3.5 py-1 rounded-full bg-primary-50 text-primary-700 text-xs font-semibold uppercase tracking-wider mb-4">
@@ -559,9 +559,9 @@ export default function HomePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="w-full max-w-3xl mx-auto bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/80 shadow-card"
+            className="w-full max-w-3xl mx-auto bg-white rounded-3xl p-8 sm:p-10 border border-industrial-200/80 shadow-card"
           >
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-industrial-100">
               <div>
                 <span className="text-xs text-primary-700 font-semibold uppercase tracking-wider block">Official Registration</span>
                 <h4 className="font-heading font-bold text-xl text-secondary-950">
@@ -578,20 +578,20 @@ export default function HomePage() {
             </div>
 
             <div className="grid sm:grid-cols-2 gap-3.5 py-5 text-sm">
-              <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100">
-                <span className="text-xs text-slate-400 block mb-0.5 uppercase tracking-wide">GSTIN</span>
+              <div className="p-3.5 rounded-xl bg-industrial-50 border border-industrial-100">
+                <span className="text-xs text-industrial-400 block mb-0.5 uppercase tracking-wide">GSTIN</span>
                 <span className="font-mono font-bold text-secondary-900 text-base">24ABECA2823M1ZQ</span>
               </div>
-              <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100">
-                <span className="text-xs text-slate-400 block mb-0.5 uppercase tracking-wide">Company Constitution</span>
+              <div className="p-3.5 rounded-xl bg-industrial-50 border border-industrial-100">
+                <span className="text-xs text-industrial-400 block mb-0.5 uppercase tracking-wide">Company Constitution</span>
                 <span className="font-semibold text-secondary-900">Private Limited Company</span>
               </div>
-              <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100">
-                <span className="text-xs text-slate-400 block mb-0.5 uppercase tracking-wide">Registration Status</span>
+              <div className="p-3.5 rounded-xl bg-industrial-50 border border-industrial-100">
+                <span className="text-xs text-industrial-400 block mb-0.5 uppercase tracking-wide">Registration Status</span>
                 <span className="font-semibold text-secondary-900">Effective from 27 March 2026</span>
               </div>
-              <div className="p-3.5 rounded-xl bg-slate-50 border border-slate-100">
-                <span className="text-xs text-slate-400 block mb-0.5 uppercase tracking-wide">Principal Facility</span>
+              <div className="p-3.5 rounded-xl bg-industrial-50 border border-industrial-100">
+                <span className="text-xs text-industrial-400 block mb-0.5 uppercase tracking-wide">Principal Facility</span>
                 <span className="font-semibold text-secondary-900">Vamaj Road, Mahesana, Gujarat</span>
               </div>
             </div>
@@ -622,7 +622,7 @@ export default function HomePage() {
             ].map((area, index) => (
               <div
                 key={index}
-                className="bg-white rounded-2xl p-5 border border-slate-200/80 shadow-xs hover:border-primary-300 transition-all text-center flex flex-col items-center justify-between"
+                className="bg-white rounded-2xl p-5 border border-industrial-200/80 shadow-xs hover:border-primary-300 transition-all text-center flex flex-col items-center justify-between"
               >
                 <div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center mb-3 text-white font-heading font-bold text-sm shadow-button">
                   {index + 1}
@@ -658,7 +658,7 @@ export default function HomePage() {
             ].map((item, index) => (
               <div
                 key={index}
-                className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs hover:border-primary-300 transition-all flex flex-col justify-between"
+                className="bg-white rounded-2xl p-6 border border-industrial-200/80 shadow-xs hover:border-primary-300 transition-all flex flex-col justify-between"
               >
                 <div>
                   <span className="font-heading text-2xl font-bold text-primary-600 block mb-2">
@@ -694,7 +694,7 @@ export default function HomePage() {
               { icon: Globe2, label: "Telecom Networks" },
               { icon: Shield, label: "BFSI & Healthcare" },
             ].map((sector, i) => (
-              <div key={i} className="p-5 rounded-2xl bg-slate-50 border border-slate-200/60 flex flex-col items-center justify-center hover:bg-primary-50/50 hover:border-primary-200 transition-colors">
+              <div key={i} className="p-5 rounded-2xl bg-industrial-50 border border-industrial-200/60 flex flex-col items-center justify-center hover:bg-primary-50/50 hover:border-primary-200 transition-colors">
                 <sector.icon size={28} className="text-primary-600 mb-2.5" />
                 <span className="text-xs font-semibold text-secondary-800 text-center">{sector.label}</span>
               </div>
@@ -735,7 +735,7 @@ export default function HomePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.08 }}
-                className="bg-white rounded-2xl p-7 border border-slate-200/80 shadow-xs flex flex-col justify-between text-left"
+                className="bg-white rounded-2xl p-7 border border-industrial-200/80 shadow-xs flex flex-col justify-between text-left"
               >
                 <div>
                   <div className="flex items-center gap-1 text-amber-400 mb-4">
@@ -747,7 +747,7 @@ export default function HomePage() {
                     &ldquo;{t.quote}&rdquo;
                   </p>
                 </div>
-                <div className="pt-4 border-t border-slate-100">
+                <div className="pt-4 border-t border-industrial-100">
                   <p className="font-heading font-bold text-secondary-950 text-sm">{t.author}</p>
                   <p className="text-xs text-primary-700 font-medium">{t.company}</p>
                 </div>
@@ -783,7 +783,7 @@ export default function HomePage() {
                 desc: "How structured ITAD programs transform decommissioned servers and laptops into valuable secondary materials.",
               },
             ].map((post, index) => (
-              <div key={index} className="bg-white rounded-2xl p-6 border border-slate-200/80 shadow-xs hover:border-primary-300 hover:shadow-card transition-all flex flex-col justify-between text-left">
+              <div key={index} className="bg-white rounded-2xl p-6 border border-industrial-200/80 shadow-xs hover:border-primary-300 hover:shadow-card transition-all flex flex-col justify-between text-left">
                 <div>
                   <span className="inline-block px-3 py-1 rounded-full bg-primary-50 text-primary-700 text-xs font-semibold mb-3">
                     {post.tag}
@@ -795,7 +795,7 @@ export default function HomePage() {
                     {post.desc}
                   </p>
                 </div>
-                <div className="mt-5 pt-3 border-t border-slate-100 flex items-center justify-between text-xs font-semibold text-primary-700">
+                <div className="mt-5 pt-3 border-t border-industrial-100 flex items-center justify-between text-xs font-semibold text-primary-700">
                   <span>Read Insight</span>
                   <ArrowRight size={13} />
                 </div>

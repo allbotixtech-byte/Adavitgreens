@@ -46,7 +46,7 @@ export default function SectionHeading({
         <p
           className={`text-base md:text-[1.05rem] leading-relaxed max-w-2xl ${
             centered ? "mx-auto text-center" : "text-left"
-          } ${light ? "text-slate-300" : "text-secondary-600"}`}
+          } ${light ? "text-industrial-300" : "text-secondary-600"}`}
         >
           {description}
         </p>

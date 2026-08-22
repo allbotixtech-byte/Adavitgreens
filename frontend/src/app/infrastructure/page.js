@@ -54,7 +54,6 @@ export default function InfrastructurePage() {
         description="Located in Mahesana, Gujarat, our facility is engineered with dedicated operational zones ensuring maximum material yield, worker safety, and environmental protection."
         primaryCTA={{ label: "Schedule a Facility Inspection", href: "/contact" }}
         secondaryCTA={{ label: "View Our Services", href: "/services" }}
-        minHeight="min-h-[70vh]"
       />
 
       {/* Facility Highlights Section */}
@@ -73,14 +72,14 @@ export default function InfrastructurePage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.08 }}
-                className="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-xs hover:border-primary-300 hover:shadow-card-hover transition-all flex flex-col justify-between"
+                className="bg-white rounded-3xl p-8 border border-industrial-200/80 shadow-xs hover:border-primary-300 hover:shadow-card-hover transition-all flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-5">
                     <div className="w-14 h-14 bg-gradient-to-br from-primary-50 to-primary-100 rounded-2xl flex items-center justify-center border border-primary-200/60 text-primary-700 shadow-xs">
                       <item.icon size={26} />
                     </div>
-                    <span className="text-xs font-semibold px-3 py-1 rounded-full bg-slate-50 text-secondary-600 border border-slate-200">
+                    <span className="text-xs font-semibold px-3 py-1 rounded-full bg-industrial-50 text-secondary-600 border border-industrial-200">
                       {item.capacity}
                     </span>
                   </div>
@@ -129,7 +128,7 @@ export default function InfrastructurePage() {
                 <ShieldCheck size={26} />
               </div>
               <h3 className="font-heading font-bold text-2xl mb-3">Principal Plant Address</h3>
-              <p className="text-slate-300 text-sm leading-relaxed mb-6">
+              <p className="text-industrial-300 text-sm leading-relaxed mb-6">
                 NO 2016 (New Survey No. 2103)/B/2, Vamaj Road, Vamaj, Mahesana, Gujarat – 382728
               </p>
               <div className="pt-4 border-t border-white/10 text-xs text-primary-300 font-mono space-y-1">

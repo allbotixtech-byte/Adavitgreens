@@ -10,12 +10,11 @@ export default function TermsPage() {
         eyebrow="TERMS OF ENGAGEMENT"
         heading="Terms & Conditions"
         description="Operational terms and conditions governing recycling, logistics, and IT asset disposition services provided by ADVAIT GREEN RECYCLING PRIVATE LIMITED."
-        minHeight="min-h-[50vh]"
       />
       <section className="section-padding">
         <div className="container-custom max-w-4xl mx-auto">
-          <div className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200/80 shadow-card space-y-8 text-secondary-600">
-            <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 flex items-center justify-between text-xs text-secondary-500">
+          <div className="bg-white rounded-3xl p-8 sm:p-12 border border-industrial-200/80 shadow-card space-y-8 text-secondary-600">
+            <div className="p-4 rounded-2xl bg-industrial-50 border border-industrial-100 flex items-center justify-between text-xs text-secondary-500">
               <span><strong>Effective Date:</strong> March 2026</span>
               <span><strong>Jurisdiction:</strong> Gujarat, India</span>
             </div>

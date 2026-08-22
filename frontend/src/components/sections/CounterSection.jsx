@@ -69,7 +69,7 @@ export default function CounterSection({ counters, heading, description }) {
                 {heading}
               </h2>
               {description && (
-                <p className="text-slate-300/90 text-base md:text-lg leading-relaxed font-normal">
+                <p className="text-industrial-300/90 text-base md:text-lg leading-relaxed font-normal">
                   {description}
                 </p>
               )}
@@ -84,12 +84,12 @@ export default function CounterSection({ counters, heading, description }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.08 }}
-                className="bg-slate-900/60 backdrop-blur-md rounded-2xl p-6 border border-white/10 text-center hover:border-primary-500/40 transition-all duration-300 hover:shadow-glow group"
+                className="bg-industrial-900/60 backdrop-blur-md rounded-2xl p-6 border border-white/10 text-center hover:border-primary-500/40 transition-all duration-300 hover:shadow-glow group"
               >
                 <div className="font-heading text-3xl sm:text-4xl md:text-[2.75rem] font-bold text-transparent bg-clip-text bg-gradient-to-r from-white via-primary-200 to-primary-400 mb-2 tracking-tight group-hover:scale-105 transition-transform duration-300">
                   <Counter end={item.value} suffix={item.suffix} />
                 </div>
-                <p className="text-slate-300 text-xs sm:text-sm font-medium tracking-wide">
+                <p className="text-industrial-300 text-xs sm:text-sm font-medium tracking-wide">
                   {item.label}
                 </p>
               </motion.div>

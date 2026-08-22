@@ -15,7 +15,7 @@ export default function Footer() {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-gradient-to-b from-secondary-950 via-[#0a101d] to-[#060a12] text-slate-300 relative overflow-hidden border-t border-slate-800/80">
+    <footer className="bg-gradient-to-b from-secondary-950 via-[#0a101d] to-[#060a12] text-industrial-300 relative overflow-hidden border-t border-industrial-800/80">
       {/* Subtle background ambient glow */}
       <div className="absolute top-0 right-1/4 w-96 h-96 bg-primary-500/5 rounded-full blur-3xl pointer-events-none" />
       <div className="absolute bottom-0 left-10 w-72 h-72 bg-accent-500/5 rounded-full blur-3xl pointer-events-none" />
@@ -39,15 +39,15 @@ export default function Footer() {
               </div>
             </Link>
 
-            <p className="text-slate-400 text-sm leading-relaxed max-w-sm">
+            <p className="text-industrial-400 text-sm leading-relaxed max-w-sm">
               ADVAIT GREEN RECYCLING PRIVATE LIMITED is dedicated to responsible recycling, IT asset disposition, and circular economy solutions across India.
             </p>
 
             {/* Verified GST Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-slate-900/90 border border-slate-800/90 shadow-inner text-xs">
+            <div className="inline-flex items-center gap-2 px-3.5 py-2 rounded-xl bg-industrial-900/90 border border-industrial-800/90 shadow-inner text-xs">
               <ShieldCheck size={16} className="text-primary-400 shrink-0" />
-              <div className="font-mono text-slate-300">
-                <span className="text-slate-500 text-[10px] block leading-none uppercase">Verified GSTIN</span>
+              <div className="font-mono text-industrial-300">
+                <span className="text-industrial-500 text-[10px] block leading-none uppercase">Verified GSTIN</span>
                 <span className="font-medium text-white">{companyInfo.gstin}</span>
               </div>
             </div>
@@ -69,11 +69,11 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-primary-400 transition-all duration-200 group"
+                    className="inline-flex items-center gap-2 text-sm text-industrial-400 hover:text-primary-400 transition-all duration-200 group"
                   >
                     <ArrowRight
                       size={12}
-                      className="text-slate-600 group-hover:text-primary-400 group-hover:translate-x-0.5 transition-all"
+                      className="text-industrial-600 group-hover:text-primary-400 group-hover:translate-x-0.5 transition-all"
                     />
                     <span>{link.label}</span>
                   </Link>
@@ -93,11 +93,11 @@ export default function Footer() {
                 <li key={link.href}>
                   <Link
                     href={link.href}
-                    className="inline-flex items-center gap-2 text-sm text-slate-400 hover:text-primary-400 transition-all duration-200 group"
+                    className="inline-flex items-center gap-2 text-sm text-industrial-400 hover:text-primary-400 transition-all duration-200 group"
                   >
                     <ArrowRight
                       size={12}
-                      className="text-slate-600 group-hover:text-primary-400 group-hover:translate-x-0.5 transition-all"
+                      className="text-industrial-600 group-hover:text-primary-400 group-hover:translate-x-0.5 transition-all"
                     />
                     <span>{link.label}</span>
                   </Link>
@@ -114,10 +114,10 @@ export default function Footer() {
             </h4>
             <ul className="space-y-3.5 text-sm">
               <li className="flex items-start gap-3">
-                <div className="w-8 h-8 rounded-lg bg-slate-900 flex items-center justify-center shrink-0 mt-0.5 border border-slate-800">
+                <div className="w-8 h-8 rounded-lg bg-industrial-900 flex items-center justify-center shrink-0 mt-0.5 border border-industrial-800">
                   <MapPin size={15} className="text-primary-400" />
                 </div>
-                <span className="text-slate-400 leading-relaxed text-xs">
+                <span className="text-industrial-400 leading-relaxed text-xs">
                   {companyInfo.address.line1}, {companyInfo.address.line2},{" "}
                   {companyInfo.address.city}, {companyInfo.address.state} –{" "}
                   {companyInfo.address.pincode}
@@ -126,9 +126,9 @@ export default function Footer() {
               <li>
                 <a
                   href="tel:+912762283000"
-                  className="flex items-center gap-3 text-slate-400 hover:text-primary-400 transition-colors group"
+                  className="flex items-center gap-3 text-industrial-400 hover:text-primary-400 transition-colors group"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-slate-900 flex items-center justify-center shrink-0 border border-slate-800 group-hover:border-primary-500/50">
+                  <div className="w-8 h-8 rounded-lg bg-industrial-900 flex items-center justify-center shrink-0 border border-industrial-800 group-hover:border-primary-500/50">
                     <Phone size={15} className="text-primary-400" />
                   </div>
                   <span className="text-xs">+91 (02762) 283000 / 94280 00000</span>
@@ -137,16 +137,16 @@ export default function Footer() {
               <li>
                 <a
                   href="mailto:contact@advaitgreen.com"
-                  className="flex items-center gap-3 text-slate-400 hover:text-primary-400 transition-colors group"
+                  className="flex items-center gap-3 text-industrial-400 hover:text-primary-400 transition-colors group"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-slate-900 flex items-center justify-center shrink-0 border border-slate-800 group-hover:border-primary-500/50">
+                  <div className="w-8 h-8 rounded-lg bg-industrial-900 flex items-center justify-center shrink-0 border border-industrial-800 group-hover:border-primary-500/50">
                     <Mail size={15} className="text-primary-400" />
                   </div>
                   <span className="text-xs">contact@advaitgreen.com</span>
                 </a>
               </li>
-              <li className="flex items-center gap-3 text-xs text-slate-400">
-                <div className="w-8 h-8 rounded-lg bg-slate-900 flex items-center justify-center shrink-0 border border-slate-800">
+              <li className="flex items-center gap-3 text-xs text-industrial-400">
+                <div className="w-8 h-8 rounded-lg bg-industrial-900 flex items-center justify-center shrink-0 border border-industrial-800">
                   <Clock size={15} className="text-primary-400" />
                 </div>
                 <span>Mon – Sat: 9:00 AM – 6:30 PM</span>
@@ -157,12 +157,12 @@ export default function Footer() {
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-slate-800/80 bg-[#040810]/70 py-6">
+      <div className="border-t border-industrial-800/80 bg-[#040810]/70 py-6">
         <div className="container-custom flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-xs text-slate-500 text-center sm:text-left">
+          <p className="text-xs text-industrial-500 text-center sm:text-left">
             &copy; {currentYear} {companyInfo.legalName}. All rights reserved.
           </p>
-          <div className="flex items-center gap-6 text-xs text-slate-500">
+          <div className="flex items-center gap-6 text-xs text-industrial-500">
             {footerLinks.legal.map((link) => (
               <Link
                 key={link.href}

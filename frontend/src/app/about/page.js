@@ -31,7 +31,6 @@ export default function AboutPage() {
         description="ADVAIT GREEN RECYCLING PRIVATE LIMITED is a Gujarat-based recycling enterprise dedicated to transforming obsolete electronics and industrial by-products into productive secondary resources."
         primaryCTA={{ label: "Schedule a Facility Visit", href: "/contact" }}
         secondaryCTA={{ label: "View Our Services", href: "/services" }}
-        minHeight="min-h-[70vh]"
       />
 
       {/* Our Story & Corporate Profile */}
@@ -62,31 +61,31 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6 }}
-              className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/80 shadow-card"
+              className="bg-white rounded-3xl p-8 sm:p-10 border border-industrial-200/80 shadow-card"
             >
               <h3 className="font-heading font-bold text-xl text-secondary-950 mb-6 flex items-center gap-2.5">
                 <Building className="text-primary-600" size={22} />
                 <span>Corporate Credentials</span>
               </h3>
               <div className="space-y-4 text-sm">
-                <div className="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                <div className="flex items-start gap-3 p-3.5 rounded-xl bg-industrial-50 border border-industrial-100">
                   <ShieldCheck className="text-primary-600 shrink-0 mt-0.5" size={18} />
                   <div>
-                    <span className="text-xs text-slate-400 block uppercase">Legal Entity</span>
+                    <span className="text-xs text-industrial-400 block uppercase">Legal Entity</span>
                     <span className="font-semibold text-secondary-900">ADVAIT GREEN RECYCLING PRIVATE LIMITED</span>
                   </div>
                 </div>
-                <div className="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                <div className="flex items-start gap-3 p-3.5 rounded-xl bg-industrial-50 border border-industrial-100">
                   <MapPin className="text-primary-600 shrink-0 mt-0.5" size={18} />
                   <div>
-                    <span className="text-xs text-slate-400 block uppercase">Facility Location</span>
+                    <span className="text-xs text-industrial-400 block uppercase">Facility Location</span>
                     <span className="font-semibold text-secondary-900">Vamaj Road, Vamaj, Mahesana, Gujarat – 382728</span>
                   </div>
                 </div>
-                <div className="flex items-start gap-3 p-3.5 rounded-xl bg-slate-50 border border-slate-100">
+                <div className="flex items-start gap-3 p-3.5 rounded-xl bg-industrial-50 border border-industrial-100">
                   <CheckCircle2 className="text-primary-600 shrink-0 mt-0.5" size={18} />
                   <div>
-                    <span className="text-xs text-slate-400 block uppercase">GST Registration</span>
+                    <span className="text-xs text-industrial-400 block uppercase">GST Registration</span>
                     <span className="font-mono font-bold text-secondary-900">24ABECA2823M1ZQ</span>
                   </div>
                 </div>
@@ -138,7 +137,7 @@ export default function AboutPage() {
                 <h3 className="font-heading text-2xl font-bold text-white mb-4">
                   A Resilient Circular Indian Economy
                 </h3>
-                <p className="text-slate-300 leading-relaxed font-normal">
+                <p className="text-industrial-300 leading-relaxed font-normal">
                   To establish India&apos;s most reliable and technologically proficient recycling infrastructure where materials cycle indefinitely, waste is treated as a strategic resource, and environmental preservation is guaranteed.
                 </p>
               </div>
@@ -163,7 +162,7 @@ export default function AboutPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.08 }}
-                className="bg-white rounded-2xl p-7 border border-slate-200/80 shadow-xs hover:border-primary-300 hover:shadow-card-hover transition-all"
+                className="bg-white rounded-2xl p-7 border border-industrial-200/80 shadow-xs hover:border-primary-300 hover:shadow-card-hover transition-all"
               >
                 <div className="w-12 h-12 bg-gradient-to-br from-primary-50 to-primary-100 rounded-xl flex items-center justify-center mb-4 border border-primary-200/50">
                   <value.icon size={22} className="text-primary-700" />

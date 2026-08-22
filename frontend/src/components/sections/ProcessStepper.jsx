@@ -14,7 +14,7 @@ export default function ProcessStepper({ steps }) {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.5, delay: index * 0.06 }}
-            className="group relative bg-white rounded-2xl p-6 border border-slate-200/80 hover:border-primary-300 hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between"
+            className="group relative bg-white rounded-2xl p-6 border border-industrial-200/80 hover:border-primary-300 hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between"
           >
             <div>
               {/* Step Number Badge */}
@@ -36,7 +36,7 @@ export default function ProcessStepper({ steps }) {
             </div>
 
             {/* Subtle bottom indicator */}
-            <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs text-slate-400 font-medium">
+            <div className="mt-4 pt-3 border-t border-industrial-100 flex items-center justify-between text-xs text-industrial-400 font-medium">
               <span>Phase {index < 4 ? "01: Collection" : "02: Processing"}</span>
               <ArrowRight size={13} className="text-primary-500 opacity-0 group-hover:opacity-100 transition-opacity" />
             </div>

@@ -10,7 +10,7 @@ function FAQItem({ question, answer, isOpen, onToggle }) {
       className={`border rounded-2xl overflow-hidden transition-all duration-300 w-full ${
         isOpen
           ? "border-primary-300 bg-primary-50/40 shadow-sm"
-          : "border-slate-200/80 bg-white hover:border-slate-300 hover:shadow-xs"
+          : "border-industrial-200/80 bg-white hover:border-industrial-300 hover:shadow-xs"
       }`}
     >
       <button
@@ -28,7 +28,7 @@ function FAQItem({ question, answer, isOpen, onToggle }) {
           className={`w-7 h-7 rounded-full flex items-center justify-center shrink-0 mt-0.5 transition-all duration-300 ${
             isOpen
               ? "bg-primary-600 text-white shadow-button rotate-0"
-              : "bg-slate-100 text-secondary-500 hover:bg-slate-200"
+              : "bg-industrial-100 text-secondary-500 hover:bg-industrial-200"
           }`}
         >
           {isOpen ? <Minus size={14} strokeWidth={2.5} /> : <Plus size={14} strokeWidth={2.5} />}

@@ -99,7 +99,6 @@ export default function InsightsPage() {
         eyebrow="EDUCATIONAL INSIGHTS"
         heading="Knowledge That Drives the Circular Economy Forward"
         description="Explore practical insights, statutory regulatory guides, and best practices in e-waste recycling, IT asset disposition, and corporate sustainability."
-        minHeight="min-h-[60vh]"
       />
 
       <section className="section-padding">
@@ -113,7 +112,7 @@ export default function InsightsPage() {
                 className={`px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition-all cursor-pointer ${
                   activeCategory === cat
                     ? "bg-primary-600 text-white shadow-button"
-                    : "bg-slate-100 text-secondary-700 hover:bg-slate-200"
+                    : "bg-industrial-100 text-secondary-700 hover:bg-industrial-200"
                 }`}
               >
                 {cat}

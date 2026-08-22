@@ -59,7 +59,6 @@ export default function SchedulePickupPage() {
         eyebrow="NATIONWIDE LOGISTICS"
         heading="Schedule a Responsible Material Pickup"
         description="Book secure, certified collection for your obsolete enterprise IT assets, electronic scrap, or industrial recyclables directly from your facility."
-        minHeight="min-h-[60vh]"
       />
 
       <section className="section-padding">
@@ -80,7 +79,7 @@ export default function SchedulePickupPage() {
               <p className="text-secondary-600 text-base max-w-xl mx-auto mb-8 leading-relaxed">
                 Thank you for choosing responsible recycling. Our operations coordinator will review your inventory specifications and contact you within 4 business hours to confirm logistics and vehicle allocation.
               </p>
-              <div className="p-4 rounded-2xl bg-slate-50 border border-slate-100 max-w-md mx-auto text-xs text-secondary-600 text-left space-y-1.5 mb-8">
+              <div className="p-4 rounded-2xl bg-industrial-50 border border-industrial-100 max-w-md mx-auto text-xs text-secondary-600 text-left space-y-1.5 mb-8">
                 <p><strong className="text-secondary-900">Registered Office:</strong> ADVAIT GREEN RECYCLING PRIVATE LIMITED</p>
                 <p><strong className="text-secondary-900">Facility:</strong> Vamaj Road, Mahesana, Gujarat – 382728</p>
                 <p><strong className="text-secondary-900">GSTIN:</strong> 24ABECA2823M1ZQ</p>
@@ -105,9 +104,9 @@ export default function SchedulePickupPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="bg-white rounded-3xl p-8 sm:p-12 border border-slate-200/80 shadow-card"
+                className="bg-white rounded-3xl p-8 sm:p-12 border border-industrial-200/80 shadow-card"
               >
-                <div className="flex items-center gap-4 pb-6 mb-8 border-b border-slate-100">
+                <div className="flex items-center gap-4 pb-6 mb-8 border-b border-industrial-100">
                   <div className="w-12 h-12 bg-gradient-to-br from-primary-600 to-primary-700 rounded-2xl flex items-center justify-center text-white shadow-button shrink-0">
                     <Truck size={24} />
                   </div>
@@ -124,7 +123,7 @@ export default function SchedulePickupPage() {
                 <form onSubmit={handleSubmit} className="space-y-8">
                   {/* Step 1: Personal / Company Details */}
                   <div>
-                    <h4 className="font-heading font-bold text-sm text-secondary-950 mb-3 pb-1 border-b border-slate-100 flex items-center gap-2">
+                    <h4 className="font-heading font-bold text-sm text-secondary-950 mb-3 pb-1 border-b border-industrial-100 flex items-center gap-2">
                       <Building2 size={16} className="text-primary-600" />
                       <span>1. Contact & Organization Details</span>
                     </h4>
@@ -185,7 +184,7 @@ export default function SchedulePickupPage() {
 
                   {/* Step 2: Pickup Location & Timing */}
                   <div>
-                    <h4 className="font-heading font-bold text-sm text-secondary-950 mb-3 pb-1 border-b border-slate-100 flex items-center gap-2">
+                    <h4 className="font-heading font-bold text-sm text-secondary-950 mb-3 pb-1 border-b border-industrial-100 flex items-center gap-2">
                       <MapPin size={16} className="text-primary-600" />
                       <span>2. Pickup Location & Preferred Timing</span>
                     </h4>
@@ -260,7 +259,7 @@ export default function SchedulePickupPage() {
 
                   {/* Step 3: Material Details */}
                   <div>
-                    <h4 className="font-heading font-bold text-sm text-secondary-950 mb-3 pb-1 border-b border-slate-100 flex items-center gap-2">
+                    <h4 className="font-heading font-bold text-sm text-secondary-950 mb-3 pb-1 border-b border-industrial-100 flex items-center gap-2">
                       <Package size={16} className="text-primary-600" />
                       <span>3. Material & Inventory Details</span>
                     </h4>

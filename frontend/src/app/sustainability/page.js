@@ -37,7 +37,6 @@ export default function SustainabilityPage() {
         description="Sustainability is not simply what we recycle—it is what we prevent from being lost, what we recover for future generations, and how we protect our planet."
         primaryCTA={{ label: "Schedule a Pickup", href: "/schedule-pickup" }}
         secondaryCTA={{ label: "View Our Services", href: "/services" }}
-        minHeight="min-h-[70vh]"
       />
 
       {/* 5R Circular Framework */}
@@ -56,7 +55,7 @@ export default function SustainabilityPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.08 }}
-                className="bg-white rounded-3xl p-7 border border-slate-200/80 shadow-xs hover:border-primary-300 hover:shadow-card-hover transition-all text-center flex flex-col justify-between"
+                className="bg-white rounded-3xl p-7 border border-industrial-200/80 shadow-xs hover:border-primary-300 hover:shadow-card-hover transition-all text-center flex flex-col justify-between"
               >
                 <div>
                   <div className="w-16 h-16 bg-gradient-to-br from-primary-50 to-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-5 border border-primary-200/60 text-primary-700 shadow-xs">
@@ -88,7 +87,7 @@ export default function SustainabilityPage() {
               <motion.div
                 key={index}
                 {...fadeUp}
-                className="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-card flex flex-col justify-between"
+                className="bg-white rounded-3xl p-8 border border-industrial-200/80 shadow-card flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between mb-4">

@@ -15,11 +15,11 @@ export default function BlogCard({ blog, index = 0 }) {
     >
       <Link
         href={`/insights/${blog.slug}`}
-        className="group flex flex-col justify-between bg-white rounded-2xl overflow-hidden border border-slate-200/80 hover:border-primary-300 hover:shadow-card-hover transition-all duration-300 h-full"
+        className="group flex flex-col justify-between bg-white rounded-2xl overflow-hidden border border-industrial-200/80 hover:border-primary-300 hover:shadow-card-hover transition-all duration-300 h-full"
       >
         <div>
           {/* Thumbnail */}
-          <div className="relative h-52 bg-slate-100 overflow-hidden">
+          <div className="relative h-52 bg-industrial-100 overflow-hidden">
             {blog.thumbnail ? (
               <img
                 src={blog.thumbnail}
@@ -44,7 +44,7 @@ export default function BlogCard({ blog, index = 0 }) {
           {/* Content */}
           <div className="p-6">
             {blog.publishedAt && (
-              <div className="flex items-center gap-1.5 text-xs font-medium text-slate-400 mb-2.5">
+              <div className="flex items-center gap-1.5 text-xs font-medium text-industrial-400 mb-2.5">
                 <Calendar size={13} className="text-primary-600" />
                 <span>{formatDate(blog.publishedAt)}</span>
               </div>
@@ -58,7 +58,7 @@ export default function BlogCard({ blog, index = 0 }) {
           </div>
         </div>
 
-        <div className="px-6 pb-6 pt-2 border-t border-slate-100 flex items-center justify-between text-sm font-semibold text-primary-700 group-hover:text-primary-600 transition-colors">
+        <div className="px-6 pb-6 pt-2 border-t border-industrial-100 flex items-center justify-between text-sm font-semibold text-primary-700 group-hover:text-primary-600 transition-colors">
           <span>Read Full Article</span>
           <ArrowRight size={15} className="group-hover:translate-x-1 transition-transform" />
         </div>

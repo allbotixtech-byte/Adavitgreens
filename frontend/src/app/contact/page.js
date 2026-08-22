@@ -47,7 +47,6 @@ export default function ContactPage() {
         eyebrow="CONNECT WITH US"
         heading="Let&apos;s Build a Greener Recycling Journey Together"
         description="Have recyclable materials, retired IT hardware or an upcoming EPR compliance requirement? Talk with our Gujarat facility team today."
-        minHeight="min-h-[60vh]"
       />
 
       <section className="section-padding">
@@ -55,7 +54,7 @@ export default function ContactPage() {
           <div className="grid lg:grid-cols-12 gap-10 lg:gap-12">
             {/* Contact Info (Span 5) */}
             <div className="lg:col-span-5 space-y-6">
-              <div className="bg-white rounded-3xl p-8 border border-slate-200/80 shadow-card space-y-6">
+              <div className="bg-white rounded-3xl p-8 border border-industrial-200/80 shadow-card space-y-6">
                 <div>
                   <span className="eyebrow mb-3">Corporate Headquarters</span>
                   <h3 className="font-heading text-xl sm:text-2xl font-bold text-secondary-950 mb-1">
@@ -64,13 +63,13 @@ export default function ContactPage() {
                   <p className="text-xs text-primary-700 font-mono font-medium">GSTIN: {companyInfo.gstin}</p>
                 </div>
 
-                <div className="space-y-4 pt-2 border-t border-slate-100">
+                <div className="space-y-4 pt-2 border-t border-industrial-100">
                   <div className="flex items-start gap-3.5">
                     <div className="w-10 h-10 rounded-xl bg-primary-50 flex items-center justify-center shrink-0 border border-primary-200/60 text-primary-700">
                       <MapPin size={18} />
                     </div>
                     <div>
-                      <p className="text-xs text-slate-400 uppercase font-semibold">Registered Office & Plant</p>
+                      <p className="text-xs text-industrial-400 uppercase font-semibold">Registered Office & Plant</p>
                       <p className="text-secondary-800 text-sm leading-relaxed font-medium">
                         {companyInfo.address.line1}, {companyInfo.address.line2}, {companyInfo.address.city}, {companyInfo.address.state} – {companyInfo.address.pincode}
                       </p>
@@ -82,7 +81,7 @@ export default function ContactPage() {
                       <Phone size={18} />
                     </div>
                     <div>
-                      <p className="text-xs text-slate-400 uppercase font-semibold">Telephone Inquiries</p>
+                      <p className="text-xs text-industrial-400 uppercase font-semibold">Telephone Inquiries</p>
                       <p className="text-secondary-800 text-sm font-medium">
                         +91 (02762) 283000 / +91 94280 00000
                       </p>
@@ -94,7 +93,7 @@ export default function ContactPage() {
                       <Mail size={18} />
                     </div>
                     <div>
-                      <p className="text-xs text-slate-400 uppercase font-semibold">Email Channel</p>
+                      <p className="text-xs text-industrial-400 uppercase font-semibold">Email Channel</p>
                       <p className="text-secondary-800 text-sm font-medium">
                         contact@advaitgreen.com / info@advaitgreen.com
                       </p>
@@ -106,7 +105,7 @@ export default function ContactPage() {
                       <Clock size={18} />
                     </div>
                     <div>
-                      <p className="text-xs text-slate-400 uppercase font-semibold">Facility Hours</p>
+                      <p className="text-xs text-industrial-400 uppercase font-semibold">Facility Hours</p>
                       <p className="text-secondary-800 text-sm font-medium">
                         Monday – Saturday: 9:00 AM – 6:30 PM
                       </p>
@@ -122,7 +121,7 @@ export default function ContactPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.6 }}
-                className="bg-white rounded-3xl p-8 sm:p-10 border border-slate-200/80 shadow-card"
+                className="bg-white rounded-3xl p-8 sm:p-10 border border-industrial-200/80 shadow-card"
               >
                 <h3 className="font-heading text-2xl font-bold text-secondary-950 mb-2">
                   Send Us a Direct Message

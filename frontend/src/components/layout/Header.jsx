@@ -47,8 +47,8 @@ export default function Header() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         scrolled
-          ? "bg-white/95 backdrop-blur-md shadow-md border-b border-slate-200/80"
-          : "bg-white/95 backdrop-blur-sm border-b border-slate-100 shadow-xs"
+          ? "bg-white/95 backdrop-blur-md shadow-md border-b border-industrial-200/80"
+          : "bg-white/95 backdrop-blur-sm border-b border-industrial-100 shadow-xs"
       }`}
     >
       {/* Top Bar */}
@@ -62,7 +62,7 @@ export default function Header() {
             <span className="text-white/20">|</span>
             <a
               href="tel:+912762283000"
-              className="flex items-center gap-1.5 text-slate-300 hover:text-primary-300 transition-colors"
+              className="flex items-center gap-1.5 text-industrial-300 hover:text-primary-300 transition-colors"
             >
               <Phone size={12} className="text-primary-400" />
               <span>+91 (02762) 283000</span>
@@ -70,13 +70,13 @@ export default function Header() {
             <span className="text-white/20">|</span>
             <a
               href="mailto:contact@advaitgreen.com"
-              className="flex items-center gap-1.5 text-slate-300 hover:text-primary-300 transition-colors"
+              className="flex items-center gap-1.5 text-industrial-300 hover:text-primary-300 transition-colors"
             >
               <Mail size={12} className="text-primary-400" />
               <span>contact@advaitgreen.com</span>
             </a>
           </div>
-          <div className="flex items-center gap-4 text-slate-300 text-[11px]">
+          <div className="flex items-center gap-4 text-industrial-300 text-[11px]">
             <span className="flex items-center gap-1 text-primary-300/90 font-medium">
               <ShieldCheck size={13} className="text-primary-400" />
               GST: {companyInfo.gstin}
@@ -117,7 +117,7 @@ export default function Header() {
                     className={`flex items-center gap-1 px-3 py-2 text-[13.5px] font-medium rounded-lg transition-all duration-200 cursor-pointer ${
                       pathname.startsWith(link.href)
                         ? "text-primary-700 bg-primary-50 font-semibold shadow-xs"
-                        : "text-secondary-700 hover:text-primary-700 hover:bg-slate-50"
+                        : "text-secondary-700 hover:text-primary-700 hover:bg-industrial-50"
                     }`}
                   >
                     {link.label}
@@ -129,8 +129,8 @@ export default function Header() {
                     />
                   </button>
                   {activeDropdown === link.label && (
-                    <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-slate-100 p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-                      <div className="text-[10px] font-semibold uppercase tracking-wider text-slate-400 px-3 py-1.5 border-b border-slate-100 mb-1">
+                    <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-industrial-100 p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
+                      <div className="text-[10px] font-semibold uppercase tracking-wider text-industrial-400 px-3 py-1.5 border-b border-industrial-100 mb-1">
                         Our Core Solutions
                       </div>
                       {link.children.map((child) => (
@@ -156,7 +156,7 @@ export default function Header() {
                   className={`px-3 py-2 text-[13.5px] font-medium rounded-lg transition-all duration-200 block ${
                     pathname === link.href
                       ? "text-primary-700 bg-primary-50 font-semibold shadow-xs"
-                      : "text-secondary-700 hover:text-primary-700 hover:bg-slate-50"
+                      : "text-secondary-700 hover:text-primary-700 hover:bg-industrial-50"
                   }`}
                 >
                   {link.label}
@@ -177,7 +177,7 @@ export default function Header() {
           </Link>
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
-            className="xl:hidden p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 text-secondary-800 transition-colors"
+            className="xl:hidden p-2.5 rounded-xl bg-industrial-100 hover:bg-industrial-200 text-secondary-800 transition-colors"
             aria-label="Toggle menu"
           >
             {mobileOpen ? <X size={22} /> : <Menu size={22} />}
@@ -188,7 +188,7 @@ export default function Header() {
       {/* Mobile Menu Sheet */}
       {mobileOpen && (
         <div className="xl:hidden fixed inset-0 top-[68px] bg-secondary-950/40 backdrop-blur-sm z-40">
-          <div className="bg-white h-full max-h-[calc(100vh-68px)] overflow-y-auto p-6 shadow-2xl space-y-2 border-t border-slate-100">
+          <div className="bg-white h-full max-h-[calc(100vh-68px)] overflow-y-auto p-6 shadow-2xl space-y-2 border-t border-industrial-100">
             {navLinks.map((link) => (
               <div key={link.label}>
                 {link.children ? (
@@ -197,7 +197,7 @@ export default function Header() {
                       onClick={() =>
                         setActiveDropdown(activeDropdown === link.label ? null : link.label)
                       }
-                      className="flex items-center justify-between w-full px-4 py-3 text-secondary-800 font-medium rounded-xl hover:bg-slate-50 transition-colors"
+                      className="flex items-center justify-between w-full px-4 py-3 text-secondary-800 font-medium rounded-xl hover:bg-industrial-50 transition-colors"
                     >
                       <span>{link.label}</span>
                       <ChevronDown
@@ -216,7 +216,7 @@ export default function Header() {
                             className={`block px-3 py-2 text-sm rounded-lg ${
                               pathname === child.href
                                 ? "text-primary-700 bg-primary-50 font-semibold"
-                                : "text-secondary-600 hover:bg-slate-50"
+                                : "text-secondary-600 hover:bg-industrial-50"
                             }`}
                           >
                             {child.label}
@@ -231,7 +231,7 @@ export default function Header() {
                     className={`block px-4 py-3 font-medium rounded-xl transition-colors ${
                       pathname === link.href
                         ? "text-primary-700 bg-primary-50 font-semibold"
-                        : "text-secondary-800 hover:bg-slate-50"
+                        : "text-secondary-800 hover:bg-industrial-50"
                     }`}
                   >
                     {link.label}
@@ -247,7 +247,7 @@ export default function Header() {
                 <span>Schedule a Pickup</span>
                 <ArrowRight size={16} />
               </Link>
-              <div className="p-4 bg-slate-50 rounded-xl border border-slate-100 text-xs text-secondary-600 space-y-1.5">
+              <div className="p-4 bg-industrial-50 rounded-xl border border-industrial-100 text-xs text-secondary-600 space-y-1.5">
                 <p className="font-semibold text-secondary-900">Registered Office & Facility:</p>
                 <p>Vamaj Road, Mahesana, Gujarat – 382728</p>
                 <p className="text-primary-700 font-mono font-medium">GSTIN: {companyInfo.gstin}</p>

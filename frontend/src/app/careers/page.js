@@ -80,7 +80,6 @@ export default function CareersPage() {
         eyebrow="JOIN OUR TEAM"
         heading="Build Your Career With a Greener Purpose"
         description="At ADVAIT GREEN RECYCLING PRIVATE LIMITED, our green mission is powered by dedicated people. Discover rewarding career paths in sustainability, recycling operations, and circular supply chains."
-        minHeight="min-h-[65vh]"
       />
 
       {/* Why Join Us */}
@@ -99,7 +98,7 @@ export default function CareersPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: index * 0.08 }}
-                className="bg-white rounded-3xl p-7 border border-slate-200/80 shadow-xs hover:border-primary-300 hover:shadow-card transition-all text-center flex flex-col justify-between"
+                className="bg-white rounded-3xl p-7 border border-industrial-200/80 shadow-xs hover:border-primary-300 hover:shadow-card transition-all text-center flex flex-col justify-between"
               >
                 <div>
                   <div className="w-14 h-14 bg-gradient-to-br from-primary-50 to-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-5 border border-primary-200/60 text-primary-700 shadow-xs">
@@ -135,7 +134,7 @@ export default function CareersPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: index * 0.06 }}
               >
-                <div className="group block bg-white rounded-2xl p-6 sm:p-7 border border-slate-200/80 shadow-xs hover:border-primary-300 hover:shadow-card transition-all">
+                <div className="group block bg-white rounded-2xl p-6 sm:p-7 border border-industrial-200/80 shadow-xs hover:border-primary-300 hover:shadow-card transition-all">
                   <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
                     <div>
                       <div className="flex flex-wrap items-center gap-2 mb-2">
@@ -145,7 +144,7 @@ export default function CareersPage() {
                           </span>
                         )}
                         {career.type && (
-                          <span className="px-3 py-0.5 rounded-full bg-slate-100 text-secondary-600 text-xs font-medium">
+                          <span className="px-3 py-0.5 rounded-full bg-industrial-100 text-secondary-600 text-xs font-medium">
                             {career.type}
                           </span>
                         )}
@@ -188,7 +187,7 @@ export default function CareersPage() {
           {/* General Application Card */}
           <div className="max-w-4xl mx-auto mt-10 p-8 sm:p-10 rounded-3xl bg-gradient-to-br from-primary-900 to-secondary-950 text-white text-center shadow-card border border-primary-500/30">
             <h4 className="font-heading font-bold text-xl mb-2">Don&apos;t See a Matching Role?</h4>
-            <p className="text-slate-300 text-sm max-w-md mx-auto mb-6">
+            <p className="text-industrial-300 text-sm max-w-md mx-auto mb-6">
               We are constantly seeking passionate environmental engineers, logistics managers, and operations specialists. Send your CV directly to our HR team.
             </p>
             <a

@@ -17,7 +17,7 @@ export default function GalleryGrid({ images }) {
             whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: index * 0.05 }}
-            className="relative group cursor-pointer rounded-2xl overflow-hidden aspect-[4/3] bg-slate-900 border border-slate-200/80 shadow-card hover:shadow-card-hover transition-all duration-300"
+            className="relative group cursor-pointer rounded-2xl overflow-hidden aspect-[4/3] bg-industrial-900 border border-industrial-200/80 shadow-card hover:shadow-card-hover transition-all duration-300"
             onClick={() => setSelectedImage(image)}
           >
             <img

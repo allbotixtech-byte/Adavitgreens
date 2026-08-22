@@ -25,7 +25,6 @@ export default function ProcessPage() {
         description="Responsible recycling requires a disciplined chain of custody. Every consignment at Advait Green is logged, categorized, processed, and reported with complete traceability."
         primaryCTA={{ label: "Schedule a Pickup", href: "/schedule-pickup" }}
         secondaryCTA={{ label: "View Our Services", href: "/services" }}
-        minHeight="min-h-[70vh]"
       />
       <section className="section-padding">
         <div className="container-custom">

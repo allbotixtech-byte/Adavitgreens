@@ -14,7 +14,7 @@ export default function ServiceCard({ icon: Icon, title, description, href, inde
     >
       <Link
         href={href}
-        className="group flex flex-col justify-between bg-white rounded-2xl p-7 border border-slate-200/80 h-full relative overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-card-hover hover:border-primary-300"
+        className="group flex flex-col justify-between bg-white rounded-2xl p-7 border border-industrial-200/80 h-full relative overflow-hidden transition-all duration-300 hover:-translate-y-1.5 hover:shadow-card-hover hover:border-primary-300"
       >
         {/* Subtle top accent gradient line */}
         <div className="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-400 via-primary-500 to-accent-400 scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
@@ -38,7 +38,7 @@ export default function ServiceCard({ icon: Icon, title, description, href, inde
           </p>
         </div>
 
-        <div className="pt-3 border-t border-slate-100 flex items-center justify-between text-sm font-semibold text-primary-700 group-hover:text-primary-600 transition-colors">
+        <div className="pt-3 border-t border-industrial-100 flex items-center justify-between text-sm font-semibold text-primary-700 group-hover:text-primary-600 transition-colors">
           <span>Learn More</span>
           <div className="w-7 h-7 rounded-full bg-primary-50 flex items-center justify-center group-hover:bg-primary-500 group-hover:text-white transition-all duration-300">
             <ArrowRight size={14} className="group-hover:translate-x-0.5 transition-transform" />

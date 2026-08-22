@@ -15,7 +15,6 @@ export default function IndustriesPage() {
         description="Every industry generates unique material streams and operates under distinct compliance mandates. We structure tailored recycling workflows to match your operational standards."
         primaryCTA={{ label: "Talk to Our Team", href: "/contact" }}
         secondaryCTA={{ label: "Schedule a Pickup", href: "/schedule-pickup" }}
-        minHeight="min-h-[70vh]"
       />
       <section className="section-padding">
         <div className="container-custom">
