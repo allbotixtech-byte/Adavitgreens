@@ -34,7 +34,7 @@ async function adminFetch(endpoint, options = {}) {
 
 // Auth
 export async function adminLogin(email, password) {
-  const data = await adminFetch("/admin", {
+  const data = await adminFetch("/admin/login", {
     method: "POST",
     body: JSON.stringify({ email, password }),
   });

@@ -1,1 +1,122 @@
-[]
+[
+  {
+    "id": "blog_001",
+    "title": "What Actually Happens to Your Laptop After You Hand It Over",
+    "slug": "what-happens-to-your-laptop-after-handover",
+    "category": "E-Waste",
+    "thumbnail": "",
+    "excerpt": "A stage-by-stage walkthrough of the recovery process — from the moment a machine enters the weighbridge to the point its copper re-enters a manufacturing line.",
+    "content": "<p>Most people's mental model of recycling ends at the collection van. The machine goes in, a certificate comes back, and whatever happened in between is somebody else's process.</p><p>It's worth knowing what that process is — partly because it explains why authorised recycling costs what it does, and partly because it explains why the informal alternative is so damaging.</p><h2>Stage 1: Weighment and Registration</h2><p>Every consignment is weighed at entry and logged against the manifest it travelled on. Serial numbers are recorded where asset-level tracking has been requested. Nothing moves further into the facility until the paperwork reconciles with the physical count.</p><h2>Stage 2: Data-Bearing Media Removal</h2><p>Before anything is dismantled, storage media is separated. Drives go to a dedicated destruction area and are handled under a separate chain of custody, with their own certificate. This step happens first for a reason — once a machine enters the dismantling floor, it becomes very hard to guarantee where any individual component went.</p><h2>Stage 3: Manual De-manufacturing</h2><p>A laptop is not one material. It is roughly a dozen distinct fractions — an aluminium or polycarbonate casing, a steel chassis, a lithium-ion battery, a display assembly containing its own hazardous components, a motherboard dense with gold, palladium and copper, and a scattering of plastics with different polymer identities.</p><p>Machine shredding all of that together destroys most of the recoverable value and contaminates every output stream. So the first pass is done by hand, by trained dismantlers, to separate fractions before mechanical processing begins.</p><h2>Stage 4: Hazardous Fraction Segregation</h2><p>Batteries, mercury-containing backlights, capacitors and CRT glass where applicable are separated into dedicated storage. These are the fractions responsible for most of the environmental harm attributed to e-waste, and they need controlled downstream handling rather than recovery on site.</p><h2>Stage 5: Mechanical Processing</h2><p>What remains — casings, chassis, cabling, mixed metals — goes through shredding, followed by magnetic separation for ferrous metal, eddy-current separation for non-ferrous, and density separation for plastics. Each output stream is graded and stored separately.</p><h2>Stage 6: Downstream Channelling</h2><p>Printed circuit boards, the most valuable fraction, are consolidated and sent to authorised refiners with the metallurgical capability to recover precious metals safely. Granulated plastics go to reprocessors. Ferrous and non-ferrous metal goes to smelters.</p><h2>Stage 7: Documentation</h2><p>The consignment closes with a Certificate of Recycling, weighment records, a Certificate of Data Destruction where applicable, and the entries required for the generator's own compliance filings.</p><h2>Why the Informal Route Is Different</h2><p>The informal chain skips stages two through five. Boards are heated over open flames to release solder, cables are burned to strip insulation, and acid baths are used to leach gold — in residential areas, without protective equipment, with the residues going into soil and groundwater. It recovers a fraction of the material and imposes the rest as a cost on everyone nearby.</p><p>That gap — between what a formal facility recovers and what an informal operation destroys — is the entire argument for authorised recycling.</p>",
+    "author": "Advait Green Team",
+    "tags": [
+      "e-waste",
+      "recycling",
+      "laptop",
+      "process"
+    ],
+    "isPublished": true,
+    "publishedAt": "2026-07-15T10:00:00.000Z",
+    "createdAt": "2026-07-15T10:00:00.000Z",
+    "updatedAt": "2026-07-15T10:00:00.000Z"
+  },
+  {
+    "id": "blog_002",
+    "title": "EPR in India: A Plain-English Guide for Producers and Importers",
+    "slug": "epr-india-guide-producers-importers",
+    "category": "EPR & Compliance",
+    "thumbnail": "",
+    "excerpt": "Who it applies to, how targets are calculated, what you file and when, and the mistakes that get flagged in audits.",
+    "content": "<p>Extended Producer Responsibility — EPR — is the principle that the entity that puts a product on the market is responsible for managing it when it reaches end of life. In India, this principle is now law for electronics, plastics, batteries, tyres and used oil.</p><h2>Who Does EPR Apply To?</h2><p>If you are a producer (manufacturer), importer or brand owner of electrical and electronic equipment, plastic packaging, batteries or tyres, you have EPR obligations under one or more of the following:</p><ul><li>E-Waste (Management) Rules, 2022</li><li>Plastic Waste Management (Amendment) Rules, 2022</li><li>Battery Waste Management Rules, 2022</li></ul><h2>How Are Targets Calculated?</h2><p>Your collection and recycling targets are a function of what you sold in a reference year. For electronics, targets are based on the average weight of equipment placed on the market, multiplied by a collection-rate percentage that increases year on year. For plastics, it is based on the weight of packaging material introduced.</p><h2>What Do You Need to File?</h2><p>Registration on the CPCB EPR portal is the first step. You then file annual returns showing how much was collected and channelled to authorised recyclers, supported by certificates of recycling that reconcile with your target.</p><h2>Common Audit Red Flags</h2><p>The most common issue flagged in audits is a gap between the certificates presented and the actual tonnage processed by the recycler cited. Other flags include using recyclers whose authorisation has lapsed, double-counting certificates, and filing returns after the deadline without prior extension.</p><h2>How We Help</h2><p>Advait Green handles the operational side of EPR fulfilment — collection logistics, processing, documentation and certificate generation — so that your compliance filing is backed by an auditable physical trail, not just paper.</p>",
+    "author": "Advait Green Team",
+    "tags": [
+      "epr",
+      "compliance",
+      "producers",
+      "regulation"
+    ],
+    "isPublished": true,
+    "publishedAt": "2026-07-02T10:00:00.000Z",
+    "createdAt": "2026-07-02T10:00:00.000Z",
+    "updatedAt": "2026-07-02T10:00:00.000Z"
+  },
+  {
+    "id": "blog_003",
+    "title": "Formatting Is Not Erasure: The Data Risk Hiding in Your IT Scrap",
+    "slug": "formatting-not-erasure-data-risk-it-scrap",
+    "category": "Data Security",
+    "thumbnail": "",
+    "excerpt": "Why a wiped drive isn't necessarily an empty one, and what a defensible destruction process actually looks like.",
+    "content": "<p>When an IT team formats a hard drive before sending a machine for disposal, they've deleted the directory — not the data. The actual magnetic patterns that encode your files are still on the platter, waiting for anyone with a recovery tool and half an hour of patience.</p><h2>The Three Levels of Data Removal</h2><p><strong>Formatting:</strong> Removes the file system index. Data is recoverable with widely available software. This is what most organisations do, and it is not enough.</p><p><strong>Overwriting:</strong> Writes new data patterns across the entire drive surface, multiple times. This is effective against software-based recovery but requires verification and is slow on large drives.</p><p><strong>Physical destruction:</strong> The drive is shredded, degaussed or punctured so that no platter surface remains intact. This is the only method that makes recovery physically impossible, and it is the standard for classified or regulated data.</p><h2>What a Defensible Process Looks Like</h2><p>A defensible data destruction process has four elements: a documented chain of custody from the moment the drive is identified for disposal, a destruction method appropriate to the data classification, a witnessed or recorded destruction event, and a certificate that ties the serial number of the specific drive to the method used and the date it was destroyed.</p><h2>The Gap</h2><p>Most organisations have a clear data classification policy and a clear retention policy, but no documented destruction policy. The assumption is that formatting handles it. It doesn't — and the liability sits with the data controller, not the recycler, until a proper transfer of custody is documented.</p>",
+    "author": "Advait Green Team",
+    "tags": [
+      "data-destruction",
+      "security",
+      "compliance",
+      "IT"
+    ],
+    "isPublished": true,
+    "publishedAt": "2026-06-20T10:00:00.000Z",
+    "createdAt": "2026-06-20T10:00:00.000Z",
+    "updatedAt": "2026-06-20T10:00:00.000Z"
+  },
+  {
+    "id": "blog_004",
+    "title": "E-Waste Rules 2022: What Changed and Who It Affects",
+    "slug": "e-waste-rules-2022-changes",
+    "category": "EPR & Compliance",
+    "thumbnail": "",
+    "excerpt": "A breakdown of the revised framework, the shift to the EPR portal, and the practical implications for bulk consumers.",
+    "content": "<p>The E-Waste (Management) Rules, 2022 replaced the 2016 framework with a fundamentally different structure. The most significant change: responsibility has shifted decisively from the consumer and dismantler to the producer and the central regulator.</p><h2>Key Changes</h2><p><strong>Centralised EPR portal:</strong> All registration, target setting, return filing and certificate verification now happens through a single CPCB-operated portal, replacing the state-by-state system.</p><p><strong>EPR certificates:</strong> Recyclers generate certificates on the portal after processing is complete. Producers purchase these certificates to meet their targets. The certificate is the unit of compliance.</p><p><strong>Revised categories:</strong> The equipment categories have been rationalised and now align more closely with the EU's WEEE categories, making compliance simpler for companies operating across both jurisdictions.</p><h2>Who It Affects</h2><p>Producers and importers are the primary obligated parties. Bulk consumers — companies that generate e-waste from their own operations — are required to channel their waste to authorised recyclers and maintain records, but their compliance burden is lighter than under the 2016 rules.</p><h2>What to Do Now</h2><p>If you are a producer: register on the EPR portal, understand your category-wise targets, and establish relationships with authorised recyclers who can generate valid certificates. If you are a bulk consumer: ensure your disposal channel ends at an authorised facility and retain the documentation.</p>",
+    "author": "Advait Green Team",
+    "tags": [
+      "e-waste",
+      "regulation",
+      "epr",
+      "2022-rules"
+    ],
+    "isPublished": true,
+    "publishedAt": "2026-06-10T10:00:00.000Z",
+    "createdAt": "2026-06-10T10:00:00.000Z",
+    "updatedAt": "2026-06-10T10:00:00.000Z"
+  },
+  {
+    "id": "blog_005",
+    "title": "The True Cost of Choosing an Unauthorised Recycler",
+    "slug": "true-cost-unauthorised-recycler",
+    "category": "Sustainability for Business",
+    "thumbnail": "",
+    "excerpt": "Cheaper quotes, transferred liability that never actually transfers, and what happens when the trail is audited.",
+    "content": "<p>The unauthorised recycler's quote is always lower. That's the point. The cost difference is the safety equipment they don't buy, the pollution control infrastructure they don't operate, the regulatory filings they don't make, and the insurance they don't carry.</p><h2>The Liability Myth</h2><p>Many companies believe that once they hand waste to a third party, liability transfers. It doesn't — not fully, and certainly not if the third party has no authorisation. Under both E-Waste and Hazardous Waste rules, the generator retains responsibility for ensuring that waste reaches an authorised destination. A receipt from an unauthorised operator is not a discharge of that responsibility.</p><h2>What Happens in an Audit</h2><p>When a regulator or a client's sustainability auditor traces the waste trail, they check whether the recycler's authorisation was valid at the time of the transaction, whether the quantities documented match, and whether the recycler's own downstream records are consistent. An unauthorised handler cannot produce any of this.</p><h2>The Hidden Costs</h2><p>Environmental remediation liability if contamination is traced back to your waste. Reputational damage if an investigation links your brand to informal-sector practices. Loss of ESG scoring credibility. Potential criminal liability under hazardous waste provisions. The cheap quote starts looking expensive.</p><h2>The Alternative</h2><p>Work with a CPCB-registered, SPCB-authorised recycler. Verify their authorisation annually. Insist on consignment-level documentation. Treat the slightly higher processing fee as what it is: insurance against a much larger liability.</p>",
+    "author": "Advait Green Team",
+    "tags": [
+      "sustainability",
+      "compliance",
+      "business",
+      "recycling"
+    ],
+    "isPublished": true,
+    "publishedAt": "2026-05-28T10:00:00.000Z",
+    "createdAt": "2026-05-28T10:00:00.000Z",
+    "updatedAt": "2026-05-28T10:00:00.000Z"
+  },
+  {
+    "id": "blog_006",
+    "title": "Lithium-Ion Battery Disposal: Handling the Fastest-Growing Hazard",
+    "slug": "lithium-ion-battery-disposal-handling",
+    "category": "Battery & Solar",
+    "thumbnail": "",
+    "excerpt": "Fire risk, storage protocols, and why the EV transition needs a recycling plan that starts now.",
+    "content": "<p>Lithium-ion batteries are in everything — phones, laptops, power tools, UPS systems, electric vehicles. They are also the single biggest fire risk in the waste management chain. A punctured or crushed lithium-ion cell can enter thermal runaway, reaching temperatures above 500°C and igniting everything around it.</p><h2>The Scale of the Problem</h2><p>India's battery waste is growing faster than any other waste category. EV adoption is accelerating, consumer electronics cycles are shortening, and industrial backup systems are being replaced at scale. The Battery Waste Management Rules, 2022 now require producers to take back and recycle batteries — but processing capacity is still catching up.</p><h2>Safe Handling Protocols</h2><p><strong>Storage:</strong> Batteries must be stored in ventilated, temperature-controlled areas away from combustible materials. Damaged or swollen batteries require isolated containment.</p><p><strong>Transport:</strong> UN-rated packaging, proper labelling, and trained drivers. A battery fire in transit is a hazmat incident.</p><p><strong>Processing:</strong> Discharge, disassembly and material separation must happen in controlled conditions. The valuable materials — lithium, cobalt, nickel, manganese — can be recovered, but only if the process is managed correctly.</p><h2>Why Start Now</h2><p>The first wave of EV batteries from early adoption cycles will reach end of life within the next three to five years. Companies that build collection and processing infrastructure now will be positioned to handle that volume. Companies that wait will face a storage problem that only gets more dangerous with time.</p>",
+    "author": "Advait Green Team",
+    "tags": [
+      "battery",
+      "lithium-ion",
+      "EV",
+      "safety"
+    ],
+    "isPublished": true,
+    "publishedAt": "2026-05-15T10:00:00.000Z",
+    "createdAt": "2026-05-15T10:00:00.000Z",
+    "updatedAt": "2026-05-15T10:00:00.000Z"
+  }
+]
