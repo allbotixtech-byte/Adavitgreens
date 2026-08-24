@@ -1,856 +1,1146 @@
-// theme.config.js
-// SINGLE SOURCE OF TRUTH FOR THE ENTIRE ADVAIT GREEN RECYCLING WEBSITE
+/**
+ * theme.config.js
+ * ADVAIT GREEN RECYCLING PRIVATE LIMITED — Design Token System
+ * ---------------------------------------------------------------------------
+ * SINGLE SOURCE OF TRUTH. Three layers, in strict order:
+ *
+ *   1. palette   — raw values. Never reference these directly in a component.
+ *   2. semantic  — role-based tokens (light + dark). This is what UI code uses.
+ *   3. components— recipes composed from semantic tokens.
+ *
+ * Helpers at the bottom (`resolve`, `toCSSVariables`, `tailwindPreset`) make the
+ * dotted token strings actually resolvable at build time — the previous config
+ * used strings like "primary.600" that nothing ever turned into a colour.
+ *
+ * DESIGN DIRECTION
+ * The palette is taken from the material fractions this business actually
+ * recovers, not from generic "eco" colour. Solder-mask green (primary),
+ * recovered copper (accent), shredded ferrous graphite (dark surfaces),
+ * aluminium (neutrals), regulatory amber (signal only). Green and copper are
+ * the two colours of a stripped circuit board — the accent earns its place
+ * instead of being an arbitrary sand tone.
+ *
+ * Radii are tight and shadows are quiet: this is an industrial facility with a
+ * weighbridge, not a wellness brand.
+ */
 
-const theme = {
-  // ============================================================
-  // BRAND
-  // ============================================================
+// ═══════════════════════════════════════════════════════════════════════════
+// 1. PALETTE — raw values
+// ═══════════════════════════════════════════════════════════════════════════
 
-  brand: {
-    name: "Advait Green Recycling",
-    legalName: "ADVAIT GREEN RECYCLING PRIVATE LIMITED",
-    tagline: "Turning Waste Into Resources. Building a Greener Future.",
-    shortTagline: "Responsible Waste Management. Sustainable Future.",
+const palette = {
+  /**
+   * PCB — primary. Solder-mask green: deeper and cooler than the usual
+   * "leaf green" every recycler on the internet uses.
+   */
+  pcb: {
+    50: '#EDF5F1',
+    100: '#D6E9E0',
+    200: '#ADD2C2',
+    300: '#7EB6A0',
+    400: '#4F977E',
+    500: '#2E7A61',
+    600: '#1F624D',
+    700: '#184E3E',
+    800: '#123C30',
+    900: '#0E2F26',
+    950: '#08201A',
   },
 
-  // ============================================================
-  // FONTS
-  // ============================================================
-
-  fonts: {
-    heading: {
-      family: "Lora",
-      google: "Lora:wght@400;500;600;700",
-      fallback: "Georgia, serif",
-    },
-
-    body: {
-      family: "Poppins",
-      google: "Poppins:wght@300;400;500;600;700",
-      fallback: "system-ui, -apple-system, BlinkMacSystemFont, sans-serif",
-    },
+  /**
+   * COPPER — accent. The single most valuable fraction recovered from e-waste,
+   * and the reason urban mining is commercially viable. Used sparingly: CTAs,
+   * data emphasis, the fraction bar. Never as a background wash.
+   */
+  copper: {
+    50: '#FBF2EC',
+    100: '#F5E1D2',
+    200: '#E9C0A3',
+    300: '#DB9C72',
+    400: '#CC7C4A',
+    500: '#B4682F',
+    600: '#995427',
+    700: '#7A4220',
+    800: '#5F341A',
+    900: '#4A2915',
+    950: '#2B170C',
   },
 
-  // ============================================================
-  // COLORS
-  // ============================================================
+  /**
+   * ALUMINIUM — neutrals. Cool grey with a faint green cast so it sits with the
+   * primary instead of fighting it. 50 is the page background; 950 is graphite,
+   * the colour of shredded ferrous output, used for dark sections and footer.
+   */
+  aluminium: {
+    0: '#FFFFFF',
+    25: '#FAFBFA',
+    50: '#F4F6F3',
+    100: '#EAEEEA',
+    200: '#DBE1DC',
+    300: '#C2CBC4',
+    400: '#9AA69D',
+    500: '#78857A',
+    600: '#5C6961',
+    700: '#47524B',
+    800: '#333B36',
+    900: '#232925',
+    950: '#14181A',
+  },
 
-  colors: {
-    // ----------------------------------------------------------
-    // PRIMARY — DEEP TEAL
-    // ----------------------------------------------------------
+  /**
+   * SIGNAL — regulatory amber. Reserved for compliance notices, hazard
+   * categories, validity warnings and the EPR deadline strip. If it appears
+   * decoratively it stops working as a signal.
+   */
+  signal: {
+    50: '#FDF6E7',
+    100: '#FAEAC4',
+    300: '#F3C766',
+    500: '#E0A126',
+    600: '#BB8118',
+    700: '#8E6011',
+    900: '#4E350A',
+  },
 
-    primary: {
-      50: "#EFF8F8",
-      100: "#DCEEEE",
-      200: "#B9DCDD",
-      300: "#8EC6C8",
-      400: "#5FA9AC",
-      500: "#2F8588",
-      600: "#246F72",
-      700: "#1B5C5F",
-      800: "#12494B",
-      900: "#083F41",
-      950: "#062E30",
+  /** Utility */
+  transparent: 'transparent',
+  current: 'currentColor',
+  white: '#FFFFFF',
+  black: '#000000',
+};
+
+// ═══════════════════════════════════════════════════════════════════════════
+// 2. SEMANTIC TOKENS — what components consume
+// ═══════════════════════════════════════════════════════════════════════════
+// Every colour decision in the UI resolves through here. Swapping a brand
+// colour means editing the palette above, not hunting through components.
+
+const semantic = {
+  light: {
+    // Surfaces — four levels, in ascending prominence
+    surface: {
+      canvas: palette.aluminium[50], // page background
+      base: palette.aluminium[0], // cards, panels
+      sunken: palette.aluminium[100], // wells, table stripes, code
+      raised: palette.aluminium[0], // elevated cards (pair with shadow)
+      inverse: palette.aluminium[950], // graphite sections, footer
+      brand: palette.pcb[900], // full-bleed brand sections
+      brandSubtle: palette.pcb[50],
+      accentSubtle: palette.copper[50],
+      signalSubtle: palette.signal[50],
+      scrim: 'rgba(20, 24, 26, 0.66)', // modal / image overlay
+      scrimSoft: 'rgba(20, 24, 26, 0.28)',
     },
 
-    // ----------------------------------------------------------
-    // SECONDARY — SAGE
-    // ----------------------------------------------------------
-
-    secondary: {
-      50: "#F5F8F4",
-      100: "#EAF1E9",
-      200: "#D6E3D5",
-      300: "#B9CDB8",
-      400: "#9AB49A",
-      500: "#7A9E7E",
-      600: "#648667",
-      700: "#506E53",
-      800: "#3D573F",
-      900: "#2E432F",
-      950: "#1C2D1F",
+    // Text — contrast ratios against surface.canvas noted
+    text: {
+      primary: palette.aluminium[900], // 13.4:1
+      secondary: palette.aluminium[700], // 8.1:1
+      tertiary: palette.aluminium[600], // 5.9:1
+      disabled: palette.aluminium[400], // 2.8:1 — non-essential only
+      brand: palette.pcb[700], // 8.0:1
+      accent: palette.copper[600], // 6.1:1  (500 is 4.4 — don't use for body)
+      onBrand: palette.aluminium[0],
+      onInverse: palette.aluminium[0],
+      onInverseMuted: palette.aluminium[300], // 8.9:1 on graphite
+      onAccent: palette.aluminium[0],
     },
 
-    // ----------------------------------------------------------
-    // ACCENT — SAND / EARTH
-    // ----------------------------------------------------------
-
-    accent: {
-      50: "#FCF9F1",
-      100: "#F7F0DD",
-      200: "#EFE1BC",
-      300: "#E5CEA0",
-      400: "#DCC083",
-      500: "#D6A85F",
-      600: "#C39348",
-      700: "#A7783A",
-      800: "#875F32",
-      900: "#704F2C",
-      950: "#4A331E",
+    border: {
+      subtle: palette.aluminium[100],
+      default: palette.aluminium[200],
+      strong: palette.aluminium[300],
+      brand: palette.pcb[600],
+      accent: palette.copper[400],
+      inverse: 'rgba(255, 255, 255, 0.14)',
+      focus: palette.pcb[500],
     },
 
-    // ----------------------------------------------------------
-    // ECO — SUPPORTING GREEN
-    // ----------------------------------------------------------
-
-    eco: {
-      50: "#F1F8F3",
-      100: "#DDEEE1",
-      200: "#BCDDC3",
-      300: "#91C69B",
-      400: "#66AB73",
-      500: "#438E52",
-      600: "#347542",
-      700: "#285D35",
-      800: "#214B2C",
-      900: "#193B23",
+    interactive: {
+      brandRest: palette.pcb[700],
+      brandHover: palette.pcb[800],
+      brandActive: palette.pcb[900],
+      accentRest: palette.copper[600],
+      accentHover: palette.copper[700],
+      accentActive: palette.copper[800],
+      neutralRest: palette.aluminium[0],
+      neutralHover: palette.aluminium[100],
+      ghostHover: 'rgba(31, 98, 77, 0.08)',
+      ghostHoverInverse: 'rgba(255, 255, 255, 0.10)',
     },
-
-    // ----------------------------------------------------------
-    // NEUTRALS
-    // ----------------------------------------------------------
-
-    neutral: {
-      white: "#FFFFFF",
-      black: "#000000",
-
-      background: "#FAFAF7",
-      backgroundAlt: "#F1F5F0",
-      backgroundDark: "#062E30",
-
-      surface: "#FFFFFF",
-      surfaceSoft: "#F7F9F6",
-      surfaceMuted: "#EAF0EB",
-
-      text: "#202827",
-      textSecondary: "#465352",
-      textLight: "#687574",
-      textMuted: "#98A5A3",
-
-      textOnDark: "#FFFFFF",
-      textOnDarkMuted: "#C5D3D1",
-
-      border: "#DDE4E1",
-      borderLight: "#E9EEEB",
-      borderDark: "#294847",
-    },
-
-    // ----------------------------------------------------------
-    // INDUSTRIAL
-    // ----------------------------------------------------------
-
-    industrial: {
-      50: "#F6F7F7",
-      100: "#EBEEED",
-      200: "#D9DEDC",
-      300: "#C0C8C5",
-      400: "#9AA5A1",
-      500: "#75817D",
-      600: "#5D6865",
-      700: "#48514F",
-      800: "#343C3A",
-      900: "#242B29",
-      950: "#151B19",
-    },
-
-    // ----------------------------------------------------------
-    // STATUS
-    // ----------------------------------------------------------
 
     status: {
-      success: "#438E52",
-      successLight: "#EAF6EC",
-
-      error: "#C84A4A",
-      errorLight: "#FCECEC",
-
-      warning: "#C38A35",
-      warningLight: "#FFF5E3",
-
-      info: "#397D9B",
-      infoLight: "#EAF4F8",
+      success: palette.pcb[600],
+      successSurface: palette.pcb[50],
+      successBorder: palette.pcb[200],
+      warning: palette.signal[700],
+      warningSurface: palette.signal[50],
+      warningBorder: palette.signal[300],
+      danger: '#A93226',
+      dangerSurface: '#FBEDEB',
+      dangerBorder: '#EEC2BC',
+      info: '#2F6F8F',
+      infoSurface: '#ECF4F8',
+      infoBorder: '#BFD9E6',
     },
 
-    // ----------------------------------------------------------
-    // SPECIAL GRADIENTS
-    // ----------------------------------------------------------
-
-    special: {
-      heroGradient:
-        "linear-gradient(135deg, #062E30 0%, #083F41 48%, #1B5C5F 100%)",
-
-      tealGradient:
-        "linear-gradient(135deg, #083F41 0%, #246F72 100%)",
-
-      sageGradient:
-        "linear-gradient(135deg, #506E53 0%, #7A9E7E 100%)",
-
-      earthGradient:
-        "linear-gradient(135deg, #A7783A 0%, #D6A85F 100%)",
-
-      softGradient:
-        "linear-gradient(135deg, #F1F5F0 0%, #FAFAF7 100%)",
-
-      overlay: "rgba(6, 46, 48, 0.58)",
-      overlayLight: "rgba(6, 46, 48, 0.25)",
+    /**
+     * DATA — for tonnage counters, recovery percentages and the fraction bar.
+     * Ordered by the actual material split of a processed consignment, so a
+     * chart built from these reads correctly without per-chart colour config.
+     */
+    data: {
+      ferrous: palette.aluminium[600],
+      nonFerrous: palette.copper[500],
+      plastics: palette.pcb[400],
+      glass: '#7FA8B8',
+      pcbFraction: palette.pcb[700],
+      residue: palette.aluminium[400],
     },
   },
 
-  // ============================================================
-  // TYPOGRAPHY
-  // ============================================================
-
-  typography: {
-    heroTitle: {
-      fontSize: "clamp(2.75rem, 6vw, 5.25rem)",
-      lineHeight: "1.05",
-      letterSpacing: "-0.035em",
-      fontWeight: 600,
+  dark: {
+    surface: {
+      canvas: palette.aluminium[950],
+      base: '#1B211D',
+      sunken: '#101413',
+      raised: '#232A26',
+      inverse: palette.aluminium[50],
+      brand: palette.pcb[950],
+      brandSubtle: 'rgba(46, 122, 97, 0.12)',
+      accentSubtle: 'rgba(180, 104, 47, 0.14)',
+      signalSubtle: 'rgba(224, 161, 38, 0.12)',
+      scrim: 'rgba(8, 32, 26, 0.74)',
+      scrimSoft: 'rgba(8, 32, 26, 0.35)',
     },
-
-    h1: {
-      fontSize: "clamp(2.5rem, 5vw, 4.25rem)",
-      lineHeight: "1.08",
-      letterSpacing: "-0.03em",
-      fontWeight: 600,
+    text: {
+      primary: palette.aluminium[50],
+      secondary: palette.aluminium[300],
+      tertiary: palette.aluminium[400],
+      disabled: palette.aluminium[600],
+      brand: palette.pcb[300],
+      accent: palette.copper[300],
+      onBrand: palette.aluminium[0],
+      onInverse: palette.aluminium[900],
+      onInverseMuted: palette.aluminium[600],
+      onAccent: palette.aluminium[0],
     },
-
-    h2: {
-      fontSize: "clamp(2rem, 4vw, 3.25rem)",
-      lineHeight: "1.15",
-      letterSpacing: "-0.025em",
-      fontWeight: 600,
+    border: {
+      subtle: 'rgba(255, 255, 255, 0.07)',
+      default: 'rgba(255, 255, 255, 0.13)',
+      strong: 'rgba(255, 255, 255, 0.22)',
+      brand: palette.pcb[500],
+      accent: palette.copper[400],
+      inverse: palette.aluminium[200],
+      focus: palette.pcb[300],
     },
-
-    h3: {
-      fontSize: "clamp(1.5rem, 2.5vw, 2rem)",
-      lineHeight: "1.25",
-      letterSpacing: "-0.015em",
-      fontWeight: 600,
+    interactive: {
+      brandRest: palette.pcb[500],
+      brandHover: palette.pcb[400],
+      brandActive: palette.pcb[300],
+      accentRest: palette.copper[500],
+      accentHover: palette.copper[400],
+      accentActive: palette.copper[300],
+      neutralRest: '#232A26',
+      neutralHover: '#2C3430',
+      ghostHover: 'rgba(255, 255, 255, 0.08)',
+      ghostHoverInverse: 'rgba(0, 0, 0, 0.16)',
     },
-
-    h4: {
-      fontSize: "1.35rem",
-      lineHeight: "1.35",
-      fontWeight: 600,
+    status: {
+      success: palette.pcb[300],
+      successSurface: 'rgba(46, 122, 97, 0.14)',
+      successBorder: 'rgba(126, 182, 160, 0.32)',
+      warning: palette.signal[300],
+      warningSurface: 'rgba(224, 161, 38, 0.13)',
+      warningBorder: 'rgba(243, 199, 102, 0.30)',
+      danger: '#E88178',
+      dangerSurface: 'rgba(169, 50, 38, 0.16)',
+      dangerBorder: 'rgba(232, 129, 120, 0.30)',
+      info: '#8FC0D8',
+      infoSurface: 'rgba(47, 111, 143, 0.16)',
+      infoBorder: 'rgba(143, 192, 216, 0.30)',
     },
-
-    bodyLarge: {
-      fontSize: "1.125rem",
-      lineHeight: "1.8",
-      fontWeight: 400,
+    data: {
+      ferrous: palette.aluminium[400],
+      nonFerrous: palette.copper[400],
+      plastics: palette.pcb[300],
+      glass: '#9CC0CE',
+      pcbFraction: palette.pcb[400],
+      residue: palette.aluminium[600],
     },
-
-    body: {
-      fontSize: "1rem",
-      lineHeight: "1.75",
-      fontWeight: 400,
-    },
-
-    bodySmall: {
-      fontSize: "0.875rem",
-      lineHeight: "1.6",
-      fontWeight: 400,
-    },
-
-    label: {
-      fontSize: "0.75rem",
-      lineHeight: "1.4",
-      letterSpacing: "0.12em",
-      fontWeight: 600,
-      textTransform: "uppercase",
-    },
-  },
-
-  // ============================================================
-  // FONT SIZES
-  // ============================================================
-
-  fontSize: {
-    xs: "0.75rem",
-    sm: "0.875rem",
-    base: "1rem",
-    lg: "1.125rem",
-    xl: "1.25rem",
-    "2xl": "1.5rem",
-    "3xl": "1.875rem",
-    "4xl": "2.25rem",
-    "5xl": "3rem",
-    "6xl": "3.75rem",
-    "7xl": "4.5rem",
-    "8xl": "6rem",
-  },
-
-  // ============================================================
-  // LAYOUT
-  // ============================================================
-
-  layout: {
-    maxWidth: "1320px",
-    contentWidth: "1180px",
-    narrowWidth: "820px",
-
-    headerHeight: "84px",
-
-    sectionPaddingY: "6rem",
-    sectionPaddingYMobile: "4rem",
-
-    sectionPaddingX: "1.5rem",
-    sectionPaddingXMobile: "1.25rem",
-
-    gridGap: "2rem",
-    cardGap: "1.5rem",
-
-    borderRadius: {
-      xs: "0.25rem",
-      sm: "0.375rem",
-      md: "0.625rem",
-      lg: "0.875rem",
-      xl: "1.25rem",
-      "2xl": "1.75rem",
-      "3xl": "2.25rem",
-      full: "9999px",
-    },
-  },
-
-  // ============================================================
-  // SHADOWS
-  // ============================================================
-
-  shadows: {
-    none: "none",
-
-    xs: "0 1px 2px rgba(6, 46, 48, 0.04)",
-
-    sm: "0 2px 8px rgba(6, 46, 48, 0.06)",
-
-    md: "0 6px 18px rgba(6, 46, 48, 0.08)",
-
-    lg: "0 12px 32px rgba(6, 46, 48, 0.10)",
-
-    xl: "0 20px 50px rgba(6, 46, 48, 0.14)",
-
-    card: "0 8px 28px rgba(6, 46, 48, 0.07)",
-
-    cardHover: "0 18px 45px rgba(6, 46, 48, 0.13)",
-
-    button: "0 8px 20px rgba(47, 133, 136, 0.25)",
-
-    buttonHover: "0 12px 28px rgba(47, 133, 136, 0.32)",
-
-    header: "0 2px 18px rgba(6, 46, 48, 0.06)",
-  },
-
-  // ============================================================
-  // BUTTONS
-  // ============================================================
-
-  buttons: {
-    primary: {
-      bg: "primary.600",
-      text: "neutral.white",
-      hoverBg: "primary.700",
-      activeBg: "primary.800",
-
-      shadow: "button",
-      hoverShadow: "buttonHover",
-
-      border: "transparent",
-      borderRadius: "md",
-
-      paddingX: "1.75rem",
-      paddingY: "0.875rem",
-
-      fontSize: "0.9375rem",
-      fontWeight: 600,
-
-      transition: "normal",
-    },
-
-    secondary: {
-      bg: "neutral.white",
-      text: "primary.700",
-
-      hoverBg: "primary.50",
-
-      border: "primary.500",
-      hoverBorder: "primary.600",
-
-      borderRadius: "md",
-
-      paddingX: "1.75rem",
-      paddingY: "0.875rem",
-
-      fontSize: "0.9375rem",
-      fontWeight: 600,
-
-      transition: "normal",
-    },
-
-    accent: {
-      bg: "accent.500",
-      text: "neutral.white",
-
-      hoverBg: "accent.600",
-
-      border: "transparent",
-      borderRadius: "md",
-
-      paddingX: "1.75rem",
-      paddingY: "0.875rem",
-
-      fontSize: "0.9375rem",
-      fontWeight: 600,
-
-      transition: "normal",
-    },
-
-    dark: {
-      bg: "primary.950",
-      text: "neutral.white",
-
-      hoverBg: "primary.900",
-
-      border: "transparent",
-      borderRadius: "md",
-
-      paddingX: "1.75rem",
-      paddingY: "0.875rem",
-
-      fontSize: "0.9375rem",
-      fontWeight: 600,
-
-      transition: "normal",
-    },
-
-    outlineLight: {
-      bg: "transparent",
-      text: "neutral.white",
-
-      hoverBg: "rgba(255,255,255,0.10)",
-
-      border: "rgba(255,255,255,0.55)",
-
-      borderRadius: "md",
-
-      paddingX: "1.75rem",
-      paddingY: "0.875rem",
-
-      fontSize: "0.9375rem",
-      fontWeight: 600,
-
-      transition: "normal",
-    },
-
-    link: {
-      bg: "transparent",
-      text: "primary.600",
-      hoverText: "primary.800",
-
-      border: "none",
-
-      paddingX: "0",
-      paddingY: "0",
-
-      fontSize: "0.9375rem",
-      fontWeight: 600,
-
-      transition: "fast",
-    },
-  },
-
-  // ============================================================
-  // CARDS
-  // ============================================================
-
-  cards: {
-    default: {
-      background: "neutral.surface",
-      border: "neutral.borderLight",
-      borderRadius: "xl",
-      shadow: "card",
-      padding: "2rem",
-    },
-
-    service: {
-      background: "neutral.surface",
-      border: "neutral.borderLight",
-      borderRadius: "xl",
-      shadow: "card",
-      hoverShadow: "cardHover",
-      padding: "2rem",
-    },
-
-    featured: {
-      background: "primary.900",
-      border: "primary.800",
-      borderRadius: "xl",
-      shadow: "xl",
-      padding: "2.5rem",
-    },
-
-    soft: {
-      background: "neutral.surfaceSoft",
-      border: "neutral.borderLight",
-      borderRadius: "xl",
-      shadow: "none",
-      padding: "2rem",
-    },
-
-    earth: {
-      background: "accent.50",
-      border: "accent.200",
-      borderRadius: "xl",
-      shadow: "none",
-      padding: "2rem",
-    },
-  },
-
-  // ============================================================
-  // BADGES
-  // ============================================================
-
-  badges: {
-    primary: {
-      background: "primary.50",
-      text: "primary.700",
-      border: "primary.200",
-    },
-
-    sage: {
-      background: "secondary.100",
-      text: "secondary.700",
-      border: "secondary.200",
-    },
-
-    eco: {
-      background: "eco.50",
-      text: "eco.700",
-      border: "eco.200",
-    },
-
-    warm: {
-      background: "accent.50",
-      text: "accent.700",
-      border: "accent.200",
-    },
-
-    dark: {
-      background: "primary.800",
-      text: "neutral.white",
-      border: "primary.700",
-    },
-  },
-
-  // ============================================================
-  // ICONS
-  // ============================================================
-
-  icons: {
-    default: "primary.600",
-    light: "primary.400",
-    dark: "primary.800",
-    sage: "secondary.600",
-    eco: "eco.600",
-    muted: "industrial.500",
-    white: "neutral.white",
-    accent: "accent.600",
-
-    container: {
-      size: "3.5rem",
-      borderRadius: "lg",
-      background: "primary.50",
-    },
-
-    containerSage: {
-      size: "3.5rem",
-      borderRadius: "lg",
-      background: "secondary.100",
-    },
-
-    containerAccent: {
-      size: "3.5rem",
-      borderRadius: "lg",
-      background: "accent.100",
-    },
-
-    containerLarge: {
-      size: "4.5rem",
-      borderRadius: "xl",
-      background: "primary.100",
-    },
-  },
-
-  // ============================================================
-  // SECTIONS
-  // ============================================================
-
-  sections: {
-    default: {
-      background: "neutral.background",
-      text: "neutral.text",
-    },
-
-    alternate: {
-      background: "neutral.backgroundAlt",
-      text: "neutral.text",
-    },
-
-    dark: {
-      background: "primary.950",
-      text: "neutral.textOnDark",
-    },
-
-    teal: {
-      background: "primary.900",
-      text: "neutral.textOnDark",
-    },
-
-    sage: {
-      background: "secondary.50",
-      text: "neutral.text",
-    },
-
-    warm: {
-      background: "accent.50",
-      text: "neutral.text",
-    },
-
-    eco: {
-      background: "eco.50",
-      text: "neutral.text",
-    },
-  },
-
-  // ============================================================
-  // HEADER
-  // ============================================================
-
-  header: {
-    height: "84px",
-
-    background: "rgba(250,250,247,0.94)",
-
-    backdropFilter: "blur(14px)",
-
-    borderBottom: "1px solid rgba(221,228,225,0.85)",
-
-    shadow: "header",
-
-    logo: {
-      height: "42px",
-      maxWidth: "190px",
-    },
-
-    nav: {
-      text: "industrial.700",
-      hoverText: "primary.600",
-      activeText: "primary.700",
-
-      fontSize: "0.875rem",
-      fontWeight: 500,
-    },
-
-    cta: {
-      background: "primary.600",
-      text: "neutral.white",
-      hoverBackground: "primary.700",
-    },
-  },
-
-  // ============================================================
-  // HERO
-  // ============================================================
-
-  hero: {
-    minHeight: "680px",
-
-    background: "special.heroGradient",
-
-    overlay: "special.overlay",
-
-    titleColor: "neutral.white",
-
-    descriptionColor: "neutral.textOnDarkMuted",
-
-    badge: {
-      background: "rgba(214,168,95,0.14)",
-      text: "accent.300",
-      border: "rgba(214,168,95,0.35)",
-    },
-
-    primaryButton: {
-      background: "accent.500",
-      text: "primary.950",
-      hoverBackground: "accent.400",
-    },
-
-    secondaryButton: {
-      background: "transparent",
-      text: "neutral.white",
-      border: "rgba(255,255,255,0.55)",
-      hoverBackground: "rgba(255,255,255,0.10)",
-    },
-  },
-
-  // ============================================================
-  // FORMS
-  // ============================================================
-
-  forms: {
-    input: {
-      background: "neutral.white",
-      border: "neutral.border",
-
-      text: "neutral.text",
-      placeholder: "neutral.textMuted",
-
-      focusBorder: "primary.500",
-      focusRing: "rgba(47,133,136,0.15)",
-
-      borderRadius: "md",
-
-      paddingX: "1rem",
-      paddingY: "0.8rem",
-
-      fontSize: "0.9375rem",
-    },
-
-    label: {
-      color: "industrial.700",
-      fontSize: "0.875rem",
-      fontWeight: 500,
-    },
-
-    textarea: {
-      minHeight: "140px",
-    },
-  },
-
-  // ============================================================
-  // LINKS
-  // ============================================================
-
-  links: {
-    default: {
-      color: "primary.600",
-      hoverColor: "primary.800",
-    },
-
-    subtle: {
-      color: "industrial.600",
-      hoverColor: "primary.600",
-    },
-
-    dark: {
-      color: "neutral.textOnDark",
-      hoverColor: "accent.300",
-    },
-  },
-
-  // ============================================================
-  // DIVIDERS
-  // ============================================================
-
-  dividers: {
-    default: "neutral.borderLight",
-    dark: "neutral.borderDark",
-    teal: "primary.200",
-    sage: "secondary.200",
-    accent: "accent.200",
-  },
-
-  // ============================================================
-  // TRANSITIONS
-  // ============================================================
-
-  transitions: {
-    instant: "100ms ease",
-    fast: "150ms ease",
-    normal: "250ms ease",
-    medium: "350ms ease",
-    slow: "500ms ease",
-
-    transform: "350ms cubic-bezier(0.22, 1, 0.36, 1)",
-  },
-
-  // ============================================================
-  // ANIMATIONS
-  // ============================================================
-
-  animations: {
-    hoverLift: {
-      transform: "translateY(-6px)",
-      transition: "350ms cubic-bezier(0.22, 1, 0.36, 1)",
-    },
-
-    hoverScale: {
-      transform: "scale(1.02)",
-      transition: "350ms cubic-bezier(0.22, 1, 0.36, 1)",
-    },
-
-    fadeUp: {
-      animation: "fadeUp 0.7s ease forwards",
-    },
-
-    fadeIn: {
-      animation: "fadeIn 0.6s ease forwards",
-    },
-  },
-
-  // ============================================================
-  // FOOTER
-  // ============================================================
-
-  footer: {
-    background: "primary.950",
-
-    text: "neutral.textOnDark",
-
-    mutedText: "neutral.textOnDarkMuted",
-
-    heading: "neutral.white",
-
-    border: "rgba(255,255,255,0.10)",
-
-    link: {
-      color: "#C5D3D1",
-      hoverColor: "#D6A85F",
-    },
-
-    accent: {
-      color: "accent.500",
-    },
-  },
-
-  // ============================================================
-  // RESPONSIVE BREAKPOINTS
-  // ============================================================
-
-  breakpoints: {
-    xs: "480px",
-    sm: "640px",
-    md: "768px",
-    lg: "1024px",
-    xl: "1280px",
-    "2xl": "1536px",
-  },
-
-  // ============================================================
-  // Z-INDEX
-  // ============================================================
-
-  zIndex: {
-    base: 0,
-    dropdown: 100,
-    sticky: 200,
-    header: 300,
-    overlay: 400,
-    modal: 500,
-    toast: 600,
-    tooltip: 700,
   },
 };
 
+// ═══════════════════════════════════════════════════════════════════════════
+// 3. TYPOGRAPHY
+// ═══════════════════════════════════════════════════════════════════════════
+// Three roles, three faces. Poppins and Lora were doing neither job well —
+// Poppins is the most-used template face on the web and Lora reads editorial,
+// not industrial.
+
+const typography = {
+  families: {
+    /** Display — Archivo. Grotesque with signage DNA; variable width axis lets
+     *  hero type go expanded without a second family. */
+    display: {
+      stack: '"Archivo", "Helvetica Neue", Arial, sans-serif',
+      variable: true,
+      axes: { wght: [400, 700], wdth: [100, 125] },
+      google: 'Archivo:wdth,wght@100..125,400..700',
+    },
+    /** Body — Instrument Sans. Humanist, quiet, high x-height at small sizes. */
+    body: {
+      stack:
+        '"Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
+      variable: true,
+      axes: { wght: [400, 600] },
+      google: 'Instrument+Sans:wght@400;500;600',
+    },
+    /** Data — JetBrains Mono. Tonnage, authorisation numbers, manifest IDs,
+     *  certificate references. A recycler's credibility is its documentation;
+     *  giving numbers their own face makes that legible at a glance. */
+    data: {
+      stack: '"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace',
+      google: 'JetBrains+Mono:wght@400;500;700',
+    },
+  },
+
+  /** One Google Fonts request for all three. */
+  googleFontsHref:
+    'https://fonts.googleapis.com/css2' +
+    '?family=Archivo:wdth,wght@100..125,400..700' +
+    '&family=Instrument+Sans:wght@400;500;600' +
+    '&family=JetBrains+Mono:wght@400;500;700' +
+    '&display=swap',
+
+  /**
+   * Fluid scale on a consistent ratio (1.2 at 380px → 1.28 at 1440px).
+   * One scale only — the old config had `typography` and `fontSize` defining
+   * overlapping, conflicting sizes.
+   */
+  scale: {
+    display: {
+      family: 'display',
+      size: 'clamp(2.75rem, 1.6rem + 4.9vw, 5.5rem)',
+      lineHeight: '0.98',
+      letterSpacing: '-0.035em',
+      weight: 600,
+      width: 112, // wdth axis — expanded for hero only
+      wrap: 'balance',
+    },
+    h1: {
+      family: 'display',
+      size: 'clamp(2.25rem, 1.5rem + 3.2vw, 3.75rem)',
+      lineHeight: '1.06',
+      letterSpacing: '-0.028em',
+      weight: 600,
+      width: 105,
+      wrap: 'balance',
+    },
+    h2: {
+      family: 'display',
+      size: 'clamp(1.75rem, 1.25rem + 2.1vw, 2.75rem)',
+      lineHeight: '1.14',
+      letterSpacing: '-0.022em',
+      weight: 600,
+      wrap: 'balance',
+    },
+    h3: {
+      family: 'display',
+      size: 'clamp(1.375rem, 1.15rem + 0.95vw, 1.875rem)',
+      lineHeight: '1.24',
+      letterSpacing: '-0.014em',
+      weight: 600,
+      wrap: 'balance',
+    },
+    h4: {
+      family: 'display',
+      size: '1.1875rem',
+      lineHeight: '1.36',
+      letterSpacing: '-0.008em',
+      weight: 600,
+    },
+    lead: {
+      family: 'body',
+      size: 'clamp(1.0625rem, 1rem + 0.32vw, 1.25rem)',
+      lineHeight: '1.62',
+      letterSpacing: '-0.004em',
+      weight: 400,
+      maxWidth: '58ch',
+      wrap: 'pretty',
+    },
+    body: {
+      family: 'body',
+      size: '1rem',
+      lineHeight: '1.68',
+      weight: 400,
+      maxWidth: '72ch',
+      wrap: 'pretty',
+    },
+    bodySm: {
+      family: 'body',
+      size: '0.875rem',
+      lineHeight: '1.6',
+      weight: 400,
+    },
+    caption: {
+      family: 'body',
+      size: '0.8125rem',
+      lineHeight: '1.5',
+      weight: 400,
+    },
+    /** Eyebrow — mono, not uppercase-tracked sans. Reads as a plant label. */
+    eyebrow: {
+      family: 'data',
+      size: '0.75rem',
+      lineHeight: '1.3',
+      letterSpacing: '0.09em',
+      weight: 500,
+      textTransform: 'uppercase',
+    },
+    /** Counters: "602.25 MT / month". Tabular so digits don't jitter on count-up. */
+    dataXl: {
+      family: 'data',
+      size: 'clamp(2.25rem, 1.6rem + 2.7vw, 3.5rem)',
+      lineHeight: '1',
+      letterSpacing: '-0.03em',
+      weight: 700,
+      fontVariantNumeric: 'tabular-nums',
+    },
+    dataLg: {
+      family: 'data',
+      size: '1.5rem',
+      lineHeight: '1.15',
+      letterSpacing: '-0.02em',
+      weight: 500,
+      fontVariantNumeric: 'tabular-nums',
+    },
+    /** Authorisation numbers, CIN, manifest refs. */
+    dataSm: {
+      family: 'data',
+      size: '0.8125rem',
+      lineHeight: '1.45',
+      letterSpacing: '0.01em',
+      weight: 400,
+      fontVariantNumeric: 'tabular-nums',
+    },
+    button: {
+      family: 'body',
+      size: '0.9375rem',
+      lineHeight: '1',
+      letterSpacing: '0.002em',
+      weight: 600,
+    },
+    nav: {
+      family: 'body',
+      size: '0.9375rem',
+      lineHeight: '1',
+      weight: 500,
+    },
+  },
+};
+
+// ═══════════════════════════════════════════════════════════════════════════
+// 4. SPACE — 4px base. (The previous config had no spacing scale at all.)
+// ═══════════════════════════════════════════════════════════════════════════
+
+const space = {
+  0: '0',
+  px: '1px',
+  0.5: '0.125rem',
+  1: '0.25rem',
+  2: '0.5rem',
+  3: '0.75rem',
+  4: '1rem',
+  5: '1.25rem',
+  6: '1.5rem',
+  8: '2rem',
+  10: '2.5rem',
+  12: '3rem',
+  14: '3.5rem',
+  16: '4rem',
+  20: '5rem',
+  24: '6rem',
+  28: '7rem',
+  32: '8rem',
+  40: '10rem',
+};
+
+// ═══════════════════════════════════════════════════════════════════════════
+// 5. LAYOUT
+// ═══════════════════════════════════════════════════════════════════════════
+
+const layout = {
+  container: {
+    wide: '1400px',
+    default: '1200px',
+    text: '68ch',
+    narrow: '46rem',
+    gutter: 'clamp(1.25rem, 4vw, 3rem)',
+  },
+
+  /** Section rhythm — three densities instead of one fixed value. */
+  section: {
+    tight: 'clamp(3rem, 6vw, 4.5rem)',
+    default: 'clamp(4.5rem, 9vw, 7.5rem)',
+    loose: 'clamp(6rem, 12vw, 10rem)',
+  },
+
+  grid: {
+    columns: 12,
+    gap: 'clamp(1.25rem, 2.5vw, 2rem)',
+    gapTight: '1rem',
+    gapLoose: '3rem',
+  },
+
+  header: {
+    height: '76px',
+    heightCompact: '62px', // after scroll
+    announcementHeight: '38px',
+  },
+
+  /**
+   * Radii — deliberately tight. The old set (up to 2.25rem) is what made the
+   * design read as a soft wellness brand rather than an industrial operator.
+   */
+  radius: {
+    none: '0',
+    xs: '2px',
+    sm: '4px',
+    md: '6px',
+    lg: '10px',
+    xl: '14px',
+    pill: '999px',
+    circle: '50%',
+  },
+
+  borderWidth: {
+    hairline: '1px',
+    thick: '2px',
+    rule: '3px', // fraction bar / heading underline
+  },
+};
+
+// ═══════════════════════════════════════════════════════════════════════════
+// 6. ELEVATION — two-layer (ambient + direct), tinted with the primary hue
+// ═══════════════════════════════════════════════════════════════════════════
+
+const elevation = {
+  none: 'none',
+  xs: '0 1px 2px rgba(14, 47, 38, 0.05)',
+  sm: '0 1px 2px rgba(14, 47, 38, 0.05), 0 2px 6px rgba(14, 47, 38, 0.05)',
+  md: '0 1px 3px rgba(14, 47, 38, 0.06), 0 6px 16px rgba(14, 47, 38, 0.07)',
+  lg: '0 2px 6px rgba(14, 47, 38, 0.06), 0 14px 32px rgba(14, 47, 38, 0.09)',
+  xl: '0 4px 10px rgba(14, 47, 38, 0.07), 0 26px 56px rgba(14, 47, 38, 0.12)',
+  /** Inset hairline — carries card definition so shadows can stay quiet. */
+  hairline: 'inset 0 0 0 1px rgba(14, 47, 38, 0.07)',
+  hairlineInverse: 'inset 0 0 0 1px rgba(255, 255, 255, 0.10)',
+  header: '0 1px 0 rgba(14, 47, 38, 0.07)',
+  headerScrolled: '0 1px 0 rgba(14, 47, 38, 0.09), 0 8px 24px rgba(14, 47, 38, 0.06)',
+  focusRing: '0 0 0 3px rgba(46, 122, 97, 0.32)',
+  focusRingAccent: '0 0 0 3px rgba(180, 104, 47, 0.32)',
+  focusRingInverse: '0 0 0 3px rgba(255, 255, 255, 0.45)',
+};
+
+// ═══════════════════════════════════════════════════════════════════════════
+// 7. MOTION
+// ═══════════════════════════════════════════════════════════════════════════
+
+const motion = {
+  duration: {
+    instant: '80ms',
+    fast: '140ms',
+    normal: '220ms',
+    slow: '380ms',
+    deliberate: '620ms', // count-up, fraction bar fill
+  },
+  easing: {
+    standard: 'cubic-bezier(0.2, 0, 0, 1)',
+    entrance: 'cubic-bezier(0.05, 0.7, 0.1, 1)',
+    exit: 'cubic-bezier(0.3, 0, 0.8, 0.15)',
+    mechanical: 'cubic-bezier(0.65, 0, 0.35, 1)', // conveyor / stepper motion
+  },
+  transition: {
+    colors: 'color 140ms cubic-bezier(0.2,0,0,1), background-color 140ms cubic-bezier(0.2,0,0,1), border-color 140ms cubic-bezier(0.2,0,0,1)',
+    transform: 'transform 220ms cubic-bezier(0.05,0.7,0.1,1)',
+    all: 'all 220ms cubic-bezier(0.2,0,0,1)',
+  },
+  /** Restrained on purpose: one lift value, no scale-on-hover on cards. */
+  hover: {
+    lift: 'translateY(-3px)',
+    liftStrong: 'translateY(-6px)',
+    nudge: 'translateX(3px)', // "Read more →" arrows
+  },
+  /** Honour prefers-reduced-motion — the old config had no provision for it. */
+  reducedMotion: {
+    duration: '1ms',
+    transform: 'none',
+  },
+};
+
+// ═══════════════════════════════════════════════════════════════════════════
+// 8. SIGNATURE — the one element this site is remembered by
+// ═══════════════════════════════════════════════════════════════════════════
+/**
+ * FRACTION BAR. A 3px multi-segment rule whose widths are the actual material
+ * recovery split of a processed consignment. It replaces the generic dotted
+ * dividers both reference sites use, and it encodes something true: this is
+ * what a tonne becomes. Used as a section divider, a heading underline, and
+ * full-bleed under the header.
+ *
+ * Feed real recovery percentages from the plant. Widths must total 100.
+ */
+const signature = {
+  fractionBar: {
+    height: '3px',
+    heightProminent: '6px',
+    segments: [
+      { key: 'ferrous', label: 'Ferrous', width: 38, token: 'data.ferrous' },
+      { key: 'nonFerrous', label: 'Non-ferrous', width: 14, token: 'data.nonFerrous' },
+      { key: 'plastics', label: 'Plastics', width: 27, token: 'data.plastics' },
+      { key: 'pcbFraction', label: 'PCB', width: 9, token: 'data.pcbFraction' },
+      { key: 'glass', label: 'Glass', width: 7, token: 'data.glass' },
+      { key: 'residue', label: 'Residue', width: 5, token: 'data.residue' },
+    ],
+    animation: {
+      property: 'width',
+      duration: '620ms',
+      easing: 'cubic-bezier(0.65, 0, 0.35, 1)',
+      stagger: '70ms',
+    },
+  },
+
+  /** Eyebrow rule — short copper tick before mono eyebrow labels. */
+  eyebrowRule: {
+    width: '18px',
+    height: '2px',
+    color: 'text.accent',
+    gap: space[3],
+  },
+
+  /** Weighbridge grid — 1px background grid on dark sections, at 6% opacity. */
+  grid: {
+    size: '56px',
+    lineLight: 'rgba(14, 47, 38, 0.045)',
+    lineDark: 'rgba(255, 255, 255, 0.05)',
+  },
+};
+
+// ═══════════════════════════════════════════════════════════════════════════
+// 9. COMPONENT RECIPES — composed only from semantic tokens
+// ═══════════════════════════════════════════════════════════════════════════
+
+const components = {
+  button: {
+    base: {
+      typography: 'button',
+      radius: layout.radius.sm,
+      borderWidth: layout.borderWidth.hairline,
+      transition: motion.transition.colors,
+      focusRing: elevation.focusRing,
+      gap: space[2],
+      whiteSpace: 'nowrap',
+    },
+    sizes: {
+      sm: { paddingX: space[4], paddingY: space[2], minHeight: '36px', fontSize: '0.875rem' },
+      md: { paddingX: space[5], paddingY: space[3], minHeight: '44px', fontSize: '0.9375rem' },
+      lg: { paddingX: space[6], paddingY: space[4], minHeight: '52px', fontSize: '1rem' },
+    },
+    variants: {
+      /** Default CTA. Brand green, not copper — copper is reserved for the
+       *  single highest-intent action per view. */
+      primary: {
+        bg: 'interactive.brandRest',
+        hoverBg: 'interactive.brandHover',
+        activeBg: 'interactive.brandActive',
+        text: 'text.onBrand',
+        border: 'transparent',
+        shadow: elevation.none,
+        hoverShadow: elevation.sm,
+      },
+      /** Reserved: "Schedule a free pickup". One per page. */
+      accent: {
+        bg: 'interactive.accentRest',
+        hoverBg: 'interactive.accentHover',
+        activeBg: 'interactive.accentActive',
+        text: 'text.onAccent',
+        border: 'transparent',
+        shadow: elevation.none,
+        hoverShadow: elevation.sm,
+        focusRing: elevation.focusRingAccent,
+      },
+      secondary: {
+        bg: 'surface.base',
+        hoverBg: 'interactive.neutralHover',
+        text: 'text.brand',
+        border: 'border.default',
+        hoverBorder: 'border.strong',
+        shadow: elevation.none,
+      },
+      ghost: {
+        bg: 'transparent',
+        hoverBg: 'interactive.ghostHover',
+        text: 'text.brand',
+        border: 'transparent',
+      },
+      onDark: {
+        bg: 'transparent',
+        hoverBg: 'interactive.ghostHoverInverse',
+        text: 'text.onInverse',
+        border: 'border.inverse',
+        focusRing: elevation.focusRingInverse,
+      },
+      link: {
+        bg: 'transparent',
+        text: 'text.accent',
+        hoverText: 'interactive.accentHover',
+        border: 'none',
+        paddingX: '0',
+        paddingY: '0',
+        underlineOffset: '4px',
+      },
+    },
+  },
+
+  card: {
+    base: {
+      radius: layout.radius.lg,
+      padding: 'clamp(1.5rem, 3vw, 2rem)',
+      transition: `${motion.transition.transform}, box-shadow 220ms ${motion.easing.standard}`,
+    },
+    variants: {
+      /** Definition comes from the hairline, not a heavy shadow. */
+      default: {
+        bg: 'surface.base',
+        border: 'border.subtle',
+        shadow: elevation.xs,
+      },
+      interactive: {
+        bg: 'surface.base',
+        border: 'border.subtle',
+        shadow: elevation.xs,
+        hoverShadow: elevation.lg,
+        hoverBorder: 'border.default',
+        hoverTransform: motion.hover.lift,
+      },
+      flat: {
+        bg: 'surface.sunken',
+        border: 'transparent',
+        shadow: elevation.none,
+      },
+      outlined: {
+        bg: 'transparent',
+        border: 'border.default',
+        shadow: elevation.none,
+      },
+      /** Certifications, authorisation numbers, compliance callouts. */
+      credential: {
+        bg: 'surface.base',
+        border: 'border.default',
+        shadow: elevation.none,
+        radius: layout.radius.sm,
+        accentEdge: { side: 'left', width: '3px', color: 'text.accent' },
+        typography: 'dataSm',
+      },
+      inverse: {
+        bg: 'surface.inverse',
+        border: 'border.inverse',
+        shadow: elevation.none,
+        text: 'text.onInverse',
+      },
+      brand: {
+        bg: 'surface.brand',
+        border: 'transparent',
+        shadow: elevation.none,
+        text: 'text.onBrand',
+      },
+    },
+  },
+
+  badge: {
+    base: {
+      radius: layout.radius.xs,
+      paddingX: space[2],
+      paddingY: space[1],
+      typography: 'eyebrow',
+      borderWidth: layout.borderWidth.hairline,
+    },
+    variants: {
+      brand: { bg: 'surface.brandSubtle', text: 'text.brand', border: 'transparent' },
+      accent: { bg: 'surface.accentSubtle', text: 'text.accent', border: 'transparent' },
+      /** Authorisation validity, EPR deadlines. */
+      compliance: { bg: 'status.warningSurface', text: 'status.warning', border: 'status.warningBorder' },
+      neutral: { bg: 'surface.sunken', text: 'text.secondary', border: 'transparent' },
+      inverse: { bg: 'rgba(255,255,255,0.10)', text: 'text.onInverse', border: 'border.inverse' },
+    },
+  },
+
+  input: {
+    base: {
+      bg: 'surface.base',
+      text: 'text.primary',
+      placeholder: 'text.tertiary',
+      border: 'border.default',
+      hoverBorder: 'border.strong',
+      focusBorder: 'border.focus',
+      focusRing: elevation.focusRing,
+      radius: layout.radius.sm,
+      paddingX: space[4],
+      paddingY: space[3],
+      minHeight: '46px',
+      fontSize: '1rem', // 16px — prevents iOS zoom-on-focus
+      transition: motion.transition.colors,
+    },
+    label: { typography: 'bodySm', color: 'text.secondary', weight: 500, marginBottom: space[2] },
+    hint: { typography: 'caption', color: 'text.tertiary', marginTop: space[2] },
+    error: { border: 'status.danger', color: 'status.danger', ring: '0 0 0 3px rgba(169,50,38,0.20)' },
+    textarea: { minHeight: '132px' },
+    /** Quantity / weight fields — mono + tabular. */
+    numeric: { fontFamily: 'data', fontVariantNumeric: 'tabular-nums' },
+  },
+
+  header: {
+    height: layout.header.height,
+    bg: 'surface.canvas',
+    bgScrolled: 'rgba(244, 246, 243, 0.86)',
+    backdropFilter: 'saturate(150%) blur(12px)',
+    borderBottom: 'border.subtle',
+    shadow: elevation.header,
+    shadowScrolled: elevation.headerScrolled,
+    logo: { height: '38px', maxWidth: '176px' },
+    nav: {
+      typography: 'nav',
+      rest: 'text.secondary',
+      hover: 'text.primary',
+      active: 'text.brand',
+      /** Copper underline on active — the only place copper appears in nav. */
+      activeIndicator: { height: '2px', color: 'text.accent', offset: '-6px' },
+      itemGap: space[6],
+    },
+    /** Helpline strip above the nav — both reference sites bury the number. */
+    utilityBar: {
+      height: layout.header.announcementHeight,
+      bg: 'surface.inverse',
+      text: 'text.onInverseMuted',
+      accent: 'text.accent',
+      typography: 'dataSm',
+    },
+    cta: 'accent',
+  },
+
+  hero: {
+    minHeight: 'min(86vh, 780px)',
+    minHeightMobile: '620px',
+    bg: 'surface.brand',
+    /** A near-flat brand ground with one soft copper bloom — the previous
+     *  three-stop teal gradient made every hero look like a stock ESG banner. */
+    backgroundImage:
+      'radial-gradient(120% 90% at 88% 8%, rgba(180,104,47,0.20) 0%, rgba(180,104,47,0) 58%), linear-gradient(180deg, #0E2F26 0%, #08201A 100%)',
+    mediaScrim: 'linear-gradient(90deg, rgba(8,32,26,0.90) 0%, rgba(8,32,26,0.62) 46%, rgba(8,32,26,0.20) 100%)',
+    gridOverlay: signature.grid.lineDark,
+    eyebrow: { typography: 'eyebrow', color: 'text.accent' },
+    title: { typography: 'display', color: 'text.onBrand' },
+    body: { typography: 'lead', color: 'text.onInverseMuted', maxWidth: '52ch' },
+    primaryCta: 'accent',
+    secondaryCta: 'onDark',
+    /** Counter strip sitting on the hero's lower edge. */
+    statStrip: {
+      bg: 'rgba(255,255,255,0.05)',
+      border: 'border.inverse',
+      value: { typography: 'dataLg', color: 'text.onInverse' },
+      label: { typography: 'caption', color: 'text.onInverseMuted' },
+    },
+  },
+
+  section: {
+    paddingY: layout.section.default,
+    variants: {
+      canvas: { bg: 'surface.canvas', text: 'text.primary' },
+      base: { bg: 'surface.base', text: 'text.primary' },
+      sunken: { bg: 'surface.sunken', text: 'text.primary' },
+      brand: { bg: 'surface.brand', text: 'text.onBrand', gridOverlay: true },
+      graphite: { bg: 'surface.inverse', text: 'text.onInverse', gridOverlay: true },
+      accentSubtle: { bg: 'surface.accentSubtle', text: 'text.primary' },
+    },
+    header: {
+      eyebrow: { typography: 'eyebrow', color: 'text.accent', marginBottom: space[3] },
+      title: { typography: 'h2', color: 'inherit' },
+      lead: { typography: 'lead', color: 'text.secondary', marginTop: space[4] },
+      maxWidth: '62ch',
+      marginBottom: 'clamp(2.5rem, 5vw, 4rem)',
+    },
+  },
+
+  footer: {
+    bg: 'surface.inverse',
+    text: 'text.onInverseMuted',
+    heading: { typography: 'eyebrow', color: 'text.onInverse' },
+    link: { rest: 'text.onInverseMuted', hover: 'text.onInverse', transition: motion.transition.colors },
+    border: 'border.inverse',
+    /** Helpline numbers and authorisation refs set in mono. */
+    contact: { typography: 'dataSm', color: 'text.onInverse' },
+    accent: 'text.accent',
+    paddingY: 'clamp(3.5rem, 7vw, 5.5rem)',
+    bottomBar: { borderTop: 'border.inverse', paddingY: space[6], typography: 'caption' },
+  },
+
+  /** Impact counters — the numbers a compliance buyer scans for first. */
+  statistic: {
+    value: { typography: 'dataXl', color: 'text.primary' },
+    valueAccent: { typography: 'dataXl', color: 'text.accent' },
+    unit: { typography: 'dataLg', color: 'text.tertiary', marginLeft: space[1] },
+    label: { typography: 'bodySm', color: 'text.secondary', marginTop: space[3] },
+    footnote: { typography: 'caption', color: 'text.tertiary' },
+    divider: 'border.subtle',
+    countUp: { duration: motion.duration.deliberate, easing: motion.easing.mechanical },
+  },
+
+  /** Process stepper. Numbering is legitimate here — the stages are sequential
+   *  and the order carries real information (media removal must precede
+   *  dismantling). Don't reuse this pattern for non-sequential lists. */
+  stepper: {
+    marker: {
+      typography: 'dataSm',
+      color: 'text.accent',
+      size: '2rem',
+      border: 'border.accent',
+      radius: layout.radius.none,
+    },
+    connector: { color: 'border.default', width: '1px', style: 'dashed' },
+    title: { typography: 'h4', color: 'text.primary' },
+    body: { typography: 'body', color: 'text.secondary' },
+  },
+
+  table: {
+    headerBg: 'surface.sunken',
+    headerText: 'text.secondary',
+    headerTypography: 'eyebrow',
+    cellPaddingX: space[4],
+    cellPaddingY: space[3],
+    border: 'border.subtle',
+    stripeBg: 'surface.canvas',
+    hoverBg: 'surface.sunken',
+    numericFont: 'data',
+    numericAlign: 'right',
+  },
+
+  modal: {
+    bg: 'surface.base',
+    radius: layout.radius.lg,
+    shadow: elevation.xl,
+    maxWidth: '560px',
+    padding: 'clamp(1.5rem, 4vw, 2.5rem)',
+    scrim: 'surface.scrim',
+    scrimBlur: 'blur(3px)',
+  },
+
+  divider: {
+    default: 'border.subtle',
+    strong: 'border.default',
+    inverse: 'border.inverse',
+    /** Prefer the fraction bar over a plain rule between major sections. */
+    signature: 'fractionBar',
+  },
+};
+
+// ═══════════════════════════════════════════════════════════════════════════
+// 10. SYSTEM
+// ═══════════════════════════════════════════════════════════════════════════
+
+const breakpoints = {
+  xs: '480px',
+  sm: '640px',
+  md: '768px',
+  lg: '1024px',
+  xl: '1280px',
+  '2xl': '1536px',
+};
+
+const zIndex = {
+  base: 0,
+  raised: 10,
+  sticky: 200,
+  header: 300,
+  dropdown: 400,
+  scrim: 500,
+  modal: 600,
+  toast: 700,
+  tooltip: 800,
+  skipLink: 900,
+};
+
+/**
+ * Accessibility floor. These are commitments, not aspirations — check them in
+ * CI if you can.
+ */
+const a11y = {
+  minContrast: { bodyText: 4.5, largeText: 3.0, uiComponent: 3.0 },
+  focusVisibleOnly: true,
+  targetMinSize: '44px',
+  skipLinkTarget: '#main',
+  reducedMotionQuery: '(prefers-reduced-motion: reduce)',
+  /** Known-bad pairs — do not use. */
+  forbidden: [
+    'copper.500 as text on aluminium.50 (4.4:1 — use copper.600)',
+    'aluminium.400 as body text on any light surface',
+    'signal.500 as text on white (2.5:1 — use signal.700)',
+  ],
+};
+
+const brand = {
+  name: 'Advait Green Recycling',
+  legalName: 'ADVAIT GREEN RECYCLING PRIVATE LIMITED',
+  /** Positioning line: what the business does, in its own vocabulary. */
+  tagline: 'Recovered, documented, accounted for.',
+  descriptor: 'Authorised e-waste, plastic and battery recycling',
+  /** Alternates, if the above is too spare for the client:
+   *  'Nothing is waste until it is wasted.'
+   *  'Every kilogram accounted for.' */
+};
+
+// ═══════════════════════════════════════════════════════════════════════════
+// 11. HELPERS — these make the dotted token strings above actually resolve
+// ═══════════════════════════════════════════════════════════════════════════
+
+/**
+ * Resolve a dotted semantic path to a real value.
+ *   resolve('text.accent')          → '#995427'
+ *   resolve('surface.brand', 'dark')→ '#08201A'
+ * Falls through raw CSS values (hex, rgba, 'transparent') untouched.
+ */
+function resolve(path, mode = 'light') {
+  if (typeof path !== 'string') return path;
+  if (/^(#|rgb|hsl|var\(|transparent$|currentColor$|none$|inherit$)/.test(path)) return path;
+
+  const scope = semantic[mode] || semantic.light;
+  const value = path.split('.').reduce((acc, key) => (acc == null ? acc : acc[key]), scope);
+  if (value != null) return value;
+
+  // Fall back to the raw palette, e.g. 'copper.500'
+  const raw = path.split('.').reduce((acc, key) => (acc == null ? acc : acc[key]), palette);
+  return raw != null ? raw : path;
+}
+
+/** Flatten an object into `--prefix-a-b: value` pairs. */
+function flatten(obj, prefix, out = {}) {
+  Object.entries(obj).forEach(([key, value]) => {
+    const name = `${prefix}-${String(key).replace(/\./g, '_')}`;
+    if (value && typeof value === 'object' && !Array.isArray(value)) flatten(value, name, out);
+    else out[name] = value;
+  });
+  return out;
+}
+
+/**
+ * Emit CSS custom properties for a mode. Drop the light set on :root and the
+ * dark set on [data-theme="dark"] — one call, no duplication between JS and CSS.
+ */
+function toCSSVariables(mode = 'light') {
+  return {
+    ...flatten(semantic[mode], '--c'),
+    ...flatten(space, '--space'),
+    ...flatten(layout.radius, '--radius'),
+    ...flatten(elevation, '--shadow'),
+    ...flatten(motion.duration, '--dur'),
+    ...flatten(motion.easing, '--ease'),
+    '--font-display': typography.families.display.stack,
+    '--font-body': typography.families.body.stack,
+    '--font-data': typography.families.data.stack,
+    '--container': layout.container.default,
+    '--gutter': layout.container.gutter,
+    '--header-h': layout.header.height,
+  };
+}
+
+/** Serialise to a pasteable CSS block. */
+function toCSSString() {
+  const block = (selector, vars) =>
+    `${selector} {\n${Object.entries(vars).map(([k, v]) => `  ${k}: ${v};`).join('\n')}\n}`;
+  return [
+    block(':root', toCSSVariables('light')),
+    block('[data-theme="dark"]', flatten(semantic.dark, '--c')),
+    `@media ${a11y.reducedMotionQuery} {\n  *, *::before, *::after {\n    animation-duration: ${motion.reducedMotion.duration} !important;\n    animation-iteration-count: 1 !important;\n    transition-duration: ${motion.reducedMotion.duration} !important;\n    scroll-behavior: auto !important;\n  }\n}`,
+  ].join('\n\n');
+}
+
+/** Drop-in Tailwind preset so Tailwind and JS never drift apart. */
+const tailwindPreset = {
+  darkMode: ['class', '[data-theme="dark"]'],
+  theme: {
+    extend: {
+      colors: {
+        pcb: palette.pcb,
+        copper: palette.copper,
+        aluminium: palette.aluminium,
+        signal: palette.signal,
+        surface: {
+          canvas: 'var(--c-surface-canvas)',
+          base: 'var(--c-surface-base)',
+          sunken: 'var(--c-surface-sunken)',
+          inverse: 'var(--c-surface-inverse)',
+          brand: 'var(--c-surface-brand)',
+        },
+        content: {
+          DEFAULT: 'var(--c-text-primary)',
+          secondary: 'var(--c-text-secondary)',
+          tertiary: 'var(--c-text-tertiary)',
+          brand: 'var(--c-text-brand)',
+          accent: 'var(--c-text-accent)',
+          inverse: 'var(--c-text-onInverse)',
+        },
+        line: {
+          subtle: 'var(--c-border-subtle)',
+          DEFAULT: 'var(--c-border-default)',
+          strong: 'var(--c-border-strong)',
+        },
+      },
+      fontFamily: {
+        display: ['Archivo', 'sans-serif'],
+        body: ['Instrument Sans', 'system-ui', 'sans-serif'],
+        data: ['JetBrains Mono', 'monospace'],
+      },
+      spacing: space,
+      borderRadius: layout.radius,
+      boxShadow: elevation,
+      maxWidth: { container: layout.container.default, wide: layout.container.wide, text: layout.container.text },
+      screens: breakpoints,
+      zIndex,
+      transitionTimingFunction: motion.easing,
+      transitionDuration: {
+        fast: motion.duration.fast,
+        normal: motion.duration.normal,
+        slow: motion.duration.slow,
+      },
+    },
+  },
+};
+
+// ═══════════════════════════════════════════════════════════════════════════
+
+const theme = {
+  brand,
+  palette,
+  semantic,
+  typography,
+  space,
+  layout,
+  elevation,
+  motion,
+  signature,
+  components,
+  breakpoints,
+  zIndex,
+  a11y,
+  // helpers
+  resolve,
+  toCSSVariables,
+  toCSSString,
+  tailwindPreset,
+};
+
 module.exports = theme;
+module.exports.default = theme;
+module.exports.resolve = resolve;
+module.exports.toCSSVariables = toCSSVariables;
+module.exports.toCSSString = toCSSString;
+module.exports.tailwindPreset = tailwindPreset;

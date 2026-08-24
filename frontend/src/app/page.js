@@ -1,844 +1,883 @@
 "use client";
 
+import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import {
-  ArrowRight,
-  CheckCircle2,
-  Shield,
-  Leaf,
-  BarChart3,
-  Eye,
-  Recycle,
-  Building2,
-  Cpu,
-  Server,
-  Lock,
-  FileCheck2,
-  Sparkles,
-  Quote,
-  Star,
-  Factory,
-  Globe2,
-  FileText,
-  Copy,
-  Check,
-  HelpCircle,
+  ArrowRight, Cpu, Leaf, ShieldCheck, TrendingUp, Truck, FileCheck,
+  Zap, Factory, Building2, GraduationCap, Landmark, ShoppingCart,
+  Stethoscope, Smartphone, Recycle, CheckCircle,
+  ClipboardCheck, PackageCheck, Wrench, RotateCcw, Award,
 } from "lucide-react";
-import { useState } from "react";
-import HeroSection from "@/components/sections/HeroSection";
-import SectionHeading from "@/components/sections/SectionHeading";
-import ServiceCard from "@/components/sections/ServiceCard";
-import ProcessStepper from "@/components/sections/ProcessStepper";
-import CounterSection from "@/components/sections/CounterSection";
-import IndustryCard from "@/components/sections/IndustryCard";
-import FAQAccordion from "@/components/sections/FAQAccordion";
-import CTABanner from "@/components/sections/CTABanner";
-import { services } from "@/data/services";
-import { industries } from "@/data/industries";
-import { homeFAQ } from "@/data/faq";
+
+const heroSlides = [
+  {
+    eyebrow: "E-Waste Recycling",
+    title: "Recover the Metal. Spare the Mountain.",
+    desc: "Every discarded laptop, server and handset holds recoverable gold, copper and rare earths. We extract them responsibly — so the earth doesn't have to be dug up again.",
+    cta: { label: "Explore E-Waste Recycling", href: "/services/e-waste" },
+  },
+  {
+    eyebrow: "Plastic Waste",
+    title: "Plastic Was Never Meant to Be a One-Way Journey.",
+    desc: "We collect, sort, granulate and return plastic waste to the production line — closing the loop for brands serious about their EPR obligations.",
+    cta: { label: "Explore Plastic Recycling", href: "/services/plastic-waste" },
+  },
+  {
+    eyebrow: "Compliance / EPR",
+    title: "Compliance, Documented. Impact, Verified.",
+    desc: "From EPR registration to certificate generation, we handle the paperwork behind your sustainability promise — audit-ready, every quarter.",
+    cta: { label: "EPR Services", href: "/services/epr" },
+  },
+];
+
+const trustBadges = [
+  { label: "CPCB Registered Recycler", icon: ShieldCheck },
+  { label: "GPCB Authorisation", icon: FileCheck },
+  { label: "ISO 9001:2015", icon: CheckCircle },
+  { label: "ISO 14001:2015", icon: Leaf },
+  { label: "ISO 45001:2018", icon: ShieldCheck },
+];
+
+const valueCards = [
+  {
+    icon: Recycle,
+    title: "What Is Waste Management?",
+    desc: "Waste management is the discipline of collecting, transporting, treating and recovering material that has reached the end of its first useful life — safely, legally, and with the maximum possible value returned to the economy.",
+  },
+  {
+    icon: Leaf,
+    title: "Why Recycling Matters",
+    desc: "Recycling one tonne of circuit boards recovers more gold than 17 tonnes of mined ore. Recovery isn't charity for the planet — it is the cheaper, cleaner, and increasingly the only legal way to source secondary raw material.",
+  },
+  {
+    icon: TrendingUp,
+    title: "The Business Case",
+    desc: "Beyond compliance, recycling reduces landfill liability, protects brand reputation, unlocks scrap value from written-off assets, and delivers the documented evidence your ESG and CSR reporting now demands.",
+  },
+];
+
+const services = [
+  { icon: Cpu, title: "E-Waste Recycling & Management", href: "/services/e-waste", image: "/images/e-west.png" },
+  { icon: Recycle, title: "Plastic Waste Management", href: "/services/plastic-waste", image: "/images/plastic-west.png" },
+  { icon: FileCheck, title: "Extended Producer Responsibility (EPR)", href: "/services/epr", image: "/images/epr.png", wide: true },
+  { icon: ShieldCheck, title: "Secure Data Destruction", href: "/services/data-destruction", image: "/images/secure-data.png" },
+  { icon: Zap, title: "Battery & Solar Panel Recycling", href: "/services/battery-recycling", image: "/images/solar-planet-recycle.png" },
+  { icon: Truck, title: "Reverse Logistics & Asset Buyback", href: "/services/reverse-logistics", image: "/images/reverse-logistic.png" },
+  { icon: Leaf, title: "Sustainability Consulting & ESG Reporting", href: "/services/sustainability", image: "/images/esg.png" },
+];
+
+const impactStats = [
+  { label: "E-waste processed annually", value: "XXX", unit: "MT" },
+  { label: "Plastic waste recycled monthly", value: "XXX", unit: "MT/Mo" },
+  { label: "Metal & material recovered daily", value: "X,XXX", unit: "kg" },
+  { label: "Waste diverted from landfill", value: "XX", unit: "%" },
+  { label: "Corporate clients served", value: "XXX", unit: "+" },
+  { label: "CO2e emissions avoided", value: "X,XXX", unit: "T" },
+];
+
+const processSteps = [
+  { num: "01", title: "Assess", icon: ClipboardCheck, desc: "We audit your waste stream, categorise it under the applicable rules, and quote against actual recoverable value." },
+  { num: "02", title: "Collect", icon: PackageCheck, desc: "Sealed, GPS-tracked transport under a valid manifest. Weighment recorded at pickup and at gate entry." },
+  { num: "03", title: "Sort & Dismantle", icon: Wrench, desc: "Manual de-manufacturing followed by mechanical segregation into ferrous, non-ferrous, plastics, glass, PCB and hazardous fractions." },
+  { num: "04", title: "Recover", icon: RotateCcw, desc: "Shredding, density separation and metal recovery lines return clean secondary raw material to industry." },
+  { num: "05", title: "Certify", icon: Award, desc: "You receive a Certificate of Recycling, a Certificate of Data Destruction where applicable, and quarterly EPR filing support." },
+];
+
+const whyChoose = [
+  { icon: ShieldCheck, title: "Fully Authorised", desc: "Every consignment moves and is treated under valid CPCB/SPCB authorisation, so your liability actually transfers." },
+  { icon: Leaf, title: "Zero Landfill", desc: "Our target is complete diversion of processed material from landfill — nothing we process ends up in the ground." },
+  { icon: FileCheck, title: "Audit-Ready Docs", desc: "Manifests, weighbridge slips, destruction certificates and Form-wise records, issued as standard." },
+  { icon: ShieldCheck, title: "Data Security", desc: "Chain-of-custody sealing and witnessed destruction available for regulated industries." },
+  { icon: TrendingUp, title: "Transparent Valuation", desc: "You see the recovery basis behind every buyback number we quote — no hidden margins." },
+  { icon: Recycle, title: "Single Partner", desc: "E-waste, plastic, battery and compliance handled by one accountable team — one contract, one point of contact." },
+];
+
+const sectors = [
+  { icon: Cpu, label: "IT & ITES", image: "/images/IT-ITES.png" },
+  { icon: Building2, label: "Banking & Financial Services", image: "/images/banking.png" },
+  { icon: Factory, label: "Manufacturing & Automotive", image: "/images/manufactring-automotive.png" },
+  { icon: Stethoscope, label: "Pharmaceuticals & Healthcare", image: "/images/pharma-healthcare.png" },
+  { icon: Smartphone, label: "Telecom & Data Centres", image: "/images/telecom-data.png" },
+  { icon: GraduationCap, label: "Educational Institutions", image: "/images/educational-institute.png" },
+  { icon: Landmark, label: "Government & PSUs", image: "/images/goverment-psu.png" },
+  { icon: ShoppingCart, label: "Retail & E-Commerce", image: "/images/retail-e-commrace.png" },
+];
 
 const fadeUp = {
-  initial: { opacity: 0, y: 30 },
-  whileInView: { opacity: 1, y: 0 },
-  viewport: { once: true, margin: "-50px" },
-  transition: { duration: 0.6 },
+  hidden: { opacity: 0, y: 24 },
+  visible: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: { delay: i * 0.1, duration: 0.5, ease: [0.2, 0, 0, 1] },
+  }),
 };
 
-export default function HomePage() {
-  const [copied, setCopied] = useState(false);
+function ServiceCard({ svc, index }) {
+  const [flipped, setFlipped] = useState(false);
+  const isDark = index % 2 === 1;
 
-  const handleCopyGST = () => {
-    navigator.clipboard.writeText("24ABECA2823M1ZQ");
-    setCopied(true);
-    setTimeout(() => setCopied(false), 2000);
+  const handleTap = () => {
+    if (window.matchMedia("(hover: none)").matches) {
+      setFlipped((prev) => !prev);
+    }
   };
 
   return (
-    <>
-      {/* SECTION 1: HERO */}
-      <HeroSection
-        eyebrow="RESPONSIBLE RECYCLING &bull; RESOURCE RECOVERY &bull; CIRCULAR ECONOMY"
-        heading="Turning Waste Into Resources. Building a Greener Future."
-        description="At ADVAIT GREEN RECYCLING PRIVATE LIMITED, we provide responsible recycling and waste-management solutions designed to recover valuable resources, reduce environmental impact and help businesses manage their end-of-life materials responsibly."
-        primaryCTA={{ label: "Schedule a Pickup", href: "/schedule-pickup" }}
-        secondaryCTA={{ label: "Explore Our Services", href: "/services" }}
-        supportingLine="Responsible handling. Maximum resource recovery. Transparent traceability."
-      />
-
-      {/* SECTION 2: INTRODUCTION (NATURAL 2-COLUMN STORY & SHOWCASE) */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <motion.div {...fadeUp}>
-              <div className="mb-4">
-                <span className="eyebrow">A Smarter Approach to Recycling</span>
-              </div>
-              <h2 className="font-heading text-3xl sm:text-4xl font-bold text-secondary-950 mb-6 leading-tight tracking-tight">
-                Waste is not the end of a product&apos;s life. It is the beginning of a new resource cycle.
-              </h2>
-              <p className="text-secondary-600 leading-relaxed mb-4 font-normal">
-                Every year, businesses and consumers generate large volumes of discarded electronics, electrical equipment, IT assets and other recyclable materials.
-              </p>
-              <p className="text-secondary-600 leading-relaxed mb-4 font-normal">
-                The challenge is not simply collecting waste. The real opportunity lies in managing it responsibly, recovering valuable resources, protecting sensitive information and ensuring that recyclable materials return to the productive economy.
-              </p>
-              <p className="text-secondary-600 leading-relaxed mb-8 font-normal">
-                ADVAIT GREEN RECYCLING PRIVATE LIMITED brings these requirements together through structured collection, certified processing, maximum recovery and complete auditable reporting.
-              </p>
-              <Link
-                href="/about"
-                className="inline-flex items-center gap-2 text-primary-700 font-semibold hover:text-primary-600 transition-colors group"
-              >
-                <span>Learn More About Our Facility & Mission</span>
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </motion.div>
-
-            {/* Circular Economy Visual Showcase Card */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-              className="relative"
-            >
-              <div className="relative rounded-3xl p-8 sm:p-10 bg-gradient-to-br from-primary-900 via-secondary-950 to-primary-950 text-white overflow-hidden shadow-2xl border border-primary-500/20">
-                <div className="absolute -top-10 -right-10 w-60 h-60 bg-primary-500/20 rounded-full blur-3xl pointer-events-none" />
-
-                <div className="relative z-10 space-y-6">
-                  <div className="flex items-center justify-between pb-6 border-b border-white/10">
-                    <div className="flex items-center gap-3">
-                      <div className="w-12 h-12 rounded-2xl bg-primary-500/20 border border-primary-400/40 flex items-center justify-center">
-                        <Recycle size={26} className="text-primary-400" />
-                      </div>
-                      <div>
-                        <p className="font-heading font-bold text-lg text-white">Closed-Loop Recovery</p>
-                        <p className="text-xs text-primary-300">Sustainable Material Flow</p>
-                      </div>
-                    </div>
-                    <span className="px-3 py-1 rounded-full bg-primary-500/20 text-primary-300 text-xs font-semibold border border-primary-500/30">
-                      Zero Landfill Aim
-                    </span>
-                  </div>
-
-                  <div className="grid grid-cols-2 gap-4">
-                    <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-                      <p className="text-xs text-industrial-400 uppercase tracking-wider mb-1">Recovery Rate</p>
-                      <p className="font-heading text-2xl font-bold text-primary-300">95%+</p>
-                      <p className="text-[11px] text-industrial-300 mt-1">Material diverted to recycling streams</p>
-                    </div>
-                    <div className="p-4 rounded-xl bg-white/5 border border-white/10">
-                      <p className="text-xs text-industrial-400 uppercase tracking-wider mb-1">Compliance</p>
-                      <p className="font-heading text-2xl font-bold text-primary-300">100%</p>
-                      <p className="text-[11px] text-industrial-300 mt-1">Authorized handling and tracking</p>
-                    </div>
-                  </div>
-
-                  <div className="p-4 rounded-xl bg-primary-950/60 border border-primary-500/30 flex items-center gap-3">
-                    <CheckCircle2 size={20} className="text-primary-400 shrink-0" />
-                    <p className="text-xs text-primary-100 leading-snug">
-                      Authorized by State Pollution Control Board for responsible handling and recovery.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 3: SERVICES (CENTERED HEADING + FULL-WIDTH GRID) */}
-      <section className="section-padding section-alt">
-        <div className="container-custom">
-          <SectionHeading
-            eyebrow="What We Do"
-            heading="End-to-End Recycling Solutions"
-            description="We help organizations manage recyclable materials through a structured process designed around responsible handling, resource recovery, sustainability and transparency."
-          />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-            {services.map((service, index) => (
-              <ServiceCard
-                key={service.slug}
-                icon={service.icon}
-                title={service.title}
-                description={service.shortDesc}
-                href={`/services/${service.slug}`}
-                index={index}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 4: WHY RECYCLING MATTERS (NATURAL 2-COLUMN) */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-              className="relative"
-            >
-              <div className="rounded-3xl p-8 sm:p-10 bg-gradient-to-br from-secondary-950 via-industrial-900 to-secondary-950 text-white border border-industrial-800 shadow-xl">
-                <div className="w-14 h-14 rounded-2xl bg-primary-500/20 border border-primary-400/40 flex items-center justify-center mb-6">
-                  <Leaf size={28} className="text-primary-400" />
-                </div>
-                <h3 className="text-white font-heading text-2xl font-bold mb-4">
-                  The Sustainable Path Forward
-                </h3>
-                <p className="text-industrial-300 text-sm leading-relaxed mb-6 font-normal">
-                  Our structured process transforms end-of-life electronic waste into valuable secondary resources:
-                </p>
-                <div className="space-y-3">
-                  {[
-                    { step: "01. Collection & Transport", desc: "Safe nationwide logistics from client facility" },
-                    { step: "02. Sorting & Segregation", desc: "Categorization into distinct material fractions" },
-                    { step: "03. Dismantling & Processing", desc: "Component-level separation and data sanitization" },
-                    { step: "04. Resource Recovery", desc: "Extracting metals, polymers, and circuit components" },
-                    { step: "05. Reintroduction", desc: "Returning raw materials to the circular manufacturing cycle" },
-                  ].map((s, idx) => (
-                    <div key={idx} className="flex items-start gap-3 p-3 rounded-xl bg-white/5 border border-white/5">
-                      <div className="w-2 h-2 rounded-full bg-primary-400 mt-1.5 shrink-0" />
-                      <div>
-                        <p className="text-sm font-semibold text-primary-200">{s.step}</p>
-                        <p className="text-xs text-industrial-400">{s.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div {...fadeUp}>
-              <div className="mb-4">
-                <span className="eyebrow">The E-Waste Challenge</span>
-              </div>
-              <h2 className="font-heading text-3xl sm:text-4xl font-bold text-secondary-950 mb-6 leading-tight tracking-tight">
-                The World Is Producing More Waste. We Need Better Recovery.
-              </h2>
-              <p className="text-secondary-600 leading-relaxed mb-4 font-normal">
-                Rapid technological development has transformed how we work and live. Shorter device lifecycles and rapid hardware refreshes generate growing volumes of discarded electronics.
-              </p>
-              <p className="text-secondary-600 leading-relaxed mb-4 font-normal">
-                When waste is handled improperly, valuable precious metals and engineering plastics are lost forever in landfills, and environmental risks multiply.
-              </p>
-              <p className="text-secondary-900 font-semibold mb-6">
-                By choosing certified recycling, organizations protect data, comply with statutory EPR obligations, and lead the transition to a circular economy.
-              </p>
-              <Link
-                href="/process"
-                className="inline-flex items-center gap-2 text-primary-700 font-semibold hover:text-primary-600 transition-colors group"
-              >
-                <span>Explore Our 8-Step Processing Roadmap</span>
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 5: OUR APPROACH (CENTERED HEADING + 4-COLUMN GRID) */}
-      <section className="section-padding section-alt">
-        <div className="container-custom">
-          <SectionHeading
-            eyebrow="Our Approach"
-            heading="From Waste to Resource"
-            description="At ADVAIT GREEN RECYCLING PRIVATE LIMITED, our approach focuses on maximizing responsible recovery while minimizing unnecessary disposal."
-          />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {[
-              {
-                icon: CheckCircle2,
-                title: "Responsible Collection",
-                desc: "We organize safe, insured and structured movement of materials from your site to our processing plant.",
-              },
-              {
-                icon: BarChart3,
-                title: "Efficient Processing",
-                desc: "Materials are inspected, categorized and dismantled according to strict technical safety requirements.",
-              },
-              {
-                icon: Recycle,
-                title: "Resource Recovery",
-                desc: "Recoverable fractions (metals, copper, engineering plastics) are separated for re-use.",
-              },
-              {
-                icon: Eye,
-                title: "Transparent Reporting",
-                desc: "Complete documentation, destruction certificates and green recycling audit reports are provided.",
-              },
-            ].map((item, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
-                className="bg-white rounded-2xl p-7 border border-industrial-200/80 text-center hover:border-primary-300 hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between"
-              >
-                <div>
-                  <div className="w-14 h-14 bg-gradient-to-br from-primary-50 to-primary-100 rounded-2xl flex items-center justify-center mx-auto mb-5 border border-primary-200/60">
-                    <item.icon size={26} className="text-primary-700" />
-                  </div>
-                  <h3 className="font-heading font-bold text-secondary-950 mb-2.5 text-base">
-                    {item.title}
-                  </h3>
-                  <p className="text-secondary-600 text-sm leading-relaxed font-normal">
-                    {item.desc}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 6: PROCESS (CENTERED HEADING + STEPPER) */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <SectionHeading
-            eyebrow="Our Process"
-            heading="How Our Recycling Process Works"
-            description="Every consignment follows a transparent, auditable 8-step journey from collection to recovery."
-          />
-          <ProcessStepper
-            steps={[
-              { title: "Request", description: "Submit a pickup or recycling inquiry with details on inventory and location." },
-              { title: "Assessment", description: "Our team reviews material types, estimated weights, and compliance logistics." },
-              { title: "Collection", description: "Materials are picked up securely via certified logistics partners." },
-              { title: "Segregation", description: "Consignments are inspected, weighed, logged, and categorized by component." },
-              { title: "Processing", description: "Equipment is systematically disassembled with high occupational safety." },
-              { title: "Recovery", description: "Ferrous, non-ferrous metals and plastics are separated for secondary smelting." },
-              { title: "Disposal", description: "Hazardous residues are neutralized via authorized disposal channels." },
-              { title: "Documentation", description: "Green Recycling Certificates and destruction reports are issued." },
-            ]}
-          />
-        </div>
-      </section>
-
-      {/* SECTION 7: IMPACT COUNTERS */}
-      <CounterSection
-        heading="Our Impact in Numbers"
-        description="Every kilogram responsibly recovered represents virgin resources saved, carbon emissions diverted, and a step towards circular manufacturing."
-        counters={[
-          { value: 50, suffix: "+", label: "Enterprises Served" },
-          { value: 100, suffix: "+ MT", label: "Material Recovered" },
-          { value: 10, suffix: "+", label: "Logistics Hubs" },
-          { value: 1, suffix: "+", label: "Years in Gujarat" },
-          { value: 95, suffix: "%", label: "Recovery Efficiency" },
-        ]}
-      />
-
-      {/* SECTION 8: INDUSTRIES */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <SectionHeading
-            eyebrow="Industries We Serve"
-            heading="Recycling Solutions for Every Sector"
-            description="From corporate IT parks to heavy manufacturing facilities, we customize waste management around your operational protocols."
-          />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {industries.map((industry, index) => (
-              <IndustryCard
-                key={index}
-                icon={industry.icon}
-                title={industry.title}
-                description={industry.description}
-                index={index}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 9: DATA DESTRUCTION (NATURAL 2-COLUMN) */}
-      <section className="section-padding bg-gradient-to-br from-secondary-950 via-[#071911] to-secondary-950 text-white border-y border-white/10">
-        <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div {...fadeUp}>
-              <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-primary-950/80 border border-primary-500/40 text-primary-300 text-xs font-semibold uppercase tracking-[0.14em] shadow-glow mb-4">
-                <Lock size={12} className="text-primary-400" />
-                <span>Enterprise Data Security</span>
-              </div>
-              <h2 className="font-heading text-3xl sm:text-4xl font-bold text-white mb-6 leading-tight tracking-tight">
-                Your Data Should Never Become Someone Else&apos;s Data.
-              </h2>
-              <p className="text-industrial-300 leading-relaxed mb-4 font-normal">
-                Retiring enterprise IT hardware is as much a cybersecurity requirement as a recycling challenge. Storage drives, magnetic media, servers, and employee workstations carry proprietary corporate records.
-              </p>
-              <p className="text-industrial-300 leading-relaxed mb-8 font-normal">
-                ADVAIT GREEN RECYCLING PRIVATE LIMITED provides degaussing, physical shredding, and cryptographic wipe workflows accompanied by tamper-proof Certificates of Destruction.
-              </p>
-              <Link
-                href="/services/data-destruction"
-                className="inline-flex items-center gap-2.5 bg-gradient-to-r from-primary-500 to-primary-600 text-white px-7 py-3.5 rounded-xl font-semibold hover:from-primary-400 hover:to-primary-500 transition-all shadow-button"
-              >
-                <span>Discuss Secure Data Destruction</span>
-                <ArrowRight size={18} />
-              </Link>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-              className="flex justify-center"
-            >
-              <div className="w-72 h-72 sm:w-80 sm:h-80 bg-gradient-to-br from-secondary-900 to-primary-950/80 rounded-full flex flex-col items-center justify-center border-2 border-primary-500/30 shadow-glow relative">
-                <Shield size={90} className="text-primary-400 mb-3" strokeWidth={1.5} />
-                <p className="font-heading font-bold text-white text-base">Certified Destruction</p>
-                <p className="text-xs text-primary-300 font-mono mt-1">100% Non-Recoverable</p>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 10: EPR (NATURAL 2-COLUMN) */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-              className="order-2 lg:order-1"
-            >
-              <div className="bg-gradient-to-br from-primary-50 to-white rounded-3xl p-8 border border-primary-200/80 shadow-card">
-                <h4 className="font-heading font-bold text-secondary-950 text-xl mb-5 flex items-center gap-2">
-                  <FileCheck2 size={22} className="text-primary-600" />
-                  <span>Our EPR Support Includes:</span>
-                </h4>
-                <ul className="grid sm:grid-cols-2 gap-3.5">
-                  {[
-                    "Collection Target Fulfillment",
-                    "PAN-India Reverse Logistics",
-                    "Material Aggregation & Weighing",
-                    "CPCB / SPCB Portal Support",
-                    "Traceable Recycling Documentation",
-                    "Quarterly & Annual Compliance Returns",
-                    "End-to-End Audit Trail",
-                  ].map((item, i) => (
-                    <li key={i} className="flex items-center gap-2.5 text-sm text-secondary-800">
-                      <CheckCircle2 size={16} className="text-primary-600 shrink-0" />
-                      <span>{item}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </motion.div>
-
-            <motion.div {...fadeUp} className="order-1 lg:order-2">
-              <div className="mb-4">
-                <span className="eyebrow">Extended Producer Responsibility</span>
-              </div>
-              <h2 className="font-heading text-3xl sm:text-4xl font-bold text-secondary-950 mb-6 leading-tight tracking-tight">
-                Make Your EPR Compliance Seamless & Transparent.
-              </h2>
-              <p className="text-secondary-600 leading-relaxed mb-4 font-normal">
-                E-Waste Management Rules mandate that producers, brand owners, and importers fulfill designated collection targets annually.
-              </p>
-              <p className="text-secondary-600 leading-relaxed mb-8 font-normal">
-                We partner with brands to aggregate qualifying e-waste volumes, channel them through authorized recycling processes, and provide all necessary regulatory documentation.
-              </p>
-              <Link
-                href="/services/epr"
-                className="inline-flex items-center gap-2 text-primary-700 font-semibold hover:text-primary-600 transition-colors group"
-              >
-                <span>Talk to Our EPR Specialists</span>
-                <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 11: CIRCULAR ECONOMY (CENTERED HEADING + CENTERED COMPARISON CARDS) */}
-      <section className="section-padding section-alt">
-        <div className="container-custom">
-          <SectionHeading
-            eyebrow="Circular Economy"
-            heading="Keeping Resources in the Productive Loop"
-            description="Moving away from the linear take-make-dispose model toward closed-loop material recovery that protects the environment."
-          />
-          <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto mb-8">
-            <div className="bg-white rounded-3xl p-8 border border-red-200/80 shadow-xs text-center flex flex-col justify-between">
-              <div>
-                <span className="inline-block px-3.5 py-1 rounded-full bg-red-50 text-red-700 text-xs font-semibold uppercase tracking-wider mb-4">
-                  Linear Model
-                </span>
-                <h3 className="font-heading font-bold text-secondary-950 text-lg mb-3">
-                  Take &rarr; Make &rarr; Use &rarr; Dispose
-                </h3>
-                <p className="text-secondary-600 text-sm leading-relaxed font-normal">
-                  Extracts finite virgin ores, manufactures products, and dumps them in landfills when discarded.
-                </p>
-              </div>
-            </div>
-
-            <div className="bg-white rounded-3xl p-8 border border-primary-300 shadow-card text-center flex flex-col justify-between relative overflow-hidden">
-              <div className="absolute top-0 right-0 w-24 h-24 bg-primary-500/10 rounded-full blur-xl pointer-events-none" />
-              <div>
-                <span className="inline-block px-3.5 py-1 rounded-full bg-primary-50 text-primary-700 text-xs font-semibold uppercase tracking-wider mb-4 border border-primary-200">
-                  Advait Closed-Loop Model
-                </span>
-                <h3 className="font-heading font-bold text-secondary-950 text-lg mb-3">
-                  Use &rarr; Collect &rarr; Recover &rarr; Remake
-                </h3>
-                <p className="text-secondary-600 text-sm leading-relaxed font-normal">
-                  Extracts refined secondary commodities back into production, minimizing carbon emissions and landfill burden.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 12: SUSTAINABILITY (CENTERED HEADING + CENTERED 3 PILLARS) */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <SectionHeading
-            eyebrow="Sustainability"
-            heading="Recycling With Purpose & Measurable Impact"
-            description="Our recycling processes deliver tangible environmental protection, resource security, and auditable ESG compliance."
-          />
-          <div className="grid sm:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {[
-              {
-                title: "Environmental Value",
-                desc: "Preventing hazardous heavy metals and toxins from leaching into soil and groundwater.",
-                badge: "Eco Protection",
-              },
-              {
-                title: "Resource Value",
-                desc: "Recovering high-purity copper, aluminum, and engineering polymers to offset virgin mining.",
-                badge: "Resource Security",
-              },
-              {
-                title: "Corporate Value",
-                desc: "Helping enterprise clients achieve ESG targets and meet statutory sustainability benchmarks.",
-                badge: "ESG Leadership",
-              },
-            ].map((item, index) => (
-              <div
-                key={index}
-                className="bg-white rounded-3xl p-8 border border-industrial-200/80 shadow-xs hover:border-primary-300 hover:shadow-card transition-all text-center flex flex-col justify-between"
-              >
-                <div>
-                  <span className="inline-block px-3.5 py-1 rounded-full bg-primary-50 text-primary-700 text-xs font-semibold uppercase tracking-wider mb-4">
-                    {item.badge}
-                  </span>
-                  <h3 className="font-heading font-bold text-secondary-950 text-lg mb-3">
-                    {item.title}
-                  </h3>
-                  <p className="text-secondary-600 text-sm leading-relaxed font-normal">
-                    {item.desc}
-                  </p>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* SECTION 13: CERTIFICATIONS & GST (CENTERED HEADING + CENTERED VERIFIED GST CARD) */}
-      <section className="section-padding section-alt">
-        <div className="container-custom">
-          <SectionHeading
-            eyebrow="Compliance & Legitimacy"
-            heading="Authorized, Registered & State Verified"
-            description="Responsible recycling requires legal standing, verified registrations, and rigorous process documentation."
-          />
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="w-full max-w-3xl mx-auto bg-white rounded-3xl p-8 sm:p-10 border border-industrial-200/80 shadow-card"
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.5, delay: index * 0.08, ease: [0.2, 0, 0, 1] }}
+      className={`svc-flip${flipped ? " flipped" : ""}${svc.wide ? " lg:col-span-2" : ""}`}
+      onClick={handleTap}
+      style={{ perspective: "1000px", cursor: "pointer" }}
+    >
+      <Link href={svc.href} className="block" style={{ textDecoration: "none" }}>
+        <div className="svc-flip-inner relative" style={{ height: "300px" }}>
+          {/* ── Front Face ── */}
+          <div
+            className="svc-flip-front absolute inset-0 rounded-xl p-7 lg:p-8 flex flex-col justify-between"
+            style={{ backgroundColor: isDark ? "#184E3E" : "#E4EBE6" }}
           >
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 pb-6 border-b border-industrial-100">
-              <div>
-                <span className="text-xs text-primary-700 font-semibold uppercase tracking-wider block">Official Registration</span>
-                <h4 className="font-heading font-bold text-xl text-secondary-950">
-                  ADVAIT GREEN RECYCLING PRIVATE LIMITED
-                </h4>
-              </div>
-              <button
-                onClick={handleCopyGST}
-                className="px-3.5 py-1.5 rounded-full bg-emerald-50 text-emerald-700 border border-emerald-200 text-xs font-semibold flex items-center gap-1.5 cursor-pointer hover:bg-emerald-100 transition-colors"
-              >
-                {copied ? <Check size={14} /> : <Copy size={14} />}
-                <span>{copied ? "GSTIN Copied" : "Copy GSTIN"}</span>
-              </button>
-            </div>
-
-            <div className="grid sm:grid-cols-2 gap-3.5 py-5 text-sm">
-              <div className="p-3.5 rounded-xl bg-industrial-50 border border-industrial-100">
-                <span className="text-xs text-industrial-400 block mb-0.5 uppercase tracking-wide">GSTIN</span>
-                <span className="font-mono font-bold text-secondary-900 text-base">24ABECA2823M1ZQ</span>
-              </div>
-              <div className="p-3.5 rounded-xl bg-industrial-50 border border-industrial-100">
-                <span className="text-xs text-industrial-400 block mb-0.5 uppercase tracking-wide">Company Constitution</span>
-                <span className="font-semibold text-secondary-900">Private Limited Company</span>
-              </div>
-              <div className="p-3.5 rounded-xl bg-industrial-50 border border-industrial-100">
-                <span className="text-xs text-industrial-400 block mb-0.5 uppercase tracking-wide">Registration Status</span>
-                <span className="font-semibold text-secondary-900">Effective from 27 March 2026</span>
-              </div>
-              <div className="p-3.5 rounded-xl bg-industrial-50 border border-industrial-100">
-                <span className="text-xs text-industrial-400 block mb-0.5 uppercase tracking-wide">Principal Facility</span>
-                <span className="font-semibold text-secondary-900">Vamaj Road, Mahesana, Gujarat</span>
-              </div>
-            </div>
-
-            <div className="pt-3 flex items-center justify-center gap-2 text-xs text-primary-700 font-medium text-center">
-              <CheckCircle2 size={15} />
-              <span>Compliant with applicable environmental and waste-management guidelines.</span>
-            </div>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* SECTION 14: INFRASTRUCTURE (CENTERED HEADING + CENTERED 5-CARD GRID) */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <SectionHeading
-            eyebrow="Facility Architecture"
-            heading="Built for Scale, Precision & Safety"
-            description="Our plant on Vamaj Road, Mahesana is engineered with dedicated operational zones to handle large-scale enterprise consignments safely."
-          />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-5 gap-4 max-w-6xl mx-auto">
-            {[
-              { title: "Material Receiving", desc: "Secure weighbridge & intake documentation" },
-              { title: "Segregation Area", desc: "High-throughput sorting by material type" },
-              { title: "Dismantling Line", desc: "Precision breakdown of electronics" },
-              { title: "Material Recovery", desc: "Specialized separation of copper & plastics" },
-              { title: "Storage & Dispatch", desc: "Safe warehousing for secondary commodities" },
-            ].map((area, index) => (
+            <div>
               <div
-                key={index}
-                className="bg-white rounded-2xl p-5 border border-industrial-200/80 shadow-xs hover:border-primary-300 transition-all text-center flex flex-col items-center justify-between"
+                className="w-12 h-12 rounded-lg flex items-center justify-center mb-5"
+                style={{ backgroundColor: isDark ? "rgba(255,255,255,0.12)" : "#D6E9E0" }}
               >
-                <div className="w-10 h-10 bg-gradient-to-br from-primary-600 to-primary-700 rounded-xl flex items-center justify-center mb-3 text-white font-heading font-bold text-sm shadow-button">
-                  {index + 1}
-                </div>
-                <h4 className="font-heading font-semibold text-secondary-950 text-sm mb-1">
-                  {area.title}
-                </h4>
-                <p className="text-xs text-secondary-500 leading-relaxed font-normal">
-                  {area.desc}
-                </p>
+                <svc.icon size={24} strokeWidth={1.8} style={{ color: isDark ? "#D6E9E0" : "#184E3E" }} />
               </div>
-            ))}
+              <h3
+                className="font-heading text-lg font-semibold tracking-tight leading-snug mb-3"
+                style={{ color: isDark ? "#ffffff" : "#08201A" }}
+              >
+                {svc.title}
+              </h3>
+              <div className="w-8 h-[3px] rounded-full" style={{ backgroundColor: "#CC7C4A" }} />
+            </div>
+            <div className="mt-auto pt-6">
+              <span
+                className="inline-flex items-center gap-2 text-sm font-semibold"
+                style={{ color: isDark ? "#D6E9E0" : "#184E3E" }}
+              >
+                Know More <ArrowRight size={16} />
+              </span>
+            </div>
           </div>
-        </div>
-      </section>
 
-      {/* SECTION 15: WHY CHOOSE ADVAIT (CENTERED HEADING + CENTERED 6-CARD GRID) */}
-      <section className="section-padding section-alt">
-        <div className="container-custom">
-          <SectionHeading
-            eyebrow="Why Advait Green"
-            heading="Why Leading Organizations Choose Us"
-            description="We combine technical recycling capability with business transparency, audited destruction records, and statutory compliance."
-          />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {[
-              { num: "01", title: "Responsible Handling", desc: "Strict adherence to safety standards and environmental regulations." },
-              { num: "02", title: "End-to-End Execution", desc: "From corporate site pickup to final raw material recovery." },
-              { num: "03", title: "Maximized Resource Value", desc: "Advanced segregation extracts maximum value for circular remaking." },
-              { num: "04", title: "Guaranteed Data Security", desc: "Certified destruction protocols prevent hardware data exposure." },
-              { num: "05", title: "Auditable Documentation", desc: "Full traceability with Green Certificates and regulatory filings." },
-              { num: "06", title: "Dedicated Team", desc: "Experienced account managers supporting your corporate ESG targets." },
-            ].map((item, index) => (
+          {/* ── Back Face ── */}
+          <div
+            className="svc-flip-back rounded-xl"
+            style={{
+              position: "absolute",
+              inset: 0,
+              overflow: "hidden",
+            }}
+          >
+            {svc.image ? (
+              <img
+                src={svc.image}
+                alt={svc.title}
+                style={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  width: "100%",
+                  height: "100%",
+                  objectFit: "cover",
+                }}
+              />
+            ) : (
               <div
-                key={index}
-                className="bg-white rounded-2xl p-6 border border-industrial-200/80 shadow-xs hover:border-primary-300 transition-all flex flex-col justify-between"
+                className="flex items-center justify-center"
+                style={{
+                  width: "100%",
+                  height: "100%",
+                  backgroundColor: isDark ? "#0E2F26" : "#D6E9E0",
+                }}
               >
-                <div>
-                  <span className="font-heading text-2xl font-bold text-primary-600 block mb-2">
-                    {item.num}
-                  </span>
-                  <h3 className="font-heading font-bold text-secondary-950 mb-2 text-base">
-                    {item.title}
-                  </h3>
-                  <p className="text-secondary-600 text-xs leading-relaxed font-normal">
-                    {item.desc}
-                  </p>
-                </div>
+                <svc.icon size={40} strokeWidth={1.4} style={{ color: isDark ? "#D6E9E0" : "#184E3E" }} />
               </div>
-            ))}
+            )}
           </div>
         </div>
-      </section>
+      </Link>
+    </motion.div>
+  );
+}
 
-      {/* SECTION 16: TRUSTED CLIENT SECTORS (CENTERED HEADING + CENTERED GRID) */}
-      <section className="section-padding">
-        <div className="container-custom text-center">
-          <SectionHeading
-            eyebrow="Client Trust"
-            heading="Trusted Across Enterprise Sectors"
-            description="We support leading organizations across IT, Manufacturing, BFSI, Healthcare and Telecom."
-          />
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4 max-w-5xl mx-auto">
-            {[
-              { icon: Building2, label: "IT & Software Parks" },
-              { icon: Factory, label: "Manufacturing" },
-              { icon: Server, label: "Data Centers" },
-              { icon: Cpu, label: "Electronics Brands" },
-              { icon: Globe2, label: "Telecom Networks" },
-              { icon: Shield, label: "BFSI & Healthcare" },
-            ].map((sector, i) => (
-              <div key={i} className="p-5 rounded-2xl bg-industrial-50 border border-industrial-200/60 flex flex-col items-center justify-center hover:bg-primary-50/50 hover:border-primary-200 transition-colors">
-                <sector.icon size={28} className="text-primary-600 mb-2.5" />
-                <span className="text-xs font-semibold text-secondary-800 text-center">{sector.label}</span>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
+function SectorCard({ sector, index }) {
+  const [flipped, setFlipped] = useState(false);
+  const isDark = index % 2 === 1;
 
-      {/* SECTION 17: PARTNER TESTIMONIALS (CENTERED HEADING + CENTERED 3-CARD GRID) */}
-      <section className="section-padding section-alt">
-        <div className="container-custom">
-          <SectionHeading
-            eyebrow="Partner Feedback"
-            heading="What Organizations Say"
-            description="Delivering prompt pickups, verified destruction certificates, and seamless EPR documentation."
-          />
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {[
-              {
-                quote: "Advait Green managed our entire data center hardware refresh with meticulous serial tracking and provided destruction certificates within 48 hours.",
-                author: "IT Infrastructure Head",
-                company: "Regional Technology Enterprise, Ahmedabad",
-              },
-              {
-                quote: "Their structured EPR collection fulfillment and transparent documentation simplified our annual SPCB compliance submission tremendously.",
-                author: "Compliance Officer",
-                company: "Consumer Electronics Brand",
-              },
-              {
-                quote: "Professional logistics, punctual pickup teams, and full adherence to environmental handling standards. Highly recommended for corporate e-waste.",
-                author: "Facility Operations Manager",
-                company: "Industrial Manufacturing Group, Gujarat",
-              },
-            ].map((t, index) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
-                className="bg-white rounded-2xl p-7 border border-industrial-200/80 shadow-xs flex flex-col justify-between text-left"
-              >
-                <div>
-                  <div className="flex items-center gap-1 text-amber-400 mb-4">
-                    {[...Array(5)].map((_, i) => (
-                      <Star key={i} size={15} fill="currentColor" />
-                    ))}
-                  </div>
-                  <p className="text-secondary-700 text-sm leading-relaxed italic mb-6">
-                    &ldquo;{t.quote}&rdquo;
-                  </p>
-                </div>
-                <div className="pt-4 border-t border-industrial-100">
-                  <p className="font-heading font-bold text-secondary-950 text-sm">{t.author}</p>
-                  <p className="text-xs text-primary-700 font-medium">{t.company}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+  const handleTap = () => {
+    if (window.matchMedia("(hover: none)").matches) {
+      setFlipped((prev) => !prev);
+    }
+  };
 
-      {/* SECTION 18: LATEST INSIGHTS (CENTERED HEADING + CENTERED 3-CARD GRID) */}
-      <section className="section-padding">
-        <div className="container-custom">
-          <SectionHeading
-            eyebrow="Insights & Knowledge"
-            heading="Perspectives on Recycling & Circular Economy"
-            description="Stay informed on e-waste management regulations, data disposal protocols, and circular supply chains."
-          />
-          <div className="grid sm:grid-cols-3 gap-6 max-w-5xl mx-auto mb-10">
-            {[
-              {
-                title: "Understanding E-Waste Management Rules 2022 & EPR Targets",
-                tag: "EPR Compliance",
-                desc: "A practical guide for electronics manufacturers and importers on fulfilling statutory recycling quotas in India.",
-              },
-              {
-                title: "Data Destruction vs. Physical Sanitization: Protecting Corporate Assets",
-                tag: "Data Security",
-                desc: "Why simple formatting fails and how certified degaussing and shredding protect enterprise confidentiality.",
-              },
-              {
-                title: "The Economics of Resource Recovery in Commercial IT Hardware",
-                tag: "Circular Economy",
-                desc: "How structured ITAD programs transform decommissioned servers and laptops into valuable secondary materials.",
-              },
-            ].map((post, index) => (
-              <div key={index} className="bg-white rounded-2xl p-6 border border-industrial-200/80 shadow-xs hover:border-primary-300 hover:shadow-card transition-all flex flex-col justify-between text-left">
-                <div>
-                  <span className="inline-block px-3 py-1 rounded-full bg-primary-50 text-primary-700 text-xs font-semibold mb-3">
-                    {post.tag}
-                  </span>
-                  <h3 className="font-heading font-bold text-secondary-950 text-base mb-2.5 leading-snug">
-                    {post.title}
-                  </h3>
-                  <p className="text-xs text-secondary-600 leading-relaxed font-normal">
-                    {post.desc}
-                  </p>
-                </div>
-                <div className="mt-5 pt-3 border-t border-industrial-100 flex items-center justify-between text-xs font-semibold text-primary-700">
-                  <span>Read Insight</span>
-                  <ArrowRight size={13} />
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="text-center">
-            <Link
-              href="/insights"
-              className="inline-flex items-center gap-2 text-primary-700 font-semibold hover:text-primary-600 transition-colors"
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ duration: 0.5, delay: index * 0.07, ease: [0.2, 0, 0, 1] }}
+      className={`svc-flip${flipped ? " flipped" : ""}`}
+      onClick={handleTap}
+      style={{ perspective: "1000px", cursor: "pointer", aspectRatio: "1 / 1" }}
+    >
+      <div className="svc-flip-inner relative" style={{ height: "100%" }}>
+        {/* Front */}
+        <div
+          className="svc-flip-front absolute inset-0 rounded-xl p-6 lg:p-7 flex flex-col justify-between"
+          style={{ backgroundColor: isDark ? "#184E3E" : "#E4EBE6" }}
+        >
+          <div>
+            <div
+              className="w-11 h-11 rounded-lg flex items-center justify-center mb-4"
+              style={{ backgroundColor: isDark ? "rgba(255,255,255,0.12)" : "#D6E9E0" }}
             >
-              <span>Browse All Educational Insights</span>
-              <ArrowRight size={18} />
+              <sector.icon size={22} strokeWidth={1.8} style={{ color: isDark ? "#D6E9E0" : "#184E3E" }} />
+            </div>
+            <h3
+              className="font-heading text-[15px] font-semibold tracking-tight leading-snug mb-2.5"
+              style={{ color: isDark ? "#ffffff" : "#08201A" }}
+            >
+              {sector.label}
+            </h3>
+            <div className="w-7 h-[3px] rounded-full" style={{ backgroundColor: "#CC7C4A" }} />
+          </div>
+        </div>
+
+        {/* Back */}
+        <div
+          className="svc-flip-back rounded-xl"
+          style={{ position: "absolute", inset: 0, overflow: "hidden" }}
+        >
+          {sector.image ? (
+            <img
+              src={sector.image}
+              alt={sector.label}
+              style={{ position: "absolute", top: 0, left: 0, width: "100%", height: "100%", objectFit: "cover" }}
+            />
+          ) : (
+            <div
+              className="flex items-center justify-center"
+              style={{ width: "100%", height: "100%", backgroundColor: isDark ? "#0E2F26" : "#D6E9E0" }}
+            >
+              <sector.icon size={40} strokeWidth={1.4} style={{ color: isDark ? "#D6E9E0" : "#184E3E" }} />
+            </div>
+          )}
+        </div>
+      </div>
+    </motion.div>
+  );
+}
+
+export default function HomePage() {
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const intervalRef = useRef(null);
+
+  useEffect(() => {
+    intervalRef.current = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % heroSlides.length);
+    }, 6000);
+    return () => clearInterval(intervalRef.current);
+  }, []);
+
+  const slide = heroSlides[currentSlide];
+
+  return (
+    <>
+      {/* ── HERO ── */}
+      <section className="relative h-screen bg-primary-950 overflow-hidden flex items-center">
+        {/* Video Background */}
+        <video
+          autoPlay
+          muted
+          loop
+          playsInline
+          className="absolute inset-0 w-full h-full object-cover"
+        >
+          <source src="/video/Home_Hero_bg.mp4" type="video/mp4" />
+        </video>
+        {/* Dark overlay for text readability */}
+        <div className="absolute inset-0 bg-black/55" />
+
+        <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6 py-20 lg:py-0 w-full">
+          <div className="max-w-[640px]">
+            <motion.p
+              key={`eyebrow-${currentSlide}`}
+              initial={{ opacity: 0, x: -12 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4 }}
+              className="font-mono text-xs uppercase tracking-[0.09em] text-white/70 mb-4"
+            >
+              {slide.eyebrow}
+            </motion.p>
+            <motion.h1
+              key={`title-${currentSlide}`}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.05 }}
+              className="font-heading text-3xl sm:text-4xl lg:text-5xl font-semibold text-white leading-[1.06] tracking-tight mb-5"
+            >
+              {slide.title}
+            </motion.h1>
+            <motion.p
+              key={`desc-${currentSlide}`}
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-white text-base lg:text-lg leading-relaxed max-w-[52ch] mb-8"
+            >
+              {slide.desc}
+            </motion.p>
+            <motion.div
+              key={`cta-${currentSlide}`}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.18 }}
+              className="flex flex-wrap gap-3"
+            >
+              <Link
+                href={slide.cta.href}
+                className="inline-flex items-center gap-2 bg-accent-600 hover:bg-accent-700 px-6 py-3 rounded text-sm font-semibold transition-colors"
+                style={{ color: "#fff" }}
+              >
+                {slide.cta.label} <ArrowRight size={15} />
+              </Link>
+              <Link
+                href="/schedule-pickup"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded text-sm font-semibold transition-colors"
+                style={{ color: "#fff", border: "1px solid rgba(255,255,255,0.25)" }}
+              >
+                Schedule a Free Pickup
+              </Link>
+            </motion.div>
+          </div>
+
+          {/* Slide indicators */}
+          <div className="flex gap-2 mt-12">
+            {heroSlides.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => {
+                  setCurrentSlide(i);
+                  clearInterval(intervalRef.current);
+                }}
+                className={`h-[3px] rounded-full transition-all duration-500 ${
+                  i === currentSlide ? "w-10 bg-accent-400" : "w-5 bg-white/20"
+                }`}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── TRUST BAR ── */}
+      <section className="bg-white border-b border-secondary-100">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-6">
+          <p className="text-center font-mono text-[11px] uppercase tracking-[0.09em] mb-5" style={{ color: "#47524B" }}>
+            Authorised & Certified
+          </p>
+          <div className="flex flex-wrap items-center justify-center gap-6 lg:gap-10">
+            {trustBadges.map((badge) => (
+              <div key={badge.label} className="flex items-center gap-2.5">
+                <div className="w-9 h-9 rounded-full flex items-center justify-center" style={{ backgroundColor: "#EDF5F1" }}>
+                  <badge.icon size={18} style={{ color: "#2E7A61" }} />
+                </div>
+                <span className="text-sm font-medium" style={{ color: "#333B36" }}>{badge.label}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── INTRODUCTION ── */}
+      <section className="bg-secondary-50 py-16 lg:py-24">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
+          <div className="max-w-[740px] mx-auto text-center">
+            <p className="font-mono text-xs uppercase tracking-[0.09em] text-accent-500 mb-3">Who We Are</p>
+            <motion.h2
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold text-primary-950 tracking-tight mb-5"
+            >
+              A Recycling Company Built for India's Next Decade of Waste
+            </motion.h2>
+            <motion.p
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true }}
+              variants={fadeUp}
+              custom={1}
+              className="text-secondary-600 leading-relaxed mb-6"
+            >
+              India generates over 1.7 million tonnes of electronic waste every year, and less than a third reaches a formal recycling channel. Advait Green Recycling exists to change that ratio. We are a GPCB authorised recycler processing electronic waste, plastic waste, battery waste and industrial scrap through mechanical and chemical recovery lines.
+            </motion.p>
+            <Link
+              href="/about"
+              className="inline-flex items-center gap-2 text-sm font-semibold text-primary-700 hover:text-primary-800 transition-colors"
+            >
+              About Advait Green <ArrowRight size={14} />
             </Link>
           </div>
         </div>
       </section>
 
-      {/* SECTION 19: FAQ (CENTERED HEADING + CENTERED ACCORDION) */}
-      <section className="section-padding section-alt">
-        <div className="container-custom">
-          <SectionHeading
-            eyebrow="Frequently Asked Questions"
-            heading="Clear Answers for Your Operations"
-            description="Find fast answers regarding collection logistics, certified data destruction, statutory EPR compliance, and our Gujarat facility operations."
+      {/* ── VALUE CARDS ── */}
+      <section className="bg-white py-16 lg:py-24 relative overflow-hidden">
+        {/* Subtle ambient background */}
+        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+          <div
+            className="absolute rounded-full opacity-[0.04]"
+            style={{
+              width: "600px", height: "600px",
+              background: "radial-gradient(circle, #2E7A61 0%, transparent 70%)",
+              top: "-10%", left: "-8%",
+              animation: "ambientDrift 25s ease-in-out infinite",
+            }}
           />
-          <div className="w-full max-w-3xl mx-auto">
-            <FAQAccordion items={homeFAQ} />
-            <div className="mt-8 text-center">
-              <Link
-                href="/faq"
-                className="inline-flex items-center gap-1.5 text-primary-700 text-sm font-semibold hover:text-primary-600 transition-colors"
+          <div
+            className="absolute rounded-full opacity-[0.03]"
+            style={{
+              width: "500px", height: "500px",
+              background: "radial-gradient(circle, #2E7A61 0%, transparent 70%)",
+              bottom: "-15%", right: "-5%",
+              animation: "ambientDrift 30s ease-in-out infinite reverse",
+            }}
+          />
+          <div
+            className="absolute rounded-full opacity-[0.02]"
+            style={{
+              width: "350px", height: "350px",
+              background: "radial-gradient(circle, #B4682F 0%, transparent 70%)",
+              top: "30%", right: "20%",
+              animation: "ambientDrift 22s ease-in-out infinite 5s",
+            }}
+          />
+        </div>
+
+        <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6">
+          <div className="grid sm:grid-cols-3 gap-6 lg:gap-8">
+            {valueCards.map((card, i) => (
+              <motion.div
+                key={card.title}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-60px" }}
+                transition={{
+                  duration: 0.7,
+                  delay: i * 0.14,
+                  ease: [0.2, 0, 0, 1],
+                }}
+                className="value-card group relative bg-secondary-50 border border-secondary-100 rounded-lg p-7 lg:p-8 transition-all duration-[350ms] ease-out hover:-translate-y-1.5 hover:shadow-lg hover:border-secondary-200 overflow-hidden"
               >
-                <span>View All 20+ Frequently Asked Questions</span>
-                <ArrowRight size={15} />
-              </Link>
-            </div>
+                {/* Hover radial glow */}
+                <div
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-[400ms] pointer-events-none"
+                  style={{
+                    background: "radial-gradient(circle at 30% 20%, rgba(46,122,97,0.05) 0%, transparent 60%)",
+                  }}
+                />
+
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.6, rotate: i === 0 ? -90 : i === 1 ? -30 : 0 }}
+                  whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+                  viewport={{ once: true }}
+                  transition={{
+                    duration: 0.6,
+                    delay: i * 0.14 + 0.15,
+                    ease: [0.2, 0, 0, 1],
+                  }}
+                  className="relative w-10 h-10 rounded-md flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-105"
+                  style={{ backgroundColor: "#EDF5F1" }}
+                >
+                  <card.icon size={20} style={{ color: "#184E3E" }} />
+                </motion.div>
+
+                <h3 className="relative font-heading text-lg font-semibold mb-2.5 tracking-tight" style={{ color: "#08201A" }}>
+                  {card.title}
+                </h3>
+                <p className="relative text-sm leading-relaxed" style={{ color: "#5C6961" }}>{card.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+
+        <style jsx>{`
+          @keyframes ambientDrift {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(15px, -20px) scale(1.05); }
+            66% { transform: translate(-10px, 12px) scale(0.97); }
+          }
+          @media (prefers-reduced-motion: reduce) {
+            .value-card { transition: none !important; }
+            .value-card:hover { transform: none !important; }
+          }
+        `}</style>
+      </section>
+
+      {/* ── SERVICES (Flip Cards) ── */}
+      <section className="py-16 lg:py-24 relative overflow-hidden" style={{ backgroundColor: "#F4F6F3" }}>
+        {/* Globe background image */}
+        <div
+          className="hidden lg:block pointer-events-none select-none"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: "60%",
+            transform: "translateX(-50%)",
+            width: "100%",
+            maxWidth: "1300px",
+            height: "100%",
+            zIndex: 0,
+          }}
+        >
+          <img
+            src="/images/transparent-bg.png"
+            alt=""
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              top: "10px",
+              right: "30px",
+              width: "600px",
+              height: "600px",
+              objectFit: "contain",
+              opacity: 0.12,
+            }}
+          />
+        </div>
+
+        <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6" style={{ zIndex: 1 }}>
+          <div className="text-center mb-12">
+            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "#B4682F" }}>What We Do</p>
+            <h2 className="font-heading text-2xl sm:text-3xl lg:text-[2.75rem] font-semibold tracking-tight" style={{ color: "#08201A" }}>
+              Our Services
+            </h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {/* Row 1: 2 cards + blank */}
+            <ServiceCard svc={services[0]} index={0} />
+            <ServiceCard svc={services[1]} index={1} />
+            <div className="hidden lg:block" />
+
+            {/* Row 2: wide card (2 cols) + normal card */}
+            <ServiceCard svc={services[2]} index={2} />
+            <ServiceCard svc={services[3]} index={3} />
+
+            {/* Row 3: 3 normal cards */}
+            <ServiceCard svc={services[4]} index={4} />
+            <ServiceCard svc={services[5]} index={5} />
+            <ServiceCard svc={services[6]} index={6} />
+          </div>
+        </div>
+
+        <style jsx global>{`
+          .svc-flip-inner {
+            transition: transform 700ms cubic-bezier(0.4, 0, 0.2, 1);
+            transform-style: preserve-3d;
+          }
+          .svc-flip:hover .svc-flip-inner,
+          .svc-flip.flipped .svc-flip-inner {
+            transform: rotateY(180deg);
+          }
+          .svc-flip-front,
+          .svc-flip-back {
+            backface-visibility: hidden;
+            -webkit-backface-visibility: hidden;
+          }
+          .svc-flip-back {
+            transform: rotateY(180deg);
+          }
+          @media (prefers-reduced-motion: reduce) {
+            .svc-flip-inner { transition: none !important; }
+          }
+        `}</style>
+      </section>
+
+      {/* ── IMPACT STATS ── */}
+      <section className="bg-primary-950 py-16 lg:py-20 relative overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)",
+            backgroundSize: "56px 56px",
+          }}
+        />
+        <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <p className="font-mono text-xs uppercase tracking-[0.09em] text-accent-400 mb-3">Our Impact</p>
+            <h2 className="font-heading text-2xl sm:text-3xl font-semibold text-white tracking-tight">
+              Numbers That Matter
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+            {impactStats.map((stat, i) => (
+              <motion.div
+                key={stat.label}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                variants={fadeUp}
+                custom={i}
+                className="text-center"
+              >
+                <p className="font-mono text-3xl lg:text-4xl font-bold text-white tabular-nums tracking-tight">
+                  {stat.value}
+                  <span className="text-lg text-secondary-400 ml-1 font-medium">{stat.unit}</span>
+                </p>
+                <p className="text-sm text-secondary-400 mt-2">{stat.label}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* SECTION 20: CTA */}
-      <CTABanner />
+      {/* ── PROCESS (Workflow) ── */}
+      <section className="bg-white py-16 lg:py-28 overflow-hidden">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
+          <div className="text-center mb-16">
+            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "#B4682F" }}>How It Works</p>
+            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight" style={{ color: "#08201A" }}>
+              Our Process
+            </h2>
+          </div>
+
+          {/* ── Desktop (lg+) ── */}
+          <div className="hidden lg:block">
+            <div className="relative mx-auto" style={{ maxWidth: "960px" }}>
+              {/* Steps grid */}
+              <div className="grid grid-cols-5">
+                {processSteps.map((step, i) => {
+                  const isTop = i % 2 === 0;
+                  const arcRotations = [-100, -10, -160, 40, -120];
+                  return (
+                    <motion.div
+                      key={step.num}
+                      initial={{ opacity: 0, y: isTop ? -20 : 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.5, delay: i * 0.15 }}
+                      className="flex flex-col items-center text-center px-2"
+                    >
+                      {/* Top text area */}
+                      <div className="flex flex-col justify-end px-1" style={{ height: "120px", paddingBottom: "18px" }}>
+                        {isTop && (
+                          <>
+                            <h4 className="font-heading text-[15px] font-bold leading-tight mb-1.5" style={{ color: "#08201A" }}>
+                              {step.title}
+                            </h4>
+                            <p className="text-[11.5px] leading-[1.6]" style={{ color: "#5C6961" }}>
+                              {step.desc}
+                            </p>
+                          </>
+                        )}
+                      </div>
+
+                      {/* Circle with accent arc */}
+                      <div className="relative" style={{ width: "105px", height: "105px" }}>
+                        <svg viewBox="0 0 105 105" className="w-full h-full">
+                          <circle cx="52.5" cy="55" r="46" fill="rgba(8,32,26,0.05)" />
+                          <circle cx="52.5" cy="52.5" r="46" fill="#ffffff" />
+                          <circle cx="52.5" cy="52.5" r="46" fill="none" stroke="#EAEEEA" strokeWidth="2.5" />
+                          <circle
+                            cx="52.5" cy="52.5" r="46" fill="none"
+                            stroke="#CC7C4A" strokeWidth="4.5"
+                            strokeDasharray="82 207" strokeLinecap="round"
+                            style={{ transform: `rotate(${arcRotations[i]}deg)`, transformOrigin: "52.5px 52.5px" }}
+                          />
+                        </svg>
+                        <div className="absolute inset-0 flex items-center justify-center" style={{ marginTop: "-2.5px" }}>
+                          <step.icon size={34} strokeWidth={1.5} style={{ color: "#184E3E" }} />
+                        </div>
+                      </div>
+
+                      {/* Bottom text area */}
+                      <div className="flex flex-col justify-start px-1" style={{ height: "120px", paddingTop: "18px" }}>
+                        {!isTop && (
+                          <>
+                            <h4 className="font-heading text-[15px] font-bold leading-tight mb-1.5" style={{ color: "#08201A" }}>
+                              {step.title}
+                            </h4>
+                            <p className="text-[11.5px] leading-[1.6]" style={{ color: "#5C6961" }}>
+                              {step.desc}
+                            </p>
+                          </>
+                        )}
+                      </div>
+                    </motion.div>
+                  );
+                })}
+              </div>
+
+              {/* Connecting arcs SVG overlay */}
+              <svg
+                className="absolute left-0 w-full pointer-events-none"
+                style={{ top: "120px", height: "105px" }}
+                viewBox="0 0 960 105"
+                fill="none"
+              >
+                {[0, 1, 2, 3].map((idx) => {
+                  const cx = [96, 288, 480, 672, 864];
+                  const r = 50;
+                  const x1 = cx[idx] + r;
+                  const x2 = cx[idx + 1] - r;
+                  const y = 52.5;
+                  const isUp = idx % 2 === 0;
+                  const cpY = isUp ? -5 : 110;
+                  return (
+                    <g key={idx}>
+                      <path
+                        d={`M ${x1} ${y} C ${x1 + 20} ${cpY}, ${x2 - 20} ${cpY}, ${x2} ${y}`}
+                        stroke="#184E3E" strokeWidth="2" strokeDasharray="6 4" opacity="0.35"
+                      />
+                      <circle cx={x1 + 2} cy={y} r="3.5" fill="#CC7C4A" />
+                      <circle cx={x2 - 2} cy={y} r="3.5" fill="#CC7C4A" />
+                    </g>
+                  );
+                })}
+              </svg>
+            </div>
+          </div>
+
+          {/* ── Mobile / Tablet (< lg) ── */}
+          <div className="lg:hidden max-w-[420px] mx-auto space-y-6">
+            {processSteps.map((step, i) => (
+              <motion.div
+                key={step.num}
+                initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+                className="flex items-center gap-4"
+              >
+                <div className="relative shrink-0" style={{ width: "64px", height: "64px" }}>
+                  <svg viewBox="0 0 64 64" className="w-full h-full">
+                    <circle cx="32" cy="33" r="28" fill="rgba(8,32,26,0.05)" />
+                    <circle cx="32" cy="32" r="28" fill="#fff" />
+                    <circle cx="32" cy="32" r="28" fill="none" stroke="#EAEEEA" strokeWidth="2" />
+                    <circle cx="32" cy="32" r="28" fill="none" stroke="#CC7C4A" strokeWidth="3"
+                      strokeDasharray="50 126" strokeLinecap="round"
+                      style={{ transform: "rotate(-90deg)", transformOrigin: "32px 32px" }}
+                    />
+                  </svg>
+                  <div className="absolute inset-0 flex items-center justify-center" style={{ marginTop: "-1px" }}>
+                    <step.icon size={24} strokeWidth={1.6} style={{ color: "#184E3E" }} />
+                  </div>
+                </div>
+                <div>
+                  <h4 className="font-heading text-base font-semibold mb-0.5" style={{ color: "#08201A" }}>
+                    {step.title}
+                  </h4>
+                  <p className="text-sm leading-relaxed" style={{ color: "#5C6961" }}>
+                    {step.desc}
+                  </p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── WHY CHOOSE US ── */}
+      <section className="py-16 lg:py-24" style={{ backgroundColor: "#F4F6F3" }}>
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
+          <div className="text-center mb-14">
+            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "#B4682F" }}>Why Advait Green</p>
+            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight" style={{ color: "#08201A" }}>
+              Why Choose Us
+            </h2>
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 max-w-[1000px] mx-auto">
+            {whyChoose.map((item, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 24 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: i * 0.1, ease: [0.2, 0, 0, 1] }}
+                className="flex flex-col items-center text-center"
+              >
+                {/* Icon circle */}
+                <div
+                  className="w-[80px] h-[80px] rounded-full flex items-center justify-center mb-5"
+                  style={{ backgroundColor: "#184E3E" }}
+                >
+                  <item.icon size={34} strokeWidth={1.5} style={{ color: "#ffffff" }} />
+                </div>
+                {/* Title */}
+                <h4
+                  className="font-heading text-base font-bold tracking-tight mb-2"
+                  style={{ color: "#184E3E" }}
+                >
+                  {item.title}
+                </h4>
+                {/* Description */}
+                <p className="text-sm leading-relaxed max-w-[280px]" style={{ color: "#5C6961" }}>
+                  {item.desc}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── SECTORS ── */}
+      <section className="py-16 lg:py-24" style={{ backgroundColor: "#ffffff" }}>
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
+          <div className="text-center mb-12">
+            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "#B4682F" }}>Industries</p>
+            <h2 className="font-heading text-2xl sm:text-3xl lg:text-[2.75rem] font-semibold tracking-tight" style={{ color: "#08201A" }}>
+              Sectors We Serve
+            </h2>
+          </div>
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+            {sectors.map((sector, i) => (
+              <SectorCard key={sector.label} sector={sector} index={i} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CTA BAND ── */}
+      <section className="bg-primary-900 py-14 lg:py-20 relative overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-[0.04]"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)",
+            backgroundSize: "56px 56px",
+          }}
+        />
+        <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6 text-center">
+          <h2 className="font-heading text-2xl sm:text-3xl font-semibold text-white tracking-tight mb-4 max-w-[600px] mx-auto">
+            Have Waste Sitting in Storage? Let's Move It Responsibly.
+          </h2>
+          <p className="text-secondary-300 text-sm sm:text-base max-w-[520px] mx-auto mb-8 leading-relaxed">
+            Tell us what you have and where it is. We'll come back within one working day with a collection plan and an indicative valuation.
+          </p>
+          <div className="flex flex-wrap justify-center gap-3">
+            <Link
+              href="/schedule-pickup"
+              className="inline-flex items-center gap-2 bg-accent-600 hover:bg-accent-700 text-white px-6 py-3 rounded text-sm font-semibold transition-colors"
+            >
+              Schedule a Free Pickup <ArrowRight size={15} />
+            </Link>
+            <Link
+              href="/contact"
+              className="inline-flex items-center gap-2 border border-white/20 hover:bg-white/8 text-white px-6 py-3 rounded text-sm font-semibold transition-colors"
+            >
+              Contact Us
+            </Link>
+          </div>
+        </div>
+      </section>
     </>
   );
 }

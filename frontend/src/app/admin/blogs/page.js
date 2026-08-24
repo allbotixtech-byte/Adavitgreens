@@ -58,7 +58,7 @@ export default function AdminBlogsPage() {
               </thead>
               <tbody className="divide-y divide-slate-100">
                 {blogs.map((blog) => (
-                  <tr key={blog._id} className="hover:bg-slate-50 transition-colors">
+                  <tr key={blog.id} className="hover:bg-slate-50 transition-colors">
                     <td className="px-4 py-3">
                       <p className="font-medium text-secondary-900 line-clamp-1">{blog.title}</p>
                     </td>

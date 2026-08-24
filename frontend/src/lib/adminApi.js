@@ -1,4 +1,4 @@
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+const API_BASE = "/api";
 
 function getToken() {
   if (typeof window === "undefined") return null;
@@ -19,7 +19,7 @@ async function adminFetch(endpoint, options = {}) {
   if (res.status === 401) {
     if (typeof window !== "undefined") {
       localStorage.removeItem("admin_token");
-      window.location.href = "/admin/login";
+      window.location.href = "/admin";
     }
     throw new Error("Session expired");
   }
@@ -34,7 +34,7 @@ async function adminFetch(endpoint, options = {}) {
 
 // Auth
 export async function adminLogin(email, password) {
-  const data = await adminFetch("/admin/login", {
+  const data = await adminFetch("/admin", {
     method: "POST",
     body: JSON.stringify({ email, password }),
   });
@@ -44,7 +44,7 @@ export async function adminLogin(email, password) {
 
 export function adminLogout() {
   localStorage.removeItem("admin_token");
-  window.location.href = "/admin/login";
+  window.location.href = "/admin";
 }
 
 export async function getAdminProfile() {

@@ -22,7 +22,7 @@ export default function AdminCareersPage() {
     if (!confirm("Delete this position?")) return;
     try {
       await deleteCareer(id);
-      setCareers(careers.filter((c) => c._id !== id));
+      setCareers(careers.filter((c) => c.id !== id));
     } catch {}
   };
 
@@ -45,7 +45,7 @@ export default function AdminCareersPage() {
       ) : (
         <div className="space-y-3">
           {careers.map((career) => (
-            <div key={career._id} className="bg-white rounded-xl p-5 border border-slate-200 flex items-center justify-between gap-4 hover:border-primary-300 transition-colors">
+            <div key={career.id} className="bg-white rounded-xl p-5 border border-slate-200 flex items-center justify-between gap-4 hover:border-primary-300 transition-colors">
               <div>
                 <h3 className="font-heading font-bold text-secondary-950">{career.title}</h3>
                 <div className="flex items-center gap-4 mt-1 text-xs text-slate-500">
@@ -57,8 +57,8 @@ export default function AdminCareersPage() {
                 </div>
               </div>
               <div className="flex items-center gap-1">
-                <Link href={`/admin/careers/edit/${career._id}`} className="p-2 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-amber-500"><Edit size={16} /></Link>
-                <button onClick={() => handleDelete(career._id)} className="p-2 rounded-lg hover:bg-red-50 text-slate-400 hover:text-red-500 cursor-pointer"><Trash2 size={16} /></button>
+                <Link href={`/admin/careers/edit/${career.id}`} className="p-2 rounded-lg hover:bg-slate-100 text-slate-400 hover:text-amber-500"><Edit size={16} /></Link>
+                <button onClick={() => handleDelete(career.id)} className="p-2 rounded-lg hover:bg-red-50 text-slate-400 hover:text-red-500 cursor-pointer"><Trash2 size={16} /></button>
               </div>
             </div>
           ))}

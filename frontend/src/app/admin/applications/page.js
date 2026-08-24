@@ -29,14 +29,14 @@ export default function AdminApplicationsPage() {
       ) : (
         <div className="space-y-3">
           {applications.map((app) => (
-            <div key={app._id} className="bg-white rounded-xl p-5 border border-slate-200 hover:border-primary-300 transition-colors">
+            <div key={app.id} className="bg-white rounded-xl p-5 border border-slate-200 hover:border-primary-300 transition-colors">
               <div className="flex items-start justify-between gap-4">
                 <div className="space-y-2">
                   <div className="flex items-center gap-2">
                     <h3 className="font-heading font-bold text-secondary-950">{app.name}</h3>
-                    {app.careerPostId?.title && (
+                    {app.careerTitle && (
                       <span className="px-2.5 py-0.5 rounded-full bg-primary-50 text-primary-700 text-xs font-medium flex items-center gap-1">
-                        <Briefcase size={10} /> {app.careerPostId.title}
+                        <Briefcase size={10} /> {app.careerTitle}
                       </span>
                     )}
                   </div>

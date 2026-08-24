@@ -12,7 +12,7 @@ export default function AdminPickupsPage() {
   const fetchData = async () => {
     try {
       const data = await getPickupSubmissions();
-      setSubmissions(data.submissions || []);
+      setSubmissions(data.pickups || []);
     } catch {} finally { setLoading(false); }
   };
 
@@ -20,13 +20,13 @@ export default function AdminPickupsPage() {
 
   const handleRead = async (id) => {
     await markPickupRead(id);
-    setSubmissions(submissions.map((s) => s._id === id ? { ...s, isRead: true } : s));
+    setSubmissions(submissions.map((s) => s.id === id ? { ...s, isRead: true } : s));
   };
 
   const handleDelete = async (id) => {
     if (!confirm("Delete this request?")) return;
     await deletePickup(id);
-    setSubmissions(submissions.filter((s) => s._id !== id));
+    setSubmissions(submissions.filter((s) => s.id !== id));
   };
 
   return (
@@ -45,7 +45,7 @@ export default function AdminPickupsPage() {
       ) : (
         <div className="space-y-3">
           {submissions.map((sub) => (
-            <div key={sub._id} className={`bg-white rounded-xl p-5 border transition-colors ${sub.isRead ? "border-slate-200" : "border-orange-300 bg-orange-50/20"}`}>
+            <div key={sub.id} className={`bg-white rounded-xl p-5 border transition-colors ${sub.isRead ? "border-slate-200" : "border-orange-300 bg-orange-50/20"}`}>
               <div className="flex items-start justify-between gap-4">
                 <div className="space-y-2 flex-1">
                   <div className="flex items-center gap-2">
@@ -69,9 +69,9 @@ export default function AdminPickupsPage() {
                 </div>
                 <div className="flex items-center gap-1 shrink-0">
                   {!sub.isRead && (
-                    <button onClick={() => handleRead(sub._id)} className="p-2 rounded-lg hover:bg-emerald-50 text-slate-400 hover:text-emerald-500 cursor-pointer"><CheckCircle size={16} /></button>
+                    <button onClick={() => handleRead(sub.id)} className="p-2 rounded-lg hover:bg-emerald-50 text-slate-400 hover:text-emerald-500 cursor-pointer"><CheckCircle size={16} /></button>
                   )}
-                  <button onClick={() => handleDelete(sub._id)} className="p-2 rounded-lg hover:bg-red-50 text-slate-400 hover:text-red-500 cursor-pointer"><Trash2 size={16} /></button>
+                  <button onClick={() => handleDelete(sub.id)} className="p-2 rounded-lg hover:bg-red-50 text-slate-400 hover:text-red-500 cursor-pointer"><Trash2 size={16} /></button>
                 </div>
               </div>
             </div>

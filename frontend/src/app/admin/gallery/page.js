@@ -45,7 +45,7 @@ export default function AdminGalleryPage() {
     if (!confirm("Delete this image?")) return;
     try {
       await deleteGalleryImage(id);
-      setImages(images.filter((i) => i._id !== id));
+      setImages(images.filter((i) => i.id !== id));
     } catch {}
   };
 
@@ -98,7 +98,7 @@ export default function AdminGalleryPage() {
       ) : (
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
           {images.map((img) => (
-            <div key={img._id} className="group relative bg-white rounded-xl border border-slate-200 overflow-hidden aspect-square">
+            <div key={img.id} className="group relative bg-white rounded-xl border border-slate-200 overflow-hidden aspect-square">
               <img src={img.imageUrl} alt={img.title || ""} className="w-full h-full object-cover" />
               <div className="absolute inset-0 bg-black/0 group-hover:bg-black/40 transition-all flex items-end">
                 <div className="w-full p-3 translate-y-full group-hover:translate-y-0 transition-transform flex items-center justify-between">
@@ -106,7 +106,7 @@ export default function AdminGalleryPage() {
                     <p className="text-white text-xs font-medium line-clamp-1">{img.title || "Untitled"}</p>
                     <p className="text-white/60 text-[10px]">{img.category}</p>
                   </div>
-                  <button onClick={() => handleDelete(img._id)} className="p-2 bg-red-500 rounded-lg text-white hover:bg-red-600 cursor-pointer"><Trash2 size={14} /></button>
+                  <button onClick={() => handleDelete(img.id)} className="p-2 bg-red-500 rounded-lg text-white hover:bg-red-600 cursor-pointer"><Trash2 size={14} /></button>
                 </div>
               </div>
             </div>

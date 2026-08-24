@@ -29,12 +29,7 @@ export default function AdminLayout({ children }) {
     setIsLoggedIn(!!token);
   }, [pathname]);
 
-  // Login page — no sidebar
-  if (pathname === "/admin/login") {
-    return <>{children}</>;
-  }
-
-  // Not logged in — redirect
+  // Not logged in — show page without sidebar (login form renders inline)
   if (!isLoggedIn) {
     return <>{children}</>;
   }
@@ -122,11 +117,7 @@ export default function AdminLayout({ children }) {
               {pathname === "/admin" ? "Dashboard" : pathname.split("/admin/")[1]?.split("/")[0] || "Dashboard"}
             </span>
           </div>
-          <div className="flex items-center gap-2">
-            <Link href="/" target="_blank" className="text-xs text-primary-600 font-medium hover:underline">
-              View Site →
-            </Link>
-          </div>
+          <div className="flex items-center gap-2" />
         </header>
 
         {/* Page content */}

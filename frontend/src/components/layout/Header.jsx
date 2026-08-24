@@ -3,20 +3,20 @@
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { Menu, X, ChevronDown, Phone, Mail, Recycle, ArrowRight, ShieldCheck } from "lucide-react";
+import { Phone, ChevronDown, Menu, X, Recycle, ArrowRight } from "lucide-react";
 import { navLinks, companyInfo } from "@/data/navigation";
 
 export default function Header() {
+  const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeDropdown, setActiveDropdown] = useState(null);
-  const pathname = usePathname();
-  const dropdownRef = useRef(null);
+  const dropdownTimeout = useRef(null);
 
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   useEffect(() => {
@@ -24,233 +24,219 @@ export default function Header() {
     setActiveDropdown(null);
   }, [pathname]);
 
-  useEffect(() => {
-    if (mobileOpen) {
-      document.body.style.overflow = "hidden";
-    } else {
-      document.body.style.overflow = "";
-    }
-    return () => { document.body.style.overflow = ""; };
-  }, [mobileOpen]);
+  const isActive = (href) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  };
 
-  useEffect(() => {
-    function handleClickOutside(e) {
-      if (dropdownRef.current && !dropdownRef.current.contains(e.target)) {
-        setActiveDropdown(null);
-      }
-    }
-    document.addEventListener("mousedown", handleClickOutside);
-    return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, []);
+  const handleDropdownEnter = (label) => {
+    clearTimeout(dropdownTimeout.current);
+    setActiveDropdown(label);
+  };
+
+  const handleDropdownLeave = () => {
+    dropdownTimeout.current = setTimeout(() => setActiveDropdown(null), 150);
+  };
+
+  const isTransparent = !scrolled && !mobileOpen;
+
+  // Colors based on state
+  const navColor = isTransparent ? "#ffffff" : "#1a1a1a";
+  const navColorMuted = isTransparent ? "rgba(255,255,255,0.8)" : "#333";
+  const logoColor = isTransparent ? "#ffffff" : "#08201A";
+  const logoSubColor = isTransparent ? "rgba(255,255,255,0.5)" : "#78857A";
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled
-          ? "bg-white/95 backdrop-blur-md shadow-md border-b border-industrial-200/80"
-          : "bg-white/95 backdrop-blur-sm border-b border-industrial-100 shadow-xs"
-      }`}
+      className="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+      style={{
+        backgroundColor: isTransparent ? "transparent" : "#FAF9F6",
+        boxShadow: isTransparent ? "none" : "0 1px 0 rgba(0,0,0,0.06)",
+      }}
     >
-      {/* Top Bar */}
-      <div className="hidden lg:block bg-gradient-to-r from-secondary-950 via-primary-950 to-secondary-950 text-white border-b border-white/10">
-        <div className="container-custom flex items-center justify-between py-2 text-xs">
-          <div className="flex items-center gap-6">
-            <div className="flex items-center gap-1.5 text-primary-300 font-medium">
-              <span className="w-2 h-2 rounded-full bg-primary-400 animate-pulse" />
-              <span>Gujarat Facility Operational</span>
-            </div>
-            <span className="text-white/20">|</span>
-            <a
-              href="tel:+912762283000"
-              className="flex items-center gap-1.5 text-industrial-300 hover:text-primary-300 transition-colors"
-            >
-              <Phone size={12} className="text-primary-400" />
-              <span>+91 (02762) 283000</span>
-            </a>
-            <span className="text-white/20">|</span>
-            <a
-              href="mailto:contact@advaitgreen.com"
-              className="flex items-center gap-1.5 text-industrial-300 hover:text-primary-300 transition-colors"
-            >
-              <Mail size={12} className="text-primary-400" />
-              <span>contact@advaitgreen.com</span>
-            </a>
-          </div>
-          <div className="flex items-center gap-4 text-industrial-300 text-[11px]">
-            <span className="flex items-center gap-1 text-primary-300/90 font-medium">
-              <ShieldCheck size={13} className="text-primary-400" />
-              GST: {companyInfo.gstin}
+      {/* Helpline Strip */}
+      <div
+        className="hidden lg:block text-xs transition-all duration-300"
+        style={{
+          backgroundColor: isTransparent ? "rgba(255,255,255,0.06)" : "#08201A",
+          color: isTransparent ? "rgba(255,255,255,0.7)" : "#D6E9E0",
+          borderBottom: isTransparent ? "1px solid rgba(255,255,255,0.1)" : "none",
+        }}
+      >
+        <div className="max-w-[1400px] mx-auto px-6 flex items-center justify-between h-[36px]">
+          <div className="flex items-center gap-6 font-mono text-[11px] tracking-wide">
+            <span className="flex items-center gap-1.5">
+              <Phone size={11} style={{ color: isTransparent ? "#DB9C72" : "#CC7C4A" }} />
+              Toll Free: {companyInfo.tollFree}
             </span>
-            <span className="text-white/20">&bull;</span>
-            <span>Responsible Resource Recovery</span>
+            <span style={{ color: isTransparent ? "rgba(255,255,255,0.2)" : "#184E3E" }}>|</span>
+            <span>E-Waste: {companyInfo.phoneEWaste}</span>
+            <span style={{ color: isTransparent ? "rgba(255,255,255,0.2)" : "#184E3E" }}>|</span>
+            <span>Plastic: {companyInfo.phonePlastic}</span>
+          </div>
+          <div className="flex items-center gap-4 text-[11px]">
+            <span>{companyInfo.email}</span>
           </div>
         </div>
       </div>
 
-      {/* Main Navbar */}
-      <nav className="container-custom flex items-center justify-between h-[68px] lg:h-[76px]">
+      {/* Main Nav */}
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 flex items-center justify-between h-[72px]">
         {/* Logo */}
-        <Link href="/" className="flex items-center gap-3 shrink-0 group">
-          <div className="w-10 h-10 bg-gradient-to-br from-primary-500 to-primary-700 rounded-xl flex items-center justify-center shadow-button transition-transform duration-300 group-hover:scale-105">
-            <Recycle size={22} className="text-white" strokeWidth={2.5} />
+        <Link href="/" className="flex items-center gap-2.5 shrink-0">
+          <div
+            className="w-9 h-9 rounded-md flex items-center justify-center transition-all duration-300"
+            style={{ backgroundColor: isTransparent ? "rgba(255,255,255,0.15)" : "#184E3E" }}
+          >
+            <Recycle size={20} style={{ color: "#fff" }} />
           </div>
           <div className="leading-tight">
-            <span className="font-heading text-[1.15rem] font-bold text-secondary-950 block leading-snug tracking-tight group-hover:text-primary-700 transition-colors">
+            <p
+              className="font-heading font-semibold text-[15px] tracking-tight transition-all duration-300"
+              style={{ color: logoColor }}
+            >
               Advait Green
-            </span>
-            <span className="text-[10px] text-primary-700 font-semibold tracking-[0.14em] uppercase block leading-none">
-              Recycling Pvt. Ltd.
-            </span>
+            </p>
+            <p
+              className="text-[10px] font-medium tracking-wide uppercase transition-all duration-300"
+              style={{ color: logoSubColor }}
+            >
+              Recycling
+            </p>
           </div>
         </Link>
 
-        {/* Desktop Navigation */}
-        <div className="hidden xl:flex items-center gap-1" ref={dropdownRef}>
+        {/* Desktop Nav */}
+        <nav className="hidden lg:flex items-center gap-0.5">
           {navLinks.map((link) => (
-            <div key={link.label} className="relative">
-              {link.children ? (
-                <>
-                  <button
-                    onClick={() =>
-                      setActiveDropdown(activeDropdown === link.label ? null : link.label)
-                    }
-                    className={`flex items-center gap-1 px-3 py-2 text-[13.5px] font-medium rounded-lg transition-all duration-200 cursor-pointer ${
-                      pathname.startsWith(link.href)
-                        ? "text-primary-700 bg-primary-50 font-semibold shadow-xs"
-                        : "text-secondary-700 hover:text-primary-700 hover:bg-industrial-50"
-                    }`}
-                  >
-                    {link.label}
-                    <ChevronDown
-                      size={14}
-                      className={`transition-transform duration-200 text-secondary-400 ${
-                        activeDropdown === link.label ? "rotate-180 text-primary-600" : ""
-                      }`}
-                    />
-                  </button>
-                  {activeDropdown === link.label && (
-                    <div className="absolute top-full left-0 mt-2 w-64 bg-white rounded-2xl shadow-xl border border-industrial-100 p-2 z-50 animate-in fade-in slide-in-from-top-2 duration-200">
-                      <div className="text-[10px] font-semibold uppercase tracking-wider text-industrial-400 px-3 py-1.5 border-b border-industrial-100 mb-1">
-                        Our Core Solutions
-                      </div>
-                      {link.children.map((child) => (
-                        <Link
-                          key={child.href}
-                          href={child.href}
-                          className={`flex items-center justify-between px-3 py-2 rounded-xl text-[13px] transition-all duration-150 ${
-                            pathname === child.href
-                              ? "text-primary-700 bg-primary-50 font-semibold"
-                              : "text-secondary-700 hover:text-primary-700 hover:bg-primary-50/60 hover:pl-4"
-                          }`}
-                        >
-                          <span>{child.label}</span>
-                          <ArrowRight size={13} className="text-primary-400 opacity-0 group-hover:opacity-100" />
-                        </Link>
-                      ))}
-                    </div>
-                  )}
-                </>
-              ) : (
-                <Link
-                  href={link.href}
-                  className={`px-3 py-2 text-[13.5px] font-medium rounded-lg transition-all duration-200 block ${
-                    pathname === link.href
-                      ? "text-primary-700 bg-primary-50 font-semibold shadow-xs"
-                      : "text-secondary-700 hover:text-primary-700 hover:bg-industrial-50"
-                  }`}
-                >
-                  {link.label}
-                </Link>
+            <div
+              key={link.label}
+              className="relative"
+              onMouseEnter={() => link.children && handleDropdownEnter(link.label)}
+              onMouseLeave={() => link.children && handleDropdownLeave()}
+            >
+              <Link
+                href={link.href}
+                className="flex items-center gap-1 px-3 py-2 text-[15px] font-medium rounded-md transition-all duration-200"
+                style={{ color: isActive(link.href) ? navColor : navColorMuted }}
+              >
+                {link.label}
+                {link.children && (
+                  <ChevronDown
+                    size={14}
+                    className={`transition-transform ${activeDropdown === link.label ? "rotate-180" : ""}`}
+                  />
+                )}
+              </Link>
+
+              {isActive(link.href) && (
+                <div
+                  className="absolute bottom-0 left-3 right-3 h-[2px] rounded-full"
+                  style={{ backgroundColor: "#CC7C4A" }}
+                />
+              )}
+
+              {link.children && activeDropdown === link.label && (
+                <div className="absolute top-full left-0 pt-1.5 z-50">
+                  <div className="bg-white border border-secondary-200 rounded-lg shadow-lg py-1.5 min-w-[240px] animate-in">
+                    {link.children.map((child) => (
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        className="block px-4 py-2.5 text-sm hover:bg-gray-50 transition-colors"
+                        style={{ color: isActive(child.href) ? "#184E3E" : "#47524B" }}
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                </div>
               )}
             </div>
           ))}
-        </div>
+        </nav>
 
-        {/* CTA Button & Mobile Toggle */}
-        <div className="flex items-center gap-3">
+        {/* Desktop CTAs */}
+        <div className="hidden lg:flex items-center gap-3">
+          <Link
+            href="/contact"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded text-sm font-semibold transition-all duration-200"
+            style={{
+              color: isTransparent ? "#fff" : "#1a1a1a",
+              border: isTransparent ? "1px solid rgba(255,255,255,0.3)" : "1px solid #C2CBC4",
+            }}
+          >
+            Contact Us
+          </Link>
           <Link
             href="/schedule-pickup"
-            className="hidden md:inline-flex items-center gap-2 bg-gradient-to-r from-primary-600 to-primary-700 text-white px-5 py-2.5 rounded-xl text-sm font-semibold hover:from-primary-500 hover:to-primary-600 transition-all shadow-button hover:shadow-button-hover active:scale-[0.98]"
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded text-sm font-semibold transition-colors"
+            style={{ backgroundColor: "#995427", color: "#fff" }}
           >
-            <span>Schedule a Pickup</span>
-            <ArrowRight size={15} />
+            E-Waste Pick Up
+            <ArrowRight size={14} />
           </Link>
-          <button
-            onClick={() => setMobileOpen(!mobileOpen)}
-            className="xl:hidden p-2.5 rounded-xl bg-industrial-100 hover:bg-industrial-200 text-secondary-800 transition-colors"
-            aria-label="Toggle menu"
-          >
-            {mobileOpen ? <X size={22} /> : <Menu size={22} />}
-          </button>
         </div>
-      </nav>
 
-      {/* Mobile Menu Sheet */}
+        {/* Mobile Toggle */}
+        <button
+          onClick={() => setMobileOpen(!mobileOpen)}
+          className="lg:hidden p-2 rounded-md"
+          style={{ color: isTransparent ? "#fff" : "#47524B" }}
+        >
+          {mobileOpen ? <X size={22} /> : <Menu size={22} />}
+        </button>
+      </div>
+
+      {/* Mobile Nav */}
       {mobileOpen && (
-        <div className="xl:hidden fixed inset-0 top-[68px] bg-secondary-950/40 backdrop-blur-sm z-40">
-          <div className="bg-white h-full max-h-[calc(100vh-68px)] overflow-y-auto p-6 shadow-2xl space-y-2 border-t border-industrial-100">
+        <div className="lg:hidden" style={{ borderTop: "1px solid #EAEEEA", backgroundColor: "#FAF9F6" }}>
+          <div className="px-4 py-3 space-y-1 max-h-[calc(100vh-72px)] overflow-y-auto">
             {navLinks.map((link) => (
               <div key={link.label}>
-                {link.children ? (
-                  <>
-                    <button
-                      onClick={() =>
-                        setActiveDropdown(activeDropdown === link.label ? null : link.label)
-                      }
-                      className="flex items-center justify-between w-full px-4 py-3 text-secondary-800 font-medium rounded-xl hover:bg-industrial-50 transition-colors"
-                    >
-                      <span>{link.label}</span>
-                      <ChevronDown
-                        size={16}
-                        className={`transition-transform duration-200 ${
-                          activeDropdown === link.label ? "rotate-180 text-primary-600" : ""
-                        }`}
-                      />
-                    </button>
-                    {activeDropdown === link.label && (
-                      <div className="ml-4 space-y-1 border-l-2 border-primary-200 pl-3 my-1">
-                        {link.children.map((child) => (
-                          <Link
-                            key={child.href}
-                            href={child.href}
-                            className={`block px-3 py-2 text-sm rounded-lg ${
-                              pathname === child.href
-                                ? "text-primary-700 bg-primary-50 font-semibold"
-                                : "text-secondary-600 hover:bg-industrial-50"
-                            }`}
-                          >
-                            {child.label}
-                          </Link>
-                        ))}
-                      </div>
-                    )}
-                  </>
-                ) : (
-                  <Link
-                    href={link.href}
-                    className={`block px-4 py-3 font-medium rounded-xl transition-colors ${
-                      pathname === link.href
-                        ? "text-primary-700 bg-primary-50 font-semibold"
-                        : "text-secondary-800 hover:bg-industrial-50"
-                    }`}
-                  >
-                    {link.label}
-                  </Link>
+                <Link
+                  href={link.href}
+                  className="block px-3 py-2.5 rounded-md text-sm font-medium"
+                  style={{ color: isActive(link.href) ? "#184E3E" : "#333" }}
+                >
+                  {link.label}
+                </Link>
+                {link.children && (
+                  <div className="ml-4 mt-0.5 space-y-0.5 pl-3" style={{ borderLeft: "2px solid #EAEEEA" }}>
+                    {link.children.map((child) => (
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        className="block px-3 py-2 text-sm rounded-md"
+                        style={{ color: isActive(child.href) ? "#184E3E" : "#78857A" }}
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
                 )}
               </div>
             ))}
-            <div className="pt-4 pb-8 space-y-3">
+
+            <div className="pt-3 space-y-2" style={{ borderTop: "1px solid #EAEEEA" }}>
               <Link
                 href="/schedule-pickup"
-                className="flex items-center justify-center gap-2 w-full text-center bg-primary-600 text-white py-3.5 rounded-xl font-semibold hover:bg-primary-500 transition-colors shadow-button"
+                className="flex items-center justify-center gap-2 px-5 py-3 rounded text-sm font-semibold w-full"
+                style={{ backgroundColor: "#995427", color: "#fff" }}
               >
-                <span>Schedule a Pickup</span>
-                <ArrowRight size={16} />
+                E-Waste Pick Up
+                <ArrowRight size={14} />
               </Link>
-              <div className="p-4 bg-industrial-50 rounded-xl border border-industrial-100 text-xs text-secondary-600 space-y-1.5">
-                <p className="font-semibold text-secondary-900">Registered Office & Facility:</p>
-                <p>Vamaj Road, Mahesana, Gujarat – 382728</p>
-                <p className="text-primary-700 font-mono font-medium">GSTIN: {companyInfo.gstin}</p>
+              <Link
+                href="/contact"
+                className="flex items-center justify-center gap-2 px-5 py-3 rounded text-sm font-semibold w-full"
+                style={{ border: "1px solid #C2CBC4", color: "#333" }}
+              >
+                Contact Us
+              </Link>
+              <div className="flex items-center gap-2 mt-2 px-3 text-xs" style={{ color: "#78857A" }}>
+                <Phone size={12} style={{ color: "#995427" }} />
+                <span>Toll Free: {companyInfo.tollFree}</span>
               </div>
             </div>
           </div>
