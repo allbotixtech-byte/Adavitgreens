@@ -38,7 +38,7 @@ export default function Header() {
     dropdownTimeout.current = setTimeout(() => setActiveDropdown(null), 150);
   };
 
-  const hasFullHero = pathname === "/" || pathname === "/about" || pathname === "/contact" || pathname === "/insights";
+  const hasFullHero = pathname === "/" || pathname === "/about" || pathname === "/contact" || pathname === "/insights" || pathname === "/careers";
   const isTransparent = hasFullHero && !scrolled && !mobileOpen;
 
   // Colors based on state

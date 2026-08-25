@@ -8,7 +8,7 @@ export default function ConditionalLayout({ children }) {
   const pathname = usePathname();
   const isAdmin = pathname.startsWith("/admin");
   const isHome = pathname === "/";
-  const hasFullHero = isHome || pathname === "/about" || pathname === "/contact" || pathname === "/insights";
+  const hasFullHero = isHome || pathname === "/about" || pathname === "/contact" || pathname === "/insights" || pathname === "/careers";
 
   if (isAdmin) return <>{children}</>;
 

@@ -1,1 +1,74 @@
-[]
+[
+  {
+    "id": "c1",
+    "title": "Plant Operations Manager",
+    "department": "Operations",
+    "location": "Mahesana, Gujarat",
+    "type": "Full-time",
+    "description": "Lead day-to-day operations at our CPCB-authorized recycling facility. You will oversee the dismantling, segregation, and processing of e-waste and plastic waste while ensuring compliance with environmental regulations and safety standards.",
+    "requirements": [
+      "5+ years of experience in waste management or manufacturing operations",
+      "Knowledge of CPCB / SPCB regulations and environmental compliance",
+      "Strong leadership and team management skills",
+      "B.E. / B.Tech in Environmental, Mechanical, or Chemical Engineering",
+      "Experience with ISO 14001 and OHSAS 18001 standards"
+    ],
+    "isActive": true,
+    "createdAt": "2026-08-10T10:00:00.000Z",
+    "updatedAt": "2026-08-10T10:00:00.000Z"
+  },
+  {
+    "id": "c2",
+    "title": "EPR Compliance Executive",
+    "department": "Compliance",
+    "location": "Mahesana, Gujarat",
+    "type": "Full-time",
+    "description": "Manage EPR documentation, filings, and reporting for our clients. You will coordinate with CPCB/SPCB, prepare annual returns, and ensure producers and importers meet their extended producer responsibility targets.",
+    "requirements": [
+      "2+ years of experience in EPR compliance or environmental consulting",
+      "In-depth understanding of E-Waste Management Rules 2022 and Plastic Waste Management Rules",
+      "Experience with CPCB portal filings and documentation",
+      "Excellent communication and client-facing skills",
+      "Degree in Environmental Science, Law, or related field"
+    ],
+    "isActive": true,
+    "createdAt": "2026-08-12T10:00:00.000Z",
+    "updatedAt": "2026-08-12T10:00:00.000Z"
+  },
+  {
+    "id": "c3",
+    "title": "Business Development Executive",
+    "department": "Sales & Marketing",
+    "location": "Ahmedabad, Gujarat",
+    "type": "Full-time",
+    "description": "Drive new business acquisition by identifying corporates, manufacturers, and IT companies that require e-waste collection and recycling services. Build relationships, present solutions, and close deals to grow our client base across Western India.",
+    "requirements": [
+      "2-4 years of B2B sales experience, preferably in waste management, sustainability, or environmental services",
+      "Strong network in IT, manufacturing, or BFSI sectors",
+      "Ability to prepare proposals, quotations, and presentations",
+      "Own vehicle and willingness to travel across Gujarat and Maharashtra",
+      "MBA or equivalent preferred"
+    ],
+    "isActive": true,
+    "createdAt": "2026-08-15T10:00:00.000Z",
+    "updatedAt": "2026-08-15T10:00:00.000Z"
+  },
+  {
+    "id": "c5",
+    "title": "Accounts & Admin Officer",
+    "department": "Finance & Admin",
+    "location": "Mahesana, Gujarat",
+    "type": "Full-time",
+    "description": "Handle accounts payable/receivable, GST returns, TDS filings, and general administrative tasks. Maintain vendor records, coordinate with auditors, and support HR with payroll processing.",
+    "requirements": [
+      "3+ years of experience in accounting and office administration",
+      "Proficiency in Tally Prime, MS Excel, and GST portal",
+      "Knowledge of TDS, GST, and income tax compliance",
+      "B.Com or M.Com with relevant certifications preferred",
+      "Organised, reliable, and good with documentation"
+    ],
+    "isActive": true,
+    "createdAt": "2026-08-20T10:00:00.000Z",
+    "updatedAt": "2026-08-20T10:00:00.000Z"
+  }
+]
