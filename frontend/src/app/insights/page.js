@@ -8,10 +8,9 @@ import {
   ChevronRight,
   ArrowRight,
   Clock,
-  Calendar,
   Search,
-  Tag,
   Mail,
+  User,
 } from "lucide-react";
 
 const categories = [
@@ -25,12 +24,6 @@ const categories = [
   "Sustainability for Business",
   "Company News",
 ];
-
-function estimateReadTime(content) {
-  if (!content) return 3;
-  const text = content.replace(/<[^>]*>/g, "");
-  return Math.max(2, Math.ceil(text.split(/\s+/).length / 220));
-}
 
 function formatDate(dateStr) {
   if (!dateStr) return "";
@@ -67,55 +60,71 @@ export default function InsightsPage() {
     return matchCat && matchSearch;
   });
 
-  const featured = filtered[0];
-  const rest = filtered.slice(1);
-
   return (
     <>
       {/* ── HERO ── */}
-      <section
-        className="relative pt-36 pb-16 lg:pt-44 lg:pb-20"
-        style={{ backgroundColor: "#08201A" }}
-      >
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)",
-            backgroundSize: "56px 56px",
-          }}
+      <section className="relative h-screen min-h-[600px] bg-primary-950 overflow-hidden flex items-end sm:items-center pb-16 sm:pb-0">
+        <img
+          src="/images/blog_hero_bg.png"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover"
         />
-        <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6">
-          <nav className="flex items-center gap-2 text-xs mb-8">
-            <Link
-              href="/"
-              style={{ color: "#9AA69D" }}
-              className="hover:text-white transition-colors"
+        <div className="absolute inset-0 bg-black/55" />
+
+        <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6 w-full pt-28 sm:pt-0">
+          <div className="max-w-[640px]">
+            <nav className="flex items-center gap-2 text-xs mb-6 sm:mb-8">
+              <Link href="/" className="text-white/60 hover:text-white transition-colors">Home</Link>
+              <ChevronRight size={12} className="text-white/30" />
+              <span style={{ color: "#CC7C4A" }}>Blog</span>
+            </nav>
+            <motion.p
+              initial={{ opacity: 0, x: -12 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.4 }}
+              className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.09em] text-white/70 mb-3 sm:mb-4"
             >
-              Home
-            </Link>
-            <ChevronRight size={12} style={{ color: "#5C6961" }} />
-            <span style={{ color: "#CC7C4A" }}>Blog</span>
-          </nav>
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="font-heading text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight leading-[1.1] max-w-[700px]"
-            style={{ color: "#ffffff" }}
-          >
-            Insights from the Recycling Floor
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            className="mt-4 text-base sm:text-lg max-w-[560px]"
-            style={{ color: "#9AA69D" }}
-          >
-            Regulatory updates, practical guides and honest commentary on waste
-            management in India.
-          </motion.p>
+              Our Blog
+            </motion.p>
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.05 }}
+              className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-[1.1] sm:leading-[1.06] tracking-tight mb-4 sm:mb-5"
+            >
+              Insights from the Recycling Floor
+            </motion.h1>
+            <motion.p
+              initial={{ opacity: 0, y: 16 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.1 }}
+              className="text-white text-sm sm:text-base lg:text-lg leading-relaxed max-w-[52ch] mb-6 sm:mb-8"
+            >
+              Regulatory updates, practical guides and honest commentary on waste
+              management in India.
+            </motion.p>
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.18 }}
+              className="flex flex-col sm:flex-row gap-3"
+            >
+              <Link
+                href="/schedule-pickup"
+                className="inline-flex items-center justify-center gap-2 bg-accent-600 hover:bg-accent-700 px-6 py-3 rounded text-sm font-semibold transition-colors"
+                style={{ color: "#fff" }}
+              >
+                Schedule a Free Pickup <ArrowRight size={15} />
+              </Link>
+              <Link
+                href="/contact"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded text-sm font-semibold transition-colors"
+                style={{ color: "#fff", border: "1px solid rgba(255,255,255,0.25)" }}
+              >
+                Contact Us
+              </Link>
+            </motion.div>
+          </div>
         </div>
       </section>
 
@@ -129,7 +138,7 @@ export default function InsightsPage() {
                 <button
                   key={cat}
                   onClick={() => setActiveCategory(cat)}
-                  className="px-4 py-2 rounded-full text-xs font-semibold transition-all duration-200 cursor-pointer"
+                  className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-semibold transition-all duration-200 cursor-pointer"
                   style={{
                     backgroundColor:
                       activeCategory === cat ? "#184E3E" : "#E4EBE6",
@@ -194,217 +203,109 @@ export default function InsightsPage() {
               </p>
             </div>
           ) : (
-            <>
-              {/* Featured Post */}
-              {featured && (
-                <motion.div
-                  initial={{ opacity: 0, y: 20 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5 }}
-                  className="mb-10"
-                >
-                  <Link href={`/insights/${featured.slug}`}>
-                    <div
-                      className="rounded-2xl overflow-hidden grid lg:grid-cols-2 transition-shadow duration-300"
-                      style={{
-                        backgroundColor: "#ffffff",
-                        boxShadow: "0 1px 3px rgba(0,0,0,0.06)",
-                      }}
-                    >
-                      {/* Featured Image */}
-                      <div
-                        className="relative h-[240px] lg:h-auto min-h-[300px]"
-                        style={{ backgroundColor: "#E4EBE6" }}
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 lg:gap-7">
+                {filtered.map((blog, i) => (
+                  <motion.div
+                    key={blog.id}
+                    initial={{ opacity: 0, y: 24 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.4, delay: i * 0.08 }}
+                  >
+                    <Link href={`/insights/${blog.slug}`}>
+                      <article
+                        className="rounded-2xl overflow-hidden group transition-all duration-300 flex flex-col h-full"
+                        style={{
+                          backgroundColor: "#ffffff",
+                          boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
+                        }}
+                        onMouseEnter={(e) =>
+                          (e.currentTarget.style.boxShadow =
+                            "0 10px 30px rgba(0,0,0,0.1)")
+                        }
+                        onMouseLeave={(e) =>
+                          (e.currentTarget.style.boxShadow =
+                            "0 1px 4px rgba(0,0,0,0.06)")
+                        }
                       >
-                        {featured.thumbnail ? (
-                          <Image
-                            src={featured.thumbnail}
-                            alt={featured.title}
-                            fill
-                            className="object-cover"
-                          />
-                        ) : (
-                          <div className="absolute inset-0 flex items-center justify-center">
-                            <div
-                              className="w-20 h-20 rounded-full flex items-center justify-center"
-                              style={{ backgroundColor: "#D6E9E0" }}
-                            >
-                              <Tag size={32} style={{ color: "#184E3E" }} />
-                            </div>
-                          </div>
-                        )}
-                        <div className="absolute top-4 left-4">
-                          <span
-                            className="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider"
-                            style={{
-                              backgroundColor: "#184E3E",
-                              color: "#ffffff",
-                            }}
-                          >
-                            Featured
-                          </span>
-                        </div>
-                      </div>
-                      {/* Featured Content */}
-                      <div className="p-8 lg:p-10 flex flex-col justify-center">
-                        <div className="flex items-center gap-3 mb-4">
-                          <span
-                            className="px-3 py-1 rounded-full text-[11px] font-semibold"
-                            style={{
-                              backgroundColor: "#EDF5F1",
-                              color: "#184E3E",
-                            }}
-                          >
-                            {featured.category}
-                          </span>
-                          <span
-                            className="flex items-center gap-1 text-xs"
-                            style={{ color: "#9AA69D" }}
-                          >
-                            <Calendar size={12} />
-                            {formatDate(featured.publishedAt)}
-                          </span>
-                          <span
-                            className="flex items-center gap-1 text-xs"
-                            style={{ color: "#9AA69D" }}
-                          >
-                            <Clock size={12} />
-                            {estimateReadTime(featured.content)} min read
-                          </span>
-                        </div>
-                        <h2
-                          className="font-heading text-xl sm:text-2xl lg:text-[28px] font-semibold leading-snug mb-4"
-                          style={{ color: "#08201A" }}
-                        >
-                          {featured.title}
-                        </h2>
-                        <p
-                          className="text-sm leading-relaxed mb-6 line-clamp-3"
-                          style={{ color: "#5C6961" }}
-                        >
-                          {featured.excerpt}
-                        </p>
-                        <span
-                          className="inline-flex items-center gap-2 text-sm font-semibold"
-                          style={{ color: "#995427" }}
-                        >
-                          Read Article <ArrowRight size={15} />
-                        </span>
-                      </div>
-                    </div>
-                  </Link>
-                </motion.div>
-              )}
-
-              {/* Grid Cards */}
-              {rest.length > 0 && (
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                  {rest.map((blog, i) => (
-                    <motion.div
-                      key={blog.id}
-                      initial={{ opacity: 0, y: 24 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ duration: 0.4, delay: i * 0.08 }}
-                    >
-                      <Link href={`/insights/${blog.slug}`}>
-                        <article
-                          className="rounded-xl overflow-hidden h-full flex flex-col transition-all duration-300 group"
+                        {/* ── Image Banner ── */}
+                        <div
+                          className="relative overflow-hidden h-[220px] sm:h-[280px] lg:h-[340px]"
                           style={{
-                            backgroundColor: "#ffffff",
-                            boxShadow: "0 1px 3px rgba(0,0,0,0.06)",
+                            background: "linear-gradient(135deg, #184E3E 0%, #2A7A5E 50%, #184E3E 100%)",
                           }}
-                          onMouseEnter={(e) =>
-                            (e.currentTarget.style.boxShadow =
-                              "0 8px 24px rgba(0,0,0,0.1)")
-                          }
-                          onMouseLeave={(e) =>
-                            (e.currentTarget.style.boxShadow =
-                              "0 1px 3px rgba(0,0,0,0.06)")
-                          }
                         >
-                          {/* Card Image */}
-                          <div
-                            className="relative h-[200px] overflow-hidden"
-                            style={{ backgroundColor: "#E4EBE6" }}
-                          >
-                            {blog.thumbnail ? (
-                              <Image
-                                src={blog.thumbnail}
-                                alt={blog.title}
-                                fill
-                                className="object-cover transition-transform duration-500 group-hover:scale-105"
-                              />
-                            ) : (
-                              <div className="absolute inset-0 flex items-center justify-center">
-                                <div
-                                  className="w-14 h-14 rounded-full flex items-center justify-center"
-                                  style={{ backgroundColor: "#D6E9E0" }}
-                                >
-                                  <Tag
-                                    size={24}
-                                    style={{ color: "#184E3E" }}
-                                  />
-                                </div>
+                          {blog.thumbnail ? (
+                            <Image
+                              src={blog.thumbnail}
+                              alt={blog.title}
+                              fill
+                              className="object-cover transition-transform duration-500 group-hover:scale-105"
+                            />
+                          ) : (
+                            <div className="absolute inset-0 bg-gradient-to-r from-[#0A2E23] via-[#184E3E] to-[#2A7A5E] flex items-center justify-center">
+                              <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{ backgroundColor: "rgba(255,255,255,0.1)" }}>
+                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
+                                  <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
+                                  <line x1="4" y1="22" x2="4" y2="15" />
+                                </svg>
                               </div>
-                            )}
-                            <div className="absolute top-3 left-3">
-                              <span
-                                className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider"
-                                style={{
-                                  backgroundColor: "#184E3E",
-                                  color: "#ffffff",
-                                }}
-                              >
-                                {blog.category}
-                              </span>
                             </div>
-                          </div>
+                          )}
+                        </div>
 
-                          {/* Card Content */}
-                          <div className="p-5 flex flex-col flex-1">
-                            <div
-                              className="flex items-center gap-3 text-xs mb-3"
-                              style={{ color: "#9AA69D" }}
-                            >
-                              <span className="flex items-center gap-1">
-                                <Calendar size={11} />
+                        {/* ── White Content Area ── */}
+                        <div className="p-5 sm:p-6 flex flex-col flex-1">
+                          {/* Title (repeated) */}
+                          <h4
+                            className="font-heading text-base sm:text-lg font-bold leading-snug line-clamp-2 mb-2"
+                            style={{ color: "#08201A" }}
+                          >
+                            {blog.title}
+                          </h4>
+
+                          {/* Accent divider */}
+                          <div
+                            className="w-8 h-[3px] rounded-full mb-3"
+                            style={{ backgroundColor: "#184E3E" }}
+                          />
+
+                          {/* Excerpt */}
+                          <p
+                            className="text-sm leading-relaxed line-clamp-3 mb-4 flex-1"
+                            style={{ color: "#5C6961" }}
+                          >
+                            {blog.excerpt}
+                          </p>
+
+                          {/* Bottom: Date + Author | Learn More */}
+                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 pt-3" style={{ borderTop: "1px solid #EDF1EE" }}>
+                            <div className="flex items-center gap-3 sm:gap-4 text-[11px] sm:text-xs" style={{ color: "#9AA69D" }}>
+                              <span className="flex items-center gap-1.5">
+                                <Clock size={12} className="shrink-0" style={{ color: "#184E3E" }} />
                                 {formatDate(blog.publishedAt)}
                               </span>
-                              <span className="flex items-center gap-1">
-                                <Clock size={11} />
-                                {estimateReadTime(blog.content)} min
+                              <span className="flex items-center gap-1.5">
+                                <User size={12} className="shrink-0" style={{ color: "#184E3E" }} />
+                                <span className="truncate max-w-[120px] sm:max-w-none">{blog.author}</span>
                               </span>
                             </div>
-                            <h3
-                              className="font-heading text-base font-semibold leading-snug mb-2.5 line-clamp-2"
+                            <span
+                              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold italic"
                               style={{ color: "#08201A" }}
                             >
-                              {blog.title}
-                            </h3>
-                            <p
-                              className="text-sm leading-relaxed line-clamp-2 mb-4 flex-1"
-                              style={{ color: "#5C6961" }}
-                            >
-                              {blog.excerpt}
-                            </p>
-                            <span
-                              className="inline-flex items-center gap-1.5 text-sm font-semibold transition-colors"
-                              style={{ color: "#995427" }}
-                            >
-                              Read More{" "}
+                              Learn More
                               <ArrowRight
-                                size={14}
+                                size={15}
                                 className="transition-transform group-hover:translate-x-1"
                               />
                             </span>
                           </div>
-                        </article>
-                      </Link>
-                    </motion.div>
-                  ))}
-                </div>
-              )}
-            </>
+                        </div>
+                      </article>
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
           )}
         </div>
       </section>

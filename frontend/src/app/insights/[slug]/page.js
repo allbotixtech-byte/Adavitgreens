@@ -13,7 +13,7 @@ import {
   Calendar,
   User,
   Tag,
-  Share2,
+  ChevronDown,
 } from "lucide-react";
 
 function estimateReadTime(content) {
@@ -57,6 +57,56 @@ function addIdsToHeadings(html) {
       .replace(/^-|-$/g, "");
     return `<h2${attrs} id="${id}">${text}</h2>`;
   });
+}
+
+function FaqAccordion({ items }) {
+  const [openIndex, setOpenIndex] = useState(null);
+  return (
+    <div className="space-y-2">
+      {items.map((item, i) => (
+        <div
+          key={i}
+          className="rounded-lg overflow-hidden transition-all duration-200"
+          style={{ border: "1px solid #D6E9E0" }}
+        >
+          <button
+            onClick={() => setOpenIndex(openIndex === i ? null : i)}
+            className="w-full flex items-center justify-between px-4 py-3 text-left cursor-pointer"
+            style={{ backgroundColor: openIndex === i ? "#F0F5F2" : "#ffffff" }}
+          >
+            <span
+              className="text-sm font-semibold pr-4"
+              style={{ color: "#08201A" }}
+            >
+              {item.question}
+            </span>
+            <ChevronDown
+              size={18}
+              className="shrink-0 transition-transform duration-200"
+              style={{
+                color: "#184E3E",
+                transform: openIndex === i ? "rotate(180deg)" : "rotate(0deg)",
+              }}
+            />
+          </button>
+          <div
+            className="overflow-hidden transition-all duration-300"
+            style={{
+              maxHeight: openIndex === i ? "500px" : "0",
+              opacity: openIndex === i ? 1 : 0,
+            }}
+          >
+            <div
+              className="px-4 pb-4 text-sm leading-relaxed"
+              style={{ color: "#5C6961" }}
+            >
+              {item.answer}
+            </div>
+          </div>
+        </div>
+      ))}
+    </div>
+  );
 }
 
 export default function BlogPostPage() {
@@ -116,7 +166,7 @@ export default function BlogPostPage() {
           Article Not Found
         </h1>
         <p className="text-sm mb-6" style={{ color: "#9AA69D" }}>
-          The article you're looking for doesn't exist or has been removed.
+          The article you&apos;re looking for doesn&apos;t exist or has been removed.
         </p>
         <Link
           href="/insights"
@@ -133,138 +183,175 @@ export default function BlogPostPage() {
   const processedContent = addIdsToHeadings(blog.content);
   const readTime = estimateReadTime(blog.content);
 
+  const faqItems = blog.faqs || [];
+
   return (
     <>
-      {/* ── HERO ── */}
-      <section
-        className="relative pt-36 pb-12 lg:pt-44 lg:pb-16"
-        style={{ backgroundColor: "#08201A" }}
-      >
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)",
-            backgroundSize: "56px 56px",
-          }}
-        />
-        <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6">
-          {/* Breadcrumbs */}
-          <nav className="flex items-center gap-2 text-xs mb-8 flex-wrap">
+      {/* ── HEADER SECTION ── */}
+      <section style={{ backgroundColor: "#F4F6F3" }}>
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 pt-8 sm:pt-10">
+          {/* Breadcrumb */}
+          <nav
+            className="inline-flex items-center gap-1 text-[11px] sm:text-[13px] mb-6 sm:mb-10 flex-wrap px-2.5 sm:px-3 py-1.5 rounded-b-lg"
+            style={{ backgroundColor: "#E4EBE6" }}
+          >
             <Link
               href="/"
-              style={{ color: "#9AA69D" }}
-              className="hover:text-white transition-colors"
+              className="transition-colors"
+              style={{ color: "#184E3E" }}
             >
               Home
             </Link>
-            <ChevronRight size={12} style={{ color: "#5C6961" }} />
+            <span style={{ color: "#9AA69D" }}>/</span>
             <Link
               href="/insights"
-              style={{ color: "#9AA69D" }}
-              className="hover:text-white transition-colors"
+              className="transition-colors"
+              style={{ color: "#184E3E" }}
             >
               Blog
             </Link>
-            <ChevronRight size={12} style={{ color: "#5C6961" }} />
+            <span style={{ color: "#9AA69D" }}>/</span>
             <span
-              className="truncate max-w-[200px]"
-              style={{ color: "#CC7C4A" }}
+              className="font-medium truncate max-w-[140px] sm:max-w-[220px]"
+              style={{ color: "#08201A" }}
             >
               {blog.title}
             </span>
           </nav>
 
-          {/* Category + Meta */}
-          <div className="flex flex-wrap items-center gap-3 mb-5">
-            <span
-              className="px-3 py-1 rounded-full text-[11px] font-bold uppercase tracking-wider"
-              style={{ backgroundColor: "#184E3E", color: "#ffffff" }}
+          {/* Centered Title + Meta + Image */}
+          <div className="max-w-[900px] mx-auto text-center flex flex-col items-center gap-4 sm:gap-6 mb-6 sm:mb-10">
+            <motion.h1
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5 }}
+              className="font-heading text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight px-1"
+              style={{ color: "#08201A", lineHeight: 1.2 }}
             >
-              {blog.category}
-            </span>
-            <span
-              className="flex items-center gap-1 text-xs"
-              style={{ color: "#9AA69D" }}
-            >
-              <Calendar size={12} />
-              {formatDate(blog.publishedAt)}
-            </span>
-            <span
-              className="flex items-center gap-1 text-xs"
-              style={{ color: "#9AA69D" }}
-            >
-              <Clock size={12} />
-              {readTime} min read
-            </span>
-          </div>
+              {blog.title}
+            </motion.h1>
 
-          {/* Title */}
-          <motion.h1
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight leading-[1.15] max-w-[760px]"
-            style={{ color: "#ffffff" }}
-          >
-            {blog.title}
-          </motion.h1>
-
-          {/* Author */}
-          <div className="flex items-center gap-3 mt-6">
-            <div
-              className="w-9 h-9 rounded-full flex items-center justify-center"
-              style={{ backgroundColor: "#184E3E" }}
+            <motion.div
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.4, delay: 0.08 }}
+              className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-0 text-xs sm:text-sm"
+              style={{ color: "#78857A" }}
             >
-              <User size={16} style={{ color: "#D6E9E0" }} />
-            </div>
-            <div>
-              <p className="text-sm font-medium" style={{ color: "#ffffff" }}>
-                {blog.author}
-              </p>
-              <p className="text-xs" style={{ color: "#78857A" }}>
-                Advait Green Recycling
-              </p>
-            </div>
+              <span>
+                By{" "}
+                <span style={{ color: "#08201A", fontWeight: 500 }}>
+                  {blog.author}
+                </span>
+              </span>
+              <span className="hidden sm:inline mx-1.5">|</span>
+              <span>{formatDate(blog.publishedAt)}</span>
+              <span className="hidden sm:inline mx-1.5">|</span>
+              <span className="sm:ml-0">{readTime} min read</span>
+            </motion.div>
+
+            {/* Featured Image */}
+            {blog.thumbnail && (
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.12 }}
+                className="w-full rounded-lg sm:rounded-xl overflow-hidden"
+                style={{ maxHeight: "500px" }}
+              >
+                <Image
+                  src={blog.thumbnail}
+                  alt={blog.title}
+                  width={900}
+                  height={500}
+                  className="w-full h-auto object-cover"
+                />
+              </motion.div>
+            )}
           </div>
         </div>
       </section>
 
-      {/* ── FEATURED IMAGE ── */}
-      {blog.thumbnail && (
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 -mt-1">
-          <div
-            className="relative h-[300px] sm:h-[400px] lg:h-[480px] rounded-2xl overflow-hidden"
-            style={{ backgroundColor: "#E4EBE6" }}
-          >
-            <Image
-              src={blog.thumbnail}
-              alt={blog.title}
-              fill
-              className="object-cover"
-            />
-          </div>
-        </div>
-      )}
+      {/* ── TOC + CONTENT ── */}
+      <section style={{ backgroundColor: "#F4F6F3" }}>
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 pb-12 lg:pb-16">
+          <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
+            {/* TOC Sidebar — LEFT on desktop, TOP on mobile */}
+            {headings.length > 0 && (
+              <aside className="w-full lg:w-[30%] shrink-0">
+                <div
+                  className="rounded-xl p-4 sm:p-0 lg:sticky lg:top-[120px]"
+                  style={{ backgroundColor: "rgba(228,235,230,0.5)" }}
+                >
+                  <div className="lg:bg-transparent lg:p-0">
+                    <h4
+                      className="font-heading text-lg sm:text-xl lg:text-2xl font-semibold mb-3 sm:mb-4"
+                      style={{ color: "#184E3E" }}
+                    >
+                      Table of Contents
+                    </h4>
+                    <nav className="max-h-[200px] sm:max-h-none lg:max-h-[50vh] overflow-y-auto lg:overflow-y-auto space-y-2.5 sm:space-y-3 pr-2">
+                      {headings.map((h) => (
+                        <a
+                          key={h.id}
+                          href={`#${h.id}`}
+                          className="flex items-start gap-2 text-[13px] sm:text-sm font-semibold leading-relaxed transition-colors group"
+                          style={{ color: "#47524B" }}
+                          onMouseEnter={(e) =>
+                            (e.currentTarget.style.color = "#184E3E")
+                          }
+                          onMouseLeave={(e) =>
+                            (e.currentTarget.style.color = "#47524B")
+                          }
+                        >
+                          <svg
+                            width="8"
+                            height="16"
+                            viewBox="0 0 8 16"
+                            fill="none"
+                            className="shrink-0 mt-0.5"
+                          >
+                            <path
+                              d="M1 1L7 8L1 15"
+                              stroke="#184E3E"
+                              strokeWidth="2"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            />
+                          </svg>
+                          <span className="line-clamp-2">{h.text}</span>
+                        </a>
+                      ))}
+                    </nav>
+                  </div>
+                </div>
+              </aside>
+            )}
 
-      {/* ── CONTENT + SIDEBAR ── */}
-      <section
-        className="py-12 lg:py-16"
-        style={{ backgroundColor: "#F4F6F3" }}
-      >
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
-          <div className="grid lg:grid-cols-[1fr_300px] gap-10 lg:gap-14">
-            {/* Main Content */}
+            {/* Main Content — RIGHT on desktop */}
             <motion.article
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="min-w-0"
+              className="min-w-0 flex-1"
             >
               <div
                 className="blog-content prose-custom"
                 dangerouslySetInnerHTML={{ __html: processedContent }}
               />
+
+              {/* FAQ Section */}
+              {faqItems.length > 0 && (
+                <div className="mt-10 sm:mt-14">
+                  <h2
+                    className="font-heading text-xl sm:text-2xl font-bold mb-4"
+                    style={{ color: "#184E3E" }}
+                  >
+                    FAQs
+                  </h2>
+                  <FaqAccordion items={faqItems} />
+                </div>
+              )}
 
               {/* Tags */}
               {blog.tags && blog.tags.length > 0 && (
@@ -289,248 +376,78 @@ export default function BlogPostPage() {
               )}
 
               {/* Back link */}
-              <div className="mt-8">
+              <div className="mt-10 text-center">
                 <Link
                   href="/insights"
-                  className="inline-flex items-center gap-2 text-sm font-semibold transition-colors"
-                  style={{ color: "#995427" }}
+                  className="inline-flex items-center gap-2 text-sm font-semibold underline transition-colors"
+                  style={{ color: "#184E3E" }}
                 >
-                  <ArrowLeft size={15} /> Back to All Articles
+                  <ArrowLeft size={15} /> Back to All Blogs
                 </Link>
               </div>
             </motion.article>
-
-            {/* Sidebar */}
-            <aside className="space-y-6 lg:sticky lg:top-[120px] lg:self-start">
-              {/* Table of Contents */}
-              {headings.length > 0 && (
-                <div
-                  className="rounded-xl p-6"
-                  style={{ backgroundColor: "#ffffff" }}
-                >
-                  <h4
-                    className="font-mono text-[11px] uppercase tracking-[0.09em] font-medium mb-4"
-                    style={{ color: "#184E3E" }}
-                  >
-                    In This Article
-                  </h4>
-                  <nav className="space-y-2">
-                    {headings.map((h) => (
-                      <a
-                        key={h.id}
-                        href={`#${h.id}`}
-                        className="block text-sm leading-relaxed transition-colors hover:translate-x-0.5"
-                        style={{ color: "#5C6961" }}
-                        onMouseEnter={(e) =>
-                          (e.currentTarget.style.color = "#184E3E")
-                        }
-                        onMouseLeave={(e) =>
-                          (e.currentTarget.style.color = "#5C6961")
-                        }
-                      >
-                        {h.text}
-                      </a>
-                    ))}
-                  </nav>
-                </div>
-              )}
-
-              {/* CTA Widget */}
-              <div
-                className="rounded-xl p-6"
-                style={{ backgroundColor: "#184E3E" }}
-              >
-                <h4
-                  className="font-heading text-base font-semibold mb-2"
-                  style={{ color: "#ffffff" }}
-                >
-                  Need a Recycling Partner?
-                </h4>
-                <p
-                  className="text-xs leading-relaxed mb-5"
-                  style={{ color: "#ADD2C2" }}
-                >
-                  Get a free waste assessment and collection plan within one
-                  working day.
-                </p>
-                <Link
-                  href="/schedule-pickup"
-                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded text-sm font-semibold transition-colors w-full justify-center"
-                  style={{ backgroundColor: "#995427", color: "#fff" }}
-                >
-                  Schedule Pickup <ArrowRight size={14} />
-                </Link>
-              </div>
-
-              {/* Newsletter */}
-              <div
-                className="rounded-xl p-6"
-                style={{
-                  backgroundColor: "#ffffff",
-                  border: "1px solid #D6E9E0",
-                }}
-              >
-                <h4
-                  className="font-heading text-sm font-semibold mb-1"
-                  style={{ color: "#08201A" }}
-                >
-                  Subscribe
-                </h4>
-                <p
-                  className="text-xs mb-4 leading-relaxed"
-                  style={{ color: "#9AA69D" }}
-                >
-                  Monthly regulatory updates and recycling insights. No sales
-                  mail.
-                </p>
-                <input
-                  type="email"
-                  placeholder="Your email"
-                  className="w-full px-3 py-2.5 rounded text-sm mb-3 border-none outline-none"
-                  style={{
-                    backgroundColor: "#F4F6F3",
-                    color: "#232925",
-                  }}
-                />
-                <button
-                  className="w-full py-2.5 rounded text-sm font-semibold cursor-pointer"
-                  style={{
-                    backgroundColor: "#08201A",
-                    color: "#ffffff",
-                  }}
-                >
-                  Subscribe
-                </button>
-              </div>
-            </aside>
           </div>
         </div>
       </section>
 
-      {/* ── RELATED ARTICLES ── */}
-      {relatedBlogs.length > 0 && (
-        <section className="py-12 lg:py-16" style={{ backgroundColor: "#ffffff" }}>
-          <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
-            <h2
-              className="font-heading text-xl sm:text-2xl font-semibold tracking-tight mb-8"
-              style={{ color: "#08201A" }}
-            >
-              More Articles
-            </h2>
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-              {relatedBlogs.map((rb) => (
-                <Link key={rb.id} href={`/insights/${rb.slug}`}>
-                  <article
-                    className="rounded-xl overflow-hidden h-full flex flex-col transition-all duration-300 group"
-                    style={{
-                      backgroundColor: "#F4F6F3",
-                      boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
-                    }}
-                    onMouseEnter={(e) =>
-                      (e.currentTarget.style.boxShadow =
-                        "0 8px 24px rgba(0,0,0,0.08)")
-                    }
-                    onMouseLeave={(e) =>
-                      (e.currentTarget.style.boxShadow =
-                        "0 1px 3px rgba(0,0,0,0.04)")
-                    }
-                  >
-                    <div
-                      className="relative h-[180px] overflow-hidden"
-                      style={{ backgroundColor: "#E4EBE6" }}
-                    >
-                      {rb.thumbnail ? (
-                        <Image
-                          src={rb.thumbnail}
-                          alt={rb.title}
-                          fill
-                          className="object-cover transition-transform duration-500 group-hover:scale-105"
-                        />
-                      ) : (
-                        <div className="absolute inset-0 flex items-center justify-center">
-                          <div
-                            className="w-12 h-12 rounded-full flex items-center justify-center"
-                            style={{ backgroundColor: "#D6E9E0" }}
-                          >
-                            <Tag size={20} style={{ color: "#184E3E" }} />
-                          </div>
-                        </div>
-                      )}
-                      <div className="absolute top-3 left-3">
-                        <span
-                          className="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider"
-                          style={{
-                            backgroundColor: "#184E3E",
-                            color: "#ffffff",
-                          }}
-                        >
-                          {rb.category}
-                        </span>
-                      </div>
-                    </div>
-                    <div className="p-5 flex-1 flex flex-col">
-                      <div
-                        className="flex items-center gap-2 text-xs mb-2"
-                        style={{ color: "#9AA69D" }}
-                      >
-                        <Calendar size={11} />
-                        {formatDate(rb.publishedAt)}
-                      </div>
-                      <h3
-                        className="font-heading text-sm font-semibold leading-snug mb-2 line-clamp-2"
-                        style={{ color: "#08201A" }}
-                      >
-                        {rb.title}
-                      </h3>
-                      <span
-                        className="inline-flex items-center gap-1 text-xs font-semibold mt-auto"
-                        style={{ color: "#995427" }}
-                      >
-                        Read More <ArrowRight size={12} />
-                      </span>
-                    </div>
-                  </article>
+      {/* ── CTA BANNER ── */}
+      <section style={{ backgroundColor: "#F4F6F3" }}>
+        <div className="max-w-[800px] mx-auto px-4 sm:px-6 pb-10 sm:pb-12 lg:pb-16">
+          <div
+            className="relative rounded-xl sm:rounded-2xl overflow-hidden px-5 py-7 sm:px-10 sm:py-12 text-center"
+            style={{
+              background: "linear-gradient(135deg, #0A2E23 0%, #184E3E 100%)",
+            }}
+          >
+            <div
+              className="absolute top-0 right-0 w-[150px] h-[150px] sm:w-[200px] sm:h-[200px] rounded-full"
+              style={{
+                backgroundColor: "rgba(255,255,255,0.04)",
+                transform: "translate(50%, -50%)",
+              }}
+            />
+
+            <div className="relative flex flex-col items-center gap-3 sm:gap-4">
+              <h3
+                className="font-heading text-lg sm:text-xl md:text-2xl font-bold"
+                style={{ color: "#ffffff", lineHeight: 1.3 }}
+              >
+                Have Equipment to Decommission?
+              </h3>
+              <p
+                className="text-xs sm:text-sm md:text-base max-w-[520px] leading-relaxed"
+                style={{ color: "rgba(255,255,255,0.85)" }}
+              >
+                Tell us what you have and where it is. We&apos;ll come back within one
+                working day with a collection plan.
+              </p>
+              <div className="flex flex-col sm:flex-row gap-2.5 sm:gap-3 mt-1 sm:mt-2 w-full sm:w-auto">
+                <Link
+                  href="/schedule-pickup"
+                  className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg text-xs sm:text-sm font-semibold transition-colors"
+                  style={{ backgroundColor: "#995427", color: "#fff" }}
+                >
+                  Schedule a Free Pickup <ArrowRight size={14} />
                 </Link>
-              ))}
+                <Link
+                  href="/contact"
+                  className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg text-xs sm:text-sm font-semibold transition-colors"
+                  style={{
+                    color: "#fff",
+                    border: "1px solid rgba(255,255,255,0.25)",
+                  }}
+                >
+                  Contact Sales
+                </Link>
+              </div>
+              <p
+                className="text-[10px] sm:text-xs mt-1 sm:mt-2"
+                style={{ color: "rgba(255,255,255,0.5)" }}
+              >
+                CPCB Authorized | ISO 14001 Certified | Pan-India Collection
+              </p>
             </div>
           </div>
-        </section>
-      )}
-
-      {/* ── CTA ── */}
-      <section
-        className="py-14 lg:py-20 relative overflow-hidden"
-        style={{ backgroundColor: "#08201A" }}
-      >
-        <div
-          className="absolute inset-0 opacity-[0.04]"
-          style={{
-            backgroundImage:
-              "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)",
-            backgroundSize: "56px 56px",
-          }}
-        />
-        <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6 text-center">
-          <h2
-            className="font-heading text-2xl sm:text-3xl font-semibold tracking-tight mb-4 max-w-[600px] mx-auto"
-            style={{ color: "#ffffff" }}
-          >
-            Have Equipment to Decommission?
-          </h2>
-          <p
-            className="text-sm sm:text-base max-w-[480px] mx-auto mb-8 leading-relaxed"
-            style={{ color: "#9AA69D" }}
-          >
-            Tell us what you have and where it is. We'll come back within one
-            working day with a collection plan.
-          </p>
-          <Link
-            href="/schedule-pickup"
-            className="inline-flex items-center gap-2 px-6 py-3 rounded text-sm font-semibold transition-colors"
-            style={{ backgroundColor: "#995427", color: "#fff" }}
-          >
-            Schedule a Free Pickup <ArrowRight size={15} />
-          </Link>
         </div>
       </section>
     </>

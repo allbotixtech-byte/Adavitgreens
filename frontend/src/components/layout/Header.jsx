@@ -38,7 +38,8 @@ export default function Header() {
     dropdownTimeout.current = setTimeout(() => setActiveDropdown(null), 150);
   };
 
-  const isTransparent = !scrolled && !mobileOpen;
+  const hasFullHero = pathname === "/" || pathname === "/about" || pathname === "/contact" || pathname === "/insights";
+  const isTransparent = hasFullHero && !scrolled && !mobileOpen;
 
   // Colors based on state
   const navColor = isTransparent ? "#ffffff" : "#1a1a1a";
