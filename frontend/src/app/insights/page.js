@@ -76,7 +76,7 @@ export default function InsightsPage() {
             <nav className="flex items-center gap-2 text-xs mb-6 sm:mb-8">
               <Link href="/" className="text-white/60 hover:text-white transition-colors">Home</Link>
               <ChevronRight size={12} className="text-white/30" />
-              <span style={{ color: "#CC7C4A" }}>Blog</span>
+              <span style={{ color: "var(--color-accent-400)" }}>Blog</span>
             </nav>
             <motion.p
               initial={{ opacity: 0, x: -12 }}
@@ -129,7 +129,7 @@ export default function InsightsPage() {
       </section>
 
       {/* ── FILTERS ── */}
-      <section style={{ backgroundColor: "#F4F6F3" }}>
+      <section style={{ backgroundColor: "var(--color-secondary-50)" }}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-6">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
             {/* Category pills */}
@@ -141,8 +141,8 @@ export default function InsightsPage() {
                   className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-semibold transition-all duration-200 cursor-pointer"
                   style={{
                     backgroundColor:
-                      activeCategory === cat ? "#184E3E" : "#E4EBE6",
-                    color: activeCategory === cat ? "#ffffff" : "#47524B",
+                      activeCategory === cat ? "var(--color-primary-700)" : "#E4EBE6",
+                    color: activeCategory === cat ? "#ffffff" : "var(--color-secondary-700)",
                   }}
                 >
                   {cat}
@@ -154,7 +154,7 @@ export default function InsightsPage() {
               <Search
                 size={16}
                 className="absolute left-3 top-1/2 -translate-y-1/2"
-                style={{ color: "#9AA69D" }}
+                style={{ color: "var(--color-secondary-400)" }}
               />
               <input
                 type="text"
@@ -164,7 +164,7 @@ export default function InsightsPage() {
                 className="w-full pl-10 pr-4 py-2.5 rounded-lg text-sm border-none outline-none"
                 style={{
                   backgroundColor: "#E4EBE6",
-                  color: "#232925",
+                  color: "var(--color-secondary-900)",
                 }}
               />
             </div>
@@ -173,18 +173,18 @@ export default function InsightsPage() {
       </section>
 
       {/* ── BLOG GRID ── */}
-      <section className="py-12 lg:py-16" style={{ backgroundColor: "#F4F6F3" }}>
+      <section className="py-12 lg:py-16" style={{ backgroundColor: "var(--color-secondary-50)" }}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
           {loading ? (
             <div className="text-center py-20">
               <div
                 className="w-8 h-8 border-2 rounded-full animate-spin mx-auto"
                 style={{
-                  borderColor: "#D6E9E0",
-                  borderTopColor: "#184E3E",
+                  borderColor: "var(--color-primary-100)",
+                  borderTopColor: "var(--color-primary-700)",
                 }}
               />
-              <p className="mt-4 text-sm" style={{ color: "#9AA69D" }}>
+              <p className="mt-4 text-sm" style={{ color: "var(--color-secondary-400)" }}>
                 Loading articles...
               </p>
             </div>
@@ -192,11 +192,11 @@ export default function InsightsPage() {
             <div className="text-center py-20">
               <p
                 className="font-heading text-xl font-semibold mb-2"
-                style={{ color: "#08201A" }}
+                style={{ color: "var(--color-primary-950)" }}
               >
                 No articles found
               </p>
-              <p className="text-sm" style={{ color: "#9AA69D" }}>
+              <p className="text-sm" style={{ color: "var(--color-secondary-400)" }}>
                 {searchQuery
                   ? "Try a different search term."
                   : "Check back later for new content."}
@@ -231,7 +231,7 @@ export default function InsightsPage() {
                         <div
                           className="relative overflow-hidden h-[220px] sm:h-[280px] lg:h-[340px]"
                           style={{
-                            background: "linear-gradient(135deg, #184E3E 0%, #2A7A5E 50%, #184E3E 100%)",
+                            background: "linear-gradient(135deg, var(--color-primary-700) 0%, var(--color-primary-400) 50%, var(--color-primary-700) 100%)",
                           }}
                         >
                           {blog.thumbnail ? (
@@ -242,7 +242,7 @@ export default function InsightsPage() {
                               className="object-cover transition-transform duration-500 group-hover:scale-105"
                             />
                           ) : (
-                            <div className="absolute inset-0 bg-gradient-to-r from-[#0A2E23] via-[#184E3E] to-[#2A7A5E] flex items-center justify-center">
+                            <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-primary-900)] via-[var(--color-primary-700)] to-[var(--color-primary-400)] flex items-center justify-center">
                               <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{ backgroundColor: "rgba(255,255,255,0.1)" }}>
                                 <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
                                   <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
@@ -258,7 +258,7 @@ export default function InsightsPage() {
                           {/* Title (repeated) */}
                           <h4
                             className="font-heading text-base sm:text-lg font-bold leading-snug line-clamp-2 mb-2"
-                            style={{ color: "#08201A" }}
+                            style={{ color: "var(--color-primary-950)" }}
                           >
                             {blog.title}
                           </h4>
@@ -266,32 +266,32 @@ export default function InsightsPage() {
                           {/* Accent divider */}
                           <div
                             className="w-8 h-[3px] rounded-full mb-3"
-                            style={{ backgroundColor: "#184E3E" }}
+                            style={{ backgroundColor: "var(--color-primary-700)" }}
                           />
 
                           {/* Excerpt */}
                           <p
                             className="text-sm leading-relaxed line-clamp-3 mb-4 flex-1"
-                            style={{ color: "#5C6961" }}
+                            style={{ color: "var(--color-secondary-600)" }}
                           >
                             {blog.excerpt}
                           </p>
 
                           {/* Bottom: Date + Author | Learn More */}
                           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 pt-3" style={{ borderTop: "1px solid #EDF1EE" }}>
-                            <div className="flex items-center gap-3 sm:gap-4 text-[11px] sm:text-xs" style={{ color: "#9AA69D" }}>
+                            <div className="flex items-center gap-3 sm:gap-4 text-[11px] sm:text-xs" style={{ color: "var(--color-secondary-400)" }}>
                               <span className="flex items-center gap-1.5">
-                                <Clock size={12} className="shrink-0" style={{ color: "#184E3E" }} />
+                                <Clock size={12} className="shrink-0" style={{ color: "var(--color-primary-700)" }} />
                                 {formatDate(blog.publishedAt)}
                               </span>
                               <span className="flex items-center gap-1.5">
-                                <User size={12} className="shrink-0" style={{ color: "#184E3E" }} />
+                                <User size={12} className="shrink-0" style={{ color: "var(--color-primary-700)" }} />
                                 <span className="truncate max-w-[120px] sm:max-w-none">{blog.author}</span>
                               </span>
                             </div>
                             <span
                               className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold italic"
-                              style={{ color: "#08201A" }}
+                              style={{ color: "var(--color-primary-950)" }}
                             >
                               Learn More
                               <ArrowRight
@@ -313,7 +313,7 @@ export default function InsightsPage() {
       {/* ── NEWSLETTER CTA ── */}
       <section
         className="py-14 lg:py-20 relative overflow-hidden"
-        style={{ backgroundColor: "#08201A" }}
+        style={{ backgroundColor: "var(--color-primary-950)" }}
       >
         <div
           className="absolute inset-0 opacity-[0.04]"
@@ -328,7 +328,7 @@ export default function InsightsPage() {
             className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-5"
             style={{ backgroundColor: "rgba(255,255,255,0.08)" }}
           >
-            <Mail size={24} style={{ color: "#CC7C4A" }} />
+            <Mail size={24} style={{ color: "var(--color-accent-400)" }} />
           </div>
           <h2
             className="font-heading text-2xl sm:text-3xl font-semibold tracking-tight mb-3"
@@ -338,7 +338,7 @@ export default function InsightsPage() {
           </h2>
           <p
             className="text-sm sm:text-base max-w-[480px] mx-auto mb-8 leading-relaxed"
-            style={{ color: "#9AA69D" }}
+            style={{ color: "var(--color-secondary-400)" }}
           >
             Monthly regulatory updates and recycling insights. No sales mail.
           </p>
@@ -355,7 +355,7 @@ export default function InsightsPage() {
             />
             <button
               className="w-full sm:w-auto px-6 py-3 rounded text-sm font-semibold transition-colors cursor-pointer"
-              style={{ backgroundColor: "#995427", color: "#fff" }}
+              style={{ backgroundColor: "var(--color-accent-600)", color: "#fff" }}
             >
               Subscribe
             </button>

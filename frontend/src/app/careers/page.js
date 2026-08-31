@@ -161,7 +161,7 @@ export default function CareersPage() {
                 Home
               </Link>
               <ChevronRight size={12} className="text-white/30" />
-              <span style={{ color: "#CC7C4A" }}>Careers</span>
+              <span style={{ color: "var(--color-accent-400)" }}>Careers</span>
             </nav>
             <motion.p
               initial={{ opacity: 0, x: -12 }}
@@ -224,7 +224,7 @@ export default function CareersPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.4 }}
               className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.09em] mb-2"
-              style={{ color: "#CC7C4A" }}
+              style={{ color: "var(--color-accent-400)" }}
             >
               Why Advait Green
             </motion.p>
@@ -234,7 +234,7 @@ export default function CareersPage() {
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: 0.05 }}
               className="font-heading text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight"
-              style={{ color: "#08201A" }}
+              style={{ color: "var(--color-primary-950)" }}
             >
               More Than a Job. A Mission.
             </motion.h2>
@@ -254,12 +254,12 @@ export default function CareersPage() {
                 }}
                 whileHover={{
                   y: -6,
-                  boxShadow: "0 12px 32px rgba(24,78,62,0.12)",
+                  boxShadow: "0 12px 32px rgba(10,77,96,0.12)",
                   transition: { duration: 0.25 },
                 }}
                 className="rounded-xl p-5 sm:p-6 cursor-default"
                 style={{
-                  backgroundColor: "#F4F6F3",
+                  backgroundColor: "var(--color-secondary-50)",
                   boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
                 }}
               >
@@ -274,19 +274,19 @@ export default function CareersPage() {
                     delay: i * 0.1 + 0.2,
                   }}
                   className="w-12 h-12 rounded-xl flex items-center justify-center mb-4"
-                  style={{ backgroundColor: "#184E3E" }}
+                  style={{ backgroundColor: "var(--color-primary-700)" }}
                 >
-                  <perk.icon size={22} style={{ color: "#D6E9E0" }} />
+                  <perk.icon size={22} style={{ color: "var(--color-primary-100)" }} />
                 </motion.div>
                 <h3
                   className="font-heading text-base sm:text-lg font-semibold mb-2"
-                  style={{ color: "#08201A" }}
+                  style={{ color: "var(--color-primary-950)" }}
                 >
                   {perk.title}
                 </h3>
                 <p
                   className="text-sm leading-relaxed"
-                  style={{ color: "#5C6961" }}
+                  style={{ color: "var(--color-secondary-600)" }}
                 >
                   {perk.desc}
                 </p>
@@ -300,19 +300,19 @@ export default function CareersPage() {
       <section
         id="openings"
         className="py-12 sm:py-16 lg:py-20"
-        style={{ backgroundColor: "#F4F6F3", scrollMarginTop: "100px" }}
+        style={{ backgroundColor: "var(--color-secondary-50)", scrollMarginTop: "100px" }}
       >
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
           <div className="text-center mb-8 sm:mb-10">
             <p
               className="font-mono text-[10px] sm:text-xs uppercase tracking-[0.09em] mb-2"
-              style={{ color: "#CC7C4A" }}
+              style={{ color: "var(--color-accent-400)" }}
             >
               Open Positions
             </p>
             <h2
               className="font-heading text-xl sm:text-2xl lg:text-3xl font-bold tracking-tight"
-              style={{ color: "#08201A" }}
+              style={{ color: "var(--color-primary-950)" }}
             >
               Current Openings
             </h2>
@@ -327,8 +327,8 @@ export default function CareersPage() {
                   onClick={() => setActiveDept(dept)}
                   className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-semibold transition-all duration-200 cursor-pointer"
                   style={{
-                    backgroundColor: activeDept === dept ? "#184E3E" : "#E4EBE6",
-                    color: activeDept === dept ? "#ffffff" : "#47524B",
+                    backgroundColor: activeDept === dept ? "var(--color-primary-700)" : "#E4EBE6",
+                    color: activeDept === dept ? "#ffffff" : "var(--color-secondary-700)",
                   }}
                 >
                   {dept}
@@ -339,7 +339,7 @@ export default function CareersPage() {
               <Search
                 size={15}
                 className="absolute left-3 top-1/2 -translate-y-1/2"
-                style={{ color: "#9AA69D" }}
+                style={{ color: "var(--color-secondary-400)" }}
               />
               <input
                 type="text"
@@ -347,7 +347,7 @@ export default function CareersPage() {
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-9 pr-4 py-2.5 rounded-lg text-sm border-none outline-none"
-                style={{ backgroundColor: "#E4EBE6", color: "#232925" }}
+                style={{ backgroundColor: "#E4EBE6", color: "var(--color-secondary-900)" }}
               />
             </div>
           </div>
@@ -357,22 +357,22 @@ export default function CareersPage() {
             <div className="text-center py-16">
               <div
                 className="w-8 h-8 border-2 rounded-full animate-spin mx-auto"
-                style={{ borderColor: "#D6E9E0", borderTopColor: "#184E3E" }}
+                style={{ borderColor: "var(--color-primary-100)", borderTopColor: "var(--color-primary-700)" }}
               />
-              <p className="mt-4 text-sm" style={{ color: "#9AA69D" }}>
+              <p className="mt-4 text-sm" style={{ color: "var(--color-secondary-400)" }}>
                 Loading openings...
               </p>
             </div>
           ) : filtered.length === 0 ? (
             <div className="text-center py-16">
-              <Briefcase size={40} className="mx-auto mb-4" style={{ color: "#D6E9E0" }} />
+              <Briefcase size={40} className="mx-auto mb-4" style={{ color: "var(--color-primary-100)" }} />
               <p
                 className="font-heading text-lg font-semibold mb-2"
-                style={{ color: "#08201A" }}
+                style={{ color: "var(--color-primary-950)" }}
               >
                 No openings found
               </p>
-              <p className="text-sm mb-6" style={{ color: "#9AA69D" }}>
+              <p className="text-sm mb-6" style={{ color: "var(--color-secondary-400)" }}>
                 {searchQuery
                   ? "Try a different search term."
                   : "We don't have openings in this department right now. Check back soon!"}
@@ -380,7 +380,7 @@ export default function CareersPage() {
               <a
                 href="mailto:careers@advaitgreen.com"
                 className="inline-flex items-center gap-2 text-sm font-semibold"
-                style={{ color: "#184E3E" }}
+                style={{ color: "var(--color-primary-700)" }}
               >
                 Send a Speculative Application <ArrowRight size={14} />
               </a>
@@ -411,23 +411,23 @@ export default function CareersPage() {
                       <div className="flex-1 min-w-0">
                         <h3
                           className="font-heading text-base sm:text-lg font-semibold mb-1.5"
-                          style={{ color: "#08201A" }}
+                          style={{ color: "var(--color-primary-950)" }}
                         >
                           {job.title}
                         </h3>
-                        <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11px] sm:text-xs" style={{ color: "#78857A" }}>
+                        <div className="flex flex-wrap items-center gap-x-4 gap-y-1.5 text-[11px] sm:text-xs" style={{ color: "var(--color-secondary-500)" }}>
                           {job.department && (
                             <span className="flex items-center gap-1">
-                              <Briefcase size={12} style={{ color: "#184E3E" }} />
+                              <Briefcase size={12} style={{ color: "var(--color-primary-700)" }} />
                               {job.department}
                             </span>
                           )}
                           <span className="flex items-center gap-1">
-                            <MapPin size={12} style={{ color: "#184E3E" }} />
+                            <MapPin size={12} style={{ color: "var(--color-primary-700)" }} />
                             {job.location}
                           </span>
                           <span className="flex items-center gap-1">
-                            <Clock size={12} style={{ color: "#184E3E" }} />
+                            <Clock size={12} style={{ color: "var(--color-primary-700)" }} />
                             {job.type}
                           </span>
                         </div>
@@ -435,7 +435,7 @@ export default function CareersPage() {
                       <div className="flex items-center gap-3 shrink-0">
                         <span
                           className="hidden sm:inline-flex items-center gap-1 text-xs font-medium px-3 py-1 rounded-full"
-                          style={{ backgroundColor: "#EDF5F1", color: "#184E3E" }}
+                          style={{ backgroundColor: "var(--color-primary-50)", color: "var(--color-primary-700)" }}
                         >
                           Posted {formatDate(job.createdAt)}
                         </span>
@@ -443,7 +443,7 @@ export default function CareersPage() {
                           size={18}
                           className="transition-transform duration-200"
                           style={{
-                            color: "#184E3E",
+                            color: "var(--color-primary-700)",
                             transform: selectedJob === job.id ? "rotate(180deg)" : "rotate(0)",
                           }}
                         />
@@ -465,7 +465,7 @@ export default function CareersPage() {
                         <div className="pt-4 sm:pt-5">
                           <p
                             className="text-sm leading-relaxed mb-5"
-                            style={{ color: "#5C6961" }}
+                            style={{ color: "var(--color-secondary-600)" }}
                           >
                             {job.description}
                           </p>
@@ -474,7 +474,7 @@ export default function CareersPage() {
                             <>
                               <h4
                                 className="text-sm font-semibold mb-2.5"
-                                style={{ color: "#08201A" }}
+                                style={{ color: "var(--color-primary-950)" }}
                               >
                                 Requirements
                               </h4>
@@ -483,12 +483,12 @@ export default function CareersPage() {
                                   <li
                                     key={ri}
                                     className="flex items-start gap-2 text-sm"
-                                    style={{ color: "#5C6961" }}
+                                    style={{ color: "var(--color-secondary-600)" }}
                                   >
                                     <CheckCircle
                                       size={14}
                                       className="shrink-0 mt-0.5"
-                                      style={{ color: "#184E3E" }}
+                                      style={{ color: "var(--color-primary-700)" }}
                                     />
                                     {req}
                                   </li>
@@ -500,7 +500,7 @@ export default function CareersPage() {
                           <button
                             onClick={() => openApply(job)}
                             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors cursor-pointer"
-                            style={{ backgroundColor: "#995427", color: "#fff" }}
+                            style={{ backgroundColor: "var(--color-accent-600)", color: "#fff" }}
                           >
                             Apply Now <ArrowRight size={14} />
                           </button>
@@ -516,12 +516,12 @@ export default function CareersPage() {
       </section>
 
       {/* ── SPECULATIVE APPLICATION CTA ── */}
-      <section style={{ backgroundColor: "#F4F6F3" }}>
+      <section style={{ backgroundColor: "var(--color-secondary-50)" }}>
         <div className="max-w-[800px] mx-auto px-4 sm:px-6 pb-12 lg:pb-16">
           <div
             className="relative rounded-xl sm:rounded-2xl overflow-hidden px-5 py-7 sm:px-10 sm:py-12 text-center"
             style={{
-              background: "linear-gradient(135deg, #0A2E23 0%, #184E3E 100%)",
+              background: "linear-gradient(135deg, var(--color-primary-900) 0%, var(--color-primary-700) 100%)",
             }}
           >
             <div
@@ -549,7 +549,7 @@ export default function CareersPage() {
               <a
                 href="mailto:careers@advaitgreen.com"
                 className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg text-xs sm:text-sm font-semibold transition-colors mt-1"
-                style={{ backgroundColor: "#995427", color: "#fff" }}
+                style={{ backgroundColor: "var(--color-accent-600)", color: "#fff" }}
               >
                 Email Your CV <ArrowRight size={14} />
               </a>
@@ -577,17 +577,17 @@ export default function CareersPage() {
               <div className="text-center py-8">
                 <div
                   className="w-14 h-14 rounded-full flex items-center justify-center mx-auto mb-4"
-                  style={{ backgroundColor: "#EDF5F1" }}
+                  style={{ backgroundColor: "var(--color-primary-50)" }}
                 >
-                  <CheckCircle size={28} style={{ color: "#184E3E" }} />
+                  <CheckCircle size={28} style={{ color: "var(--color-primary-700)" }} />
                 </div>
                 <h3
                   className="font-heading text-xl font-bold mb-2"
-                  style={{ color: "#08201A" }}
+                  style={{ color: "var(--color-primary-950)" }}
                 >
                   Application Submitted!
                 </h3>
-                <p className="text-sm mb-6" style={{ color: "#5C6961" }}>
+                <p className="text-sm mb-6" style={{ color: "var(--color-secondary-600)" }}>
                   Thank you for applying for{" "}
                   <strong>{applyJob.title}</strong>. We&apos;ll review your
                   application and get back to you soon.
@@ -595,7 +595,7 @@ export default function CareersPage() {
                 <button
                   onClick={closeApply}
                   className="px-6 py-2.5 rounded-lg text-sm font-semibold cursor-pointer"
-                  style={{ backgroundColor: "#184E3E", color: "#fff" }}
+                  style={{ backgroundColor: "var(--color-primary-700)", color: "#fff" }}
                 >
                   Close
                 </button>
@@ -607,18 +607,18 @@ export default function CareersPage() {
                   <div>
                     <h3
                       className="font-heading text-lg sm:text-xl font-bold"
-                      style={{ color: "#08201A" }}
+                      style={{ color: "var(--color-primary-950)" }}
                     >
                       Apply for {applyJob.title}
                     </h3>
-                    <p className="text-xs mt-1" style={{ color: "#78857A" }}>
+                    <p className="text-xs mt-1" style={{ color: "var(--color-secondary-500)" }}>
                       {applyJob.department} &middot; {applyJob.location}
                     </p>
                   </div>
                   <button
                     onClick={closeApply}
                     className="p-1 rounded-lg cursor-pointer"
-                    style={{ color: "#9AA69D" }}
+                    style={{ color: "var(--color-secondary-400)" }}
                   >
                     <X size={20} />
                   </button>
@@ -628,7 +628,7 @@ export default function CareersPage() {
                 <form onSubmit={handleApply} className="space-y-4">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-medium mb-1.5" style={{ color: "#47524B" }}>
+                      <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--color-secondary-700)" }}>
                         Full Name *
                       </label>
                       <input
@@ -637,11 +637,11 @@ export default function CareersPage() {
                         value={formState.name}
                         onChange={(e) => setFormState({ ...formState, name: e.target.value })}
                         className="w-full px-3 py-2.5 rounded-lg text-sm border-none outline-none"
-                        style={{ backgroundColor: "#F4F6F3", color: "#232925" }}
+                        style={{ backgroundColor: "var(--color-secondary-50)", color: "var(--color-secondary-900)" }}
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-medium mb-1.5" style={{ color: "#47524B" }}>
+                      <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--color-secondary-700)" }}>
                         Email *
                       </label>
                       <input
@@ -650,14 +650,14 @@ export default function CareersPage() {
                         value={formState.email}
                         onChange={(e) => setFormState({ ...formState, email: e.target.value })}
                         className="w-full px-3 py-2.5 rounded-lg text-sm border-none outline-none"
-                        style={{ backgroundColor: "#F4F6F3", color: "#232925" }}
+                        style={{ backgroundColor: "var(--color-secondary-50)", color: "var(--color-secondary-900)" }}
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     <div>
-                      <label className="block text-xs font-medium mb-1.5" style={{ color: "#47524B" }}>
+                      <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--color-secondary-700)" }}>
                         Phone *
                       </label>
                       <input
@@ -666,11 +666,11 @@ export default function CareersPage() {
                         value={formState.phone}
                         onChange={(e) => setFormState({ ...formState, phone: e.target.value })}
                         className="w-full px-3 py-2.5 rounded-lg text-sm border-none outline-none"
-                        style={{ backgroundColor: "#F4F6F3", color: "#232925" }}
+                        style={{ backgroundColor: "var(--color-secondary-50)", color: "var(--color-secondary-900)" }}
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-medium mb-1.5" style={{ color: "#47524B" }}>
+                      <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--color-secondary-700)" }}>
                         Years of Experience
                       </label>
                       <input
@@ -679,21 +679,21 @@ export default function CareersPage() {
                         onChange={(e) => setFormState({ ...formState, experience: e.target.value })}
                         placeholder="e.g. 3 years"
                         className="w-full px-3 py-2.5 rounded-lg text-sm border-none outline-none"
-                        style={{ backgroundColor: "#F4F6F3", color: "#232925" }}
+                        style={{ backgroundColor: "var(--color-secondary-50)", color: "var(--color-secondary-900)" }}
                       />
                     </div>
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium mb-1.5" style={{ color: "#47524B" }}>
+                    <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--color-secondary-700)" }}>
                       Resume / CV *
                     </label>
                     <label
                       className="flex items-center justify-center gap-2 w-full px-4 py-4 rounded-lg text-sm cursor-pointer transition-colors"
                       style={{
-                        backgroundColor: "#F4F6F3",
-                        border: "1px dashed #D6E9E0",
-                        color: formState.resume ? "#184E3E" : "#9AA69D",
+                        backgroundColor: "var(--color-secondary-50)",
+                        border: "1px dashed var(--color-primary-100)",
+                        color: formState.resume ? "var(--color-primary-700)" : "var(--color-secondary-400)",
                       }}
                     >
                       <Upload size={16} />
@@ -712,7 +712,7 @@ export default function CareersPage() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-medium mb-1.5" style={{ color: "#47524B" }}>
+                    <label className="block text-xs font-medium mb-1.5" style={{ color: "var(--color-secondary-700)" }}>
                       Cover Letter (optional)
                     </label>
                     <textarea
@@ -721,7 +721,7 @@ export default function CareersPage() {
                       onChange={(e) => setFormState({ ...formState, coverLetter: e.target.value })}
                       placeholder="Tell us why you'd be a great fit..."
                       className="w-full px-3 py-2.5 rounded-lg text-sm border-none outline-none resize-none"
-                      style={{ backgroundColor: "#F4F6F3", color: "#232925" }}
+                      style={{ backgroundColor: "var(--color-secondary-50)", color: "var(--color-secondary-900)" }}
                     />
                   </div>
 
@@ -730,7 +730,7 @@ export default function CareersPage() {
                     disabled={submitting}
                     className="w-full py-3 rounded-lg text-sm font-semibold transition-colors cursor-pointer flex items-center justify-center gap-2"
                     style={{
-                      backgroundColor: submitting ? "#78857A" : "#184E3E",
+                      backgroundColor: submitting ? "var(--color-secondary-500)" : "var(--color-primary-700)",
                       color: "#fff",
                     }}
                   >

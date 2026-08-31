@@ -13,19 +13,22 @@ import {
 const heroSlides = [
   {
     eyebrow: "E-Waste Recycling",
-    title: "Recover the Metal. Spare the Mountain.",
+    title: "Recover the Metal.",
+    highlight: "Spare the Mountain.",
     desc: "Every discarded laptop, server and handset holds recoverable gold, copper and rare earths. We extract them responsibly — so the earth doesn't have to be dug up again.",
     cta: { label: "Explore E-Waste Recycling", href: "/services/e-waste" },
   },
   {
     eyebrow: "Plastic Waste",
-    title: "Plastic Was Never Meant to Be a One-Way Journey.",
+    title: "Plastic Was Never Meant",
+    highlight: "to Be a One-Way Journey.",
     desc: "We collect, sort, granulate and return plastic waste to the production line — closing the loop for brands serious about their EPR obligations.",
     cta: { label: "Explore Plastic Recycling", href: "/services/plastic-waste" },
   },
   {
     eyebrow: "Compliance / EPR",
-    title: "Compliance, Documented. Impact, Verified.",
+    title: "Compliance, Documented.",
+    highlight: "Impact, Verified.",
     desc: "From EPR registration to certificate generation, we handle the paperwork behind your sustainability promise — audit-ready, every quarter.",
     cta: { label: "EPR Services", href: "/services/epr" },
   },
@@ -138,27 +141,27 @@ function ServiceCard({ svc, index }) {
           {/* ── Front Face ── */}
           <div
             className="svc-flip-front absolute inset-0 rounded-xl p-7 lg:p-8 flex flex-col justify-between"
-            style={{ backgroundColor: isDark ? "#184E3E" : "#E4EBE6" }}
+            style={{ backgroundColor: isDark ? "var(--color-primary-700)" : "#E4EBE6" }}
           >
             <div>
               <div
                 className="w-12 h-12 rounded-lg flex items-center justify-center mb-5"
-                style={{ backgroundColor: isDark ? "rgba(255,255,255,0.12)" : "#D6E9E0" }}
+                style={{ backgroundColor: isDark ? "rgba(255,255,255,0.12)" : "var(--color-primary-100)" }}
               >
-                <svc.icon size={24} strokeWidth={1.8} style={{ color: isDark ? "#D6E9E0" : "#184E3E" }} />
+                <svc.icon size={24} strokeWidth={1.8} style={{ color: isDark ? "var(--color-primary-100)" : "var(--color-primary-700)" }} />
               </div>
               <h3
                 className="font-heading text-lg font-semibold tracking-tight leading-snug mb-3"
-                style={{ color: isDark ? "#ffffff" : "#08201A" }}
+                style={{ color: isDark ? "#ffffff" : "var(--color-primary-950)" }}
               >
                 {svc.title}
               </h3>
-              <div className="w-8 h-[3px] rounded-full" style={{ backgroundColor: "#CC7C4A" }} />
+              <div className="w-8 h-[3px] rounded-full" style={{ backgroundColor: "var(--color-accent-400)" }} />
             </div>
             <div className="mt-auto pt-6">
               <span
                 className="inline-flex items-center gap-2 text-sm font-semibold"
-                style={{ color: isDark ? "#D6E9E0" : "#184E3E" }}
+                style={{ color: isDark ? "var(--color-primary-100)" : "var(--color-primary-700)" }}
               >
                 Know More <ArrowRight size={16} />
               </span>
@@ -193,10 +196,10 @@ function ServiceCard({ svc, index }) {
                 style={{
                   width: "100%",
                   height: "100%",
-                  backgroundColor: isDark ? "#0E2F26" : "#D6E9E0",
+                  backgroundColor: isDark ? "var(--color-primary-900)" : "var(--color-primary-100)",
                 }}
               >
-                <svc.icon size={40} strokeWidth={1.4} style={{ color: isDark ? "#D6E9E0" : "#184E3E" }} />
+                <svc.icon size={40} strokeWidth={1.4} style={{ color: isDark ? "var(--color-primary-100)" : "var(--color-primary-700)" }} />
               </div>
             )}
           </div>
@@ -224,28 +227,28 @@ function SectorCard({ sector, index }) {
       transition={{ duration: 0.5, delay: index * 0.07, ease: [0.2, 0, 0, 1] }}
       className={`svc-flip${flipped ? " flipped" : ""}`}
       onClick={handleTap}
-      style={{ perspective: "1000px", cursor: "pointer", aspectRatio: "1 / 1" }}
+      style={{ perspective: "1000px", cursor: "pointer" }}
     >
-      <div className="svc-flip-inner relative" style={{ height: "100%" }}>
+      <div className="svc-flip-inner relative" style={{ height: "220px" }}>
         {/* Front */}
         <div
-          className="svc-flip-front absolute inset-0 rounded-xl p-6 lg:p-7 flex flex-col justify-between"
-          style={{ backgroundColor: isDark ? "#184E3E" : "#E4EBE6" }}
+          className="svc-flip-front absolute inset-0 rounded-xl p-5 sm:p-6 lg:p-7 flex flex-col justify-between"
+          style={{ backgroundColor: isDark ? "var(--color-primary-700)" : "#E4EBE6" }}
         >
           <div>
             <div
-              className="w-11 h-11 rounded-lg flex items-center justify-center mb-4"
-              style={{ backgroundColor: isDark ? "rgba(255,255,255,0.12)" : "#D6E9E0" }}
+              className="w-10 h-10 sm:w-11 sm:h-11 rounded-lg flex items-center justify-center mb-3 sm:mb-4"
+              style={{ backgroundColor: isDark ? "rgba(255,255,255,0.12)" : "var(--color-primary-100)" }}
             >
-              <sector.icon size={22} strokeWidth={1.8} style={{ color: isDark ? "#D6E9E0" : "#184E3E" }} />
+              <sector.icon size={22} strokeWidth={1.8} style={{ color: isDark ? "var(--color-primary-100)" : "var(--color-primary-700)" }} />
             </div>
             <h3
-              className="font-heading text-[15px] font-semibold tracking-tight leading-snug mb-2.5"
-              style={{ color: isDark ? "#ffffff" : "#08201A" }}
+              className="font-heading text-sm sm:text-[15px] font-semibold tracking-tight leading-snug mb-2 sm:mb-2.5"
+              style={{ color: isDark ? "#ffffff" : "var(--color-primary-950)" }}
             >
               {sector.label}
             </h3>
-            <div className="w-7 h-[3px] rounded-full" style={{ backgroundColor: "#CC7C4A" }} />
+            <div className="w-7 h-[3px] rounded-full" style={{ backgroundColor: "var(--color-accent-400)" }} />
           </div>
         </div>
 
@@ -263,9 +266,9 @@ function SectorCard({ sector, index }) {
           ) : (
             <div
               className="flex items-center justify-center"
-              style={{ width: "100%", height: "100%", backgroundColor: isDark ? "#0E2F26" : "#D6E9E0" }}
+              style={{ width: "100%", height: "100%", backgroundColor: isDark ? "var(--color-primary-900)" : "var(--color-primary-100)" }}
             >
-              <sector.icon size={40} strokeWidth={1.4} style={{ color: isDark ? "#D6E9E0" : "#184E3E" }} />
+              <sector.icon size={40} strokeWidth={1.4} style={{ color: isDark ? "var(--color-primary-100)" : "var(--color-primary-700)" }} />
             </div>
           )}
         </div>
@@ -322,7 +325,8 @@ export default function HomePage() {
               transition={{ duration: 0.5, delay: 0.05 }}
               className="font-heading text-3xl sm:text-4xl lg:text-5xl font-semibold text-white leading-[1.06] tracking-tight mb-5"
             >
-              {slide.title}
+              {slide.title}{" "}
+              <span style={{ color: "var(--color-accent-400)" }}>{slide.highlight}</span>
             </motion.h1>
             <motion.p
               key={`desc-${currentSlide}`}
@@ -378,16 +382,16 @@ export default function HomePage() {
       {/* ── TRUST BAR ── */}
       <section className="bg-white border-b border-secondary-100">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-6">
-          <p className="text-center font-mono text-[11px] uppercase tracking-[0.09em] mb-5" style={{ color: "#47524B" }}>
+          <p className="text-center font-mono text-[11px] uppercase tracking-[0.09em] mb-5" style={{ color: "var(--color-secondary-700)" }}>
             Authorised & Certified
           </p>
           <div className="flex flex-wrap items-center justify-center gap-6 lg:gap-10">
             {trustBadges.map((badge) => (
               <div key={badge.label} className="flex items-center gap-2.5">
-                <div className="w-9 h-9 rounded-full flex items-center justify-center" style={{ backgroundColor: "#EDF5F1" }}>
-                  <badge.icon size={18} style={{ color: "#2E7A61" }} />
+                <div className="w-9 h-9 rounded-full flex items-center justify-center" style={{ backgroundColor: "var(--color-primary-50)" }}>
+                  <badge.icon size={18} style={{ color: "var(--color-primary-500)" }} />
                 </div>
-                <span className="text-sm font-medium" style={{ color: "#333B36" }}>{badge.label}</span>
+                <span className="text-sm font-medium" style={{ color: "var(--color-secondary-800)" }}>{badge.label}</span>
               </div>
             ))}
           </div>
@@ -436,7 +440,7 @@ export default function HomePage() {
             className="absolute rounded-full opacity-[0.04]"
             style={{
               width: "600px", height: "600px",
-              background: "radial-gradient(circle, #2E7A61 0%, transparent 70%)",
+              background: "radial-gradient(circle, var(--color-primary-500) 0%, transparent 70%)",
               top: "-10%", left: "-8%",
               animation: "ambientDrift 25s ease-in-out infinite",
             }}
@@ -445,7 +449,7 @@ export default function HomePage() {
             className="absolute rounded-full opacity-[0.03]"
             style={{
               width: "500px", height: "500px",
-              background: "radial-gradient(circle, #2E7A61 0%, transparent 70%)",
+              background: "radial-gradient(circle, var(--color-primary-500) 0%, transparent 70%)",
               bottom: "-15%", right: "-5%",
               animation: "ambientDrift 30s ease-in-out infinite reverse",
             }}
@@ -454,7 +458,7 @@ export default function HomePage() {
             className="absolute rounded-full opacity-[0.02]"
             style={{
               width: "350px", height: "350px",
-              background: "radial-gradient(circle, #B4682F 0%, transparent 70%)",
+              background: "radial-gradient(circle, var(--color-accent-500) 0%, transparent 70%)",
               top: "30%", right: "20%",
               animation: "ambientDrift 22s ease-in-out infinite 5s",
             }}
@@ -480,7 +484,7 @@ export default function HomePage() {
                 <div
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-[400ms] pointer-events-none"
                   style={{
-                    background: "radial-gradient(circle at 30% 20%, rgba(46,122,97,0.05) 0%, transparent 60%)",
+                    background: "radial-gradient(circle at 30% 20%, rgba(14,116,144,0.05) 0%, transparent 60%)",
                   }}
                 />
 
@@ -494,15 +498,15 @@ export default function HomePage() {
                     ease: [0.2, 0, 0, 1],
                   }}
                   className="relative w-10 h-10 rounded-md flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-105"
-                  style={{ backgroundColor: "#EDF5F1" }}
+                  style={{ backgroundColor: "var(--color-primary-50)" }}
                 >
-                  <card.icon size={20} style={{ color: "#184E3E" }} />
+                  <card.icon size={20} style={{ color: "var(--color-primary-700)" }} />
                 </motion.div>
 
-                <h3 className="relative font-heading text-lg font-semibold mb-2.5 tracking-tight" style={{ color: "#08201A" }}>
+                <h3 className="relative font-heading text-lg font-semibold mb-2.5 tracking-tight" style={{ color: "var(--color-primary-950)" }}>
                   {card.title}
                 </h3>
-                <p className="relative text-sm leading-relaxed" style={{ color: "#5C6961" }}>{card.desc}</p>
+                <p className="relative text-sm leading-relaxed" style={{ color: "var(--color-secondary-600)" }}>{card.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -522,7 +526,7 @@ export default function HomePage() {
       </section>
 
       {/* ── SERVICES (Flip Cards) ── */}
-      <section className="py-16 lg:py-24 relative overflow-hidden" style={{ backgroundColor: "#F4F6F3" }}>
+      <section className="py-16 lg:py-24 relative overflow-hidden" style={{ backgroundColor: "var(--color-secondary-50)" }}>
         {/* Globe background image */}
         <div
           className="hidden lg:block pointer-events-none select-none"
@@ -555,8 +559,8 @@ export default function HomePage() {
 
         <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6" style={{ zIndex: 1 }}>
           <div className="text-center mb-12">
-            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "#B4682F" }}>What We Do</p>
-            <h2 className="font-heading text-2xl sm:text-3xl lg:text-[2.75rem] font-semibold tracking-tight" style={{ color: "#08201A" }}>
+            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>What We Do</p>
+            <h2 className="font-heading text-2xl sm:text-3xl lg:text-[2.75rem] font-semibold tracking-tight" style={{ color: "var(--color-primary-950)" }}>
               Our Services
             </h2>
           </div>
@@ -643,8 +647,8 @@ export default function HomePage() {
       <section className="bg-white py-16 lg:py-28 overflow-hidden">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
           <div className="text-center mb-16">
-            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "#B4682F" }}>How It Works</p>
-            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight" style={{ color: "#08201A" }}>
+            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>How It Works</p>
+            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight" style={{ color: "var(--color-primary-950)" }}>
               Our Process
             </h2>
           </div>
@@ -670,10 +674,10 @@ export default function HomePage() {
                       <div className="flex flex-col justify-end px-1" style={{ height: "120px", paddingBottom: "18px" }}>
                         {isTop && (
                           <>
-                            <h4 className="font-heading text-[15px] font-bold leading-tight mb-1.5" style={{ color: "#08201A" }}>
+                            <h4 className="font-heading text-[15px] font-bold leading-tight mb-1.5" style={{ color: "var(--color-primary-950)" }}>
                               {step.title}
                             </h4>
-                            <p className="text-[11.5px] leading-[1.6]" style={{ color: "#5C6961" }}>
+                            <p className="text-[11.5px] leading-[1.6]" style={{ color: "var(--color-secondary-600)" }}>
                               {step.desc}
                             </p>
                           </>
@@ -683,18 +687,18 @@ export default function HomePage() {
                       {/* Circle with accent arc */}
                       <div className="relative" style={{ width: "105px", height: "105px" }}>
                         <svg viewBox="0 0 105 105" className="w-full h-full">
-                          <circle cx="52.5" cy="55" r="46" fill="rgba(8,32,26,0.05)" />
+                          <circle cx="52.5" cy="55" r="46" fill="rgba(4,30,38,0.05)" />
                           <circle cx="52.5" cy="52.5" r="46" fill="#ffffff" />
-                          <circle cx="52.5" cy="52.5" r="46" fill="none" stroke="#EAEEEA" strokeWidth="2.5" />
+                          <circle cx="52.5" cy="52.5" r="46" fill="none" stroke="var(--color-secondary-100)" strokeWidth="2.5" />
                           <circle
                             cx="52.5" cy="52.5" r="46" fill="none"
-                            stroke="#CC7C4A" strokeWidth="4.5"
+                            stroke="var(--color-accent-400)" strokeWidth="4.5"
                             strokeDasharray="82 207" strokeLinecap="round"
                             style={{ transform: `rotate(${arcRotations[i]}deg)`, transformOrigin: "52.5px 52.5px" }}
                           />
                         </svg>
                         <div className="absolute inset-0 flex items-center justify-center" style={{ marginTop: "-2.5px" }}>
-                          <step.icon size={34} strokeWidth={1.5} style={{ color: "#184E3E" }} />
+                          <step.icon size={34} strokeWidth={1.5} style={{ color: "var(--color-primary-700)" }} />
                         </div>
                       </div>
 
@@ -702,10 +706,10 @@ export default function HomePage() {
                       <div className="flex flex-col justify-start px-1" style={{ height: "120px", paddingTop: "18px" }}>
                         {!isTop && (
                           <>
-                            <h4 className="font-heading text-[15px] font-bold leading-tight mb-1.5" style={{ color: "#08201A" }}>
+                            <h4 className="font-heading text-[15px] font-bold leading-tight mb-1.5" style={{ color: "var(--color-primary-950)" }}>
                               {step.title}
                             </h4>
-                            <p className="text-[11.5px] leading-[1.6]" style={{ color: "#5C6961" }}>
+                            <p className="text-[11.5px] leading-[1.6]" style={{ color: "var(--color-secondary-600)" }}>
                               {step.desc}
                             </p>
                           </>
@@ -735,10 +739,10 @@ export default function HomePage() {
                     <g key={idx}>
                       <path
                         d={`M ${x1} ${y} C ${x1 + 20} ${cpY}, ${x2 - 20} ${cpY}, ${x2} ${y}`}
-                        stroke="#184E3E" strokeWidth="2" strokeDasharray="6 4" opacity="0.35"
+                        stroke="var(--color-primary-700)" strokeWidth="2" strokeDasharray="6 4" opacity="0.35"
                       />
-                      <circle cx={x1 + 2} cy={y} r="3.5" fill="#CC7C4A" />
-                      <circle cx={x2 - 2} cy={y} r="3.5" fill="#CC7C4A" />
+                      <circle cx={x1 + 2} cy={y} r="3.5" fill="var(--color-accent-400)" />
+                      <circle cx={x2 - 2} cy={y} r="3.5" fill="var(--color-accent-400)" />
                     </g>
                   );
                 })}
@@ -759,23 +763,23 @@ export default function HomePage() {
               >
                 <div className="relative shrink-0" style={{ width: "64px", height: "64px" }}>
                   <svg viewBox="0 0 64 64" className="w-full h-full">
-                    <circle cx="32" cy="33" r="28" fill="rgba(8,32,26,0.05)" />
+                    <circle cx="32" cy="33" r="28" fill="rgba(4,30,38,0.05)" />
                     <circle cx="32" cy="32" r="28" fill="#fff" />
-                    <circle cx="32" cy="32" r="28" fill="none" stroke="#EAEEEA" strokeWidth="2" />
-                    <circle cx="32" cy="32" r="28" fill="none" stroke="#CC7C4A" strokeWidth="3"
+                    <circle cx="32" cy="32" r="28" fill="none" stroke="var(--color-secondary-100)" strokeWidth="2" />
+                    <circle cx="32" cy="32" r="28" fill="none" stroke="var(--color-accent-400)" strokeWidth="3"
                       strokeDasharray="50 126" strokeLinecap="round"
                       style={{ transform: "rotate(-90deg)", transformOrigin: "32px 32px" }}
                     />
                   </svg>
                   <div className="absolute inset-0 flex items-center justify-center" style={{ marginTop: "-1px" }}>
-                    <step.icon size={24} strokeWidth={1.6} style={{ color: "#184E3E" }} />
+                    <step.icon size={24} strokeWidth={1.6} style={{ color: "var(--color-primary-700)" }} />
                   </div>
                 </div>
                 <div>
-                  <h4 className="font-heading text-base font-semibold mb-0.5" style={{ color: "#08201A" }}>
+                  <h4 className="font-heading text-base font-semibold mb-0.5" style={{ color: "var(--color-primary-950)" }}>
                     {step.title}
                   </h4>
-                  <p className="text-sm leading-relaxed" style={{ color: "#5C6961" }}>
+                  <p className="text-sm leading-relaxed" style={{ color: "var(--color-secondary-600)" }}>
                     {step.desc}
                   </p>
                 </div>
@@ -786,11 +790,11 @@ export default function HomePage() {
       </section>
 
       {/* ── WHY CHOOSE US ── */}
-      <section className="py-16 lg:py-24" style={{ backgroundColor: "#F4F6F3" }}>
+      <section className="py-16 lg:py-24" style={{ backgroundColor: "var(--color-secondary-50)" }}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
           <div className="text-center mb-14">
-            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "#B4682F" }}>Why Advait Green</p>
-            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight" style={{ color: "#08201A" }}>
+            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>Why Advait Green</p>
+            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight" style={{ color: "var(--color-primary-950)" }}>
               Why Choose Us
             </h2>
           </div>
@@ -807,19 +811,19 @@ export default function HomePage() {
                 {/* Icon circle */}
                 <div
                   className="w-[80px] h-[80px] rounded-full flex items-center justify-center mb-5"
-                  style={{ backgroundColor: "#184E3E" }}
+                  style={{ backgroundColor: "var(--color-primary-700)" }}
                 >
                   <item.icon size={34} strokeWidth={1.5} style={{ color: "#ffffff" }} />
                 </div>
                 {/* Title */}
                 <h4
                   className="font-heading text-base font-bold tracking-tight mb-2"
-                  style={{ color: "#184E3E" }}
+                  style={{ color: "var(--color-primary-700)" }}
                 >
                   {item.title}
                 </h4>
                 {/* Description */}
-                <p className="text-sm leading-relaxed max-w-[280px]" style={{ color: "#5C6961" }}>
+                <p className="text-sm leading-relaxed max-w-[280px]" style={{ color: "var(--color-secondary-600)" }}>
                   {item.desc}
                 </p>
               </motion.div>
@@ -832,12 +836,12 @@ export default function HomePage() {
       <section className="py-16 lg:py-24" style={{ backgroundColor: "#ffffff" }}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
           <div className="text-center mb-12">
-            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "#B4682F" }}>Industries</p>
-            <h2 className="font-heading text-2xl sm:text-3xl lg:text-[2.75rem] font-semibold tracking-tight" style={{ color: "#08201A" }}>
+            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>Industries</p>
+            <h2 className="font-heading text-2xl sm:text-3xl lg:text-[2.75rem] font-semibold tracking-tight" style={{ color: "var(--color-primary-950)" }}>
               Sectors We Serve
             </h2>
           </div>
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-5">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-2 lg:gap-5">
             {sectors.map((sector, i) => (
               <SectorCard key={sector.label} sector={sector} index={i} />
             ))}

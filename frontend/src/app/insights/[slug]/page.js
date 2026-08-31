@@ -67,7 +67,7 @@ function FaqAccordion({ items }) {
         <div
           key={i}
           className="rounded-lg overflow-hidden transition-all duration-200"
-          style={{ border: "1px solid #D6E9E0" }}
+          style={{ border: "1px solid var(--color-primary-100)" }}
         >
           <button
             onClick={() => setOpenIndex(openIndex === i ? null : i)}
@@ -76,7 +76,7 @@ function FaqAccordion({ items }) {
           >
             <span
               className="text-sm font-semibold pr-4"
-              style={{ color: "#08201A" }}
+              style={{ color: "var(--color-primary-950)" }}
             >
               {item.question}
             </span>
@@ -84,7 +84,7 @@ function FaqAccordion({ items }) {
               size={18}
               className="shrink-0 transition-transform duration-200"
               style={{
-                color: "#184E3E",
+                color: "var(--color-primary-700)",
                 transform: openIndex === i ? "rotate(180deg)" : "rotate(0deg)",
               }}
             />
@@ -98,7 +98,7 @@ function FaqAccordion({ items }) {
           >
             <div
               className="px-4 pb-4 text-sm leading-relaxed"
-              style={{ color: "#5C6961" }}
+              style={{ color: "var(--color-secondary-600)" }}
             >
               {item.answer}
             </div>
@@ -143,11 +143,11 @@ export default function BlogPostPage() {
     return (
       <div
         className="min-h-screen flex items-center justify-center"
-        style={{ backgroundColor: "#F4F6F3" }}
+        style={{ backgroundColor: "var(--color-secondary-50)" }}
       >
         <div
           className="w-8 h-8 border-2 rounded-full animate-spin"
-          style={{ borderColor: "#D6E9E0", borderTopColor: "#184E3E" }}
+          style={{ borderColor: "var(--color-primary-100)", borderTopColor: "var(--color-primary-700)" }}
         />
       </div>
     );
@@ -157,21 +157,21 @@ export default function BlogPostPage() {
     return (
       <div
         className="min-h-screen flex flex-col items-center justify-center"
-        style={{ backgroundColor: "#F4F6F3" }}
+        style={{ backgroundColor: "var(--color-secondary-50)" }}
       >
         <h1
           className="font-heading text-2xl font-semibold mb-3"
-          style={{ color: "#08201A" }}
+          style={{ color: "var(--color-primary-950)" }}
         >
           Article Not Found
         </h1>
-        <p className="text-sm mb-6" style={{ color: "#9AA69D" }}>
+        <p className="text-sm mb-6" style={{ color: "var(--color-secondary-400)" }}>
           The article you&apos;re looking for doesn&apos;t exist or has been removed.
         </p>
         <Link
           href="/insights"
           className="inline-flex items-center gap-2 text-sm font-semibold"
-          style={{ color: "#995427" }}
+          style={{ color: "var(--color-accent-600)" }}
         >
           <ArrowLeft size={15} /> Back to All Articles
         </Link>
@@ -188,7 +188,7 @@ export default function BlogPostPage() {
   return (
     <>
       {/* ── HEADER SECTION ── */}
-      <section style={{ backgroundColor: "#F4F6F3" }}>
+      <section style={{ backgroundColor: "var(--color-secondary-50)" }}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 pt-8 sm:pt-10">
           {/* Breadcrumb */}
           <nav
@@ -198,22 +198,22 @@ export default function BlogPostPage() {
             <Link
               href="/"
               className="transition-colors"
-              style={{ color: "#184E3E" }}
+              style={{ color: "var(--color-primary-700)" }}
             >
               Home
             </Link>
-            <span style={{ color: "#9AA69D" }}>/</span>
+            <span style={{ color: "var(--color-secondary-400)" }}>/</span>
             <Link
               href="/insights"
               className="transition-colors"
-              style={{ color: "#184E3E" }}
+              style={{ color: "var(--color-primary-700)" }}
             >
               Blog
             </Link>
-            <span style={{ color: "#9AA69D" }}>/</span>
+            <span style={{ color: "var(--color-secondary-400)" }}>/</span>
             <span
               className="font-medium truncate max-w-[140px] sm:max-w-[220px]"
-              style={{ color: "#08201A" }}
+              style={{ color: "var(--color-primary-950)" }}
             >
               {blog.title}
             </span>
@@ -226,7 +226,7 @@ export default function BlogPostPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.5 }}
               className="font-heading text-xl sm:text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight px-1"
-              style={{ color: "#08201A", lineHeight: 1.2 }}
+              style={{ color: "var(--color-primary-950)", lineHeight: 1.2 }}
             >
               {blog.title}
             </motion.h1>
@@ -236,11 +236,11 @@ export default function BlogPostPage() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.4, delay: 0.08 }}
               className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-0 text-xs sm:text-sm"
-              style={{ color: "#78857A" }}
+              style={{ color: "var(--color-secondary-500)" }}
             >
               <span>
                 By{" "}
-                <span style={{ color: "#08201A", fontWeight: 500 }}>
+                <span style={{ color: "var(--color-primary-950)", fontWeight: 500 }}>
                   {blog.author}
                 </span>
               </span>
@@ -273,7 +273,7 @@ export default function BlogPostPage() {
       </section>
 
       {/* ── TOC + CONTENT ── */}
-      <section style={{ backgroundColor: "#F4F6F3" }}>
+      <section style={{ backgroundColor: "var(--color-secondary-50)" }}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 pb-12 lg:pb-16">
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
             {/* TOC Sidebar — LEFT on desktop, TOP on mobile */}
@@ -286,7 +286,7 @@ export default function BlogPostPage() {
                   <div className="lg:bg-transparent lg:p-0">
                     <h4
                       className="font-heading text-lg sm:text-xl lg:text-2xl font-semibold mb-3 sm:mb-4"
-                      style={{ color: "#184E3E" }}
+                      style={{ color: "var(--color-primary-700)" }}
                     >
                       Table of Contents
                     </h4>
@@ -296,12 +296,12 @@ export default function BlogPostPage() {
                           key={h.id}
                           href={`#${h.id}`}
                           className="flex items-start gap-2 text-[13px] sm:text-sm font-semibold leading-relaxed transition-colors group"
-                          style={{ color: "#47524B" }}
+                          style={{ color: "var(--color-secondary-700)" }}
                           onMouseEnter={(e) =>
-                            (e.currentTarget.style.color = "#184E3E")
+                            (e.currentTarget.style.color = "var(--color-primary-700)")
                           }
                           onMouseLeave={(e) =>
-                            (e.currentTarget.style.color = "#47524B")
+                            (e.currentTarget.style.color = "var(--color-secondary-700)")
                           }
                         >
                           <svg
@@ -313,7 +313,7 @@ export default function BlogPostPage() {
                           >
                             <path
                               d="M1 1L7 8L1 15"
-                              stroke="#184E3E"
+                              stroke="var(--color-primary-700)"
                               strokeWidth="2"
                               strokeLinecap="round"
                               strokeLinejoin="round"
@@ -345,7 +345,7 @@ export default function BlogPostPage() {
                 <div className="mt-10 sm:mt-14">
                   <h2
                     className="font-heading text-xl sm:text-2xl font-bold mb-4"
-                    style={{ color: "#184E3E" }}
+                    style={{ color: "var(--color-primary-700)" }}
                   >
                     FAQs
                   </h2>
@@ -357,16 +357,16 @@ export default function BlogPostPage() {
               {blog.tags && blog.tags.length > 0 && (
                 <div
                   className="mt-10 pt-8 flex flex-wrap items-center gap-2"
-                  style={{ borderTop: "1px solid #D6E9E0" }}
+                  style={{ borderTop: "1px solid var(--color-primary-100)" }}
                 >
-                  <Tag size={14} style={{ color: "#9AA69D" }} />
+                  <Tag size={14} style={{ color: "var(--color-secondary-400)" }} />
                   {blog.tags.map((tag) => (
                     <span
                       key={tag}
                       className="px-3 py-1 rounded-full text-xs font-medium"
                       style={{
                         backgroundColor: "#E4EBE6",
-                        color: "#47524B",
+                        color: "var(--color-secondary-700)",
                       }}
                     >
                       {tag}
@@ -380,7 +380,7 @@ export default function BlogPostPage() {
                 <Link
                   href="/insights"
                   className="inline-flex items-center gap-2 text-sm font-semibold underline transition-colors"
-                  style={{ color: "#184E3E" }}
+                  style={{ color: "var(--color-primary-700)" }}
                 >
                   <ArrowLeft size={15} /> Back to All Blogs
                 </Link>
@@ -391,12 +391,12 @@ export default function BlogPostPage() {
       </section>
 
       {/* ── CTA BANNER ── */}
-      <section style={{ backgroundColor: "#F4F6F3" }}>
+      <section style={{ backgroundColor: "var(--color-secondary-50)" }}>
         <div className="max-w-[800px] mx-auto px-4 sm:px-6 pb-10 sm:pb-12 lg:pb-16">
           <div
             className="relative rounded-xl sm:rounded-2xl overflow-hidden px-5 py-7 sm:px-10 sm:py-12 text-center"
             style={{
-              background: "linear-gradient(135deg, #0A2E23 0%, #184E3E 100%)",
+              background: "linear-gradient(135deg, var(--color-primary-900) 0%, var(--color-primary-700) 100%)",
             }}
           >
             <div
@@ -425,7 +425,7 @@ export default function BlogPostPage() {
                 <Link
                   href="/schedule-pickup"
                   className="inline-flex items-center justify-center gap-2 px-5 sm:px-6 py-2.5 sm:py-3 rounded-lg text-xs sm:text-sm font-semibold transition-colors"
-                  style={{ backgroundColor: "#995427", color: "#fff" }}
+                  style={{ backgroundColor: "var(--color-accent-600)", color: "#fff" }}
                 >
                   Schedule a Free Pickup <ArrowRight size={14} />
                 </Link>

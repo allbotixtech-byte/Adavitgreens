@@ -101,7 +101,7 @@ export default function ContactPage() {
             <nav className="flex items-center gap-2 text-xs mb-6 sm:mb-8">
               <Link href="/" className="text-white/60 hover:text-white transition-colors">Home</Link>
               <ChevronRight size={12} className="text-white/30" />
-              <span style={{ color: "#CC7C4A" }}>Contact Us</span>
+              <span style={{ color: "var(--color-accent-400)" }}>Contact Us</span>
             </nav>
             <motion.p
               initial={{ opacity: 0, x: -12 }}
@@ -160,16 +160,16 @@ export default function ContactPage() {
             <motion.div
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
               className="rounded-xl p-6 sm:p-7"
-              style={{ backgroundColor: "#184E3E" }}
+              style={{ backgroundColor: "var(--color-primary-700)" }}
             >
               <div className="w-11 h-11 rounded-lg flex items-center justify-center mb-4" style={{ backgroundColor: "rgba(255,255,255,0.12)" }}>
-                <Phone size={20} style={{ color: "#D6E9E0" }} />
+                <Phone size={20} style={{ color: "var(--color-primary-100)" }} />
               </div>
               <h3 className="font-heading text-base font-semibold mb-3" style={{ color: "#ffffff" }}>Call Us</h3>
-              <div className="space-y-2 text-sm" style={{ color: "#ADD2C2" }}>
-                <p><span className="text-xs" style={{ color: "#9AA69D" }}>Toll Free:</span><br />{companyInfo.tollFree}</p>
-                <p><span className="text-xs" style={{ color: "#9AA69D" }}>E-Waste:</span><br />{companyInfo.phoneEWaste}</p>
-                <p><span className="text-xs" style={{ color: "#9AA69D" }}>Plastic:</span><br />{companyInfo.phonePlastic}</p>
+              <div className="space-y-2 text-sm" style={{ color: "var(--color-primary-200)" }}>
+                <p><span className="text-xs" style={{ color: "var(--color-secondary-400)" }}>Toll Free:</span><br />{companyInfo.tollFree}</p>
+                <p><span className="text-xs" style={{ color: "var(--color-secondary-400)" }}>E-Waste:</span><br />{companyInfo.phoneEWaste}</p>
+                <p><span className="text-xs" style={{ color: "var(--color-secondary-400)" }}>Plastic:</span><br />{companyInfo.phonePlastic}</p>
               </div>
             </motion.div>
 
@@ -179,14 +179,14 @@ export default function ContactPage() {
               className="rounded-xl p-6 sm:p-7"
               style={{ backgroundColor: "#E4EBE6" }}
             >
-              <div className="w-11 h-11 rounded-lg flex items-center justify-center mb-4" style={{ backgroundColor: "#D6E9E0" }}>
-                <Mail size={20} style={{ color: "#184E3E" }} />
+              <div className="w-11 h-11 rounded-lg flex items-center justify-center mb-4" style={{ backgroundColor: "var(--color-primary-100)" }}>
+                <Mail size={20} style={{ color: "var(--color-primary-700)" }} />
               </div>
-              <h3 className="font-heading text-base font-semibold mb-3" style={{ color: "#08201A" }}>Email Us</h3>
-              <div className="space-y-2 text-sm" style={{ color: "#47524B" }}>
-                <p><span className="text-xs" style={{ color: "#9AA69D" }}>General:</span><br />{companyInfo.email}</p>
-                <p><span className="text-xs" style={{ color: "#9AA69D" }}>Sales & Quotes:</span><br />sales@advaitgreen.com</p>
-                <p><span className="text-xs" style={{ color: "#9AA69D" }}>EPR:</span><br />epr@advaitgreen.com</p>
+              <h3 className="font-heading text-base font-semibold mb-3" style={{ color: "var(--color-primary-950)" }}>Email Us</h3>
+              <div className="space-y-2 text-sm" style={{ color: "var(--color-secondary-700)" }}>
+                <p><span className="text-xs" style={{ color: "var(--color-secondary-400)" }}>General:</span><br />{companyInfo.email}</p>
+                <p><span className="text-xs" style={{ color: "var(--color-secondary-400)" }}>Sales & Quotes:</span><br />sales@advaitgreen.com</p>
+                <p><span className="text-xs" style={{ color: "var(--color-secondary-400)" }}>EPR:</span><br />epr@advaitgreen.com</p>
               </div>
             </motion.div>
 
@@ -194,16 +194,16 @@ export default function ContactPage() {
             <motion.div
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={2}
               className="rounded-xl p-6 sm:p-7"
-              style={{ backgroundColor: "#184E3E" }}
+              style={{ backgroundColor: "var(--color-primary-700)" }}
             >
               <div className="w-11 h-11 rounded-lg flex items-center justify-center mb-4" style={{ backgroundColor: "rgba(255,255,255,0.12)" }}>
-                <MessageCircle size={20} style={{ color: "#D6E9E0" }} />
+                <MessageCircle size={20} style={{ color: "var(--color-primary-100)" }} />
               </div>
               <h3 className="font-heading text-base font-semibold mb-3" style={{ color: "#ffffff" }}>WhatsApp</h3>
-              <p className="text-sm leading-relaxed" style={{ color: "#ADD2C2" }}>
+              <p className="text-sm leading-relaxed" style={{ color: "var(--color-primary-200)" }}>
                 {companyInfo.phoneEWaste}
               </p>
-              <p className="text-xs mt-2 leading-relaxed" style={{ color: "#9AA69D" }}>
+              <p className="text-xs mt-2 leading-relaxed" style={{ color: "var(--color-secondary-400)" }}>
                 Send a photo of your waste for a quick indicative quote.
               </p>
             </motion.div>
@@ -214,15 +214,15 @@ export default function ContactPage() {
               className="rounded-xl p-6 sm:p-7"
               style={{ backgroundColor: "#E4EBE6" }}
             >
-              <div className="w-11 h-11 rounded-lg flex items-center justify-center mb-4" style={{ backgroundColor: "#D6E9E0" }}>
-                <Clock size={20} style={{ color: "#184E3E" }} />
+              <div className="w-11 h-11 rounded-lg flex items-center justify-center mb-4" style={{ backgroundColor: "var(--color-primary-100)" }}>
+                <Clock size={20} style={{ color: "var(--color-primary-700)" }} />
               </div>
-              <h3 className="font-heading text-base font-semibold mb-3" style={{ color: "#08201A" }}>Working Hours</h3>
-              <div className="space-y-2 text-sm" style={{ color: "#47524B" }}>
-                <p><span className="font-semibold" style={{ color: "#08201A" }}>Mon – Sat:</span><br />9:00 AM – 6:30 PM</p>
-                <p><span className="font-semibold" style={{ color: "#08201A" }}>Sunday:</span><br />Closed</p>
+              <h3 className="font-heading text-base font-semibold mb-3" style={{ color: "var(--color-primary-950)" }}>Working Hours</h3>
+              <div className="space-y-2 text-sm" style={{ color: "var(--color-secondary-700)" }}>
+                <p><span className="font-semibold" style={{ color: "var(--color-primary-950)" }}>Mon – Sat:</span><br />9:00 AM – 6:30 PM</p>
+                <p><span className="font-semibold" style={{ color: "var(--color-primary-950)" }}>Sunday:</span><br />Closed</p>
               </div>
-              <p className="text-xs mt-3 leading-relaxed" style={{ color: "#9AA69D" }}>
+              <p className="text-xs mt-3 leading-relaxed" style={{ color: "var(--color-secondary-400)" }}>
                 Bulk collection scheduling available outside these hours on request.
               </p>
             </motion.div>
@@ -231,7 +231,7 @@ export default function ContactPage() {
       </section>
 
       {/* ── ENQUIRY FORM + LOCATIONS ── */}
-      <section id="enquiry-form" className="py-12 sm:py-16 lg:py-24 scroll-mt-[120px]" style={{ backgroundColor: "#F4F6F3" }}>
+      <section id="enquiry-form" className="py-12 sm:py-16 lg:py-24 scroll-mt-[120px]" style={{ backgroundColor: "var(--color-secondary-50)" }}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_380px] gap-8 lg:gap-14">
             {/* Form */}
@@ -240,26 +240,26 @@ export default function ContactPage() {
               className="rounded-2xl p-6 sm:p-8 lg:p-10"
               style={{ backgroundColor: "#ffffff" }}
             >
-              <h2 className="font-heading text-xl sm:text-2xl font-semibold tracking-tight mb-2" style={{ color: "#08201A" }}>
+              <h2 className="font-heading text-xl sm:text-2xl font-semibold tracking-tight mb-2" style={{ color: "var(--color-primary-950)" }}>
                 Send Us an Enquiry
               </h2>
-              <p className="text-sm mb-8" style={{ color: "#9AA69D" }}>
+              <p className="text-sm mb-8" style={{ color: "var(--color-secondary-400)" }}>
                 We respond to every enquiry within one working day.
               </p>
 
               {submitted ? (
                 <div className="text-center py-12">
-                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: "#EDF5F1" }}>
-                    <CheckCircle size={32} style={{ color: "#184E3E" }} />
+                  <div className="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5" style={{ backgroundColor: "var(--color-primary-50)" }}>
+                    <CheckCircle size={32} style={{ color: "var(--color-primary-700)" }} />
                   </div>
-                  <h3 className="font-heading text-lg font-semibold mb-2" style={{ color: "#08201A" }}>Thank You!</h3>
-                  <p className="text-sm" style={{ color: "#5C6961" }}>Your enquiry has been submitted. We'll get back to you within one working day.</p>
+                  <h3 className="font-heading text-lg font-semibold mb-2" style={{ color: "var(--color-primary-950)" }}>Thank You!</h3>
+                  <p className="text-sm" style={{ color: "var(--color-secondary-600)" }}>Your enquiry has been submitted. We'll get back to you within one working day.</p>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                     <div>
-                      <label className="block text-xs font-semibold mb-1.5" style={{ color: "#47524B" }}>Full Name *</label>
+                      <label className="block text-xs font-semibold mb-1.5" style={{ color: "var(--color-secondary-700)" }}>Full Name *</label>
                       <input
                         type="text"
                         name="name"
@@ -268,11 +268,11 @@ export default function ContactPage() {
                         onChange={handleChange}
                         placeholder="Your name"
                         className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-colors"
-                        style={{ backgroundColor: "#F4F6F3", border: "1px solid #E4EBE6", color: "#232925" }}
+                        style={{ backgroundColor: "var(--color-secondary-50)", border: "1px solid #E4EBE6", color: "var(--color-secondary-900)" }}
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold mb-1.5" style={{ color: "#47524B" }}>Email Address *</label>
+                      <label className="block text-xs font-semibold mb-1.5" style={{ color: "var(--color-secondary-700)" }}>Email Address *</label>
                       <input
                         type="email"
                         name="email"
@@ -281,14 +281,14 @@ export default function ContactPage() {
                         onChange={handleChange}
                         placeholder="you@company.com"
                         className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-colors"
-                        style={{ backgroundColor: "#F4F6F3", border: "1px solid #E4EBE6", color: "#232925" }}
+                        style={{ backgroundColor: "var(--color-secondary-50)", border: "1px solid #E4EBE6", color: "var(--color-secondary-900)" }}
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                     <div>
-                      <label className="block text-xs font-semibold mb-1.5" style={{ color: "#47524B" }}>Mobile Number *</label>
+                      <label className="block text-xs font-semibold mb-1.5" style={{ color: "var(--color-secondary-700)" }}>Mobile Number *</label>
                       <input
                         type="tel"
                         name="phone"
@@ -297,11 +297,11 @@ export default function ContactPage() {
                         onChange={handleChange}
                         placeholder="+91 XXXXX XXXXX"
                         className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-colors"
-                        style={{ backgroundColor: "#F4F6F3", border: "1px solid #E4EBE6", color: "#232925" }}
+                        style={{ backgroundColor: "var(--color-secondary-50)", border: "1px solid #E4EBE6", color: "var(--color-secondary-900)" }}
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold mb-1.5" style={{ color: "#47524B" }}>Organisation Name</label>
+                      <label className="block text-xs font-semibold mb-1.5" style={{ color: "var(--color-secondary-700)" }}>Organisation Name</label>
                       <input
                         type="text"
                         name="company"
@@ -309,14 +309,14 @@ export default function ContactPage() {
                         onChange={handleChange}
                         placeholder="Company name"
                         className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-colors"
-                        style={{ backgroundColor: "#F4F6F3", border: "1px solid #E4EBE6", color: "#232925" }}
+                        style={{ backgroundColor: "var(--color-secondary-50)", border: "1px solid #E4EBE6", color: "var(--color-secondary-900)" }}
                       />
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-5">
                     <div>
-                      <label className="block text-xs font-semibold mb-1.5" style={{ color: "#47524B" }}>City / Location *</label>
+                      <label className="block text-xs font-semibold mb-1.5" style={{ color: "var(--color-secondary-700)" }}>City / Location *</label>
                       <input
                         type="text"
                         name="city"
@@ -325,18 +325,18 @@ export default function ContactPage() {
                         onChange={handleChange}
                         placeholder="Your city"
                         className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-colors"
-                        style={{ backgroundColor: "#F4F6F3", border: "1px solid #E4EBE6", color: "#232925" }}
+                        style={{ backgroundColor: "var(--color-secondary-50)", border: "1px solid #E4EBE6", color: "var(--color-secondary-900)" }}
                       />
                     </div>
                     <div>
-                      <label className="block text-xs font-semibold mb-1.5" style={{ color: "#47524B" }}>Enquiring About *</label>
+                      <label className="block text-xs font-semibold mb-1.5" style={{ color: "var(--color-secondary-700)" }}>Enquiring About *</label>
                       <select
                         name="service"
                         required
                         value={form.service}
                         onChange={handleChange}
                         className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-colors appearance-none cursor-pointer"
-                        style={{ backgroundColor: "#F4F6F3", border: "1px solid #E4EBE6", color: form.service ? "#232925" : "#9AA69D" }}
+                        style={{ backgroundColor: "var(--color-secondary-50)", border: "1px solid #E4EBE6", color: form.service ? "var(--color-secondary-900)" : "var(--color-secondary-400)" }}
                       >
                         <option value="" disabled>Select a service</option>
                         {enquiryOptions.map((opt) => (
@@ -347,13 +347,13 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold mb-1.5" style={{ color: "#47524B" }}>Approximate Quantity</label>
+                    <label className="block text-xs font-semibold mb-1.5" style={{ color: "var(--color-secondary-700)" }}>Approximate Quantity</label>
                     <select
                       name="quantity"
                       value={form.quantity}
                       onChange={handleChange}
                       className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-colors appearance-none cursor-pointer"
-                      style={{ backgroundColor: "#F4F6F3", border: "1px solid #E4EBE6", color: form.quantity ? "#232925" : "#9AA69D" }}
+                      style={{ backgroundColor: "var(--color-secondary-50)", border: "1px solid #E4EBE6", color: form.quantity ? "var(--color-secondary-900)" : "var(--color-secondary-400)" }}
                     >
                       <option value="" disabled>Select quantity range</option>
                       {quantityOptions.map((opt) => (
@@ -363,7 +363,7 @@ export default function ContactPage() {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-semibold mb-1.5" style={{ color: "#47524B" }}>Message</label>
+                    <label className="block text-xs font-semibold mb-1.5" style={{ color: "var(--color-secondary-700)" }}>Message</label>
                     <textarea
                       name="message"
                       rows={4}
@@ -371,7 +371,7 @@ export default function ContactPage() {
                       onChange={handleChange}
                       placeholder="Tell us about your waste stream, volume, or any specific requirements..."
                       className="w-full px-4 py-3 rounded-lg text-sm outline-none transition-colors resize-none"
-                      style={{ backgroundColor: "#F4F6F3", border: "1px solid #E4EBE6", color: "#232925" }}
+                      style={{ backgroundColor: "var(--color-secondary-50)", border: "1px solid #E4EBE6", color: "var(--color-secondary-900)" }}
                     />
                   </div>
 
@@ -383,7 +383,7 @@ export default function ContactPage() {
                     type="submit"
                     disabled={submitting}
                     className="inline-flex items-center justify-center gap-2 w-full sm:w-auto px-8 py-3.5 rounded-lg text-sm font-semibold transition-colors cursor-pointer disabled:opacity-60"
-                    style={{ backgroundColor: "#184E3E", color: "#ffffff" }}
+                    style={{ backgroundColor: "var(--color-primary-700)", color: "#ffffff" }}
                   >
                     {submitting ? (
                       <><Loader2 size={16} className="animate-spin" /> Submitting...</>
@@ -401,13 +401,13 @@ export default function ContactPage() {
               <motion.div
                 initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
                 className="rounded-xl p-6 sm:p-7"
-                style={{ backgroundColor: "#184E3E" }}
+                style={{ backgroundColor: "var(--color-primary-700)" }}
               >
                 <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style={{ backgroundColor: "rgba(255,255,255,0.12)" }}>
-                  <MapPin size={18} style={{ color: "#D6E9E0" }} />
+                  <MapPin size={18} style={{ color: "var(--color-primary-100)" }} />
                 </div>
                 <h3 className="font-heading text-base font-semibold mb-1" style={{ color: "#ffffff" }}>Corporate Office</h3>
-                <p className="text-sm leading-relaxed mb-4" style={{ color: "#ADD2C2" }}>
+                <p className="text-sm leading-relaxed mb-4" style={{ color: "var(--color-primary-200)" }}>
                   {companyInfo.address.corporate}
                 </p>
                 <a
@@ -415,7 +415,7 @@ export default function ContactPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 text-xs font-semibold"
-                  style={{ color: "#CC7C4A" }}
+                  style={{ color: "var(--color-accent-400)" }}
                 >
                   Get Directions <ArrowRight size={12} />
                 </a>
@@ -427,14 +427,14 @@ export default function ContactPage() {
                 className="rounded-xl p-6 sm:p-7"
                 style={{ backgroundColor: "#E4EBE6" }}
               >
-                <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style={{ backgroundColor: "#D6E9E0" }}>
-                  <MapPin size={18} style={{ color: "#184E3E" }} />
+                <div className="w-10 h-10 rounded-lg flex items-center justify-center mb-4" style={{ backgroundColor: "var(--color-primary-100)" }}>
+                  <MapPin size={18} style={{ color: "var(--color-primary-700)" }} />
                 </div>
-                <h3 className="font-heading text-base font-semibold mb-1" style={{ color: "#08201A" }}>Recycling Facility</h3>
-                <p className="text-sm leading-relaxed mb-2" style={{ color: "#47524B" }}>
+                <h3 className="font-heading text-base font-semibold mb-1" style={{ color: "var(--color-primary-950)" }}>Recycling Facility</h3>
+                <p className="text-sm leading-relaxed mb-2" style={{ color: "var(--color-secondary-700)" }}>
                   {companyInfo.address.facility}
                 </p>
-                <p className="text-xs mb-4" style={{ color: "#9AA69D" }}>
+                <p className="text-xs mb-4" style={{ color: "var(--color-secondary-400)" }}>
                   Facility visits by prior appointment only.
                 </p>
                 <a
@@ -442,7 +442,7 @@ export default function ContactPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center gap-1.5 text-xs font-semibold"
-                  style={{ color: "#995427" }}
+                  style={{ color: "var(--color-accent-600)" }}
                 >
                   Get Directions <ArrowRight size={12} />
                 </a>
@@ -451,18 +451,18 @@ export default function ContactPage() {
               {/* Quick CTA */}
               <div
                 className="rounded-xl p-6 sm:p-7 text-center"
-                style={{ backgroundColor: "#ffffff", border: "1px solid #D6E9E0" }}
+                style={{ backgroundColor: "#ffffff", border: "1px solid var(--color-primary-100)" }}
               >
-                <h4 className="font-heading text-sm font-semibold mb-1" style={{ color: "#08201A" }}>
+                <h4 className="font-heading text-sm font-semibold mb-1" style={{ color: "var(--color-primary-950)" }}>
                   Need a Free Waste Assessment?
                 </h4>
-                <p className="text-xs mb-4 leading-relaxed" style={{ color: "#9AA69D" }}>
+                <p className="text-xs mb-4 leading-relaxed" style={{ color: "var(--color-secondary-400)" }}>
                   No charge for assessment or collection scheduling.
                 </p>
                 <Link
                   href="/schedule-pickup"
                   className="inline-flex items-center justify-center gap-2 w-full px-5 py-2.5 rounded-lg text-sm font-semibold transition-colors"
-                  style={{ backgroundColor: "#995427", color: "#fff" }}
+                  style={{ backgroundColor: "var(--color-accent-600)", color: "#fff" }}
                 >
                   Schedule Pickup <ArrowRight size={14} />
                 </Link>
@@ -476,8 +476,8 @@ export default function ContactPage() {
       <section style={{ backgroundColor: "#ffffff" }}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-20">
           <div className="text-center mb-10 sm:mb-14">
-            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "#B4682F" }}>Find Us</p>
-            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight" style={{ color: "#08201A" }}>
+            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>Find Us</p>
+            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight" style={{ color: "var(--color-primary-950)" }}>
               Our Location
             </h2>
           </div>
@@ -498,7 +498,7 @@ export default function ContactPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="py-12 sm:py-14 lg:py-20 relative overflow-hidden" style={{ backgroundColor: "#08201A" }}>
+      <section className="py-12 sm:py-14 lg:py-20 relative overflow-hidden" style={{ backgroundColor: "var(--color-primary-950)" }}>
         <div
           className="absolute inset-0 opacity-[0.04]"
           style={{
@@ -510,14 +510,14 @@ export default function ContactPage() {
           <h2 className="font-heading text-2xl sm:text-3xl font-semibold tracking-tight mb-4 max-w-[600px] mx-auto" style={{ color: "#ffffff" }}>
             Ready to Recycle Responsibly?
           </h2>
-          <p className="text-sm sm:text-base max-w-[480px] mx-auto mb-8 leading-relaxed" style={{ color: "#9AA69D" }}>
+          <p className="text-sm sm:text-base max-w-[480px] mx-auto mb-8 leading-relaxed" style={{ color: "var(--color-secondary-400)" }}>
             Tell us what you have and where it is. We'll come back within one working day with a collection plan.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-3">
             <Link
               href="/schedule-pickup"
               className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded text-sm font-semibold transition-colors"
-              style={{ backgroundColor: "#995427", color: "#fff" }}
+              style={{ backgroundColor: "var(--color-accent-600)", color: "#fff" }}
             >
               Schedule a Free Pickup <ArrowRight size={15} />
             </Link>

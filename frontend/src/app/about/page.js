@@ -79,7 +79,7 @@ export default function AboutPage() {
             <nav className="flex items-center gap-2 text-xs mb-6 sm:mb-8">
               <Link href="/" className="text-white/60 hover:text-white transition-colors">Home</Link>
               <ChevronRight size={12} className="text-white/30" />
-              <span style={{ color: "#CC7C4A" }}>About Us</span>
+              <span style={{ color: "var(--color-accent-400)" }}>About Us</span>
             </nav>
             <motion.p
               initial={{ opacity: 0, x: -12 }}
@@ -131,32 +131,32 @@ export default function AboutPage() {
       </section>
 
       {/* ── WHO WE ARE ── */}
-      <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "#F4F6F3" }}>
+      <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "var(--color-secondary-50)" }}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
           <div className="max-w-[800px] mx-auto">
-            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "#B4682F" }}>Who We Are</p>
+            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>Who We Are</p>
             <motion.h2
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
               className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-6"
-              style={{ color: "#08201A" }}
+              style={{ color: "var(--color-primary-950)" }}
             >
               A Recycling Company Built for India's Next Decade of Waste
             </motion.h2>
             <motion.p
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={1}
-              className="text-base leading-relaxed mb-5" style={{ color: "#47524B" }}
+              className="text-base leading-relaxed mb-5" style={{ color: "var(--color-secondary-700)" }}
             >
               Advait Green Recycling Private Limited was established with a clear intent — to build formal, traceable recycling capacity in a sector still dominated by informal handling.
             </motion.p>
             <motion.p
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={2}
-              className="text-base leading-relaxed mb-5" style={{ color: "#47524B" }}
+              className="text-base leading-relaxed mb-5" style={{ color: "var(--color-secondary-700)" }}
             >
               The name <em>Advait</em> means "not two" — the idea that industry and environment are not opposing interests. A recycling business that isn't commercially sound will not survive to protect anything; a recycling business that isn't environmentally rigorous doesn't deserve to.
             </motion.p>
             <motion.p
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={3}
-              className="text-base leading-relaxed" style={{ color: "#47524B" }}
+              className="text-base leading-relaxed" style={{ color: "var(--color-secondary-700)" }}
             >
               Today we operate an integrated facility at Vamaj, Mahesana (Gujarat), authorised by the Gujarat Pollution Control Board to handle electronic waste and plastic waste. We serve organisations across India, from single-site SMEs to multi-location enterprises with quarterly decommissioning cycles.
             </motion.p>
@@ -171,13 +171,13 @@ export default function AboutPage() {
             <motion.div
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
               className="rounded-xl p-6 sm:p-8 lg:p-10"
-              style={{ backgroundColor: "#184E3E" }}
+              style={{ backgroundColor: "var(--color-primary-700)" }}
             >
               <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-5" style={{ backgroundColor: "rgba(255,255,255,0.12)" }}>
-                <Eye size={24} style={{ color: "#D6E9E0" }} />
+                <Eye size={24} style={{ color: "var(--color-primary-100)" }} />
               </div>
               <h3 className="font-heading text-xl font-semibold mb-4" style={{ color: "#ffffff" }}>Our Vision</h3>
-              <p className="text-sm leading-relaxed" style={{ color: "#ADD2C2" }}>
+              <p className="text-sm leading-relaxed" style={{ color: "var(--color-primary-200)" }}>
                 A resource economy where end-of-life is simply a stage in a material's life — not the end of it.
               </p>
             </motion.div>
@@ -186,10 +186,10 @@ export default function AboutPage() {
               className="rounded-xl p-6 sm:p-8 lg:p-10"
               style={{ backgroundColor: "#E4EBE6" }}
             >
-              <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-5" style={{ backgroundColor: "#D6E9E0" }}>
-                <Target size={24} style={{ color: "#184E3E" }} />
+              <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-5" style={{ backgroundColor: "var(--color-primary-100)" }}>
+                <Target size={24} style={{ color: "var(--color-primary-700)" }} />
               </div>
-              <h3 className="font-heading text-xl font-semibold mb-4" style={{ color: "#08201A" }}>Our Mission</h3>
+              <h3 className="font-heading text-xl font-semibold mb-4" style={{ color: "var(--color-primary-950)" }}>Our Mission</h3>
               <ul className="space-y-3">
                 {[
                   "Provide waste generators with a formal, fully documented and commercially fair recycling channel.",
@@ -197,8 +197,8 @@ export default function AboutPage() {
                   "Make regulatory compliance straightforward for producers, importers and brand owners.",
                   "Create safe, skilled and dignified employment in the recycling sector.",
                 ].map((item, i) => (
-                  <li key={i} className="flex gap-2.5 text-sm leading-relaxed" style={{ color: "#47524B" }}>
-                    <CheckCircle size={16} className="shrink-0 mt-0.5" style={{ color: "#184E3E" }} />
+                  <li key={i} className="flex gap-2.5 text-sm leading-relaxed" style={{ color: "var(--color-secondary-700)" }}>
+                    <CheckCircle size={16} className="shrink-0 mt-0.5" style={{ color: "var(--color-primary-700)" }} />
                     {item}
                   </li>
                 ))}
@@ -209,11 +209,11 @@ export default function AboutPage() {
       </section>
 
       {/* ── CORE VALUES ── */}
-      <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "#F4F6F3" }}>
+      <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "var(--color-secondary-50)" }}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
           <div className="text-center mb-10 sm:mb-14">
-            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "#B4682F" }}>What Guides Us</p>
-            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight" style={{ color: "#08201A" }}>
+            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>What Guides Us</p>
+            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight" style={{ color: "var(--color-primary-950)" }}>
               Our Core Values
             </h2>
           </div>
@@ -229,12 +229,12 @@ export default function AboutPage() {
               >
                 <div
                   className="w-[56px] h-[56px] sm:w-[70px] sm:h-[70px] rounded-full flex items-center justify-center mb-3 sm:mb-4"
-                  style={{ backgroundColor: "#184E3E" }}
+                  style={{ backgroundColor: "var(--color-primary-700)" }}
                 >
                   <val.icon size={24} strokeWidth={1.5} className="sm:!w-7 sm:!h-7" style={{ color: "#ffffff" }} />
                 </div>
-                <h4 className="font-heading text-sm font-bold mb-1.5" style={{ color: "#184E3E" }}>{val.title}</h4>
-                <p className="text-xs leading-relaxed" style={{ color: "#5C6961" }}>{val.desc}</p>
+                <h4 className="font-heading text-sm font-bold mb-1.5" style={{ color: "var(--color-primary-700)" }}>{val.title}</h4>
+                <p className="text-xs leading-relaxed" style={{ color: "var(--color-secondary-600)" }}>{val.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -245,13 +245,13 @@ export default function AboutPage() {
       <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "#ffffff" }}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
           <div className="text-center mb-10 sm:mb-14">
-            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "#B4682F" }}>Milestones</p>
-            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight" style={{ color: "#08201A" }}>
+            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>Milestones</p>
+            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight" style={{ color: "var(--color-primary-950)" }}>
               Our Journey
             </h2>
           </div>
           <div className="max-w-[700px] mx-auto relative">
-            <div className="absolute left-[19px] sm:left-[23px] top-0 bottom-0 w-px" style={{ backgroundColor: "#D6E9E0" }} />
+            <div className="absolute left-[19px] sm:left-[23px] top-0 bottom-0 w-px" style={{ backgroundColor: "var(--color-primary-100)" }} />
             {timeline.map((item, i) => (
               <motion.div
                 key={item.year}
@@ -263,13 +263,13 @@ export default function AboutPage() {
               >
                 <div
                   className="shrink-0 w-[40px] h-[40px] sm:w-[48px] sm:h-[48px] rounded-full flex items-center justify-center font-mono text-[11px] sm:text-xs font-bold relative z-10"
-                  style={{ backgroundColor: "#184E3E", color: "#ffffff" }}
+                  style={{ backgroundColor: "var(--color-primary-700)", color: "#ffffff" }}
                 >
                   {item.year.slice(2)}
                 </div>
                 <div className="pt-2.5">
-                  <span className="font-heading text-sm font-bold" style={{ color: "#08201A" }}>{item.year}</span>
-                  <p className="text-sm leading-relaxed mt-1" style={{ color: "#5C6961" }}>{item.event}</p>
+                  <span className="font-heading text-sm font-bold" style={{ color: "var(--color-primary-950)" }}>{item.year}</span>
+                  <p className="text-sm leading-relaxed mt-1" style={{ color: "var(--color-secondary-600)" }}>{item.event}</p>
                 </div>
               </motion.div>
             ))}
@@ -278,14 +278,14 @@ export default function AboutPage() {
       </section>
 
       {/* ── INFRASTRUCTURE ── */}
-      <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "#F4F6F3" }}>
+      <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "var(--color-secondary-50)" }}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
           <div className="text-center mb-10 sm:mb-14">
-            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "#B4682F" }}>Capability</p>
-            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight" style={{ color: "#08201A" }}>
+            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>Capability</p>
+            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight" style={{ color: "var(--color-primary-950)" }}>
               Infrastructure & Facility
             </h2>
-            <p className="text-sm mt-3 max-w-[500px] mx-auto" style={{ color: "#5C6961" }}>
+            <p className="text-sm mt-3 max-w-[500px] mx-auto" style={{ color: "var(--color-secondary-600)" }}>
               Engineered for recovery, not just disposal — different fractions need different treatment to retain their value.
             </p>
           </div>
@@ -300,22 +300,22 @@ export default function AboutPage() {
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: i * 0.1 }}
                   className="rounded-xl p-7"
-                  style={{ backgroundColor: isDark ? "#184E3E" : "#E4EBE6" }}
+                  style={{ backgroundColor: isDark ? "var(--color-primary-700)" : "#E4EBE6" }}
                 >
                   <div
                     className="w-11 h-11 rounded-lg flex items-center justify-center mb-4"
-                    style={{ backgroundColor: isDark ? "rgba(255,255,255,0.12)" : "#D6E9E0" }}
+                    style={{ backgroundColor: isDark ? "rgba(255,255,255,0.12)" : "var(--color-primary-100)" }}
                   >
-                    <infra.icon size={22} strokeWidth={1.8} style={{ color: isDark ? "#D6E9E0" : "#184E3E" }} />
+                    <infra.icon size={22} strokeWidth={1.8} style={{ color: isDark ? "var(--color-primary-100)" : "var(--color-primary-700)" }} />
                   </div>
-                  <h3 className="font-heading text-base font-semibold mb-3" style={{ color: isDark ? "#ffffff" : "#08201A" }}>
+                  <h3 className="font-heading text-base font-semibold mb-3" style={{ color: isDark ? "#ffffff" : "var(--color-primary-950)" }}>
                     {infra.title}
                   </h3>
-                  <div className="w-7 h-[3px] rounded-full mb-4" style={{ backgroundColor: "#CC7C4A" }} />
+                  <div className="w-7 h-[3px] rounded-full mb-4" style={{ backgroundColor: "var(--color-accent-400)" }} />
                   <ul className="space-y-2">
                     {infra.items.map((item) => (
-                      <li key={item} className="flex items-start gap-2 text-sm" style={{ color: isDark ? "#ADD2C2" : "#47524B" }}>
-                        <CheckCircle size={13} className="shrink-0 mt-0.5" style={{ color: isDark ? "#CC7C4A" : "#184E3E" }} />
+                      <li key={item} className="flex items-start gap-2 text-sm" style={{ color: isDark ? "var(--color-primary-200)" : "var(--color-secondary-700)" }}>
+                        <CheckCircle size={13} className="shrink-0 mt-0.5" style={{ color: isDark ? "var(--color-accent-400)" : "var(--color-primary-700)" }} />
                         {item}
                       </li>
                     ))}
@@ -331,8 +331,8 @@ export default function AboutPage() {
       <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "#ffffff" }}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
           <div className="text-center mb-10 sm:mb-14">
-            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "#B4682F" }}>Trust & Compliance</p>
-            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight" style={{ color: "#08201A" }}>
+            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>Trust & Compliance</p>
+            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight" style={{ color: "var(--color-primary-950)" }}>
               Certifications & Authorisations
             </h2>
           </div>
@@ -345,12 +345,12 @@ export default function AboutPage() {
                 viewport={{ once: true }}
                 transition={{ duration: 0.4, delay: i * 0.06 }}
                 className="rounded-xl p-4 sm:p-5 flex sm:flex-col items-center sm:text-center gap-3 sm:gap-0"
-                style={{ backgroundColor: "#EDF5F1", border: "1px solid #D6E9E0" }}
+                style={{ backgroundColor: "var(--color-primary-50)", border: "1px solid var(--color-primary-100)" }}
               >
-                <div className="w-10 h-10 shrink-0 rounded-full flex items-center justify-center sm:mb-3" style={{ backgroundColor: "#D6E9E0" }}>
-                  <cert.icon size={18} style={{ color: "#184E3E" }} />
+                <div className="w-10 h-10 shrink-0 rounded-full flex items-center justify-center sm:mb-3" style={{ backgroundColor: "var(--color-primary-100)" }}>
+                  <cert.icon size={18} style={{ color: "var(--color-primary-700)" }} />
                 </div>
-                <p className="text-xs font-semibold leading-snug" style={{ color: "#08201A" }}>{cert.name}</p>
+                <p className="text-xs font-semibold leading-snug" style={{ color: "var(--color-primary-950)" }}>{cert.name}</p>
               </motion.div>
             ))}
           </div>
@@ -358,20 +358,20 @@ export default function AboutPage() {
       </section>
 
       {/* ── OUR PEOPLE ── */}
-      <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "#F4F6F3" }}>
+      <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "var(--color-secondary-50)" }}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
           <div className="max-w-[800px] mx-auto text-center">
-            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "#B4682F" }}>Our Team</p>
+            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>Our Team</p>
             <motion.h2
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
               className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-6"
-              style={{ color: "#08201A" }}
+              style={{ color: "var(--color-primary-950)" }}
             >
               The People Behind Every Tonne
             </motion.h2>
             <motion.p
               initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={1}
-              className="text-base leading-relaxed" style={{ color: "#47524B" }}
+              className="text-base leading-relaxed" style={{ color: "var(--color-secondary-700)" }}
             >
               Behind every tonne processed is a team of dismantlers, line operators, drivers, compliance officers and coordinators. We invest in them because manual de-manufacturing is skilled work, and skilled work deserves training, protective equipment, health checks and a career path.
             </motion.p>
@@ -383,8 +383,8 @@ export default function AboutPage() {
       <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "#ffffff" }}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
           <div className="text-center mb-10 sm:mb-14">
-            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "#B4682F" }}>Giving Back</p>
-            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight" style={{ color: "#08201A" }}>
+            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>Giving Back</p>
+            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight" style={{ color: "var(--color-primary-950)" }}>
               CSR & Community
             </h2>
           </div>
@@ -398,11 +398,11 @@ export default function AboutPage() {
                 transition={{ duration: 0.5, delay: i * 0.1 }}
                 className="flex flex-col items-center text-center"
               >
-                <div className="w-[56px] h-[56px] sm:w-[70px] sm:h-[70px] rounded-full flex items-center justify-center mb-3 sm:mb-4" style={{ backgroundColor: "#184E3E" }}>
+                <div className="w-[56px] h-[56px] sm:w-[70px] sm:h-[70px] rounded-full flex items-center justify-center mb-3 sm:mb-4" style={{ backgroundColor: "var(--color-primary-700)" }}>
                   <item.icon size={24} strokeWidth={1.5} className="sm:!w-7 sm:!h-7" style={{ color: "#ffffff" }} />
                 </div>
-                <h4 className="font-heading text-sm font-bold mb-1.5" style={{ color: "#184E3E" }}>{item.title}</h4>
-                <p className="text-xs leading-relaxed" style={{ color: "#5C6961" }}>{item.desc}</p>
+                <h4 className="font-heading text-sm font-bold mb-1.5" style={{ color: "var(--color-primary-700)" }}>{item.title}</h4>
+                <p className="text-xs leading-relaxed" style={{ color: "var(--color-secondary-600)" }}>{item.desc}</p>
               </motion.div>
             ))}
           </div>
@@ -410,7 +410,7 @@ export default function AboutPage() {
       </section>
 
       {/* ── CTA ── */}
-      <section className="py-12 sm:py-14 lg:py-20 relative overflow-hidden" style={{ backgroundColor: "#08201A" }}>
+      <section className="py-12 sm:py-14 lg:py-20 relative overflow-hidden" style={{ backgroundColor: "var(--color-primary-950)" }}>
         <div
           className="absolute inset-0 opacity-[0.04]"
           style={{
@@ -422,14 +422,14 @@ export default function AboutPage() {
           <h2 className="font-heading text-2xl sm:text-3xl font-semibold tracking-tight mb-4 max-w-[600px] mx-auto" style={{ color: "#ffffff" }}>
             Ready to Recycle Responsibly?
           </h2>
-          <p className="text-sm sm:text-base max-w-[520px] mx-auto mb-8 leading-relaxed" style={{ color: "#9AA69D" }}>
+          <p className="text-sm sm:text-base max-w-[520px] mx-auto mb-8 leading-relaxed" style={{ color: "var(--color-secondary-400)" }}>
             Tell us what you have and where it is. We'll come back within one working day with a collection plan and an indicative valuation.
           </p>
           <div className="flex flex-col sm:flex-row justify-center gap-3">
             <Link
               href="/schedule-pickup"
               className="inline-flex items-center justify-center gap-2 px-6 py-3 rounded text-sm font-semibold transition-colors"
-              style={{ backgroundColor: "#995427", color: "#fff" }}
+              style={{ backgroundColor: "var(--color-accent-600)", color: "#fff" }}
             >
               Schedule a Free Pickup <ArrowRight size={15} />
             </Link>
