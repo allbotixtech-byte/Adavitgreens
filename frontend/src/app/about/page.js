@@ -6,7 +6,9 @@ import {
   ArrowRight, ShieldCheck, Eye, Search, Lock, BarChart3,
   Target, Recycle, Users, TreePine, GraduationCap, Wrench,
   Cpu, Zap, Factory, Truck, CheckCircle, ChevronRight,
+  Award, Gauge, FileCheck, Headset, MapPin, Building2, Scale,
 } from "lucide-react";
+import { services } from "@/data/services";
 
 const values = [
   { icon: ShieldCheck, title: "Legitimacy First", desc: "We only do what our authorisations permit us to do. No exceptions, whatever the tonnage." },
@@ -51,6 +53,65 @@ const csr = [
   { icon: Wrench, title: "Skill Training", desc: "For informal sector workers transitioning into formal recycling roles." },
   { icon: TreePine, title: "Facility Greening", desc: "Tree plantation and environmental restoration at our facility." },
 ];
+
+const whyUs = [
+  {
+    icon: ShieldCheck,
+    title: "Authorised, Not Just Available",
+    desc: "Every stream we accept is covered by a valid CPCB or GPCB authorisation. If we are not permitted to handle something, we say so and point you to someone who is.",
+  },
+  {
+    icon: Factory,
+    title: "We Process It Ourselves",
+    desc: "Material is recycled at our own facility, not brokered onward. That is why the certificates we issue can be traced back to a weighbridge slip and a processing batch.",
+  },
+  {
+    icon: FileCheck,
+    title: "Documentation as Standard",
+    desc: "Manifests, certificates of recycling and data destruction, and quarterly filings are part of the service — not an extra you have to chase after the truck leaves.",
+  },
+  {
+    icon: Scale,
+    title: "Recovery-Based Pricing",
+    desc: "Valuations are built from what we actually recover, and we show you the logic. No flat scrap rate that quietly keeps the upside on our side of the table.",
+  },
+  {
+    icon: Headset,
+    title: "One Point of Contact",
+    desc: "A named account manager across every stream you hand us — e-waste, plastics, biomedical or solid waste — instead of four vendors and four escalation paths.",
+  },
+  {
+    icon: Truck,
+    title: "Pan-India Collection",
+    desc: "GPS-tracked reverse logistics reaching single sites and distributed branch networks alike, with sealed transport and signed handover at every pickup.",
+  },
+];
+
+const glanceStats = [
+  { value: "2019", label: "Incorporated in Gujarat", icon: Building2 },
+  { value: "8", label: "Waste Streams Handled", icon: Recycle },
+  { value: "XXX+", label: "Organisations Served", icon: Users },
+  { value: "Pan-India", label: "Collection Coverage", icon: MapPin },
+];
+
+/**
+ * Installed processing capacity, shown unit-wise.
+ * `XXX` values are placeholders pending confirmed figures from operations —
+ * the same convention used for the homepage impact stats.
+ */
+const capacity = [
+  { unit: "E-Waste Processing Line", location: "Vamaj, Mahesana", rate: "XXX", uom: "MT / Month", icon: Cpu },
+  { unit: "Plastic Recycling Line", location: "Vamaj, Mahesana", rate: "500", uom: "MT / Month", icon: Recycle },
+  { unit: "Battery & Solar Handling", location: "Vamaj, Mahesana", rate: "XXX", uom: "MT / Month", icon: Zap },
+  { unit: "Storage & Segregation", location: "Vamaj, Mahesana", rate: "XXX", uom: "Sq. Ft.", icon: Factory },
+];
+
+/**
+ * Leadership profiles. Left empty deliberately — the section below renders
+ * nothing until real names, designations and credentials are supplied.
+ * Shape: { name, role, credentials, bio }
+ */
+const leadership = [];
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -160,6 +221,74 @@ export default function AboutPage() {
             >
               Today we operate an integrated facility at Vamaj, Mahesana (Gujarat), authorised by the Gujarat Pollution Control Board to handle electronic waste and plastic waste. We serve organisations across India, from single-site SMEs to multi-location enterprises with quarterly decommissioning cycles.
             </motion.p>
+          </div>
+        </div>
+      </section>
+
+      {/* ── AT A GLANCE ── */}
+      <section className="py-10 sm:py-12" style={{ backgroundColor: "var(--color-primary-900)" }}>
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8 max-w-[1100px] mx-auto">
+            {glanceStats.map((stat, i) => (
+              <motion.div
+                key={stat.label}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: i * 0.08 }}
+                className="text-center"
+              >
+                <stat.icon size={22} strokeWidth={1.6} className="mx-auto mb-3" style={{ color: "var(--color-accent-400)" }} />
+                <p className="font-heading text-2xl sm:text-3xl lg:text-4xl font-bold tracking-tight mb-1.5" style={{ color: "#ffffff" }}>
+                  {stat.value}
+                </p>
+                <p className="text-xs sm:text-sm leading-snug" style={{ color: "var(--color-primary-200)" }}>
+                  {stat.label}
+                </p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── WHY ADVAIT GREEN ── */}
+      <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "var(--color-secondary-50)" }}>
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
+          <div className="text-center max-w-[640px] mx-auto mb-10 sm:mb-14">
+            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>Why Advait Green</p>
+            <motion.h2
+              initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
+              className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-4"
+              style={{ color: "var(--color-primary-950)" }}
+            >
+              What Actually Separates Us
+            </motion.h2>
+            <p className="text-sm sm:text-base leading-relaxed" style={{ color: "var(--color-secondary-600)" }}>
+              Plenty of operators will take your waste away. Fewer can show you where it went, what came out of it, and the authorisation that made it legal.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-[1100px] mx-auto">
+            {whyUs.map((item, i) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.08 }}
+                className="rounded-xl p-6 border transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+                style={{ borderColor: "var(--color-secondary-200)", backgroundColor: "#ffffff" }}
+              >
+                <div
+                  className="w-11 h-11 rounded-lg flex items-center justify-center mb-4"
+                  style={{ backgroundColor: "var(--color-primary-50)", border: "1px solid var(--color-primary-200)" }}
+                >
+                  <item.icon size={22} strokeWidth={1.6} style={{ color: "var(--color-primary-700)" }} />
+                </div>
+                <h4 className="text-sm font-semibold mb-2" style={{ color: "var(--color-primary-950)" }}>{item.title}</h4>
+                <p className="text-xs leading-relaxed" style={{ color: "var(--color-secondary-600)" }}>{item.desc}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -327,8 +456,54 @@ export default function AboutPage() {
         </div>
       </section>
 
-      {/* ── CERTIFICATIONS ── */}
+      {/* ── PROCESSING CAPACITY ── */}
       <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "#ffffff" }}>
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
+          <div className="text-center mb-10 sm:mb-14">
+            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>Installed Capacity</p>
+            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight" style={{ color: "var(--color-primary-950)" }}>
+              Processing Capacity, Unit by Unit
+            </h2>
+            <p className="text-sm mt-3 max-w-[560px] mx-auto" style={{ color: "var(--color-secondary-600)" }}>
+              Capacity is what turns an authorisation into an actual service. These are the lines running at our Mahesana facility.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-[1100px] mx-auto">
+            {capacity.map((c, i) => (
+              <motion.div
+                key={c.unit}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.45, delay: i * 0.08 }}
+                className="rounded-xl border p-6 flex flex-col"
+                style={{ borderColor: "var(--color-secondary-200)", backgroundColor: "var(--color-secondary-50)" }}
+              >
+                <div
+                  className="w-11 h-11 rounded-lg flex items-center justify-center mb-4"
+                  style={{ backgroundColor: "var(--color-primary-50)", border: "1px solid var(--color-primary-200)" }}
+                >
+                  <c.icon size={22} strokeWidth={1.6} style={{ color: "var(--color-primary-700)" }} />
+                </div>
+                <h4 className="text-sm font-semibold mb-1" style={{ color: "var(--color-primary-950)" }}>{c.unit}</h4>
+                <p className="text-xs mb-4" style={{ color: "var(--color-secondary-500)" }}>{c.location}</p>
+                <div className="mt-auto">
+                  <span className="font-heading text-3xl font-bold tracking-tight" style={{ color: "var(--color-primary-800)" }}>
+                    {c.rate}
+                  </span>
+                  <span className="font-mono text-[11px] uppercase tracking-[0.09em] ml-2" style={{ color: "var(--color-secondary-500)" }}>
+                    {c.uom}
+                  </span>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── CERTIFICATIONS ── */}
+      <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "var(--color-secondary-50)" }}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
           <div className="text-center mb-10 sm:mb-14">
             <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>Trust & Compliance</p>
@@ -357,6 +532,54 @@ export default function AboutPage() {
         </div>
       </section>
 
+      {/* ── WHAT WE DO ── */}
+      <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "#ffffff" }}>
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
+          <div className="text-center max-w-[640px] mx-auto mb-10 sm:mb-12">
+            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>What We Do</p>
+            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-4" style={{ color: "var(--color-primary-950)" }}>
+              Eight Streams, One Authorisation Trail
+            </h2>
+            <p className="text-sm sm:text-base leading-relaxed" style={{ color: "var(--color-secondary-600)" }}>
+              Whatever your organisation is accountable for, it is handled under the same documentation discipline.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-[1100px] mx-auto">
+            {services.map((svc, i) => (
+              <motion.div
+                key={svc.slug}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: (i % 4) * 0.07 }}
+              >
+                <Link
+                  href={svc.href}
+                  className="group flex items-center gap-3 h-full rounded-xl border p-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
+                  style={{ borderColor: "var(--color-secondary-200)", backgroundColor: "var(--color-secondary-50)" }}
+                >
+                  <div
+                    className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
+                    style={{ backgroundColor: "var(--color-primary-50)", border: "1px solid var(--color-primary-200)" }}
+                  >
+                    <svc.icon size={20} strokeWidth={1.6} style={{ color: "var(--color-primary-700)" }} />
+                  </div>
+                  <span className="text-[13px] font-semibold leading-snug" style={{ color: "var(--color-primary-950)" }}>
+                    {svc.title}
+                  </span>
+                  <ChevronRight
+                    size={16}
+                    className="ml-auto shrink-0 transition-transform duration-300 group-hover:translate-x-1"
+                    style={{ color: "var(--color-secondary-400)" }}
+                  />
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* ── OUR PEOPLE ── */}
       <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "var(--color-secondary-50)" }}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
@@ -376,6 +599,40 @@ export default function AboutPage() {
               Behind every tonne processed is a team of dismantlers, line operators, drivers, compliance officers and coordinators. We invest in them because manual de-manufacturing is skilled work, and skilled work deserves training, protective equipment, health checks and a career path.
             </motion.p>
           </div>
+
+          {/* Leadership — renders only once `leadership` is populated. */}
+          {leadership.length > 0 && (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-[1100px] mx-auto mt-12 sm:mt-16">
+              {leadership.map((person, i) => (
+                <motion.div
+                  key={person.name}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.45, delay: i * 0.08 }}
+                  className="bg-white rounded-xl border p-6 text-left"
+                  style={{ borderColor: "var(--color-secondary-200)" }}
+                >
+                  <div
+                    className="w-12 h-12 rounded-full flex items-center justify-center mb-4"
+                    style={{ backgroundColor: "var(--color-primary-700)" }}
+                  >
+                    <Users size={22} strokeWidth={1.6} style={{ color: "#ffffff" }} />
+                  </div>
+                  <h4 className="font-heading text-base font-semibold mb-1" style={{ color: "var(--color-primary-950)" }}>
+                    {person.name}
+                  </h4>
+                  <p className="font-mono text-[11px] uppercase tracking-[0.09em] mb-1" style={{ color: "var(--color-accent-600)" }}>
+                    {person.role}
+                  </p>
+                  {person.credentials && (
+                    <p className="text-xs mb-3" style={{ color: "var(--color-secondary-500)" }}>{person.credentials}</p>
+                  )}
+                  <p className="text-xs leading-relaxed" style={{ color: "var(--color-secondary-600)" }}>{person.bio}</p>
+                </motion.div>
+              ))}
+            </div>
+          )}
         </div>
       </section>
 

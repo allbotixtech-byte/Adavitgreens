@@ -9,6 +9,7 @@ import {
   Stethoscope, Smartphone, Recycle, CheckCircle,
   ClipboardCheck, PackageCheck, Wrench, RotateCcw, Award,
 } from "lucide-react";
+import { services } from "@/data/services";
 
 const heroSlides = [
   {
@@ -60,15 +61,7 @@ const valueCards = [
   },
 ];
 
-const services = [
-  { icon: Cpu, title: "E-Waste Recycling & Management", href: "/services/e-waste", image: "/images/e-west.png" },
-  { icon: Recycle, title: "Plastic Waste Management", href: "/services/plastic-waste", image: "/images/plastic-west.png" },
-  { icon: FileCheck, title: "Extended Producer Responsibility (EPR)", href: "/services/epr", image: "/images/epr.png", wide: true },
-  { icon: ShieldCheck, title: "Secure Data Destruction", href: "/services/data-destruction", image: "/images/secure-data.png" },
-  { icon: Zap, title: "Battery & Solar Panel Recycling", href: "/services/battery-recycling", image: "/images/solar-planet-recycle.png" },
-  { icon: Truck, title: "Reverse Logistics & Asset Buyback", href: "/services/reverse-logistics", image: "/images/reverse-logistic.png" },
-  { icon: Leaf, title: "Sustainability Consulting & ESG Reporting", href: "/services/sustainability", image: "/images/esg.png" },
-];
+
 
 const impactStats = [
   { label: "E-waste processed annually", value: "XXX", unit: "MT" },
@@ -565,19 +558,9 @@ export default function HomePage() {
             </h2>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {/* Row 1: 2 cards + blank */}
-            <ServiceCard svc={services[0]} index={0} />
-            <ServiceCard svc={services[1]} index={1} />
-            <div className="hidden lg:block" />
-
-            {/* Row 2: wide card (2 cols) + normal card */}
-            <ServiceCard svc={services[2]} index={2} />
-            <ServiceCard svc={services[3]} index={3} />
-
-            {/* Row 3: 3 normal cards */}
-            <ServiceCard svc={services[4]} index={4} />
-            <ServiceCard svc={services[5]} index={5} />
-            <ServiceCard svc={services[6]} index={6} />
+            {services.map((svc, i) => (
+              <ServiceCard key={svc.slug} svc={svc} index={i} />
+            ))}
           </div>
         </div>
 

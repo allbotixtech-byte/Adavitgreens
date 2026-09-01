@@ -71,7 +71,7 @@ const wasteItems = [
     icon: Printer,
     label: "Monitors & Peripherals",
     desc: "CRT and flat-panel monitors, printers, scanners, copiers, projectors, keyboards, mice and other peripherals. CRT monitors receive special treatment due to leaded glass and phosphor coatings.",
-    image: "/images/monitors-peripherals.jpg",
+    image: "/images/Monitors-Peripherals.jpg",
   },
   {
     icon: Cable,
@@ -1137,7 +1137,7 @@ export default function EWastePage() {
               </p>
 
               <Link
-                href="/services/data-destruction"
+                href="/services/others"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
                 style={{ backgroundColor: "var(--color-primary-700)" }}
               >

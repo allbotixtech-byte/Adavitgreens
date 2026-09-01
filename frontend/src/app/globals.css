@@ -111,10 +111,15 @@ a {
   transition: color 200ms ease;
 }
 
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
+/* Kept in @layer base so Tailwind utilities (h-full / object-cover on
+   full-bleed hero images) can still override the intrinsic-ratio default.
+   Unlayered rules outrank @layer utilities in Tailwind v4. */
+@layer base {
+  img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+  }
 }
 
 :focus-visible {
