@@ -3,12 +3,12 @@
 import { usePathname } from "next/navigation";
 import Header from "./Header";
 import Footer from "./Footer";
+import { hasFullHero } from "@/lib/layout";
 
 export default function ConditionalLayout({ children }) {
   const pathname = usePathname();
   const isAdmin = pathname.startsWith("/admin");
-  const isHome = pathname === "/";
-  const hasFullHero = isHome || pathname === "/about" || pathname === "/contact" || pathname === "/insights" || pathname === "/careers" || pathname.startsWith("/services/");
+  const fullHero = hasFullHero(pathname);
 
   if (isAdmin) return <>{children}</>;
 
@@ -16,7 +16,7 @@ export default function ConditionalLayout({ children }) {
     <>
       <Header />
       {/* Pages with full-height hero sit behind the fixed header; others need top offset */}
-      <main className={`flex-1 ${hasFullHero ? "" : "pt-[64px] sm:pt-[72px] lg:pt-[116px]"}`}>
+      <main className={`flex-1 ${fullHero ? "" : "pt-[64px] sm:pt-[72px] lg:pt-[116px]"}`}>
         {children}
       </main>
       <Footer />

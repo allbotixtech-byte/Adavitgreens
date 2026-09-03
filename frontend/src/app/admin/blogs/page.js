@@ -63,7 +63,7 @@ export default function AdminBlogsPage() {
                       <p className="font-medium text-secondary-900 line-clamp-1">{blog.title}</p>
                     </td>
                     <td className="px-4 py-3">
-                      <span className="px-2.5 py-0.5 rounded-full bg-primary-50 text-primary-700 text-xs font-medium">{blog.category || "—"}</span>
+                      <span className="px-2.5 py-0.5 rounded-full bg-primary-50 text-primary-700 text-xs font-medium">{blog.category || "-"}</span>
                     </td>
                     <td className="px-4 py-3">
                       <span className={`px-2.5 py-0.5 rounded-full text-xs font-medium ${blog.isPublished ? "bg-emerald-50 text-emerald-700" : "bg-amber-50 text-amber-700"}`}>

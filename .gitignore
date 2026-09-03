@@ -38,3 +38,5 @@ Thumbs.db
 
 # Misc
 *.log
+# Throwaway output dir for verification builds
+.next-verify/

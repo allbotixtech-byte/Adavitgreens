@@ -12,7 +12,6 @@ export const navLinks = [
       { label: "Extended Producer Responsibility", href: "/services/epr" },
       { label: "AMC Authorised E-Waste Recycler", href: "/services/amc-e-waste-recycler" },
       { label: "Solid Waste Management", href: "/services/solid-waste" },
-      { label: "Others", href: "/services/others" },
     ],
   },
   { label: "Blog", href: "/insights" },
@@ -59,6 +58,5 @@ export const footerLinks = {
     { label: "Extended Producer Responsibility", href: "/services/epr" },
     { label: "AMC Authorised E-Waste Recycler", href: "/services/amc-e-waste-recycler" },
     { label: "Solid Waste Management", href: "/services/solid-waste" },
-    { label: "Others", href: "/services/others" },
   ],
 };

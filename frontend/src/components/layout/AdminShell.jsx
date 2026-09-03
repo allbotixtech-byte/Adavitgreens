@@ -4,7 +4,7 @@ import { usePathname } from "next/navigation";
 import Link from "next/link";
 import {
   LayoutDashboard, FileText, Image, Briefcase, Users,
-  MessageSquare, Truck, LogOut, Recycle, ChevronRight, Menu, X,
+  MessageSquare, Truck, LogOut, ChevronRight, Menu, X,
 } from "lucide-react";
 import { useState, useEffect } from "react";
 import { adminLogout } from "@/lib/adminApi";
@@ -29,7 +29,7 @@ export default function AdminShell({ children }) {
     setIsLoggedIn(!!token);
   }, [pathname]);
 
-  // Not logged in — show page without sidebar (login form renders inline)
+  // Not logged in - show page without sidebar (login form renders inline)
   if (!isLoggedIn) {
     return <>{children}</>;
   }
@@ -49,15 +49,25 @@ export default function AdminShell({ children }) {
       >
         <div className="flex flex-col h-full">
           {/* Logo */}
-          <div className="flex items-center gap-3 px-5 py-5 border-b border-white/10">
-            <div className="w-9 h-9 bg-primary-500 rounded-lg flex items-center justify-center">
-              <Recycle size={20} className="text-white" />
+          <Link
+            href="/admin"
+            onClick={() => setSidebarOpen(false)}
+            className="flex items-center gap-3 px-5 py-5 border-b border-white/10 transition-colors hover:bg-white/5"
+          >
+            <div
+              className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
+              style={{
+                backgroundColor: "rgba(255,255,255,0.07)",
+                border: "1px solid rgba(255,255,255,0.12)",
+              }}
+            >
+              <img src="/images/advait-mark.png" alt="" className="w-7 h-7 object-contain" />
             </div>
             <div>
               <p className="font-heading font-bold text-sm text-white leading-tight">Advait Green</p>
               <p className="text-[10px] text-primary-400 font-medium">Admin Panel</p>
             </div>
-          </div>
+          </Link>
 
           {/* Navigation */}
           <nav className="flex-1 px-3 py-4 space-y-1 overflow-y-auto">
@@ -110,7 +120,16 @@ export default function AdminShell({ children }) {
           >
             {sidebarOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
-          <div className="flex items-center gap-2 text-sm text-slate-500">
+
+          {/* Brand mark — the sidebar logo is off-screen on mobile */}
+          <Link href="/admin" className="lg:hidden flex items-center gap-2">
+            <img src="/images/advait-mark.png" alt="Advait Green" className="w-7 h-7 object-contain" />
+            <span className="font-heading font-bold text-sm" style={{ color: "var(--color-primary-950)" }}>
+              Advait Green
+            </span>
+          </Link>
+
+          <div className="hidden lg:flex items-center gap-2 text-sm text-slate-500">
             <span className="hidden sm:inline">Admin</span>
             <ChevronRight size={14} />
             <span className="font-medium text-slate-800 capitalize">

@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import Image from "next/image";
 import { Phone, ChevronDown, Menu, X, ArrowRight } from "lucide-react";
 import { navLinks, companyInfo } from "@/data/navigation";
+import { hasFullHero } from "@/lib/layout";
 
 export default function Header() {
   const pathname = usePathname();
@@ -41,8 +42,7 @@ export default function Header() {
     dropdownTimeout.current = setTimeout(() => setActiveDropdown(null), 150);
   };
 
-  const hasFullHero = pathname === "/" || pathname === "/about" || pathname === "/contact" || pathname === "/insights" || pathname === "/careers" || pathname.startsWith("/services/");
-  const isTransparent = hasFullHero && !scrolled && !mobileOpen;
+  const isTransparent = hasFullHero(pathname) && !scrolled && !mobileOpen;
 
   // Colors based on state
   const navColor = isTransparent ? "#ffffff" : "#1a1a1a";

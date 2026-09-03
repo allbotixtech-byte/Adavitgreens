@@ -10,7 +10,7 @@ export const metadata = {
     description:
       "Design, supply, installation and AMC of air scrubbers, dust collectors, ETPs and stack monitoring systems engineered to meet CPCB and GPCB consent limits.",
     url: "/services/pollution-control-devices",
-    images: [{ url: "/images/Industrial-Equipment.jpg", alt: "Pollution Control Devices — Advait Green Recycling" }],
+    images: [{ url: "/images/Industrial-Equipment.jpg", alt: "Pollution Control Devices - Advait Green Recycling" }],
   },
   twitter: {
     title: "Pollution Control Devices | Advait Green Recycling",

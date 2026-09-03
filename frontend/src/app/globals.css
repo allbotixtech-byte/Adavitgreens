@@ -6,7 +6,7 @@
   --font-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-data: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
-  /* ---- Primary (Deep Teal) — headings, navbar, structure ---- */
+  /* ---- Primary (Deep Teal) - headings, navbar, structure ---- */
   --color-primary-50: #E8F4F9;
   --color-primary-100: #C8E5F2;
   --color-primary-200: #94CEE5;
@@ -19,7 +19,7 @@
   --color-primary-900: #01283E;
   --color-primary-950: #001A2B;
 
-  /* ---- Secondary (Neutral) — backgrounds, borders, muted text ---- */
+  /* ---- Secondary (Neutral) - backgrounds, borders, muted text ---- */
   --color-secondary-0: #FFFFFF;
   --color-secondary-25: #FAFCFC;
   --color-secondary-50: #F4F7F8;
@@ -34,7 +34,7 @@
   --color-secondary-900: #1E2529;
   --color-secondary-950: #12191C;
 
-  /* ---- Accent (Green) — CTA buttons, highlights ---- */
+  /* ---- Accent (Green) - CTA buttons, highlights ---- */
   --color-accent-50: #EDFCE5;
   --color-accent-100: #D5F8C5;
   --color-accent-200: #AEF192;
@@ -359,6 +359,29 @@ main { min-height: 100vh; }
 /* ============================================
    ANIMATIONS
    ============================================ */
+
+/* Horizontal marquee used by the Core Values and Benefits rails. Lives here
+   rather than in a <style jsx> block: styled-jsx needs an App Router style
+   registry to emit anything, and this project has none.
+   Duration is overridable per instance via --marquee-duration. */
+@keyframes marqueeX {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+.marquee-x {
+  animation: marqueeX var(--marquee-duration, 46s) linear infinite;
+  will-change: transform;
+}
+
+.marquee-x:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-x { animation: none; }
+  .marquee-rail { overflow-x: auto; }
+}
 
 @keyframes fade-in {
   from { opacity: 0; }

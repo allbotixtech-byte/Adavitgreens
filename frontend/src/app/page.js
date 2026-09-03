@@ -2,37 +2,59 @@
 
 import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import {
+  motion, useMotionValue, useSpring, useTransform, useMotionTemplate,
+  useReducedMotion, useInView, animate,
+} from "framer-motion";
 import {
   ArrowRight, Cpu, Leaf, ShieldCheck, TrendingUp, Truck, FileCheck,
   Zap, Factory, Building2, GraduationCap, Landmark, ShoppingCart,
   Stethoscope, Smartphone, Recycle, CheckCircle,
-  ClipboardCheck, PackageCheck, Wrench, RotateCcw, Award,
+  ClipboardCheck, PackageCheck, Wrench, RotateCcw, Award, Lock,
 } from "lucide-react";
-import { services } from "@/data/services";
+import { getService } from "@/data/services";
 
 const heroSlides = [
   {
     eyebrow: "E-Waste Recycling",
     title: "Recover the Metal.",
     highlight: "Spare the Mountain.",
-    desc: "Every discarded laptop, server and handset holds recoverable gold, copper and rare earths. We extract them responsibly — so the earth doesn't have to be dug up again.",
+    desc: "Every discarded laptop, server and handset holds recoverable gold, copper and rare earths. We extract them responsibly - so the earth doesn't have to be dug up again.",
     cta: { label: "Explore E-Waste Recycling", href: "/services/e-waste" },
   },
   {
     eyebrow: "Plastic Waste",
     title: "Plastic Was Never Meant",
     highlight: "to Be a One-Way Journey.",
-    desc: "We collect, sort, granulate and return plastic waste to the production line — closing the loop for brands serious about their EPR obligations.",
+    desc: "We collect, sort, granulate and return plastic waste to the production line - closing the loop for brands serious about their EPR obligations.",
     cta: { label: "Explore Plastic Recycling", href: "/services/plastic-waste" },
   },
   {
     eyebrow: "Compliance / EPR",
     title: "Compliance, Documented.",
     highlight: "Impact, Verified.",
-    desc: "From EPR registration to certificate generation, we handle the paperwork behind your sustainability promise — audit-ready, every quarter.",
+    desc: "From EPR registration to certificate generation, we handle the paperwork behind your sustainability promise - audit-ready, every quarter.",
     cta: { label: "EPR Services", href: "/services/epr" },
   },
+];
+
+/**
+ * Homepage "Our Services" grid arrangement, by slug. `null` is a deliberate
+ * empty cell; "solid-waste" carries `wide: true` so it spans two columns.
+ *
+ *   row 1 |  e-waste      |  plastic-waste  |  (empty)
+ *   row 2 |  solid-waste  (spans 2)         |  pollution
+ *   row 3 |  bio-medical  |  epr            |  amc
+ */
+const HOME_SERVICE_GRID = [
+  "e-waste",
+  "plastic-waste",
+  null,
+  "solid-waste",
+  "pollution-control-devices",
+  "bio-medical-waste",
+  "epr",
+  "amc-e-waste-recycler",
 ];
 
 const trustBadges = [
@@ -47,12 +69,12 @@ const valueCards = [
   {
     icon: Recycle,
     title: "What Is Waste Management?",
-    desc: "Waste management is the discipline of collecting, transporting, treating and recovering material that has reached the end of its first useful life — safely, legally, and with the maximum possible value returned to the economy.",
+    desc: "Waste management is the discipline of collecting, transporting, treating and recovering material that has reached the end of its first useful life - safely, legally, and with the maximum possible value returned to the economy.",
   },
   {
     icon: Leaf,
     title: "Why Recycling Matters",
-    desc: "Recycling one tonne of circuit boards recovers more gold than 17 tonnes of mined ore. Recovery isn't charity for the planet — it is the cheaper, cleaner, and increasingly the only legal way to source secondary raw material.",
+    desc: "Recycling one tonne of circuit boards recovers more gold than 17 tonnes of mined ore. Recovery isn't charity for the planet - it is the cheaper, cleaner, and increasingly the only legal way to source secondary raw material.",
   },
   {
     icon: TrendingUp,
@@ -63,13 +85,21 @@ const valueCards = [
 
 
 
+/**
+ * SAMPLE FIGURES — replace with confirmed operational data before launch.
+ *
+ * Where a number is already claimed elsewhere on the site it is matched here so
+ * the site does not contradict itself: clients 500 ("500+ Corporates Served",
+ * e-waste page) and plastic 500 MT/month ("500 MT Monthly Recycling Capacity",
+ * plastic-waste page). The other four are illustrative placeholders.
+ */
 const impactStats = [
-  { label: "E-waste processed annually", value: "XXX", unit: "MT" },
-  { label: "Plastic waste recycled monthly", value: "XXX", unit: "MT/Mo" },
-  { label: "Metal & material recovered daily", value: "X,XXX", unit: "kg" },
-  { label: "Waste diverted from landfill", value: "XX", unit: "%" },
-  { label: "Corporate clients served", value: "XXX", unit: "+" },
-  { label: "CO2e emissions avoided", value: "X,XXX", unit: "T" },
+  { label: "E-waste processed annually", value: 12000, unit: "MT" },
+  { label: "Plastic waste recycled monthly", value: 500, unit: "MT/Mo" },
+  { label: "Metal & material recovered daily", value: 3200, unit: "kg" },
+  { label: "Waste diverted from landfill", value: 96, unit: "%" },
+  { label: "Corporate clients served", value: 500, unit: "+" },
+  { label: "CO2e emissions avoided", value: 8400, unit: "T" },
 ];
 
 const processSteps = [
@@ -82,11 +112,11 @@ const processSteps = [
 
 const whyChoose = [
   { icon: ShieldCheck, title: "Fully Authorised", desc: "Every consignment moves and is treated under valid CPCB/SPCB authorisation, so your liability actually transfers." },
-  { icon: Leaf, title: "Zero Landfill", desc: "Our target is complete diversion of processed material from landfill — nothing we process ends up in the ground." },
+  { icon: Leaf, title: "Zero Landfill", desc: "Our target is complete diversion of processed material from landfill - nothing we process ends up in the ground." },
   { icon: FileCheck, title: "Audit-Ready Docs", desc: "Manifests, weighbridge slips, destruction certificates and Form-wise records, issued as standard." },
-  { icon: ShieldCheck, title: "Data Security", desc: "Chain-of-custody sealing and witnessed destruction available for regulated industries." },
-  { icon: TrendingUp, title: "Transparent Valuation", desc: "You see the recovery basis behind every buyback number we quote — no hidden margins." },
-  { icon: Recycle, title: "Single Partner", desc: "E-waste, plastic, battery and compliance handled by one accountable team — one contract, one point of contact." },
+  { icon: Lock, title: "Data Security", desc: "Chain-of-custody sealing and witnessed destruction available for regulated industries." },
+  { icon: TrendingUp, title: "Transparent Valuation", desc: "You see the recovery basis behind every buyback number we quote - no hidden margins." },
+  { icon: Recycle, title: "Single Partner", desc: "E-waste, plastic, battery and compliance handled by one accountable team - one contract, one point of contact." },
 ];
 
 const sectors = [
@@ -108,6 +138,499 @@ const fadeUp = {
     transition: { delay: i * 0.1, duration: 0.5, ease: [0.2, 0, 0, 1] },
   }),
 };
+
+/**
+ * Process flow with a travelling indicator.
+ *
+ * A dot walks the connector between steps and the step it arrives at is
+ * highlighted. Desktop follows the real SVG arc via getPointAtLength, so the
+ * dot tracks the curve exactly rather than approximating it; mobile walks a
+ * vertical rail whose stop positions are measured from the rendered circles
+ * (rows differ in height, so they can't be assumed evenly spaced).
+ *
+ * Runs only while the section is on screen, and is skipped entirely under
+ * prefers-reduced-motion — the last step stays highlighted instead.
+ */
+const DOT_TRAVEL_MS = 1000;
+const DOT_DWELL_MS = 850;
+
+function ProcessFlow() {
+  const sectionRef = useRef(null);
+  const reduceMotion = useReducedMotion();
+  const inView = useInView(sectionRef, { margin: "0px 0px -15% 0px" });
+
+  const [active, setActive] = useState(0);
+
+  // Desktop
+  const pathRefs = useRef([]);
+  const dotRef = useRef(null);
+
+  // Mobile
+  const railWrapRef = useRef(null);
+  const circleRefs = useRef([]);
+  const mobileDotRef = useRef(null);
+  const [stops, setStops] = useState([]);
+
+  // Measure the vertical centre of each mobile circle relative to the wrapper.
+  useEffect(() => {
+    const measure = () => {
+      const wrap = railWrapRef.current;
+      if (!wrap) return;
+      const wrapTop = wrap.getBoundingClientRect().top;
+      const next = circleRefs.current
+        .filter(Boolean)
+        .map((el) => {
+          const r = el.getBoundingClientRect();
+          return r.top - wrapTop + r.height / 2;
+        });
+      setStops(next);
+    };
+    measure();
+    const raf = requestAnimationFrame(measure);
+    window.addEventListener("resize", measure);
+    return () => {
+      cancelAnimationFrame(raf);
+      window.removeEventListener("resize", measure);
+    };
+  }, []);
+
+  // Drive the dot from segment to segment while the section is visible.
+  useEffect(() => {
+    if (!inView) return;
+    if (reduceMotion) {
+      setActive(processSteps.length - 1);
+      return;
+    }
+
+    let cancelled = false;
+    let controls = null;
+    let timer = null;
+
+    const place = (t, seg) => {
+      // Desktop: exact point along the arc
+      const path = pathRefs.current[seg];
+      if (path && dotRef.current) {
+        const len = path.getTotalLength();
+        const p = path.getPointAtLength(t * len);
+        dotRef.current.setAttribute("transform", `translate(${p.x}, ${p.y})`);
+      }
+      // Mobile: interpolate between measured stops
+      if (mobileDotRef.current && stops.length > seg + 1) {
+        const y = stops[seg] + (stops[seg + 1] - stops[seg]) * t;
+        mobileDotRef.current.style.transform = `translate(-50%, -50%) translateY(${y}px)`;
+      }
+    };
+
+    const runSegment = (seg) => {
+      if (cancelled) return;
+      setActive(seg);
+      controls = animate(0, 1, {
+        duration: DOT_TRAVEL_MS / 1000,
+        ease: [0.45, 0, 0.55, 1],
+        onUpdate: (t) => place(t, seg),
+        onComplete: () => {
+          if (cancelled) return;
+          setActive(seg + 1);
+          timer = setTimeout(() => {
+            const next = seg + 1 >= processSteps.length - 1 ? 0 : seg + 1;
+            runSegment(next);
+          }, DOT_DWELL_MS);
+        },
+      });
+    };
+
+    timer = setTimeout(() => runSegment(0), 400);
+
+    return () => {
+      cancelled = true;
+      controls?.stop();
+      clearTimeout(timer);
+    };
+  }, [inView, reduceMotion, stops]);
+
+  const cx = [96, 288, 480, 672, 864];
+
+  return (
+    <section ref={sectionRef} className="bg-white py-16 lg:py-28 overflow-hidden">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
+        <div className="text-center mb-16">
+          <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>
+            How It Works
+          </p>
+          <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight" style={{ color: "var(--color-primary-950)" }}>
+            Our Process
+          </h2>
+        </div>
+
+        {/* ── Desktop (lg+) ── */}
+        <div className="hidden lg:block">
+          <div className="relative mx-auto" style={{ maxWidth: "960px" }}>
+            <div className="grid grid-cols-5">
+              {processSteps.map((step, i) => {
+                const isTop = i % 2 === 0;
+                const arcRotations = [-100, -10, -160, 40, -120];
+                const on = active === i;
+                return (
+                  <motion.div
+                    key={step.num}
+                    initial={{ opacity: 0, y: isTop ? -20 : 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: i * 0.15 }}
+                    className="flex flex-col items-center text-center px-2"
+                  >
+                    <div className="flex flex-col justify-end px-1" style={{ height: "120px", paddingBottom: "18px" }}>
+                      {isTop && <StepText step={step} on={on} />}
+                    </div>
+
+                    <div
+                      className="relative transition-transform duration-500"
+                      style={{ width: "105px", height: "105px", transform: on ? "scale(1.07)" : "scale(1)" }}
+                    >
+                      {/* Highlight halo */}
+                      <span
+                        aria-hidden="true"
+                        className="absolute inset-0 rounded-full transition-opacity duration-500"
+                        style={{
+                          opacity: on ? 1 : 0,
+                          boxShadow: "0 0 0 6px rgba(57,217,0,0.13), 0 10px 30px rgba(22,168,0,0.18)",
+                        }}
+                      />
+                      <svg viewBox="0 0 105 105" className="relative w-full h-full">
+                        <circle cx="52.5" cy="55" r="46" fill="rgba(4,30,38,0.05)" />
+                        <circle cx="52.5" cy="52.5" r="46" fill="#ffffff" />
+                        <circle
+                          cx="52.5" cy="52.5" r="46" fill="none"
+                          stroke={on ? "var(--color-accent-400)" : "var(--color-secondary-100)"}
+                          strokeWidth="2.5"
+                          style={{ transition: "stroke 400ms ease" }}
+                        />
+                        <circle
+                          cx="52.5" cy="52.5" r="46" fill="none"
+                          stroke="var(--color-accent-400)" strokeWidth="4.5"
+                          strokeDasharray="82 207" strokeLinecap="round"
+                          style={{ transform: `rotate(${arcRotations[i]}deg)`, transformOrigin: "52.5px 52.5px" }}
+                        />
+                      </svg>
+                      <div className="absolute inset-0 flex items-center justify-center" style={{ marginTop: "-2.5px" }}>
+                        <step.icon
+                          size={34}
+                          strokeWidth={1.5}
+                          style={{
+                            color: on ? "var(--color-accent-600)" : "var(--color-primary-700)",
+                            transition: "color 400ms ease",
+                          }}
+                        />
+                      </div>
+                    </div>
+
+                    <div className="flex flex-col justify-start px-1" style={{ height: "120px", paddingTop: "18px" }}>
+                      {!isTop && <StepText step={step} on={on} />}
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Connector arcs + travelling dot */}
+            <svg
+              className="absolute left-0 w-full pointer-events-none"
+              style={{ top: "120px", height: "105px" }}
+              viewBox="0 0 960 105"
+              fill="none"
+            >
+              {[0, 1, 2, 3].map((idx) => {
+                const r = 50;
+                const x1 = cx[idx] + r;
+                const x2 = cx[idx + 1] - r;
+                const y = 52.5;
+                const isUp = idx % 2 === 0;
+                const cpY = isUp ? -5 : 110;
+                const d = `M ${x1} ${y} C ${x1 + 20} ${cpY}, ${x2 - 20} ${cpY}, ${x2} ${y}`;
+                return (
+                  <g key={idx}>
+                    <path
+                      ref={(el) => (pathRefs.current[idx] = el)}
+                      d={d}
+                      stroke="var(--color-primary-700)"
+                      strokeWidth="2"
+                      strokeDasharray="6 4"
+                      opacity={active === idx ? 0.7 : 0.35}
+                      style={{ transition: "opacity 400ms ease" }}
+                    />
+                    <circle cx={x1 + 2} cy={y} r="3.5" fill="var(--color-accent-400)" />
+                    <circle cx={x2 - 2} cy={y} r="3.5" fill="var(--color-accent-400)" />
+                  </g>
+                );
+              })}
+
+              {/* The travelling dot — halo + core, moved as one group */}
+              {!reduceMotion && (
+                <g ref={dotRef} transform={`translate(${cx[0] + 50}, 52.5)`}>
+                  <circle r="10" fill="var(--color-accent-500)" opacity="0.20" />
+                  <circle r="5.5" fill="var(--color-accent-500)" />
+                  <circle r="2" fill="#ffffff" opacity="0.85" />
+                </g>
+              )}
+            </svg>
+          </div>
+        </div>
+
+        {/* ── Mobile / Tablet (< lg) ── */}
+        <div ref={railWrapRef} className="lg:hidden relative max-w-[420px] mx-auto space-y-6">
+          {/* Vertical rail */}
+          {stops.length > 1 && (
+            <span
+              aria-hidden="true"
+              className="absolute w-[2px]"
+              style={{
+                left: "32px",
+                top: `${stops[0]}px`,
+                height: `${stops[stops.length - 1] - stops[0]}px`,
+                background:
+                  "repeating-linear-gradient(to bottom, var(--color-primary-200) 0 6px, transparent 6px 10px)",
+              }}
+            />
+          )}
+
+          {/* Travelling dot */}
+          {!reduceMotion && stops.length > 1 && (
+            <span
+              ref={mobileDotRef}
+              aria-hidden="true"
+              className="absolute rounded-full"
+              style={{
+                left: "32px",
+                top: 0,
+                width: "14px",
+                height: "14px",
+                backgroundColor: "var(--color-accent-500)",
+                boxShadow: "0 0 0 5px rgba(57,217,0,0.18)",
+                transform: `translate(-50%, -50%) translateY(${stops[0]}px)`,
+              }}
+            />
+          )}
+
+          {processSteps.map((step, i) => {
+            const on = active === i;
+            return (
+              <motion.div
+                key={step.num}
+                initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.1 }}
+                className="relative flex items-center gap-4"
+              >
+                <div
+                  ref={(el) => (circleRefs.current[i] = el)}
+                  className="relative shrink-0 transition-transform duration-500"
+                  style={{ width: "64px", height: "64px", transform: on ? "scale(1.08)" : "scale(1)" }}
+                >
+                  <span
+                    aria-hidden="true"
+                    className="absolute inset-0 rounded-full transition-opacity duration-500"
+                    style={{
+                      opacity: on ? 1 : 0,
+                      boxShadow: "0 0 0 5px rgba(57,217,0,0.13), 0 8px 20px rgba(22,168,0,0.16)",
+                    }}
+                  />
+                  <svg viewBox="0 0 64 64" className="relative w-full h-full">
+                    <circle cx="32" cy="33" r="28" fill="rgba(4,30,38,0.05)" />
+                    <circle cx="32" cy="32" r="28" fill="#fff" />
+                    <circle
+                      cx="32" cy="32" r="28" fill="none"
+                      stroke={on ? "var(--color-accent-400)" : "var(--color-secondary-100)"}
+                      strokeWidth="2"
+                      style={{ transition: "stroke 400ms ease" }}
+                    />
+                    <circle
+                      cx="32" cy="32" r="28" fill="none"
+                      stroke="var(--color-accent-400)" strokeWidth="3"
+                      strokeDasharray="50 126" strokeLinecap="round"
+                      style={{ transform: "rotate(-90deg)", transformOrigin: "32px 32px" }}
+                    />
+                  </svg>
+                  <div className="absolute inset-0 flex items-center justify-center" style={{ marginTop: "-1px" }}>
+                    <step.icon
+                      size={24}
+                      strokeWidth={1.6}
+                      style={{
+                        color: on ? "var(--color-accent-600)" : "var(--color-primary-700)",
+                        transition: "color 400ms ease",
+                      }}
+                    />
+                  </div>
+                </div>
+                <div>
+                  <h4
+                    className="font-heading text-base font-semibold mb-0.5 transition-colors duration-400"
+                    style={{ color: on ? "var(--color-accent-700)" : "var(--color-primary-950)" }}
+                  >
+                    {step.title}
+                  </h4>
+                  <p className="text-sm leading-relaxed" style={{ color: "var(--color-secondary-600)" }}>
+                    {step.desc}
+                  </p>
+                </div>
+              </motion.div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+function StepText({ step, on }) {
+  return (
+    <>
+      <h4
+        className="font-heading text-[15px] font-bold leading-tight mb-1.5 transition-colors duration-500"
+        style={{ color: on ? "var(--color-accent-700)" : "var(--color-primary-950)" }}
+      >
+        {step.title}
+      </h4>
+      <p className="text-[11.5px] leading-[1.6]" style={{ color: "var(--color-secondary-600)" }}>
+        {step.desc}
+      </p>
+    </>
+  );
+}
+
+/**
+ * Counts from 0 up to `value` the first time it scrolls into view.
+ *
+ * Driven by a motion value so each frame writes straight to the DOM rather
+ * than re-rendering. Under prefers-reduced-motion it snaps to the final
+ * figure instead of animating.
+ */
+function CountUp({ value }) {
+  const ref = useRef(null);
+  const reduceMotion = useReducedMotion();
+  const inView = useInView(ref, { once: true, margin: "0px 0px -40px 0px" });
+
+  const count = useMotionValue(0);
+  const display = useTransform(count, (v) => Math.round(v).toLocaleString("en-IN"));
+
+  useEffect(() => {
+    if (!inView) return;
+    if (reduceMotion) {
+      count.set(value);
+      return;
+    }
+    const controls = animate(count, value, { duration: 1.4, ease: [0.2, 0, 0, 1] });
+    return () => controls.stop();
+  }, [inView, value, reduceMotion, count]);
+
+  return (
+    <motion.span ref={ref} aria-label={value.toLocaleString("en-IN")}>
+      {display}
+    </motion.span>
+  );
+}
+
+/**
+ * Value card with cursor-tracked lighting and a subtle pointer-follow tilt.
+ *
+ * The spotlight and tilt are driven by motion values rather than React state,
+ * so pointer movement never triggers a re-render. Everything degrades to a
+ * plain static card under prefers-reduced-motion.
+ */
+function ValueCard({ card, index }) {
+  const ref = useRef(null);
+  const reduceMotion = useReducedMotion();
+
+  // Normalised pointer position within the card (0-1 on each axis).
+  const px = useMotionValue(0.5);
+  const py = useMotionValue(0.5);
+
+  const spring = { stiffness: 160, damping: 20, mass: 0.4 };
+  const rotateX = useSpring(useTransform(py, [0, 1], [5.5, -5.5]), spring);
+  const rotateY = useSpring(useTransform(px, [0, 1], [-5.5, 5.5]), spring);
+
+  const glowX = useTransform(px, (v) => `${v * 100}%`);
+  const glowY = useTransform(py, (v) => `${v * 100}%`);
+  const spotlight = useMotionTemplate`radial-gradient(420px circle at ${glowX} ${glowY}, rgba(57,217,0,0.13), rgba(8,127,165,0.07) 38%, transparent 68%)`;
+
+  const handleMove = (e) => {
+    if (reduceMotion || !ref.current) return;
+    const r = ref.current.getBoundingClientRect();
+    px.set((e.clientX - r.left) / r.width);
+    py.set((e.clientY - r.top) / r.height);
+  };
+  const handleLeave = () => {
+    px.set(0.5);
+    py.set(0.5);
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      onPointerMove={handleMove}
+      onPointerLeave={handleLeave}
+      initial={{ opacity: 0, y: 34 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      whileHover={reduceMotion ? undefined : { y: -8 }}
+      viewport={{ once: true, margin: "0px 0px -40px 0px" }}
+      transition={{ duration: 0.42, delay: index * 0.07, ease: [0.2, 0, 0, 1] }}
+      style={
+        reduceMotion
+          ? undefined
+          : { rotateX, rotateY, transformPerspective: 1000, transformStyle: "preserve-3d" }
+      }
+      className="value-card group relative bg-secondary-50 border border-secondary-100 rounded-lg p-7 lg:p-8 overflow-hidden transition-[box-shadow,border-color] duration-300 hover:shadow-lg hover:border-secondary-200"
+    >
+      {/* Cursor-tracked spotlight */}
+      <motion.div
+        aria-hidden="true"
+        className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+        style={{ background: spotlight }}
+      />
+
+      {/* Accent rule — draws across on reveal, extends on hover */}
+      <motion.span
+        aria-hidden="true"
+        className="absolute top-0 left-0 h-[3px]"
+        style={{ backgroundColor: "var(--color-accent-500)" }}
+        initial={{ width: 0 }}
+        whileInView={{ width: "38%" }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.4, delay: index * 0.07 + 0.1, ease: [0.2, 0, 0, 1] }}
+      />
+
+      <motion.div
+        initial={{ opacity: 0, scale: 0.7, rotate: index === 0 ? -45 : index === 1 ? -20 : 0 }}
+        whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.36, delay: index * 0.07 + 0.05, ease: [0.2, 0, 0, 1] }}
+        className="relative w-10 h-10 rounded-md flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-110 group-hover:-rotate-6"
+        style={{ backgroundColor: "var(--color-primary-50)" }}
+      >
+        <card.icon size={20} style={{ color: "var(--color-primary-700)" }} />
+      </motion.div>
+
+      {/* Title is not animated — it appears with the card, no delay */}
+      <h3
+        className="relative font-heading text-lg font-semibold tracking-tight mb-2.5"
+        style={{ color: "var(--color-primary-950)" }}
+      >
+        {card.title}
+      </h3>
+
+      <motion.p
+        initial={{ opacity: 0, y: 10 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.34, delay: index * 0.07 + 0.08, ease: [0.2, 0, 0, 1] }}
+        className="relative text-sm leading-relaxed"
+        style={{ color: "var(--color-secondary-600)" }}
+      >
+        {card.desc}
+      </motion.p>
+    </motion.div>
+  );
+}
 
 function ServiceCard({ svc, index }) {
   const [flipped, setFlipped] = useState(false);
@@ -427,95 +950,177 @@ export default function HomePage() {
 
       {/* ── VALUE CARDS ── */}
       <section className="bg-white py-16 lg:py-24 relative overflow-hidden">
-        {/* Subtle ambient background */}
-        <div className="absolute inset-0 pointer-events-none" aria-hidden="true">
+
+        {/* ── Animated Ambient Background ── */}
+        <div
+          className="absolute inset-0 pointer-events-none overflow-hidden"
+          aria-hidden="true"
+        >
+          {/* Top-left primary glow */}
           <div
-            className="absolute rounded-full opacity-[0.04]"
+            className="absolute rounded-full"
             style={{
-              width: "600px", height: "600px",
-              background: "radial-gradient(circle, var(--color-primary-500) 0%, transparent 70%)",
-              top: "-10%", left: "-8%",
-              animation: "ambientDrift 25s ease-in-out infinite",
+              width: "650px",
+              height: "650px",
+              background:
+                "radial-gradient(circle, var(--color-primary-500) 0%, transparent 68%)",
+              top: "-20%",
+              left: "-12%",
+              opacity: 0.045,
+              filter: "blur(2px)",
+              animation: "ambientFloatOne 16s ease-in-out infinite",
+              willChange: "transform",
             }}
           />
+
+          {/* Bottom-right primary glow */}
           <div
-            className="absolute rounded-full opacity-[0.03]"
+            className="absolute rounded-full"
             style={{
-              width: "500px", height: "500px",
-              background: "radial-gradient(circle, var(--color-primary-500) 0%, transparent 70%)",
-              bottom: "-15%", right: "-5%",
-              animation: "ambientDrift 30s ease-in-out infinite reverse",
+              width: "550px",
+              height: "550px",
+              background:
+                "radial-gradient(circle, var(--color-primary-500) 0%, transparent 68%)",
+              bottom: "-20%",
+              right: "-10%",
+              opacity: 0.035,
+              filter: "blur(3px)",
+              animation: "ambientFloatTwo 20s ease-in-out infinite",
+              willChange: "transform",
             }}
           />
+
+          {/* Accent glow */}
           <div
-            className="absolute rounded-full opacity-[0.02]"
+            className="absolute rounded-full"
             style={{
-              width: "350px", height: "350px",
-              background: "radial-gradient(circle, var(--color-accent-500) 0%, transparent 70%)",
-              top: "30%", right: "20%",
-              animation: "ambientDrift 22s ease-in-out infinite 5s",
+              width: "400px",
+              height: "400px",
+              background:
+                "radial-gradient(circle, var(--color-accent-500) 0%, transparent 68%)",
+              top: "25%",
+              right: "15%",
+              opacity: 0.025,
+              filter: "blur(4px)",
+              animation: "ambientFloatThree 14s ease-in-out infinite",
+              willChange: "transform",
+            }}
+          />
+
+          {/* Center breathing glow */}
+          <div
+            className="absolute rounded-full"
+            style={{
+              width: "300px",
+              height: "300px",
+              background:
+                "radial-gradient(circle, var(--color-primary-500) 0%, transparent 70%)",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+              opacity: 0.015,
+              animation: "ambientPulse 9s ease-in-out infinite",
+              willChange: "transform, opacity",
             }}
           />
         </div>
 
+        {/* ── Value Cards ── */}
         <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6">
           <div className="grid sm:grid-cols-3 gap-6 lg:gap-8">
             {valueCards.map((card, i) => (
-              <motion.div
+              <ValueCard
                 key={card.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-60px" }}
-                transition={{
-                  duration: 0.7,
-                  delay: i * 0.14,
-                  ease: [0.2, 0, 0, 1],
-                }}
-                className="value-card group relative bg-secondary-50 border border-secondary-100 rounded-lg p-7 lg:p-8 transition-all duration-[350ms] ease-out hover:-translate-y-1.5 hover:shadow-lg hover:border-secondary-200 overflow-hidden"
-              >
-                {/* Hover radial glow */}
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-[400ms] pointer-events-none"
-                  style={{
-                    background: "radial-gradient(circle at 30% 20%, rgba(14,116,144,0.05) 0%, transparent 60%)",
-                  }}
-                />
-
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.6, rotate: i === 0 ? -90 : i === 1 ? -30 : 0 }}
-                  whileInView={{ opacity: 1, scale: 1, rotate: 0 }}
-                  viewport={{ once: true }}
-                  transition={{
-                    duration: 0.6,
-                    delay: i * 0.14 + 0.15,
-                    ease: [0.2, 0, 0, 1],
-                  }}
-                  className="relative w-10 h-10 rounded-md flex items-center justify-center mb-4 transition-transform duration-300 group-hover:scale-105"
-                  style={{ backgroundColor: "var(--color-primary-50)" }}
-                >
-                  <card.icon size={20} style={{ color: "var(--color-primary-700)" }} />
-                </motion.div>
-
-                <h3 className="relative font-heading text-lg font-semibold mb-2.5 tracking-tight" style={{ color: "var(--color-primary-950)" }}>
-                  {card.title}
-                </h3>
-                <p className="relative text-sm leading-relaxed" style={{ color: "var(--color-secondary-600)" }}>{card.desc}</p>
-              </motion.div>
+                card={card}
+                index={i}
+              />
             ))}
           </div>
         </div>
 
+        {/* ── Animations ── */}
         <style jsx>{`
-          @keyframes ambientDrift {
-            0%, 100% { transform: translate(0, 0) scale(1); }
-            33% { transform: translate(15px, -20px) scale(1.05); }
-            66% { transform: translate(-10px, 12px) scale(0.97); }
+          @keyframes ambientFloatOne {
+            0%,
+            100% {
+              transform: translate3d(0, 0, 0) scale(1);
+            }
+
+            25% {
+              transform: translate3d(35px, 25px, 0) scale(1.04);
+            }
+
+            50% {
+              transform: translate3d(75px, -15px, 0) scale(1.08);
+            }
+
+            75% {
+              transform: translate3d(30px, -40px, 0) scale(1.03);
+            }
           }
+
+          @keyframes ambientFloatTwo {
+            0%,
+            100% {
+              transform: translate3d(0, 0, 0) scale(1);
+            }
+
+            25% {
+              transform: translate3d(-30px, -25px, 0) scale(1.05);
+            }
+
+            50% {
+              transform: translate3d(-70px, 15px, 0) scale(1.09);
+            }
+
+            75% {
+              transform: translate3d(-25px, 40px, 0) scale(1.04);
+            }
+          }
+
+          @keyframes ambientFloatThree {
+            0%,
+            100% {
+              transform: translate3d(0, 0, 0) scale(1);
+            }
+
+            25% {
+              transform: translate3d(-25px, 20px, 0) scale(1.06);
+            }
+
+            50% {
+              transform: translate3d(30px, 50px, 0) scale(0.94);
+            }
+
+            75% {
+              transform: translate3d(55px, -20px, 0) scale(1.07);
+            }
+          }
+
+          @keyframes ambientPulse {
+            0%,
+            100% {
+              transform: translate(-50%, -50%) scale(0.8);
+              opacity: 0.01;
+            }
+
+            50% {
+              transform: translate(-50%, -50%) scale(1.25);
+              opacity: 0.025;
+            }
+          }
+
           @media (prefers-reduced-motion: reduce) {
-            .value-card { transition: none !important; }
-            .value-card:hover { transform: none !important; }
+            .value-card {
+              transition: none !important;
+            }
+
+            .value-card:hover {
+              transform: none !important;
+            }
           }
         `}</style>
+
       </section>
 
       {/* ── SERVICES (Flip Cards) ── */}
@@ -558,9 +1163,19 @@ export default function HomePage() {
             </h2>
           </div>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {services.map((svc, i) => (
-              <ServiceCard key={svc.slug} svc={svc} index={i} />
-            ))}
+            {(() => {
+              let cardIndex = -1;
+              return HOME_SERVICE_GRID.map((slug, cell) => {
+                if (!slug) {
+                  // Empty cell — only reserved once the grid is 3 columns wide.
+                  return <div key={`gap-${cell}`} className="hidden lg:block" />;
+                }
+                const svc = getService(slug);
+                if (!svc) return null;
+                cardIndex += 1;
+                return <ServiceCard key={svc.slug} svc={svc} index={cardIndex} />;
+              });
+            })()}
           </div>
         </div>
 
@@ -616,7 +1231,7 @@ export default function HomePage() {
                 className="text-center"
               >
                 <p className="font-mono text-3xl lg:text-4xl font-bold text-white tabular-nums tracking-tight">
-                  {stat.value}
+                  <CountUp value={stat.value} />
                   <span className="text-lg text-secondary-400 ml-1 font-medium">{stat.unit}</span>
                 </p>
                 <p className="text-sm text-secondary-400 mt-2">{stat.label}</p>
@@ -627,190 +1242,96 @@ export default function HomePage() {
       </section>
 
       {/* ── PROCESS (Workflow) ── */}
-      <section className="bg-white py-16 lg:py-28 overflow-hidden">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
-          <div className="text-center mb-16">
-            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>How It Works</p>
-            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight" style={{ color: "var(--color-primary-950)" }}>
-              Our Process
-            </h2>
-          </div>
-
-          {/* ── Desktop (lg+) ── */}
-          <div className="hidden lg:block">
-            <div className="relative mx-auto" style={{ maxWidth: "960px" }}>
-              {/* Steps grid */}
-              <div className="grid grid-cols-5">
-                {processSteps.map((step, i) => {
-                  const isTop = i % 2 === 0;
-                  const arcRotations = [-100, -10, -160, 40, -120];
-                  return (
-                    <motion.div
-                      key={step.num}
-                      initial={{ opacity: 0, y: isTop ? -20 : 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ duration: 0.5, delay: i * 0.15 }}
-                      className="flex flex-col items-center text-center px-2"
-                    >
-                      {/* Top text area */}
-                      <div className="flex flex-col justify-end px-1" style={{ height: "120px", paddingBottom: "18px" }}>
-                        {isTop && (
-                          <>
-                            <h4 className="font-heading text-[15px] font-bold leading-tight mb-1.5" style={{ color: "var(--color-primary-950)" }}>
-                              {step.title}
-                            </h4>
-                            <p className="text-[11.5px] leading-[1.6]" style={{ color: "var(--color-secondary-600)" }}>
-                              {step.desc}
-                            </p>
-                          </>
-                        )}
-                      </div>
-
-                      {/* Circle with accent arc */}
-                      <div className="relative" style={{ width: "105px", height: "105px" }}>
-                        <svg viewBox="0 0 105 105" className="w-full h-full">
-                          <circle cx="52.5" cy="55" r="46" fill="rgba(4,30,38,0.05)" />
-                          <circle cx="52.5" cy="52.5" r="46" fill="#ffffff" />
-                          <circle cx="52.5" cy="52.5" r="46" fill="none" stroke="var(--color-secondary-100)" strokeWidth="2.5" />
-                          <circle
-                            cx="52.5" cy="52.5" r="46" fill="none"
-                            stroke="var(--color-accent-400)" strokeWidth="4.5"
-                            strokeDasharray="82 207" strokeLinecap="round"
-                            style={{ transform: `rotate(${arcRotations[i]}deg)`, transformOrigin: "52.5px 52.5px" }}
-                          />
-                        </svg>
-                        <div className="absolute inset-0 flex items-center justify-center" style={{ marginTop: "-2.5px" }}>
-                          <step.icon size={34} strokeWidth={1.5} style={{ color: "var(--color-primary-700)" }} />
-                        </div>
-                      </div>
-
-                      {/* Bottom text area */}
-                      <div className="flex flex-col justify-start px-1" style={{ height: "120px", paddingTop: "18px" }}>
-                        {!isTop && (
-                          <>
-                            <h4 className="font-heading text-[15px] font-bold leading-tight mb-1.5" style={{ color: "var(--color-primary-950)" }}>
-                              {step.title}
-                            </h4>
-                            <p className="text-[11.5px] leading-[1.6]" style={{ color: "var(--color-secondary-600)" }}>
-                              {step.desc}
-                            </p>
-                          </>
-                        )}
-                      </div>
-                    </motion.div>
-                  );
-                })}
-              </div>
-
-              {/* Connecting arcs SVG overlay */}
-              <svg
-                className="absolute left-0 w-full pointer-events-none"
-                style={{ top: "120px", height: "105px" }}
-                viewBox="0 0 960 105"
-                fill="none"
-              >
-                {[0, 1, 2, 3].map((idx) => {
-                  const cx = [96, 288, 480, 672, 864];
-                  const r = 50;
-                  const x1 = cx[idx] + r;
-                  const x2 = cx[idx + 1] - r;
-                  const y = 52.5;
-                  const isUp = idx % 2 === 0;
-                  const cpY = isUp ? -5 : 110;
-                  return (
-                    <g key={idx}>
-                      <path
-                        d={`M ${x1} ${y} C ${x1 + 20} ${cpY}, ${x2 - 20} ${cpY}, ${x2} ${y}`}
-                        stroke="var(--color-primary-700)" strokeWidth="2" strokeDasharray="6 4" opacity="0.35"
-                      />
-                      <circle cx={x1 + 2} cy={y} r="3.5" fill="var(--color-accent-400)" />
-                      <circle cx={x2 - 2} cy={y} r="3.5" fill="var(--color-accent-400)" />
-                    </g>
-                  );
-                })}
-              </svg>
-            </div>
-          </div>
-
-          {/* ── Mobile / Tablet (< lg) ── */}
-          <div className="lg:hidden max-w-[420px] mx-auto space-y-6">
-            {processSteps.map((step, i) => (
-              <motion.div
-                key={step.num}
-                initial={{ opacity: 0, x: i % 2 === 0 ? -20 : 20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.1 }}
-                className="flex items-center gap-4"
-              >
-                <div className="relative shrink-0" style={{ width: "64px", height: "64px" }}>
-                  <svg viewBox="0 0 64 64" className="w-full h-full">
-                    <circle cx="32" cy="33" r="28" fill="rgba(4,30,38,0.05)" />
-                    <circle cx="32" cy="32" r="28" fill="#fff" />
-                    <circle cx="32" cy="32" r="28" fill="none" stroke="var(--color-secondary-100)" strokeWidth="2" />
-                    <circle cx="32" cy="32" r="28" fill="none" stroke="var(--color-accent-400)" strokeWidth="3"
-                      strokeDasharray="50 126" strokeLinecap="round"
-                      style={{ transform: "rotate(-90deg)", transformOrigin: "32px 32px" }}
-                    />
-                  </svg>
-                  <div className="absolute inset-0 flex items-center justify-center" style={{ marginTop: "-1px" }}>
-                    <step.icon size={24} strokeWidth={1.6} style={{ color: "var(--color-primary-700)" }} />
-                  </div>
-                </div>
-                <div>
-                  <h4 className="font-heading text-base font-semibold mb-0.5" style={{ color: "var(--color-primary-950)" }}>
-                    {step.title}
-                  </h4>
-                  <p className="text-sm leading-relaxed" style={{ color: "var(--color-secondary-600)" }}>
-                    {step.desc}
-                  </p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <ProcessFlow />
 
       {/* ── WHY CHOOSE US ── */}
-      <section className="py-16 lg:py-24" style={{ backgroundColor: "var(--color-secondary-50)" }}>
+      <section className="py-14 sm:py-16 lg:py-24" style={{ backgroundColor: "var(--color-secondary-50)" }}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
-          <div className="text-center mb-14">
-            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>Why Advait Green</p>
-            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight" style={{ color: "var(--color-primary-950)" }}>
-              Why Choose Us
-            </h2>
-          </div>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 max-w-[1000px] mx-auto">
-            {whyChoose.map((item, i) => (
-              <motion.div
-                key={i}
-                initial={{ opacity: 0, y: 24 }}
+          {/* Floating white panel */}
+          <div
+            className="rounded-[24px] sm:rounded-[32px] bg-white px-5 sm:px-10 lg:px-16 py-12 sm:py-14 lg:py-20"
+            style={{ boxShadow: "0 2px 6px rgba(1,63,93,0.05), 0 20px 50px rgba(1,63,93,0.07)" }}
+          >
+            {/* Heading */}
+            <div className="text-center max-w-[860px] mx-auto mb-12 lg:mb-16">
+              <motion.p
+                initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1, ease: [0.2, 0, 0, 1] }}
-                className="flex flex-col items-center text-center"
+                transition={{ duration: 0.4 }}
+                className="font-mono text-xs uppercase tracking-[0.09em] mb-4"
+                style={{ color: "var(--color-accent-500)" }}
               >
-                {/* Icon circle */}
-                <div
-                  className="w-[80px] h-[80px] rounded-full flex items-center justify-center mb-5"
-                  style={{ backgroundColor: "var(--color-primary-700)" }}
+                Why Advait Green
+              </motion.p>
+
+              <motion.h2
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.06 }}
+                className="font-heading text-[26px] sm:text-4xl lg:text-[2.9rem] font-semibold tracking-tight leading-[1.14]"
+                style={{ color: "var(--color-primary-950)" }}
+              >
+                Why Choose{" "}
+                <span style={{ color: "var(--color-primary-600)" }}>Advait Green</span>{" "}
+                <span style={{ color: "var(--color-accent-600)" }}>Recycling</span>
+              </motion.h2>
+
+              <motion.p
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.12 }}
+                className="text-sm sm:text-base leading-relaxed mt-5"
+                style={{ color: "var(--color-secondary-600)" }}
+              >
+                Plenty of operators will take waste away. Fewer can show you the authorisation that made it legal, the weighbridge slip behind the valuation, and the certificate your auditor will ask for. We built the business around the paperwork as much as the processing.
+              </motion.p>
+            </div>
+
+            {/* Feature grid */}
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 lg:gap-x-10 gap-y-11 lg:gap-y-14 max-w-[1080px] mx-auto">
+              {whyChoose.map((item, i) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 22 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "0px 0px -40px 0px" }}
+                  transition={{ duration: 0.45, delay: (i % 3) * 0.08, ease: [0.2, 0, 0, 1] }}
+                  className="group flex flex-col items-center text-center"
                 >
-                  <item.icon size={34} strokeWidth={1.5} style={{ color: "#ffffff" }} />
-                </div>
-                {/* Title */}
-                <h4
-                  className="font-heading text-base font-bold tracking-tight mb-2"
-                  style={{ color: "var(--color-primary-700)" }}
-                >
-                  {item.title}
-                </h4>
-                {/* Description */}
-                <p className="text-sm leading-relaxed max-w-[280px]" style={{ color: "var(--color-secondary-600)" }}>
-                  {item.desc}
-                </p>
-              </motion.div>
-            ))}
+                  <div
+                    className="w-[68px] h-[68px] sm:w-[74px] sm:h-[74px] rounded-2xl flex items-center justify-center mb-5 transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-md"
+                    style={{
+                      backgroundColor: "var(--color-primary-50)",
+                      border: "1px solid var(--color-primary-100)",
+                    }}
+                  >
+                    <item.icon
+                      size={30}
+                      strokeWidth={1.6}
+                      className="transition-transform duration-300 group-hover:scale-110"
+                      style={{ color: "var(--color-primary-600)" }}
+                    />
+                  </div>
+
+                  <h4
+                    className="font-heading text-[17px] font-bold tracking-tight mb-2.5"
+                    style={{ color: "var(--color-primary-950)" }}
+                  >
+                    {item.title}
+                  </h4>
+
+                  <p
+                    className="text-sm leading-relaxed max-w-[300px]"
+                    style={{ color: "var(--color-secondary-600)" }}
+                  >
+                    {item.desc}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>

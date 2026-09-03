@@ -1,15 +1,15 @@
 /**
  * theme.config.js
- * ADVAIT GREEN RECYCLING PRIVATE LIMITED — Design Token System
+ * ADVAIT GREEN RECYCLING PRIVATE LIMITED - Design Token System
  * ---------------------------------------------------------------------------
  * SINGLE SOURCE OF TRUTH. Three layers, in strict order:
  *
- *   1. palette   — raw values. Never reference these directly in a component.
- *   2. semantic  — role-based tokens (light + dark). This is what UI code uses.
- *   3. components— recipes composed from semantic tokens.
+ *   1. palette   - raw values. Never reference these directly in a component.
+ *   2. semantic  - role-based tokens (light + dark). This is what UI code uses.
+ *   3. components- recipes composed from semantic tokens.
  *
  * Helpers at the bottom (`resolve`, `toCSSVariables`, `tailwindPreset`) make the
- * dotted token strings actually resolvable at build time — the previous config
+ * dotted token strings actually resolvable at build time - the previous config
  * used strings like "primary.600" that nothing ever turned into a colour.
  *
  * DESIGN DIRECTION
@@ -17,7 +17,7 @@
  * recovers, not from generic "eco" colour. Solder-mask green (primary),
  * recovered copper (accent), shredded ferrous graphite (dark surfaces),
  * aluminium (neutrals), regulatory amber (signal only). Green and copper are
- * the two colours of a stripped circuit board — the accent earns its place
+ * the two colours of a stripped circuit board - the accent earns its place
  * instead of being an arbitrary sand tone.
  *
  * Radii are tight and shadows are quiet: this is an industrial facility with a
@@ -25,12 +25,12 @@
  */
 
 // ═══════════════════════════════════════════════════════════════════════════
-// 1. PALETTE — raw values
+// 1. PALETTE - raw values
 // ═══════════════════════════════════════════════════════════════════════════
 
 const palette = {
   /**
-   * PCB — primary. Solder-mask green: deeper and cooler than the usual
+   * PCB - primary. Solder-mask green: deeper and cooler than the usual
    * "leaf green" every recycler on the internet uses.
    */
   pcb: {
@@ -48,7 +48,7 @@ const palette = {
   },
 
   /**
-   * COPPER — accent. The single most valuable fraction recovered from e-waste,
+   * COPPER - accent. The single most valuable fraction recovered from e-waste,
    * and the reason urban mining is commercially viable. Used sparingly: CTAs,
    * data emphasis, the fraction bar. Never as a background wash.
    */
@@ -67,7 +67,7 @@ const palette = {
   },
 
   /**
-   * ALUMINIUM — neutrals. Cool grey with a faint green cast so it sits with the
+   * ALUMINIUM - neutrals. Cool grey with a faint green cast so it sits with the
    * primary instead of fighting it. 50 is the page background; 950 is graphite,
    * the colour of shredded ferrous output, used for dark sections and footer.
    */
@@ -88,7 +88,7 @@ const palette = {
   },
 
   /**
-   * SIGNAL — regulatory amber. Reserved for compliance notices, hazard
+   * SIGNAL - regulatory amber. Reserved for compliance notices, hazard
    * categories, validity warnings and the EPR deadline strip. If it appears
    * decoratively it stops working as a signal.
    */
@@ -110,14 +110,14 @@ const palette = {
 };
 
 // ═══════════════════════════════════════════════════════════════════════════
-// 2. SEMANTIC TOKENS — what components consume
+// 2. SEMANTIC TOKENS - what components consume
 // ═══════════════════════════════════════════════════════════════════════════
 // Every colour decision in the UI resolves through here. Swapping a brand
 // colour means editing the palette above, not hunting through components.
 
 const semantic = {
   light: {
-    // Surfaces — four levels, in ascending prominence
+    // Surfaces - four levels, in ascending prominence
     surface: {
       canvas: palette.aluminium[50], // page background
       base: palette.aluminium[0], // cards, panels
@@ -132,14 +132,14 @@ const semantic = {
       scrimSoft: 'rgba(20, 24, 26, 0.28)',
     },
 
-    // Text — contrast ratios against surface.canvas noted
+    // Text - contrast ratios against surface.canvas noted
     text: {
       primary: palette.aluminium[900], // 13.4:1
       secondary: palette.aluminium[700], // 8.1:1
       tertiary: palette.aluminium[600], // 5.9:1
-      disabled: palette.aluminium[400], // 2.8:1 — non-essential only
+      disabled: palette.aluminium[400], // 2.8:1 - non-essential only
       brand: palette.pcb[700], // 8.0:1
-      accent: palette.copper[600], // 6.1:1  (500 is 4.4 — don't use for body)
+      accent: palette.copper[600], // 6.1:1  (500 is 4.4 - don't use for body)
       onBrand: palette.aluminium[0],
       onInverse: palette.aluminium[0],
       onInverseMuted: palette.aluminium[300], // 8.9:1 on graphite
@@ -185,7 +185,7 @@ const semantic = {
     },
 
     /**
-     * DATA — for tonnage counters, recovery percentages and the fraction bar.
+     * DATA - for tonnage counters, recovery percentages and the fraction bar.
      * Ordered by the actual material split of a processed consignment, so a
      * chart built from these reads correctly without per-chart colour config.
      */
@@ -274,13 +274,13 @@ const semantic = {
 // ═══════════════════════════════════════════════════════════════════════════
 // 3. TYPOGRAPHY
 // ═══════════════════════════════════════════════════════════════════════════
-// Three roles, three faces. Poppins and Lora were doing neither job well —
+// Three roles, three faces. Poppins and Lora were doing neither job well -
 // Poppins is the most-used template face on the web and Lora reads editorial,
 // not industrial.
 
 const typography = {
   families: {
-    /** Display — Archivo. Grotesque with signage DNA; variable width axis lets
+    /** Display - Archivo. Grotesque with signage DNA; variable width axis lets
      *  hero type go expanded without a second family. */
     display: {
       stack: '"Archivo", "Helvetica Neue", Arial, sans-serif',
@@ -288,7 +288,7 @@ const typography = {
       axes: { wght: [400, 700], wdth: [100, 125] },
       google: 'Archivo:wdth,wght@100..125,400..700',
     },
-    /** Body — Instrument Sans. Humanist, quiet, high x-height at small sizes. */
+    /** Body - Instrument Sans. Humanist, quiet, high x-height at small sizes. */
     body: {
       stack:
         '"Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
@@ -296,7 +296,7 @@ const typography = {
       axes: { wght: [400, 600] },
       google: 'Instrument+Sans:wght@400;500;600',
     },
-    /** Data — JetBrains Mono. Tonnage, authorisation numbers, manifest IDs,
+    /** Data - JetBrains Mono. Tonnage, authorisation numbers, manifest IDs,
      *  certificate references. A recycler's credibility is its documentation;
      *  giving numbers their own face makes that legible at a glance. */
     data: {
@@ -315,7 +315,7 @@ const typography = {
 
   /**
    * Fluid scale on a consistent ratio (1.2 at 380px → 1.28 at 1440px).
-   * One scale only — the old config had `typography` and `fontSize` defining
+   * One scale only - the old config had `typography` and `fontSize` defining
    * overlapping, conflicting sizes.
    */
   scale: {
@@ -325,7 +325,7 @@ const typography = {
       lineHeight: '0.98',
       letterSpacing: '-0.035em',
       weight: 600,
-      width: 112, // wdth axis — expanded for hero only
+      width: 112, // wdth axis - expanded for hero only
       wrap: 'balance',
     },
     h1: {
@@ -389,7 +389,7 @@ const typography = {
       lineHeight: '1.5',
       weight: 400,
     },
-    /** Eyebrow — mono, not uppercase-tracked sans. Reads as a plant label. */
+    /** Eyebrow - mono, not uppercase-tracked sans. Reads as a plant label. */
     eyebrow: {
       family: 'data',
       size: '0.75rem',
@@ -441,7 +441,7 @@ const typography = {
 };
 
 // ═══════════════════════════════════════════════════════════════════════════
-// 4. SPACE — 4px base. (The previous config had no spacing scale at all.)
+// 4. SPACE - 4px base. (The previous config had no spacing scale at all.)
 // ═══════════════════════════════════════════════════════════════════════════
 
 const space = {
@@ -479,7 +479,7 @@ const layout = {
     gutter: 'clamp(1.25rem, 4vw, 3rem)',
   },
 
-  /** Section rhythm — three densities instead of one fixed value. */
+  /** Section rhythm - three densities instead of one fixed value. */
   section: {
     tight: 'clamp(3rem, 6vw, 4.5rem)',
     default: 'clamp(4.5rem, 9vw, 7.5rem)',
@@ -500,7 +500,7 @@ const layout = {
   },
 
   /**
-   * Radii — deliberately tight. The old set (up to 2.25rem) is what made the
+   * Radii - deliberately tight. The old set (up to 2.25rem) is what made the
    * design read as a soft wellness brand rather than an industrial operator.
    */
   radius: {
@@ -522,7 +522,7 @@ const layout = {
 };
 
 // ═══════════════════════════════════════════════════════════════════════════
-// 6. ELEVATION — two-layer (ambient + direct), tinted with the primary hue
+// 6. ELEVATION - two-layer (ambient + direct), tinted with the primary hue
 // ═══════════════════════════════════════════════════════════════════════════
 
 const elevation = {
@@ -532,7 +532,7 @@ const elevation = {
   md: '0 1px 3px rgba(14, 47, 38, 0.06), 0 6px 16px rgba(14, 47, 38, 0.07)',
   lg: '0 2px 6px rgba(14, 47, 38, 0.06), 0 14px 32px rgba(14, 47, 38, 0.09)',
   xl: '0 4px 10px rgba(14, 47, 38, 0.07), 0 26px 56px rgba(14, 47, 38, 0.12)',
-  /** Inset hairline — carries card definition so shadows can stay quiet. */
+  /** Inset hairline - carries card definition so shadows can stay quiet. */
   hairline: 'inset 0 0 0 1px rgba(14, 47, 38, 0.07)',
   hairlineInverse: 'inset 0 0 0 1px rgba(255, 255, 255, 0.10)',
   header: '0 1px 0 rgba(14, 47, 38, 0.07)',
@@ -571,7 +571,7 @@ const motion = {
     liftStrong: 'translateY(-6px)',
     nudge: 'translateX(3px)', // "Read more →" arrows
   },
-  /** Honour prefers-reduced-motion — the old config had no provision for it. */
+  /** Honour prefers-reduced-motion - the old config had no provision for it. */
   reducedMotion: {
     duration: '1ms',
     transform: 'none',
@@ -579,7 +579,7 @@ const motion = {
 };
 
 // ═══════════════════════════════════════════════════════════════════════════
-// 8. SIGNATURE — the one element this site is remembered by
+// 8. SIGNATURE - the one element this site is remembered by
 // ═══════════════════════════════════════════════════════════════════════════
 /**
  * FRACTION BAR. A 3px multi-segment rule whose widths are the actual material
@@ -610,7 +610,7 @@ const signature = {
     },
   },
 
-  /** Eyebrow rule — short copper tick before mono eyebrow labels. */
+  /** Eyebrow rule - short copper tick before mono eyebrow labels. */
   eyebrowRule: {
     width: '18px',
     height: '2px',
@@ -618,7 +618,7 @@ const signature = {
     gap: space[3],
   },
 
-  /** Weighbridge grid — 1px background grid on dark sections, at 6% opacity. */
+  /** Weighbridge grid - 1px background grid on dark sections, at 6% opacity. */
   grid: {
     size: '56px',
     lineLight: 'rgba(14, 47, 38, 0.045)',
@@ -627,7 +627,7 @@ const signature = {
 };
 
 // ═══════════════════════════════════════════════════════════════════════════
-// 9. COMPONENT RECIPES — composed only from semantic tokens
+// 9. COMPONENT RECIPES - composed only from semantic tokens
 // ═══════════════════════════════════════════════════════════════════════════
 
 const components = {
@@ -647,7 +647,7 @@ const components = {
       lg: { paddingX: space[6], paddingY: space[4], minHeight: '52px', fontSize: '1rem' },
     },
     variants: {
-      /** Default CTA. Brand green, not copper — copper is reserved for the
+      /** Default CTA. Brand green, not copper - copper is reserved for the
        *  single highest-intent action per view. */
       primary: {
         bg: 'interactive.brandRest',
@@ -788,14 +788,14 @@ const components = {
       paddingX: space[4],
       paddingY: space[3],
       minHeight: '46px',
-      fontSize: '1rem', // 16px — prevents iOS zoom-on-focus
+      fontSize: '1rem', // 16px - prevents iOS zoom-on-focus
       transition: motion.transition.colors,
     },
     label: { typography: 'bodySm', color: 'text.secondary', weight: 500, marginBottom: space[2] },
     hint: { typography: 'caption', color: 'text.tertiary', marginTop: space[2] },
     error: { border: 'status.danger', color: 'status.danger', ring: '0 0 0 3px rgba(169,50,38,0.20)' },
     textarea: { minHeight: '132px' },
-    /** Quantity / weight fields — mono + tabular. */
+    /** Quantity / weight fields - mono + tabular. */
     numeric: { fontFamily: 'data', fontVariantNumeric: 'tabular-nums' },
   },
 
@@ -813,11 +813,11 @@ const components = {
       rest: 'text.secondary',
       hover: 'text.primary',
       active: 'text.brand',
-      /** Copper underline on active — the only place copper appears in nav. */
+      /** Copper underline on active - the only place copper appears in nav. */
       activeIndicator: { height: '2px', color: 'text.accent', offset: '-6px' },
       itemGap: space[6],
     },
-    /** Helpline strip above the nav — both reference sites bury the number. */
+    /** Helpline strip above the nav - both reference sites bury the number. */
     utilityBar: {
       height: layout.header.announcementHeight,
       bg: 'surface.inverse',
@@ -832,7 +832,7 @@ const components = {
     minHeight: 'min(86vh, 780px)',
     minHeightMobile: '620px',
     bg: 'surface.brand',
-    /** A near-flat brand ground with one soft copper bloom — the previous
+    /** A near-flat brand ground with one soft copper bloom - the previous
      *  three-stop teal gradient made every hero look like a stock ESG banner. */
     backgroundImage:
       'radial-gradient(120% 90% at 88% 8%, rgba(180,104,47,0.20) 0%, rgba(180,104,47,0) 58%), linear-gradient(180deg, #0E2F26 0%, #08201A 100%)',
@@ -884,7 +884,7 @@ const components = {
     bottomBar: { borderTop: 'border.inverse', paddingY: space[6], typography: 'caption' },
   },
 
-  /** Impact counters — the numbers a compliance buyer scans for first. */
+  /** Impact counters - the numbers a compliance buyer scans for first. */
   statistic: {
     value: { typography: 'dataXl', color: 'text.primary' },
     valueAccent: { typography: 'dataXl', color: 'text.accent' },
@@ -895,7 +895,7 @@ const components = {
     countUp: { duration: motion.duration.deliberate, easing: motion.easing.mechanical },
   },
 
-  /** Process stepper. Numbering is legitimate here — the stages are sequential
+  /** Process stepper. Numbering is legitimate here - the stages are sequential
    *  and the order carries real information (media removal must precede
    *  dismantling). Don't reuse this pattern for non-sequential lists. */
   stepper: {
@@ -970,7 +970,7 @@ const zIndex = {
 };
 
 /**
- * Accessibility floor. These are commitments, not aspirations — check them in
+ * Accessibility floor. These are commitments, not aspirations - check them in
  * CI if you can.
  */
 const a11y = {
@@ -979,11 +979,11 @@ const a11y = {
   targetMinSize: '44px',
   skipLinkTarget: '#main',
   reducedMotionQuery: '(prefers-reduced-motion: reduce)',
-  /** Known-bad pairs — do not use. */
+  /** Known-bad pairs - do not use. */
   forbidden: [
-    'copper.500 as text on aluminium.50 (4.4:1 — use copper.600)',
+    'copper.500 as text on aluminium.50 (4.4:1 - use copper.600)',
     'aluminium.400 as body text on any light surface',
-    'signal.500 as text on white (2.5:1 — use signal.700)',
+    'signal.500 as text on white (2.5:1 - use signal.700)',
   ],
 };
 
@@ -999,7 +999,7 @@ const brand = {
 };
 
 // ═══════════════════════════════════════════════════════════════════════════
-// 11. HELPERS — these make the dotted token strings above actually resolve
+// 11. HELPERS - these make the dotted token strings above actually resolve
 // ═══════════════════════════════════════════════════════════════════════════
 
 /**
@@ -1033,7 +1033,7 @@ function flatten(obj, prefix, out = {}) {
 
 /**
  * Emit CSS custom properties for a mode. Drop the light set on :root and the
- * dark set on [data-theme="dark"] — one call, no duplication between JS and CSS.
+ * dark set on [data-theme="dark"] - one call, no duplication between JS and CSS.
  */
 function toCSSVariables(mode = 'light') {
   return {

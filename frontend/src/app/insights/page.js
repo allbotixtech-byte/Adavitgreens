@@ -11,6 +11,8 @@ import {
   Search,
   Mail,
   User,
+  X,
+  Newspaper,
 } from "lucide-react";
 
 const categories = [
@@ -129,183 +131,222 @@ export default function InsightsPage() {
       </section>
 
       {/* ── FILTERS ── */}
-      <section style={{ backgroundColor: "var(--color-secondary-50)" }}>
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-6">
+      <section
+        className="sticky top-[64px] sm:top-[72px] lg:top-[116px] z-30"
+        style={{ backgroundColor: "#ffffff", borderBottom: "1px solid var(--color-secondary-200)" }}
+      >
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 py-4">
           <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
             {/* Category pills */}
             <div className="flex flex-wrap gap-2">
-              {categories.map((cat) => (
-                <button
-                  key={cat}
-                  onClick={() => setActiveCategory(cat)}
-                  className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-semibold transition-all duration-200 cursor-pointer"
-                  style={{
-                    backgroundColor:
-                      activeCategory === cat ? "var(--color-primary-700)" : "#E4EBE6",
-                    color: activeCategory === cat ? "#ffffff" : "var(--color-secondary-700)",
-                  }}
-                >
-                  {cat}
-                </button>
-              ))}
+              {categories.map((cat) => {
+                const on = activeCategory === cat;
+                return (
+                  <button
+                    key={cat}
+                    onClick={() => setActiveCategory(cat)}
+                    aria-pressed={on}
+                    className="px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-xs font-semibold transition-all duration-200 cursor-pointer border"
+                    style={{
+                      backgroundColor: on ? "var(--color-primary-700)" : "transparent",
+                      borderColor: on ? "var(--color-primary-700)" : "var(--color-secondary-200)",
+                      color: on ? "#ffffff" : "var(--color-secondary-700)",
+                    }}
+                  >
+                    {cat}
+                  </button>
+                );
+              })}
             </div>
-            {/* Search */}
+
+            {/* Search — inline styles: globals.css sets unlayered input rules
+                that outrank Tailwind utilities. */}
             <div className="relative w-full lg:w-[280px] shrink-0">
               <Search
                 size={16}
-                className="absolute left-3 top-1/2 -translate-y-1/2"
+                className="absolute left-3.5 top-1/2 -translate-y-1/2 pointer-events-none z-10"
                 style={{ color: "var(--color-secondary-400)" }}
               />
               <input
                 type="text"
-                placeholder="Search articles..."
+                placeholder="Search articles…"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                className="w-full pl-10 pr-4 py-2.5 rounded-lg text-sm border-none outline-none"
+                aria-label="Search articles"
                 style={{
-                  backgroundColor: "#E4EBE6",
+                  width: "100%",
+                  fontSize: "0.875rem",
+                  padding: "0.6rem 2.4rem 0.6rem 2.5rem",
+                  borderRadius: "9999px",
+                  backgroundColor: "var(--color-secondary-50)",
+                  border: "1px solid var(--color-secondary-200)",
                   color: "var(--color-secondary-900)",
+                  outline: "none",
                 }}
               />
+              {searchQuery && (
+                <button
+                  onClick={() => setSearchQuery("")}
+                  aria-label="Clear search"
+                  className="absolute right-3 top-1/2 -translate-y-1/2 cursor-pointer"
+                  style={{ color: "var(--color-secondary-400)" }}
+                >
+                  <X size={15} />
+                </button>
+              )}
             </div>
           </div>
         </div>
       </section>
 
       {/* ── BLOG GRID ── */}
-      <section className="py-12 lg:py-16" style={{ backgroundColor: "var(--color-secondary-50)" }}>
+      <section className="py-10 lg:py-16" style={{ backgroundColor: "var(--color-secondary-50)" }}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
+          {!loading && filtered.length > 0 && (
+            <p className="font-mono text-[11px] uppercase tracking-[0.09em] mb-6" style={{ color: "var(--color-secondary-500)" }}>
+              {filtered.length} {filtered.length === 1 ? "article" : "articles"}
+              {activeCategory !== "All" && ` in ${activeCategory}`}
+            </p>
+          )}
+
           {loading ? (
-            <div className="text-center py-20">
-              <div
-                className="w-8 h-8 border-2 rounded-full animate-spin mx-auto"
-                style={{
-                  borderColor: "var(--color-primary-100)",
-                  borderTopColor: "var(--color-primary-700)",
-                }}
-              />
-              <p className="mt-4 text-sm" style={{ color: "var(--color-secondary-400)" }}>
-                Loading articles...
-              </p>
+            /* Skeletons keep the grid from collapsing while data loads */
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+              {Array.from({ length: 6 }).map((_, i) => (
+                <div
+                  key={i}
+                  className="rounded-2xl overflow-hidden animate-pulse"
+                  style={{ backgroundColor: "#ffffff", border: "1px solid var(--color-secondary-200)" }}
+                >
+                  <div className="h-[200px]" style={{ backgroundColor: "var(--color-secondary-100)" }} />
+                  <div className="p-5">
+                    <div className="h-4 w-3/4 rounded mb-3" style={{ backgroundColor: "var(--color-secondary-100)" }} />
+                    <div className="h-3 w-full rounded mb-2" style={{ backgroundColor: "var(--color-secondary-100)" }} />
+                    <div className="h-3 w-5/6 rounded" style={{ backgroundColor: "var(--color-secondary-100)" }} />
+                  </div>
+                </div>
+              ))}
             </div>
           ) : filtered.length === 0 ? (
-            <div className="text-center py-20">
-              <p
-                className="font-heading text-xl font-semibold mb-2"
-                style={{ color: "var(--color-primary-950)" }}
-              >
+            <div
+              className="flex flex-col items-center text-center rounded-2xl border border-dashed py-16 px-6"
+              style={{ borderColor: "var(--color-secondary-300)", backgroundColor: "#ffffff" }}
+            >
+              <Search size={26} strokeWidth={1.5} style={{ color: "var(--color-secondary-400)" }} />
+              <p className="font-heading text-lg font-semibold mt-4 mb-1.5" style={{ color: "var(--color-primary-950)" }}>
                 No articles found
               </p>
-              <p className="text-sm" style={{ color: "var(--color-secondary-400)" }}>
+              <p className="text-sm mb-6" style={{ color: "var(--color-secondary-500)" }}>
                 {searchQuery
-                  ? "Try a different search term."
+                  ? `Nothing matches “${searchQuery}”.`
                   : "Check back later for new content."}
               </p>
+              {(searchQuery || activeCategory !== "All") && (
+                <button
+                  onClick={() => { setSearchQuery(""); setActiveCategory("All"); }}
+                  className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg text-sm font-semibold text-white cursor-pointer transition-all hover:-translate-y-0.5"
+                  style={{ backgroundColor: "var(--color-primary-700)" }}
+                >
+                  Clear filters
+                </button>
+              )}
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-5 sm:gap-6 lg:gap-7">
-                {filtered.map((blog, i) => (
-                  <motion.div
-                    key={blog.id}
-                    initial={{ opacity: 0, y: 24 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.4, delay: i * 0.08 }}
-                  >
-                    <Link href={`/insights/${blog.slug}`}>
-                      <article
-                        className="rounded-2xl overflow-hidden group transition-all duration-300 flex flex-col h-full"
-                        style={{
-                          backgroundColor: "#ffffff",
-                          boxShadow: "0 1px 4px rgba(0,0,0,0.06)",
-                        }}
-                        onMouseEnter={(e) =>
-                          (e.currentTarget.style.boxShadow =
-                            "0 10px 30px rgba(0,0,0,0.1)")
-                        }
-                        onMouseLeave={(e) =>
-                          (e.currentTarget.style.boxShadow =
-                            "0 1px 4px rgba(0,0,0,0.06)")
-                        }
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 sm:gap-6">
+              {filtered.map((blog, i) => (
+                <motion.div
+                  key={blog.id}
+                  initial={{ opacity: 0, y: 22 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: (i % 3) * 0.07, ease: [0.2, 0, 0, 1] }}
+                >
+                  <Link href={`/insights/${blog.slug}`} className="block h-full">
+                    <article
+                      className="group rounded-2xl overflow-hidden flex flex-col h-full border transition-all duration-300 hover:-translate-y-1 hover:shadow-card-hover"
+                      style={{ backgroundColor: "#ffffff", borderColor: "var(--color-secondary-200)" }}
+                    >
+                      {/* Cover */}
+                      <div
+                        className="relative overflow-hidden h-[190px] sm:h-[200px] shrink-0"
+                        style={{ backgroundColor: "var(--color-primary-900)" }}
                       >
-                        {/* ── Image Banner ── */}
-                        <div
-                          className="relative overflow-hidden h-[220px] sm:h-[280px] lg:h-[340px]"
-                          style={{
-                            background: "linear-gradient(135deg, var(--color-primary-700) 0%, var(--color-primary-400) 50%, var(--color-primary-700) 100%)",
-                          }}
-                        >
-                          {blog.thumbnail ? (
-                            <Image
-                              src={blog.thumbnail}
-                              alt={blog.title}
-                              fill
-                              className="object-cover transition-transform duration-500 group-hover:scale-105"
-                            />
-                          ) : (
-                            <div className="absolute inset-0 bg-gradient-to-r from-[var(--color-primary-900)] via-[var(--color-primary-700)] to-[var(--color-primary-400)] flex items-center justify-center">
-                              <div className="w-20 h-20 rounded-full flex items-center justify-center" style={{ backgroundColor: "rgba(255,255,255,0.1)" }}>
-                                <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.4)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                                  <path d="M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z" />
-                                  <line x1="4" y1="22" x2="4" y2="15" />
-                                </svg>
-                              </div>
-                            </div>
-                          )}
-                        </div>
-
-                        {/* ── White Content Area ── */}
-                        <div className="p-5 sm:p-6 flex flex-col flex-1">
-                          {/* Title (repeated) */}
-                          <h4
-                            className="font-heading text-base sm:text-lg font-bold leading-snug line-clamp-2 mb-2"
-                            style={{ color: "var(--color-primary-950)" }}
-                          >
-                            {blog.title}
-                          </h4>
-
-                          {/* Accent divider */}
-                          <div
-                            className="w-8 h-[3px] rounded-full mb-3"
-                            style={{ backgroundColor: "var(--color-primary-700)" }}
+                        {blog.thumbnail ? (
+                          <Image
+                            src={blog.thumbnail}
+                            alt={blog.title}
+                            fill
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                            className="object-cover transition-transform duration-500 group-hover:scale-105"
                           />
-
-                          {/* Excerpt */}
-                          <p
-                            className="text-sm leading-relaxed line-clamp-3 mb-4 flex-1"
-                            style={{ color: "var(--color-secondary-600)" }}
-                          >
-                            {blog.excerpt}
-                          </p>
-
-                          {/* Bottom: Date + Author | Learn More */}
-                          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 pt-3" style={{ borderTop: "1px solid #EDF1EE" }}>
-                            <div className="flex items-center gap-3 sm:gap-4 text-[11px] sm:text-xs" style={{ color: "var(--color-secondary-400)" }}>
-                              <span className="flex items-center gap-1.5">
-                                <Clock size={12} className="shrink-0" style={{ color: "var(--color-primary-700)" }} />
-                                {formatDate(blog.publishedAt)}
-                              </span>
-                              <span className="flex items-center gap-1.5">
-                                <User size={12} className="shrink-0" style={{ color: "var(--color-primary-700)" }} />
-                                <span className="truncate max-w-[120px] sm:max-w-none">{blog.author}</span>
-                              </span>
-                            </div>
-                            <span
-                              className="inline-flex items-center gap-1.5 text-xs sm:text-sm font-semibold italic"
-                              style={{ color: "var(--color-primary-950)" }}
-                            >
-                              Learn More
-                              <ArrowRight
-                                size={15}
-                                className="transition-transform group-hover:translate-x-1"
-                              />
-                            </span>
+                        ) : (
+                          <div className="absolute inset-0 flex items-center justify-center">
+                            <Newspaper size={34} strokeWidth={1.2} style={{ color: "rgba(255,255,255,0.28)" }} />
                           </div>
+                        )}
+
+                        {/* Category badge */}
+                        {blog.category && (
+                          <span
+                            className="absolute top-3.5 left-3.5 px-2.5 py-1 rounded-full text-[10px] font-semibold uppercase tracking-[0.06em]"
+                            style={{
+                              backgroundColor: "rgba(255,255,255,0.92)",
+                              backdropFilter: "blur(8px)",
+                              color: "var(--color-primary-800)",
+                            }}
+                          >
+                            {blog.category}
+                          </span>
+                        )}
+                      </div>
+
+                      {/* Body */}
+                      <div className="p-5 sm:p-6 flex flex-col flex-1">
+                        <h3
+                          className="font-heading text-base sm:text-[17px] font-bold leading-snug line-clamp-2 mb-3"
+                          style={{ color: "var(--color-primary-950)" }}
+                        >
+                          {blog.title}
+                        </h3>
+
+                        <div className="w-9 h-[3px] rounded-full mb-3.5" style={{ backgroundColor: "var(--color-accent-500)" }} />
+
+                        <p
+                          className="text-[13px] leading-relaxed line-clamp-3 mb-5 flex-1"
+                          style={{ color: "var(--color-secondary-600)" }}
+                        >
+                          {blog.excerpt}
+                        </p>
+
+                        <div
+                          className="flex items-center justify-between gap-3 pt-3.5"
+                          style={{ borderTop: "1px solid var(--color-secondary-100)" }}
+                        >
+                          <div className="flex items-center gap-3 text-[11px] min-w-0" style={{ color: "var(--color-secondary-500)" }}>
+                            <span className="flex items-center gap-1.5 shrink-0">
+                              <Clock size={12} style={{ color: "var(--color-primary-500)" }} />
+                              {formatDate(blog.publishedAt)}
+                            </span>
+                            {blog.author && (
+                              <span className="flex items-center gap-1.5 min-w-0">
+                                <User size={12} className="shrink-0" style={{ color: "var(--color-primary-500)" }} />
+                                <span className="truncate">{blog.author}</span>
+                              </span>
+                            )}
+                          </div>
+                          <span
+                            className="inline-flex items-center gap-1.5 text-xs font-semibold shrink-0"
+                            style={{ color: "var(--color-primary-700)" }}
+                          >
+                            Read
+                            <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-1" />
+                          </span>
                         </div>
-                      </article>
-                    </Link>
-                  </motion.div>
-                ))}
-              </div>
+                      </div>
+                    </article>
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
           )}
         </div>
       </section>
@@ -346,11 +387,16 @@ export default function InsightsPage() {
             <input
               type="email"
               placeholder="Your email address"
-              className="w-full sm:flex-1 px-4 py-3 rounded text-sm border-none outline-none"
+              aria-label="Your email address"
+              className="w-full sm:flex-1"
               style={{
+                fontSize: "0.875rem",
+                padding: "0.75rem 1rem",
+                borderRadius: "8px",
                 backgroundColor: "rgba(255,255,255,0.08)",
                 color: "#ffffff",
                 border: "1px solid rgba(255,255,255,0.12)",
+                outline: "none",
               }}
             />
             <button

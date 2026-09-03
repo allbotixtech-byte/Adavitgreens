@@ -18,7 +18,7 @@ export default function ServicesIndex() {
     <>
       {/* ── HERO ── */}
       <section className="relative h-screen min-h-[600px] bg-primary-950 overflow-hidden flex items-end sm:items-center pb-16 sm:pb-0">
-        <img src="/images/home_bg.png" alt="" className="absolute inset-0 w-full h-full object-cover" />
+        <img src="/images/E-West-Managment-4.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/60" />
 
         <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6 w-full pt-28 sm:pt-0">
@@ -44,7 +44,7 @@ export default function ServicesIndex() {
               transition={{ duration: 0.5, delay: 0.05 }}
               className="font-heading text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-semibold text-white leading-[1.1] sm:leading-[1.06] tracking-tight mb-4 sm:mb-5"
             >
-              Eight Services.{" "}
+              Seven Services.{" "}
               <span style={{ color: "var(--color-accent-400)" }}>One Accountable Partner.</span>
             </motion.h1>
 
@@ -54,7 +54,7 @@ export default function ServicesIndex() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-white text-sm sm:text-base lg:text-lg leading-relaxed max-w-[52ch] mb-6 sm:mb-8"
             >
-              From e-waste and plastics to biomedical, solid waste and pollution control equipment — every stream handled under valid authorisation, with the documentation your audit file needs.
+              From e-waste and plastics to biomedical, solid waste and pollution control equipment - every stream handled under valid authorisation, with the documentation your audit file needs.
             </motion.p>
 
             <motion.div

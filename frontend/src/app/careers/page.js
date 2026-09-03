@@ -401,7 +401,7 @@ export default function CareersPage() {
                       boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
                     }}
                   >
-                    {/* Job Header — always visible */}
+                    {/* Job Header - always visible */}
                     <button
                       onClick={() =>
                         setSelectedJob(selectedJob === job.id ? null : job.id)
@@ -450,7 +450,7 @@ export default function CareersPage() {
                       </div>
                     </button>
 
-                    {/* Job Details — expandable */}
+                    {/* Job Details - expandable */}
                     <div
                       className="overflow-hidden transition-all duration-300"
                       style={{
@@ -699,7 +699,7 @@ export default function CareersPage() {
                       <Upload size={16} />
                       {formState.resume
                         ? formState.resume.name
-                        : "Click to upload (PDF, DOC — max 5 MB)"}
+                        : "Click to upload (PDF, DOC - max 5 MB)"}
                       <input
                         type="file"
                         accept=".pdf,.doc,.docx"

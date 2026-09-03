@@ -59,7 +59,7 @@ export const metadata = {
     siteName: "Advait Green Recycling",
     title: "Advait Green Recycling | CPCB Authorised E-Waste & Plastic Recycler in India",
     description:
-      "Authorised recycling for e-waste, plastics, biomedical and solid waste — with the certificates, manifests and EPR filings your compliance file needs.",
+      "Authorised recycling for e-waste, plastics, biomedical and solid waste - with the certificates, manifests and EPR filings your compliance file needs.",
     images: [
       {
         url: "/images/og-default.png",
@@ -73,7 +73,7 @@ export const metadata = {
     card: "summary_large_image",
     title: "Advait Green Recycling | CPCB Authorised Recycler",
     description:
-      "Authorised recycling for e-waste, plastics, biomedical and solid waste — documented, traceable and audit-ready.",
+      "Authorised recycling for e-waste, plastics, biomedical and solid waste - documented, traceable and audit-ready.",
     images: ["/images/og-default.png"],
   },
   robots: {
@@ -100,7 +100,11 @@ export const viewport = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en" className={`${archivo.variable} ${instrumentSans.variable}`}>
+    <html
+      lang="en"
+      data-scroll-behavior="smooth"
+      className={`${archivo.variable} ${instrumentSans.variable}`}
+    >
       <body className="min-h-screen flex flex-col antialiased">
         <ConditionalLayout>{children}</ConditionalLayout>
       </body>

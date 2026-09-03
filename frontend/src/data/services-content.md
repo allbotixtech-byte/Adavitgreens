@@ -1,4 +1,4 @@
-# Advait Green Recycling — Services Content
+# Advait Green Recycling - Services Content
 
 ---
 
@@ -7,12 +7,12 @@
 **Tagline:** Recover the Metal. Spare the Mountain.
 
 **Short Description:**
-End-to-end electronic waste recycling — from collection and dismantling to metal recovery and certified disposal — for businesses across India.
+End-to-end electronic waste recycling - from collection and dismantling to metal recovery and certified disposal - for businesses across India.
 
 **Detailed Description:**
 India generates over 1.7 million tonnes of electronic waste annually, yet less than a third reaches formal recycling channels. Advait Green Recycling bridges that gap. We collect end-of-life computers, servers, telecom equipment, consumer electronics, peripherals, cables and printed circuit boards from corporate offices, data centres, manufacturing plants and government facilities.
 
-Our GPCB-authorised facility at Mahesana, Gujarat processes e-waste through manual de-manufacturing, mechanical shredding, magnetic and eddy-current separation, and density-based sorting. Recoverable metals — copper, aluminium, steel, gold, silver and palladium — are returned to the secondary raw material market, while hazardous fractions are channelled to authorised downstream processors.
+Our GPCB-authorised facility at Mahesana, Gujarat processes e-waste through manual de-manufacturing, mechanical shredding, magnetic and eddy-current separation, and density-based sorting. Recoverable metals - copper, aluminium, steel, gold, silver and palladium - are returned to the secondary raw material market, while hazardous fractions are channelled to authorised downstream processors.
 
 **What We Handle:**
 - Desktops, laptops, servers and workstations
@@ -25,7 +25,7 @@ Our GPCB-authorised facility at Mahesana, Gujarat processes e-waste through manu
 - Industrial electronic controls and instrumentation
 
 **Key Benefits:**
-- CPCB/GPCB authorised processing — your liability actually transfers
+- CPCB/GPCB authorised processing - your liability actually transfers
 - Certificate of Recycling issued for every consignment
 - Chain-of-custody documentation from pickup to final processing
 - Transparent recovery-based valuation and asset buyback
@@ -39,7 +39,7 @@ Our GPCB-authorised facility at Mahesana, Gujarat processes e-waste through manu
 
 ## 2. Plastic Waste Management
 
-**Tagline:** Closing the Loop on Plastic — From Waste Stream to Production Line.
+**Tagline:** Closing the Loop on Plastic - From Waste Stream to Production Line.
 
 **Short Description:**
 Collection, sorting, washing and granulation of post-consumer and post-industrial plastic waste to produce recycled raw material for manufacturers.
@@ -47,13 +47,13 @@ Collection, sorting, washing and granulation of post-consumer and post-industria
 **Detailed Description:**
 Plastic waste is one of the fastest-growing environmental challenges in India. Under the Plastic Waste Management Rules, 2016 (amended 2021), producers, importers and brand owners carry Extended Producer Responsibility for the plastic packaging they introduce into the market. Advait Green Recycling helps businesses meet these obligations while ensuring plastic waste is genuinely recycled, not just diverted to informal channels.
 
-Our plastic waste processing line includes sorting conveyors, washing and drying units, granulators and agglomerators. We handle rigid plastics (HDPE, PP, PET, LDPE, PVC) as well as flexible packaging and multi-layered plastics through authorised downstream partnerships. The output — clean, graded granules — is supplied back to manufacturers, completing the circular loop.
+Our plastic waste processing line includes sorting conveyors, washing and drying units, granulators and agglomerators. We handle rigid plastics (HDPE, PP, PET, LDPE, PVC) as well as flexible packaging and multi-layered plastics through authorised downstream partnerships. The output - clean, graded granules - is supplied back to manufacturers, completing the circular loop.
 
 **What We Handle:**
 - Post-consumer packaging waste (bottles, containers, pouches)
 - Post-industrial offcuts and rejects
 - Multi-layered packaging (MLP) via authorised co-processing
-- Rigid plastics — HDPE, PP, PET, LDPE, PVC
+- Rigid plastics - HDPE, PP, PET, LDPE, PVC
 - Flexible films and wraps
 - Agricultural plastic waste
 
@@ -75,12 +75,12 @@ Our plastic waste processing line includes sorting conveyors, washing and drying
 **Tagline:** Compliance, Documented. Impact, Verified.
 
 **Short Description:**
-End-to-end EPR advisory and execution — from CPCB registration and target allocation to collection, recycling and quarterly certificate filing.
+End-to-end EPR advisory and execution - from CPCB registration and target allocation to collection, recycling and quarterly certificate filing.
 
 **Detailed Description:**
 The Central Pollution Control Board (CPCB) mandates that producers, importers and brand owners of electrical and electronic equipment, batteries and plastic packaging must fulfil Extended Producer Responsibility targets. Non-compliance attracts penalties and can disrupt business operations.
 
-Advait Green Recycling offers a single-window EPR service. We assist with CPCB portal registration, annual target planning, collection network setup, processing through our authorised facility, and generation of EPR certificates. Our compliance team handles the paperwork — quarterly filings, annual returns, audit documentation — so your sustainability promise is backed by verifiable evidence, every quarter.
+Advait Green Recycling offers a single-window EPR service. We assist with CPCB portal registration, annual target planning, collection network setup, processing through our authorised facility, and generation of EPR certificates. Our compliance team handles the paperwork - quarterly filings, annual returns, audit documentation - so your sustainability promise is backed by verifiable evidence, every quarter.
 
 **What We Cover:**
 - E-Waste EPR (E-Waste Management Rules, 2016)
@@ -110,10 +110,10 @@ Advait Green Recycling offers a single-window EPR service. We assist with CPCB p
 **Tagline:** Your Data Leaves No Trace. Guaranteed.
 
 **Short Description:**
-Certified destruction of data-bearing devices — hard drives, SSDs, tapes, mobile phones — with witnessed processing and tamper-proof documentation.
+Certified destruction of data-bearing devices - hard drives, SSDs, tapes, mobile phones - with witnessed processing and tamper-proof documentation.
 
 **Detailed Description:**
-Retired IT assets carry confidential data that survives a factory reset. For regulated industries — banking, healthcare, government, legal — improper disposal creates serious exposure to data breaches, regulatory penalties and reputational damage.
+Retired IT assets carry confidential data that survives a factory reset. For regulated industries - banking, healthcare, government, legal - improper disposal creates serious exposure to data breaches, regulatory penalties and reputational damage.
 
 Advait Green Recycling provides secure, certified data destruction services. We offer both on-site and off-site destruction, with chain-of-custody sealing from the moment devices leave your premises. Processing methods include degaussing, physical shredding and multi-pass overwriting (per NIST 800-88 guidelines). Every device is logged by serial number, and you receive a Certificate of Data Destruction listing each unit processed.
 
@@ -126,9 +126,9 @@ Advait Green Recycling provides secure, certified data destruction services. We 
 - Server and NAS storage arrays
 
 **Destruction Methods:**
-- Physical shredding — device reduced to irrecoverable fragments
-- Degaussing — magnetic media rendered unreadable
-- Data wiping — NIST 800-88 compliant multi-pass overwrite with verification
+- Physical shredding - device reduced to irrecoverable fragments
+- Degaussing - magnetic media rendered unreadable
+- Data wiping - NIST 800-88 compliant multi-pass overwrite with verification
 - Witnessed destruction available for high-security environments
 
 **Key Benefits:**
@@ -152,7 +152,7 @@ Advait Green Recycling provides secure, certified data destruction services. We 
 Safe collection, discharge, dismantling and authorised recycling of lithium-ion batteries, lead-acid batteries and end-of-life solar photovoltaic modules.
 
 **Detailed Description:**
-As India accelerates its renewable energy and electric vehicle adoption, the volume of spent batteries and retired solar panels is rising sharply. These contain valuable materials — lithium, cobalt, nickel, silver, silicon — but also hazardous substances that demand specialised handling.
+As India accelerates its renewable energy and electric vehicle adoption, the volume of spent batteries and retired solar panels is rising sharply. These contain valuable materials - lithium, cobalt, nickel, silver, silicon - but also hazardous substances that demand specialised handling.
 
 Advait Green Recycling holds authorisation for battery and solar module waste processing. Our facility features dedicated segregated storage, a discharge and dismantling area, and established downstream channelling to authorised smelters and material recovery units. We ensure that spent energy storage and generation assets are handled safely, in compliance with the Battery Waste Management Rules, 2022 and E-Waste Management Rules (for solar modules).
 
@@ -183,12 +183,12 @@ Advait Green Recycling holds authorisation for battery and solar module waste pr
 **Tagline:** Turn Retired Assets into Recovered Value.
 
 **Short Description:**
-Nationwide collection, warehousing, valuation and buyback of end-of-life IT, electronic and industrial assets — managed from pickup to payment.
+Nationwide collection, warehousing, valuation and buyback of end-of-life IT, electronic and industrial assets - managed from pickup to payment.
 
 **Detailed Description:**
 Large organisations retire hundreds or thousands of IT and electronic assets every refresh cycle. Without a structured reverse logistics partner, these assets pile up in storerooms, leak data, and lose residual value.
 
-Advait Green Recycling operates a managed reverse logistics service across India. We handle pickup scheduling, secure transportation under manifest, warehousing at our facility, detailed asset inventorying (make, model, serial number, condition), and fair-market valuation based on recoverable material and reuse potential. Assets with residual life are refurbished for secondary markets (with data wiped); the rest enter our recycling line. You receive a transparent buyback offer against auditable recovery estimates — and a single invoice that offsets your disposal cost.
+Advait Green Recycling operates a managed reverse logistics service across India. We handle pickup scheduling, secure transportation under manifest, warehousing at our facility, detailed asset inventorying (make, model, serial number, condition), and fair-market valuation based on recoverable material and reuse potential. Assets with residual life are refurbished for secondary markets (with data wiped); the rest enter our recycling line. You receive a transparent buyback offer against auditable recovery estimates - and a single invoice that offsets your disposal cost.
 
 **What We Cover:**
 - Pan-India pickup with GPS-tracked vehicles
@@ -201,7 +201,7 @@ Advait Green Recycling operates a managed reverse logistics service across India
 
 **Key Benefits:**
 - Single contract covering collection, valuation, buyback and recycling
-- Transparent pricing — recovery logic shared, no hidden margins
+- Transparent pricing - recovery logic shared, no hidden margins
 - Reduces storage costs and asset hoarding risk
 - Compliant disposal path for regulated industries
 - One point of contact for multi-location rollouts
@@ -221,7 +221,7 @@ Advait Green Recycling operates a managed reverse logistics service across India
 Advisory services to help organisations quantify their waste footprint, build circular economy strategies, and generate audit-ready ESG and CSR documentation.
 
 **Detailed Description:**
-Sustainability is no longer a voluntary initiative — SEBI's BRSR framework, corporate ESG disclosure norms, and investor expectations now demand that businesses quantify and report their environmental impact with auditable data.
+Sustainability is no longer a voluntary initiative - SEBI's BRSR framework, corporate ESG disclosure norms, and investor expectations now demand that businesses quantify and report their environmental impact with auditable data.
 
 Advait Green Recycling's consulting arm works with organisations to assess their current waste generation profile, identify diversion and recovery opportunities, and build measurable sustainability roadmaps. We assist with waste audit exercises, circular procurement advisory, carbon footprint estimation linked to waste diversion, and the preparation of ESG/CSR reports that reflect actual, verified recycling outcomes from our own facility data.
 
@@ -248,12 +248,12 @@ Advait Green Recycling's consulting arm works with organisations to assess their
 
 ---
 
-## Services Section — Homepage Card Summary
+## Services Section - Homepage Card Summary
 
 | # | Service | Card Title | Short Line (for overlay/card) |
 |---|---------|-----------|-------------------------------|
 | 1 | E-Waste | E-Waste Recycling & Management | Authorised recovery of metals and materials from end-of-life electronics. |
-| 2 | Plastic | Plastic Waste Management | Collection, sorting and granulation — turning plastic waste into production-ready material. |
+| 2 | Plastic | Plastic Waste Management | Collection, sorting and granulation - turning plastic waste into production-ready material. |
 | 3 | EPR | Extended Producer Responsibility | Single-window compliance from registration to quarterly certificate filing. |
 | 4 | Data | Secure Data Destruction | Certified, serial-tracked destruction of every data-bearing device you retire. |
 | 5 | Battery & Solar | Battery & Solar Panel Recycling | Safe decommissioning and material recovery from spent batteries and solar modules. |

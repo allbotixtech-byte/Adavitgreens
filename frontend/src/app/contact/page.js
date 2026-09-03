@@ -125,7 +125,7 @@ export default function ContactPage() {
               transition={{ duration: 0.5, delay: 0.1 }}
               className="text-white text-sm sm:text-base lg:text-lg leading-relaxed max-w-[52ch] mb-6 sm:mb-8"
             >
-              Tell us what you have. We'll tell you exactly what happens to it — and come back within one working day.
+              Tell us what you have. We'll tell you exactly what happens to it - and come back within one working day.
             </motion.p>
             <motion.div
               initial={{ opacity: 0, y: 12 }}
@@ -395,7 +395,7 @@ export default function ContactPage() {
               )}
             </motion.div>
 
-            {/* Sidebar — Locations */}
+            {/* Sidebar - Locations */}
             <div className="space-y-5 lg:sticky lg:top-[120px] lg:self-start">
               {/* Corporate Office */}
               <motion.div

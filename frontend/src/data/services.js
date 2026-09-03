@@ -4,7 +4,7 @@
  * `services` drives the header dropdown, the footer column, the homepage
  * "Our Services" grid and the /services index. Entries that carry a `detail`
  * object are additionally rendered as a full detail page by
- * <ServiceDetailPage /> — see src/components/sections/ServiceDetailPage.jsx.
+ * <ServiceDetailPage /> - see src/components/sections/ServiceDetailPage.jsx.
  *
  * E-Waste and Plastic Waste keep their own bespoke pages and therefore only
  * need catalogue fields here.
@@ -21,7 +21,7 @@ import {
 } from "lucide-react";
 
 /* ────────────────────────────────────────────────────────────
-   1. E-WASTE MANAGEMENT  (bespoke page — catalogue fields only)
+   1. E-WASTE MANAGEMENT  (bespoke page - catalogue fields only)
    ──────────────────────────────────────────────────────────── */
 const eWaste = {
   slug: "e-waste",
@@ -31,11 +31,11 @@ const eWaste = {
   icon: Cpu,
   image: "/images/e-west.png",
   summary:
-    "End-to-end electronic waste recycling — collection, dismantling, metal recovery and certified disposal for businesses across India.",
+    "End-to-end electronic waste recycling - collection, dismantling, metal recovery and certified disposal for businesses across India.",
 };
 
 /* ────────────────────────────────────────────────────────────
-   2. PLASTIC WASTE MANAGEMENT  (bespoke page — catalogue only)
+   2. PLASTIC WASTE MANAGEMENT  (bespoke page - catalogue only)
    ──────────────────────────────────────────────────────────── */
 const plasticWaste = {
   slug: "plastic-waste",
@@ -57,25 +57,41 @@ const pollutionControl = {
   title: "Pollution Control Devices",
   navLabel: "Pollution Control Devices",
   icon: Wind,
-  image: "/images/manufactring-automotive.png",
+  image: "/images/pollution-control-device-1.jpg",
   summary:
     "Design, supply, installation and maintenance of air and water pollution control equipment engineered to meet CPCB and GPCB discharge norms.",
   detail: {
     eyebrow: "Pollution Control Devices",
-    heroImage: "/images/Industrial-Equipment.jpg",
+    // Single fallback kept for any context that reads heroImage directly;
+    // heroSlides drives the rotating hero.
+    heroImage: "/images/pollution-control-device-1.jpg",
+    heroSlides: [
+      {
+        image: "/images/pollution-control-device-1.jpg",
+        caption: "Dust Collection - Pulse-Jet Bag Filters",
+      },
+      {
+        image: "/images/pollution-control-device-2.jpg",
+        caption: "Effluent Treatment - Clarifiers & Settling Ponds",
+      },
+      {
+        image: "/images/pollution-control-device-3.jpg",
+        caption: "Stack Emissions & Fume Extraction",
+      },
+    ],
     heroTitle: "Emissions Have a Limit.",
     heroHighlight: "So Should Yours.",
     heroDesc:
-      "Air scrubbers, dust collectors, effluent treatment plants and stack monitoring systems — engineered, installed and maintained to keep your emissions inside the consent limits written on your licence.",
+      "Air scrubbers, dust collectors, effluent treatment plants and stack monitoring systems - engineered, installed and maintained to keep your emissions inside the consent limits written on your licence.",
     overview: {
       eyebrow: "The Challenge",
       title: "Consent to Operate Is Only as Good as Your Equipment",
       paragraphs: [
-        "Every industrial unit operating in India holds a Consent to Operate issued under the Air (Prevention and Control of Pollution) Act, 1981 and the Water (Prevention and Control of Pollution) Act, 1974. That consent specifies exact limits for particulate matter, gaseous emissions and effluent parameters — and State Pollution Control Boards test against them without notice.",
+        "Every industrial unit operating in India holds a Consent to Operate issued under the Air (Prevention and Control of Pollution) Act, 1981 and the Water (Prevention and Control of Pollution) Act, 1974. That consent specifies exact limits for particulate matter, gaseous emissions and effluent parameters - and State Pollution Control Boards test against them without notice.",
         "The gap between compliance and violation is almost always equipment: an undersized scrubber, a bag filter past its service life, an ETP running outside its design load. Penalties escalate quickly, from show-cause notices to closure directions under Section 33A.",
-        "Advait Green designs, supplies, installs and maintains pollution control equipment sized to your actual process load — not a catalogue approximation. Every installation is commissioned with performance testing against the parameters on your consent order.",
+        "Advait Green designs, supplies, installs and maintains pollution control equipment sized to your actual process load - not a catalogue approximation. Every installation is commissioned with performance testing against the parameters on your consent order.",
       ],
-      image: "/images/Industrial-Equipment.jpg",
+      image: "/images/pollution.jpeg",
       badgeLabel: "CPCB / GPCB Compliant",
       badgeSub: "Design, supply, installation & AMC",
     },
@@ -91,32 +107,32 @@ const pollutionControl = {
       {
         icon: Filter,
         label: "Dust Collectors & Bag Filters",
-        desc: "Pulse-jet bag houses, cartridge filters and cyclone separators for particulate control in grinding, shredding, material handling and furnace operations. Filter media selected for temperature, abrasiveness and moisture — with differential pressure monitoring built in.",
-        image: "/images/manufactring-automotive.png",
+        desc: "Pulse-jet bag houses, cartridge filters and cyclone separators for particulate control in grinding, shredding, material handling and furnace operations. Filter media selected for temperature, abrasiveness and moisture - with differential pressure monitoring built in.",
+        image: "/images/DustCollectorsBagFilters.jpg",
       },
       {
         icon: Droplets,
         label: "Effluent Treatment Plants",
         desc: "Physico-chemical and biological ETPs covering equalisation, neutralisation, clarification, aeration and sludge dewatering. Designed to bring effluent within the inlet parameters of your CETP or within direct-discharge norms where applicable.",
-        image: "/images/Rigid-Plastics.jpg",
+        image: "/images/EffluentTreatmentPlants.jpg",
       },
       {
         icon: Container,
         label: "Sewage Treatment Plants",
         desc: "Packaged and civil STPs for industrial townships, commercial complexes and institutional campuses. MBBR, SBR and MBR configurations with treated water suitable for flushing, gardening and cooling tower make-up.",
-        image: "/images/Post-Industrial-Waste.jpg",
+        image: "/images/SewageTreatmentPlants.jpg",
       },
       {
         icon: Flame,
         label: "Fume Extraction Systems",
         desc: "Capture hoods, ducting networks, centrifugal blowers and stack assemblies for welding fumes, soldering fumes, plating baths and solvent operations. Designed for adequate capture velocity at the source, not just extraction at the roof.",
-        image: "/images/E-West-Managment-4.jpg",
+        image: "/images/FumeExtractionSystems.jpg",
       },
       {
         icon: Gauge,
         label: "Monitoring & Instrumentation",
-        desc: "Online continuous emission monitoring systems (OCEMS), stack sampling ports, effluent flow meters and pH/TSS analysers — including connectivity to the CPCB and State Board servers where your category mandates it.",
-        image: "/images/server-networking.jpg",
+        desc: "Online continuous emission monitoring systems (OCEMS), stack sampling ports, effluent flow meters and pH/TSS analysers - including connectivity to the CPCB and State Board servers where your category mandates it.",
+        image: "/images/MonitoringInstrumentation.jpg",
       },
     ],
     processSubtitle: "How We Work",
@@ -126,7 +142,7 @@ const pollutionControl = {
         icon: Eye,
         num: "01",
         title: "Site Assessment",
-        desc: "Our engineers survey your process, measure actual gas or effluent load, and read your consent order — so the design targets your real numbers, not assumed ones.",
+        desc: "Our engineers survey your process, measure actual gas or effluent load, and read your consent order - so the design targets your real numbers, not assumed ones.",
       },
       {
         icon: SlidersHorizontal,
@@ -144,7 +160,7 @@ const pollutionControl = {
         icon: HardHat,
         num: "04",
         title: "Fabrication & Installation",
-        desc: "Fabrication to approved drawings, site erection, ducting, electrical integration and safety interlocks — executed with minimal disruption to your production schedule.",
+        desc: "Fabrication to approved drawings, site erection, ducting, electrical integration and safety interlocks - executed with minimal disruption to your production schedule.",
       },
       {
         icon: Thermometer,
@@ -165,7 +181,7 @@ const pollutionControl = {
       {
         icon: ShieldCheck,
         title: "Consent Compliance",
-        desc: "Equipment sized against the actual parameters on your consent order — so a surprise inspection is an inconvenience, not a closure risk.",
+        desc: "Equipment sized against the actual parameters on your consent order - so a surprise inspection is an inconvenience, not a closure risk.",
       },
       {
         icon: AlertTriangle,
@@ -175,12 +191,12 @@ const pollutionControl = {
       {
         icon: TrendingUp,
         title: "Lower Running Cost",
-        desc: "Right-sized blowers and correctly specified filter media cut power draw and consumable replacement — an oversized system wastes energy every hour it runs.",
+        desc: "Right-sized blowers and correctly specified filter media cut power draw and consumable replacement - an oversized system wastes energy every hour it runs.",
       },
       {
         icon: Leaf,
         title: "Genuine Emission Reduction",
-        desc: "Measurable reduction in particulate and gaseous discharge — the environmental outcome the regulation was actually written for.",
+        desc: "Measurable reduction in particulate and gaseous discharge - the environmental outcome the regulation was actually written for.",
       },
       {
         icon: HardHat,
@@ -190,7 +206,7 @@ const pollutionControl = {
       {
         icon: BarChart3,
         title: "Audit-Ready Records",
-        desc: "Design basis, commissioning reports and maintenance logs kept in one place — ready for board inspection, ESG reporting or customer audit.",
+        desc: "Design basis, commissioning reports and maintenance logs kept in one place - ready for board inspection, ESG reporting or customer audit.",
       },
     ],
     stats: [
@@ -206,7 +222,7 @@ const pollutionControl = {
     whyTitle: "Why Advait Green for",
     whyHighlight: "Pollution Control Equipment",
     whyDesc:
-      "Engineering-led design, performance-tested commissioning and long-term maintenance — from a partner who also understands the compliance paperwork behind the equipment.",
+      "Engineering-led design, performance-tested commissioning and long-term maintenance - from a partner who also understands the compliance paperwork behind the equipment.",
     compliance: {
       badge: "Regulatory",
       title: "Built Around Your",
@@ -241,7 +257,7 @@ const pollutionControl = {
     },
     ctaTitle: "Not Sure Your Current System Still Meets Its Limits?",
     ctaDesc:
-      "Send us your consent order and a description of your process. We will tell you honestly whether your existing equipment is adequate — and what it would take if it is not.",
+      "Send us your consent order and a description of your process. We will tell you honestly whether your existing equipment is adequate - and what it would take if it is not.",
   },
 };
 
@@ -254,23 +270,23 @@ const bioMedical = {
   title: "Bio Medical Waste Management",
   navLabel: "Bio Medical Waste Management",
   icon: Syringe,
-  image: "/images/pharma-healthcare.png",
+  image: "/images/BioMedicalWasteManagement-Hero.jpg",
   summary:
     "Colour-coded collection, secure transport and authorised treatment of biomedical waste under the Bio-Medical Waste Management Rules, 2016.",
   detail: {
     eyebrow: "Bio Medical Waste Management",
-    heroImage: "/images/pharma-healthcare.png",
+    heroImage: "/images/BioMedicalWasteManagement-Hero.jpg",
     heroTitle: "Healthcare Waste Is Not",
     heroHighlight: "Ordinary Waste.",
     heroDesc:
-      "Segregation at source, barcoded collection, refrigerated transport and treatment at authorised Common Bio-Medical Waste Treatment Facilities — with the manifest trail the Bio-Medical Waste Management Rules, 2016 demand.",
+      "Segregation at source, barcoded collection, refrigerated transport and treatment at authorised Common Bio-Medical Waste Treatment Facilities - with the manifest trail the Bio-Medical Waste Management Rules, 2016 demand.",
     overview: {
       eyebrow: "The Challenge",
       title: "One Missegregated Bag Undoes an Entire Protocol",
       paragraphs: [
-        "India's healthcare establishments generate over 700 tonnes of biomedical waste every day — infectious cultures, sharps, anatomical waste, contaminated plastics, expired pharmaceuticals and cytotoxic residues. Mixed with general waste, any one of these becomes a public health hazard and a documented regulatory violation.",
+        "India's healthcare establishments generate over 700 tonnes of biomedical waste every day - infectious cultures, sharps, anatomical waste, contaminated plastics, expired pharmaceuticals and cytotoxic residues. Mixed with general waste, any one of these becomes a public health hazard and a documented regulatory violation.",
         "The Bio-Medical Waste Management Rules, 2016 place the obligation squarely on the occupier: the hospital, clinic, laboratory, blood bank or veterinary institution generating the waste. Segregation into yellow, red, white and blue streams must happen at the point of generation, and the chain of custody must be traceable to final treatment.",
-        "Advait Green provides the full operating system around that obligation — colour-coded bins and liners, trained handling staff, barcoded bag tracking, dedicated transport and disposal through authorised Common Bio-Medical Waste Treatment Facilities, with annual returns filed on your behalf.",
+        "Advait Green provides the full operating system around that obligation - colour-coded bins and liners, trained handling staff, barcoded bag tracking, dedicated transport and disposal through authorised Common Bio-Medical Waste Treatment Facilities, with annual returns filed on your behalf.",
       ],
       image: "/images/pharma-healthcare.png",
       badgeLabel: "BMW Rules, 2016 Compliant",
@@ -282,38 +298,38 @@ const bioMedical = {
       {
         icon: Biohazard,
         label: "Yellow Category",
-        desc: "Human and animal anatomical waste, soiled dressings, microbiology and biotechnology cultures, expired and discarded medicines, chemical waste and cytotoxic drug residues. Treated by incineration or plasma pyrolysis at authorised facilities — never landfilled.",
-        image: "/images/pharma-healthcare.png",
+        desc: "Human and animal anatomical waste, soiled dressings, microbiology and biotechnology cultures, expired and discarded medicines, chemical waste and cytotoxic drug residues. Treated by incineration or plasma pyrolysis at authorised facilities - never landfilled.",
+        image: "/images/yellow-category.png",
       },
       {
         icon: Recycle,
         label: "Red Category",
-        desc: "Contaminated recyclable plastics — IV tubing, catheters, urine bags, syringes without needles, vacutainers and gloves. Autoclaved or microwaved to sterilise, then shredded and channelled to authorised plastic recyclers.",
-        image: "/images/Rigid-Plastics.jpg",
+        desc: "Contaminated recyclable plastics - IV tubing, catheters, urine bags, syringes without needles, vacutainers and gloves. Autoclaved or microwaved to sterilise, then shredded and channelled to authorised plastic recyclers.",
+        image: "/images/red-category.png",
       },
       {
         icon: Bandage,
         label: "White Category (Sharps)",
         desc: "Needles, scalpels, blades, lancets and any contaminated sharp object capable of causing puncture injury. Collected in puncture-proof, leak-proof containers, then autoclaved and mutilated before final encapsulation or disposal.",
-        image: "/images/Consumer-Electronics.jpg",
+        image: "/images/white-category.png",
       },
       {
         icon: FlaskConical,
         label: "Blue Category",
         desc: "Broken and discarded contaminated glassware including medicine vials and ampoules, plus metallic body implants. Disinfected, washed and sent for recycling through authorised channels.",
-        image: "/images/Circuit-Boards-PCBs.jpg",
+        image: "/images/blue-category.png",
       },
       {
         icon: Microscope,
         label: "Laboratory & Research Waste",
         desc: "Culture plates, stocks, specimens, blood samples, live attenuated vaccines and residues from diagnostic and research laboratories. Pre-treated on site by autoclaving or disinfection before handover, as the Rules require.",
-        image: "/images/Industrial-Equipment.jpg",
+        image: "/images/Laboratory_ResearchWaste.png",
       },
       {
         icon: Stethoscope,
         label: "Expired Pharmaceuticals",
-        desc: "Time-expired, discontinued and returned medicines from hospital pharmacies, retail chemists and pharmaceutical distributors — destroyed under documented supervision with certificates of destruction issued.",
-        image: "/images/pharma-healthcare.png",
+        desc: "Time-expired, discontinued and returned medicines from hospital pharmacies, retail chemists and pharmaceutical distributors - destroyed under documented supervision with certificates of destruction issued.",
+        image: "/images/Expired_Pharmaceuticals.png",
       },
     ],
     processSubtitle: "How It Works",
@@ -329,7 +345,7 @@ const bioMedical = {
         icon: ClipboardCheck,
         num: "02",
         title: "Barcoded Tagging",
-        desc: "Every bag is weighed and barcoded at collection, recording department, category, weight, date and handler — creating the traceability the Rules require.",
+        desc: "Every bag is weighed and barcoded at collection, recording department, category, weight, date and handler - creating the traceability the Rules require.",
       },
       {
         icon: Container,
@@ -341,7 +357,7 @@ const bioMedical = {
         icon: Truck,
         num: "04",
         title: "Dedicated Transport",
-        desc: "Purpose-built, labelled and GPS-tracked vehicles authorised solely for biomedical waste — never shared with general waste collection.",
+        desc: "Purpose-built, labelled and GPS-tracked vehicles authorised solely for biomedical waste - never shared with general waste collection.",
       },
       {
         icon: Flame,
@@ -353,7 +369,7 @@ const bioMedical = {
         icon: FileCheck,
         num: "06",
         title: "Documentation & Returns",
-        desc: "Manifests, treatment certificates and the Form IV annual return prepared and filed — your audit file stays complete without your staff assembling it.",
+        desc: "Manifests, treatment certificates and the Form IV annual return prepared and filed - your audit file stays complete without your staff assembling it.",
       },
     ],
     benefitsEyebrow: "Why It Matters",
@@ -382,7 +398,7 @@ const bioMedical = {
       {
         icon: Leaf,
         title: "Reduced Environmental Load",
-        desc: "Red-category plastics recovered for recycling after sterilisation instead of being incinerated — lower emissions, less material lost.",
+        desc: "Red-category plastics recovered for recycling after sterilisation instead of being incinerated - lower emissions, less material lost.",
       },
       {
         icon: Headset,
@@ -403,13 +419,13 @@ const bioMedical = {
     whyTitle: "Why Advait Green for",
     whyHighlight: "Bio Medical Waste",
     whyDesc:
-      "Trained handlers, barcoded traceability and authorised treatment partners — with the reporting burden lifted off your clinical staff.",
+      "Trained handlers, barcoded traceability and authorised treatment partners - with the reporting burden lifted off your clinical staff.",
     compliance: {
       badge: "Regulatory",
       title: "Bio-Medical Waste",
       highlight: "Management Rules, 2016",
       paragraphs: [
-        "Under the Rules, the occupier — not the contractor — remains legally responsible for the waste generated on their premises. Authorisation from the State Pollution Control Board, annual returns in Form IV, accident reporting and maintained records are all obligations that sit with the healthcare establishment.",
+        "Under the Rules, the occupier - not the contractor - remains legally responsible for the waste generated on their premises. Authorisation from the State Pollution Control Board, annual returns in Form IV, accident reporting and maintained records are all obligations that sit with the healthcare establishment.",
         "We operate as the system behind that responsibility: correct segregation infrastructure, documented handover at every stage, treatment through authorised facilities only, and the paperwork prepared in the form the board expects.",
       ],
       cta: { label: "Discuss Your Facility's Requirement", href: "/contact" },
@@ -451,22 +467,29 @@ const epr = {
   title: "Extended Producer Responsibility",
   navLabel: "Extended Producer Responsibility",
   icon: FileCheck,
-  image: "/images/epr.png",
+  image: "/images/Extended-Producer-Responsibility-Hero-1.jpg",
   summary:
-    "EPR registration, target planning and certificate generation for producers, importers and brand owners — backed by verified recycling at our own facility.",
+    "EPR registration, target planning and certificate generation for producers, importers and brand owners - backed by verified recycling at our own facility.",
   detail: {
     eyebrow: "Extended Producer Responsibility",
-    heroImage: "/images/epr.png",
+    // Fallback for any context reading heroImage directly; heroSlides drives
+    // the rotating hero.
+    heroImage: "/images/Extended-Producer-Responsibility-Hero-1.jpg",
+    heroSlides: [
+      { image: "/images/Extended-Producer-Responsibility-Hero-1.jpg" },
+      { image: "/images/Extended-Producer-Responsibility-Hero-2.jpg" },
+      { image: "/images/Extended-Producer-Responsibility-Hero-3.jpg" },
+    ],
     heroTitle: "Compliance, Documented.",
     heroHighlight: "Impact, Verified.",
     heroDesc:
-      "From CPCB portal registration to quarterly certificate generation — we carry the EPR obligation for producers, importers and brand owners, with certificates backed by material we actually processed.",
+      "From CPCB portal registration to quarterly certificate generation - we carry the EPR obligation for producers, importers and brand owners, with certificates backed by material we actually processed.",
     overview: {
       eyebrow: "The Challenge",
       title: "Paper Credits Do Not Survive an Audit",
       paragraphs: [
         "Extended Producer Responsibility makes the producer, importer or brand owner accountable for what happens to a product after the consumer is finished with it. In India the obligation now spans electronics under the E-Waste (Management) Rules, 2022, packaging under the Plastic Waste Management Rules, batteries under the Battery Waste Management Rules, 2022 and used tyres.",
-        "Targets are computed on your placed-on-market quantities, filed quarterly on the CPCB EPR portal, and settled by surrendering EPR certificates. The market for those certificates is uneven — and certificates issued against volumes that were never genuinely processed have become a recurring audit finding.",
+        "Targets are computed on your placed-on-market quantities, filed quarterly on the CPCB EPR portal, and settled by surrendering EPR certificates. The market for those certificates is uneven - and certificates issued against volumes that were never genuinely processed have become a recurring audit finding.",
         "Advait Green issues certificates against material physically received, processed and recorded at our own authorised facility. The recycling behind your compliance is traceable to a consignment, a weighbridge slip and a processing batch.",
       ],
       image: "/images/epr.png",
@@ -479,13 +502,13 @@ const epr = {
       {
         icon: Cpu,
         label: "E-Waste EPR",
-        desc: "Registration and target fulfilment under the E-Waste (Management) Rules, 2022 across all scheduled electrical and electronic equipment categories — with collection, channelisation and recycling handled end to end.",
+        desc: "Registration and target fulfilment under the E-Waste (Management) Rules, 2022 across all scheduled electrical and electronic equipment categories - with collection, channelisation and recycling handled end to end.",
         image: "/images/e-west.png",
       },
       {
         icon: Recycle,
         label: "Plastic Packaging EPR",
-        desc: "Category I to IV plastic packaging obligations under the Plastic Waste Management Rules — rigid, flexible, multi-layered and compostable — including recycling, end-of-life disposal and reuse targets.",
+        desc: "Category I to IV plastic packaging obligations under the Plastic Waste Management Rules - rigid, flexible, multi-layered and compostable - including recycling, end-of-life disposal and reuse targets.",
         image: "/images/plastic-west.png",
       },
       {
@@ -497,7 +520,7 @@ const epr = {
       {
         icon: Building2,
         label: "Importer Compliance",
-        desc: "Support for importers whose obligation is triggered on customs clearance — registration, quantity declaration and target computation aligned to your import records.",
+        desc: "Support for importers whose obligation is triggered on customs clearance - registration, quantity declaration and target computation aligned to your import records.",
         image: "/images/manufactring-automotive.png",
       },
       {
@@ -509,7 +532,7 @@ const epr = {
       {
         icon: Route,
         label: "Collection Network Setup",
-        desc: "Design and operation of take-back channels — collection points, reverse logistics, dealer buy-back and awareness programmes — where your category requires demonstrable consumer collection.",
+        desc: "Design and operation of take-back channels - collection points, reverse logistics, dealer buy-back and awareness programmes - where your category requires demonstrable consumer collection.",
         image: "/images/reverse-logistic.png",
       },
     ],
@@ -526,7 +549,7 @@ const epr = {
         icon: FileCheck,
         num: "02",
         title: "Portal Registration",
-        desc: "EPR registration on the CPCB portal — documentation, category mapping and application follow-up until your registration number is issued.",
+        desc: "EPR registration on the CPCB portal - documentation, category mapping and application follow-up until your registration number is issued.",
       },
       {
         icon: Scale,
@@ -574,7 +597,7 @@ const epr = {
       {
         icon: Globe,
         title: "Supply Chain Assurance",
-        desc: "Multinational customers increasingly audit their vendors' EPR position — documented compliance keeps you on their approved list.",
+        desc: "Multinational customers increasingly audit their vendors' EPR position - documented compliance keeps you on their approved list.",
       },
       {
         icon: CalendarClock,
@@ -600,7 +623,7 @@ const epr = {
     whyTitle: "Why Advait Green for",
     whyHighlight: "EPR Compliance",
     whyDesc:
-      "A recycler first and a compliance partner second — which means the certificates we issue are backed by tonnage that physically passed through our facility.",
+      "A recycler first and a compliance partner second - which means the certificates we issue are backed by tonnage that physically passed through our facility.",
     compliance: {
       badge: "Regulatory",
       title: "Rules That Create Your",
@@ -648,23 +671,30 @@ const amcRecycler = {
   title: "AMC Authorised E-Waste Recycler",
   navLabel: "AMC Authorised E-Waste Recycler",
   icon: BadgeCheck,
-  image: "/images/secure-data.png",
+  image: "/images/amc-hero.jpg",
   summary:
-    "An annual maintenance contract for your e-waste — scheduled pickups, asset reporting and year-round compliance from a CPCB authorised recycler.",
+    "An annual maintenance contract for your e-waste - scheduled pickups, asset reporting and year-round compliance from a CPCB authorised recycler.",
   detail: {
     eyebrow: "AMC Authorised E-Waste Recycler",
-    heroImage: "/images/E-West-Managment-3.jpg",
+    // Fallback for any context reading heroImage directly; heroSlides drives
+    // the rotating hero.
+    heroImage: "/images/amc-hero.jpg",
+    heroSlides: [
+      { image: "/images/amc-hero.jpg" },
+      { image: "/images/amc-hero-2.jpg" },
+      { image: "/images/E-West-Managment-3.jpg" },
+    ],
     heroTitle: "Compliance Is Not an Event.",
     heroHighlight: "It Is a Calendar.",
     heroDesc:
-      "An annual maintenance contract that puts your entire e-waste obligation on a schedule — fixed pickups, tracked assets, certificates issued on collection and filings prepared before they are due.",
+      "An annual maintenance contract that puts your entire e-waste obligation on a schedule - fixed pickups, tracked assets, certificates issued on collection and filings prepared before they are due.",
     overview: {
       eyebrow: "The Challenge",
-      title: "Most Organisations Deal With E-Waste Once a Year — Too Late",
+      title: "Most Organisations Deal With E-Waste Once a Year - Too Late",
       paragraphs: [
         "The typical pattern is familiar: obsolete IT accumulates in a store room for months, someone notices the audit approaching, and a disposal is arranged in a hurry. Assets go out without a proper inventory, certificates arrive late or not at all, and the compliance file has a gap that an auditor will find.",
         "An annual maintenance contract replaces that scramble with a schedule. Advait Green becomes your standing authorised recycler: agreed pickup frequency, a named account manager, asset-level reporting on every consignment, and certificates issued as collections happen rather than reconstructed afterwards.",
-        "For organisations running continuous IT refresh cycles — banks, IT services, hospitals, manufacturing plants, government departments and educational institutions — the AMC model turns e-waste from a recurring problem into a managed service line.",
+        "For organisations running continuous IT refresh cycles - banks, IT services, hospitals, manufacturing plants, government departments and educational institutions - the AMC model turns e-waste from a recurring problem into a managed service line.",
       ],
       image: "/images/E-West-Managment-2.jpg",
       badgeLabel: "CPCB / GPCB Authorised",
@@ -676,13 +706,13 @@ const amcRecycler = {
       {
         icon: CalendarClock,
         label: "Scheduled Pickups",
-        desc: "An agreed collection frequency — monthly, quarterly or on-call within a guaranteed response window — so material never accumulates beyond your storage tolerance or a regulator's comfort.",
+        desc: "An agreed collection frequency - monthly, quarterly or on-call within a guaranteed response window - so material never accumulates beyond your storage tolerance or a regulator's comfort.",
         image: "/images/E-Waste-Collection-Logistics.jpg",
       },
       {
         icon: ClipboardCheck,
         label: "Asset-Level Inventory",
-        desc: "Serial numbers, asset tags, make, model and condition recorded at pickup and reconciled against your fixed asset register — so finance can retire assets with evidence, not assumption.",
+        desc: "Serial numbers, asset tags, make, model and condition recorded at pickup and reconciled against your fixed asset register - so finance can retire assets with evidence, not assumption.",
         image: "/images/computer-workstation.jpg",
       },
       {
@@ -694,7 +724,7 @@ const amcRecycler = {
       {
         icon: Award,
         label: "Certificates of Recycling",
-        desc: "Issued against every consignment as it is processed — not batched at year end — so your compliance file is complete on any given day of the year.",
+        desc: "Issued against every consignment as it is processed - not batched at year end - so your compliance file is complete on any given day of the year.",
         image: "/images/E-West-Managment-5.jpg",
       },
       {
@@ -706,7 +736,7 @@ const amcRecycler = {
       {
         icon: BarChart3,
         label: "Compliance Reporting",
-        desc: "Periodic reports covering quantities collected, categories processed, recovery achieved and diversion from landfill — formatted for internal ESG and external audit use.",
+        desc: "Periodic reports covering quantities collected, categories processed, recovery achieved and diversion from landfill - formatted for internal ESG and external audit use.",
         image: "/images/esg.png",
       },
     ],
@@ -723,7 +753,7 @@ const amcRecycler = {
         icon: FileCheck,
         num: "02",
         title: "Contract & Onboarding",
-        desc: "A defined annual scope with rates, response times, reporting formats and a named account manager — plus induction for your facilities and IT teams.",
+        desc: "A defined annual scope with rates, response times, reporting formats and a named account manager - plus induction for your facilities and IT teams.",
       },
       {
         icon: Truck,
@@ -761,7 +791,7 @@ const amcRecycler = {
       {
         icon: ShieldCheck,
         title: "Continuous Audit Readiness",
-        desc: "Certificates issued as collections happen — your compliance file is complete on any date an auditor picks.",
+        desc: "Certificates issued as collections happen - your compliance file is complete on any date an auditor picks.",
       },
       {
         icon: Scale,
@@ -781,7 +811,7 @@ const amcRecycler = {
       {
         icon: BarChart3,
         title: "Reportable Impact",
-        desc: "Year-on-year data on tonnage diverted and material recovered — the numbers your ESG report needs.",
+        desc: "Year-on-year data on tonnage diverted and material recovered - the numbers your ESG report needs.",
       },
     ],
     stats: [
@@ -797,13 +827,13 @@ const amcRecycler = {
     whyTitle: "Why Advait Green as Your",
     whyHighlight: "Contracted Recycler",
     whyDesc:
-      "Authorised processing at our own facility, asset-level transparency and a service calendar built around your audit dates — not ours.",
+      "Authorised processing at our own facility, asset-level transparency and a service calendar built around your audit dates - not ours.",
     compliance: {
       badge: "Regulatory",
       title: "Your Obligation Under the",
       highlight: "E-Waste Rules, 2022",
       paragraphs: [
-        "Bulk consumers of electrical and electronic equipment must channel end-of-life assets only to registered recyclers, maintain records in Form 6, and produce those records on demand. Handing equipment to an unregistered scrap dealer does not discharge the obligation — it creates one.",
+        "Bulk consumers of electrical and electronic equipment must channel end-of-life assets only to registered recyclers, maintain records in Form 6, and produce those records on demand. Handing equipment to an unregistered scrap dealer does not discharge the obligation - it creates one.",
         "Under the AMC, that record-keeping becomes ours to maintain and yours to present. Every collection is documented, every certificate is filed, and the annual return is prepared before its deadline rather than after your auditor asks.",
       ],
       cta: { label: "Request an AMC Proposal", href: "/contact" },
@@ -845,24 +875,40 @@ const solidWaste = {
   title: "Solid Waste Management",
   navLabel: "Solid Waste Management",
   icon: Trash2,
-  image: "/images/reverse-logistic.png",
+  image: "/images/Post-Industrial-Waste.jpg",
   // Spans two columns in the homepage 3-up grid so 8 cards close the last row.
   wide: true,
   summary:
     "Segregated collection, material recovery and scientific disposal of municipal and industrial solid waste under the Solid Waste Management Rules, 2016.",
   detail: {
     eyebrow: "Solid Waste Management",
-    heroImage: "/images/reverse-logistic.png",
+    // Fallback for any context reading heroImage directly; heroSlides drives
+    // the rotating hero.
+    heroImage: "/images/Post-Industrial-Waste.jpg",
+    heroSlides: [
+      {
+        image: "/images/Post-Industrial-Waste.jpg",
+        caption: "Mixed Waste — Before Segregation",
+      },
+      {
+        image: "/images/E-West-Managment-5.jpg",
+        caption: "Bulk Material Handling",
+      },
+      {
+        image: "/images/amc-hero-2.jpg",
+        caption: "The Municipal Stream at Source",
+      },
+    ],
     heroTitle: "A Landfill Is a Decision.",
     heroHighlight: "Not a Destination.",
     heroDesc:
-      "Segregated collection, material recovery, composting and scientific disposal for campuses, industrial estates, commercial complexes and urban local bodies — with diversion measured, not claimed.",
+      "Segregated collection, material recovery, composting and scientific disposal for campuses, industrial estates, commercial complexes and urban local bodies - with diversion measured, not claimed.",
     overview: {
       eyebrow: "The Challenge",
       title: "Most Waste Sent to Landfill Never Needed to Go There",
       paragraphs: [
-        "India generates more than 160,000 tonnes of municipal solid waste every day, and a large share still reaches unlined dumpsites. Yet the majority of it is wet organic waste that could be composted and dry recyclables that hold real market value. What makes it landfill is not its nature — it is the fact that it was mixed.",
-        "The Solid Waste Management Rules, 2016 place a duty on every waste generator to segregate at source into biodegradable, non-biodegradable and domestic hazardous fractions, and make bulk generators — campuses, hotels, hospitals, gated communities, industrial units — responsible for arranging processing of their own waste.",
+        "India generates more than 160,000 tonnes of municipal solid waste every day, and a large share still reaches unlined dumpsites. Yet the majority of it is wet organic waste that could be composted and dry recyclables that hold real market value. What makes it landfill is not its nature - it is the fact that it was mixed.",
+        "The Solid Waste Management Rules, 2016 place a duty on every waste generator to segregate at source into biodegradable, non-biodegradable and domestic hazardous fractions, and make bulk generators - campuses, hotels, hospitals, gated communities, industrial units - responsible for arranging processing of their own waste.",
         "Advait Green operates that system end to end: bin infrastructure and segregation training, routed collection, material recovery facility sorting, organic processing, recyclable channelisation and documented disposal of the genuine residue only.",
       ],
       image: "/images/reverse-logistic.png",
@@ -887,7 +933,7 @@ const solidWaste = {
       {
         icon: Boxes,
         label: "Industrial Non-Hazardous Waste",
-        desc: "Packaging waste, wooden pallets, rejected material, process residues and general factory sweepings — sorted for recovery with only genuinely non-recoverable fractions sent for disposal.",
+        desc: "Packaging waste, wooden pallets, rejected material, process residues and general factory sweepings - sorted for recovery with only genuinely non-recoverable fractions sent for disposal.",
         image: "/images/Post-Industrial-Waste.jpg",
       },
       {
@@ -905,7 +951,7 @@ const solidWaste = {
       {
         icon: Container,
         label: "Bulk Generator Contracts",
-        desc: "Full-scope waste management for campuses, gated communities, hotels, malls and industrial estates — infrastructure, manpower, routing, processing and monthly diversion reporting.",
+        desc: "Full-scope waste management for campuses, gated communities, hotels, malls and industrial estates - infrastructure, manpower, routing, processing and monthly diversion reporting.",
         image: "/images/E-Waste-Collection-Logistics.jpg",
       },
     ],
@@ -928,7 +974,7 @@ const solidWaste = {
         icon: SlidersHorizontal,
         num: "03",
         title: "Material Recovery",
-        desc: "Sorting at our MRF into marketable grades — polymer type, paper grade, metal category — with contaminants and rejects separated out.",
+        desc: "Sorting at our MRF into marketable grades - polymer type, paper grade, metal category - with contaminants and rejects separated out.",
       },
       {
         icon: Sprout,
@@ -965,7 +1011,7 @@ const solidWaste = {
       {
         icon: TrendingUp,
         title: "Recovered Material Value",
-        desc: "Clean, segregated recyclables carry real market value — value that mixed waste destroys before it ever reaches a sorting line.",
+        desc: "Clean, segregated recyclables carry real market value - value that mixed waste destroys before it ever reaches a sorting line.",
       },
       {
         icon: BarChart3,
@@ -996,14 +1042,14 @@ const solidWaste = {
     whyTitle: "Why Advait Green for",
     whyHighlight: "Solid Waste Management",
     whyDesc:
-      "Segregation infrastructure, routed collection and material recovery run as one system — with diversion reported in weights, not adjectives.",
+      "Segregation infrastructure, routed collection and material recovery run as one system - with diversion reported in weights, not adjectives.",
     compliance: {
       badge: "Regulatory",
       title: "Solid Waste",
       highlight: "Management Rules, 2016",
       paragraphs: [
         "The Rules make every waste generator responsible for segregating waste at source, and require bulk generators to arrange for processing of biodegradable waste within their own premises or through an agreed facility. Handing mixed waste to a collector does not discharge that duty.",
-        "We build the operating system around it — bins, briefing, routes, sorting, processing and the monthly record that shows what actually happened to each stream.",
+        "We build the operating system around it - bins, briefing, routes, sorting, processing and the monthly record that shows what actually happened to each stream.",
       ],
       cta: { label: "Discuss a Site Assessment", href: "/contact" },
       items: [
@@ -1015,7 +1061,7 @@ const solidWaste = {
         {
           icon: Scale,
           title: "Stream-Wise Weight Records",
-          desc: "Collection weights captured per stream, per pickup — the basis of any credible diversion claim.",
+          desc: "Collection weights captured per stream, per pickup - the basis of any credible diversion claim.",
         },
         {
           icon: FileCheck,
@@ -1031,204 +1077,7 @@ const solidWaste = {
     },
     ctaTitle: "Want to Know How Much of Your Waste Is Actually Recoverable?",
     ctaDesc:
-      "We will run a characterisation study on your site — a week of segregated weighing — and show you exactly what you are currently sending to landfill.",
-  },
-};
-
-/* ────────────────────────────────────────────────────────────
-   8. OTHERS
-   ──────────────────────────────────────────────────────────── */
-const others = {
-  slug: "others",
-  href: "/services/others",
-  title: "Others",
-  navLabel: "Others",
-  icon: Boxes,
-  image: "/images/esg.png",
-  summary:
-    "Secure data destruction, battery and solar panel recycling, reverse logistics, asset buyback and sustainability consulting — the specialised work around the core streams.",
-  detail: {
-    eyebrow: "Other Services",
-    heroImage: "/images/esg.png",
-    heroTitle: "The Work That Sits",
-    heroHighlight: "Around the Core.",
-    heroDesc:
-      "Secure data destruction, battery and solar panel recycling, reverse logistics, asset buyback and sustainability consulting — specialised services delivered under the same authorisations and the same documentation discipline.",
-    overview: {
-      eyebrow: "The Scope",
-      title: "Not Every Requirement Fits a Standard Category",
-      paragraphs: [
-        "Waste rarely arrives in tidy categories. A data centre decommission is an e-waste job, a data security job and a logistics job at once. A solar installation reaching end of life is part panel recycling, part hazardous handling. A brand consolidating its ESG reporting needs numbers from every one of those streams in one format.",
-        "These are the services we run alongside the core recycling lines — each delivered under the same authorisations, the same chain-of-custody documentation and the same certificate discipline as everything else we handle.",
-        "If your requirement does not map cleanly onto one of our listed services, it almost certainly maps onto a combination of them. Describe the situation and we will scope it.",
-      ],
-      image: "/images/esg.png",
-      badgeLabel: "Specialised Services",
-      badgeSub: "Scoped to your specific requirement",
-    },
-    handlesEyebrow: "Specialised Services",
-    handlesTitle: "What Else We Do",
-    handles: [
-      {
-        icon: ShieldCheck,
-        label: "Secure Data Destruction",
-        desc: "Software-based sanitisation to recognised overwriting standards, degaussing, and physical shredding of hard drives, SSDs, tapes and mobile devices. Serial-level certificates of destruction issued, with witnessed destruction available on request.",
-        image: "/images/secure-data.png",
-      },
-      {
-        icon: Zap,
-        label: "Battery & Solar Panel Recycling",
-        desc: "Lead-acid, lithium-ion, nickel-cadmium and industrial battery recycling under the Battery Waste Management Rules, 2022, plus end-of-life photovoltaic module handling for glass, aluminium and silicon recovery.",
-        image: "/images/solar-planet-recycle.png",
-      },
-      {
-        icon: Truck,
-        label: "Reverse Logistics",
-        desc: "Nationwide pickup, consolidation and transport of end-of-life assets from distributed sites — branch networks, retail chains, service centres and project sites — with tracked movement to our facility.",
-        image: "/images/reverse-logistic.png",
-      },
-      {
-        icon: TrendingUp,
-        label: "Asset Buyback",
-        desc: "Transparent, recovery-based valuation of retired IT and electronic assets. You receive a documented offer per lot, settled against verified weights and grades rather than a flat scrap rate.",
-        image: "/images/computer-workstation.jpg",
-      },
-      {
-        icon: BarChart3,
-        label: "Sustainability & ESG Reporting",
-        desc: "Consolidated waste and recovery data across every stream we handle for you, formatted as inputs to BRSR filings, GRI disclosures, customer sustainability questionnaires and internal ESG dashboards.",
-        image: "/images/esg.png",
-      },
-      {
-        icon: Lightbulb,
-        label: "Custom & Project Work",
-        desc: "Data centre decommissions, plant closures, warehouse clearances and one-off consignments that cut across categories — scoped, quoted and executed as a defined project with a single point of contact.",
-        image: "/images/E-West-Managment-4.jpg",
-      },
-    ],
-    processSubtitle: "How We Engage",
-    processTitle: "How a Non-Standard Requirement Gets Handled",
-    process: [
-      {
-        icon: Headset,
-        num: "01",
-        title: "Describe the Requirement",
-        desc: "Tell us what you have, where it is and what constraints apply — security, timeline, site access or reporting needs.",
-      },
-      {
-        icon: Eye,
-        num: "02",
-        title: "Site or Remote Survey",
-        desc: "A physical visit or a documented remote assessment to establish quantities, categories and any hazardous fractions involved.",
-      },
-      {
-        icon: ClipboardCheck,
-        num: "03",
-        title: "Scoped Proposal",
-        desc: "A written scope covering method, timeline, commercial terms and exactly which certificates and reports you will receive.",
-      },
-      {
-        icon: Truck,
-        num: "04",
-        title: "Execution",
-        desc: "Collection, on-site work or destruction carried out to the agreed method, with your representative present wherever the scope requires it.",
-      },
-      {
-        icon: RotateCcw,
-        num: "05",
-        title: "Processing & Recovery",
-        desc: "Material processed at our authorised facility or channelled to authorised specialists, with chain of custody maintained throughout.",
-      },
-      {
-        icon: Award,
-        num: "06",
-        title: "Documentation Handover",
-        desc: "Certificates, serial-level reports, weight records and the reporting inputs your compliance and ESG teams need.",
-      },
-    ],
-    benefitsEyebrow: "Why It Matters",
-    benefitsTitle: "Why Consolidate These With One Partner",
-    benefits: [
-      {
-        icon: ShieldCheck,
-        title: "One Chain of Custody",
-        desc: "Assets do not change hands between three vendors — the documentation trail stays unbroken from your site to final processing.",
-      },
-      {
-        icon: BarChart3,
-        title: "Consolidated Reporting",
-        desc: "Every stream reported in one consistent format, so ESG reporting stops being a data reconciliation exercise.",
-      },
-      {
-        icon: Scale,
-        title: "Better Recovered Value",
-        desc: "Volume across streams supports stronger buyback terms than fragmented, one-off disposals ever achieve.",
-      },
-      {
-        icon: Headset,
-        title: "Single Point of Contact",
-        desc: "One account manager across data destruction, logistics, recycling and reporting — not four separate escalation paths.",
-      },
-      {
-        icon: FileCheck,
-        title: "Consistent Documentation",
-        desc: "Certificates and records in the same format every time, so your audit file does not need reformatting.",
-      },
-      {
-        icon: Sparkles,
-        title: "Scoped to Fit",
-        desc: "Requirements that cross categories get scoped as one project rather than forced into a standard service description.",
-      },
-    ],
-    stats: [
-      { stat: "Serial-Level", label: "Destruction Certificates", dark: true },
-      { stat: "Pan-India", label: "Reverse Logistics", dark: false },
-      { stat: "BRSR", label: "Reporting Inputs", dark: true },
-      { stat: "Witnessed", label: "Destruction Available", dark: false },
-      { stat: "Project", label: "Scoped Engagements", dark: true },
-      { stat: "Single", label: "Point of Contact", dark: false },
-      { stat: "Authorised", label: "Downstream Partners", dark: true },
-      { stat: "10+", label: "Years of Experience", dark: false },
-    ],
-    whyTitle: "Why Advait Green for",
-    whyHighlight: "Specialised Requirements",
-    whyDesc:
-      "The same authorisations, the same documentation discipline and the same account team — applied to the requirements that do not fit a standard category.",
-    compliance: {
-      badge: "Assurance",
-      title: "Handled Under the Same",
-      highlight: "Authorisations",
-      paragraphs: [
-        "Specialised does not mean informal. Data destruction, battery recycling, solar module handling and project decommissions are all executed under our CPCB and GPCB authorisations, with the same chain-of-custody records and certificate discipline as our core streams.",
-        "Where a fraction requires a specialist downstream processor, it goes to an authorised one — and you receive the documentation showing where it went.",
-      ],
-      cta: { label: "Describe Your Requirement", href: "/contact" },
-      items: [
-        {
-          icon: ShieldCheck,
-          title: "Authorised Processing",
-          desc: "Every stream handled under valid CPCB and GPCB authorisation, or by an authorised partner.",
-        },
-        {
-          icon: FileCheck,
-          title: "Certificates Per Engagement",
-          desc: "Recycling, destruction and disposal certificates issued for every job, however non-standard.",
-        },
-        {
-          icon: Eye,
-          title: "Chain of Custody",
-          desc: "Documented custody from your site through to final processing or downstream handover.",
-        },
-        {
-          icon: BarChart3,
-          title: "Reporting Inputs",
-          desc: "Weights, categories and recovery data formatted for your ESG and compliance reporting.",
-        },
-      ],
-    },
-    ctaTitle: "Have Something That Does Not Fit a Category?",
-    ctaDesc:
-      "Describe the situation — a decommission, a clearance, a mixed consignment, a reporting gap. We will tell you how we would handle it and what it would cost.",
+      "We will run a characterisation study on your site - a week of segregated weighing - and show you exactly what you are currently sending to landfill.",
   },
 };
 
@@ -1240,7 +1089,6 @@ export const services = [
   epr,
   amcRecycler,
   solidWaste,
-  others,
 ];
 
 /** Catalogue entries used for nav dropdowns and footer columns. */

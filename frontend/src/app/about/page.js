@@ -1,14 +1,13 @@
 "use client";
 
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import {
-  ArrowRight, ShieldCheck, Eye, Search, Lock, BarChart3,
-  Target, Recycle, Users, TreePine, GraduationCap, Wrench,
-  Cpu, Zap, Factory, Truck, CheckCircle, ChevronRight,
-  Award, Gauge, FileCheck, Headset, MapPin, Building2, Scale,
+  ArrowRight, ShieldCheck, Eye, Search, Lock, BarChart3, Target, Recycle, Users, TreePine, GraduationCap, Wrench, Cpu, Zap, Factory, Truck, CheckCircle, ChevronRight, FileCheck, Headset, MapPin, Building2, Scale, Quote,
 } from "lucide-react";
 import { services } from "@/data/services";
+import HorizontalShowcase from "@/components/sections/HorizontalShowcase";
 
 const values = [
   { icon: ShieldCheck, title: "Legitimacy First", desc: "We only do what our authorisations permit us to do. No exceptions, whatever the tonnage." },
@@ -18,40 +17,77 @@ const values = [
   { icon: BarChart3, title: "Continuous Recovery", desc: "Every process line is reviewed against one question: what are we still losing?" },
 ];
 
-const timeline = [
-  { year: "2019", event: "Advait Green Recycling incorporated at Mahesana, Gujarat." },
-  { year: "2020", event: "GPCB authorisation received for e-waste collection, dismantling and recycling." },
-  { year: "2021", event: "First processing facility commissioned at Vamaj, Mahesana." },
-  { year: "2022", event: "Plastic waste recycling line added; PWM authorisation obtained." },
-  { year: "2023", event: "CPCB EPR registration; EPR advisory vertical launched." },
-  { year: "2024", event: "ISO 9001, 14001 and 45001 certifications achieved." },
-  { year: "2025", event: "Battery and solar module waste handling capability commissioned." },
-  { year: "2026", event: "GST registered. Continued expansion of processing capacity and client base." },
-];
 
 const infrastructure = [
-  { icon: Cpu, title: "E-Waste Line", items: ["Manual de-manufacturing bays", "Primary shredder", "Magnetic & eddy-current separation", "Density-based sorting", "PCB segregation & storage"] },
-  { icon: Recycle, title: "Plastic Line", items: ["Sorting conveyor", "Washing & drying unit", "Granulator & agglomerator", "Batch-wise quality testing"] },
-  { icon: Zap, title: "Battery & Solar", items: ["Dedicated segregated storage", "Discharge & dismantling area", "Authorised downstream channelling"] },
-  { icon: Factory, title: "Support Infrastructure", items: ["Electronic weighbridge", "CCTV-covered material movement", "Hazardous storage zones", "Data destruction room", "GPS-tracked collection vehicles"] },
+  {
+    icon: Cpu,
+    title: "E-Waste Line",
+    desc: "Skilled hands take each device apart before anything is shredded, so hazardous components and high-value boards are removed while they are still intact.",
+    items: ["Manual de-manufacturing bays", "Primary shredder", "Magnetic & eddy-current separation", "Density-based sorting", "PCB segregation & storage"],
+  },
+  {
+    icon: Recycle,
+    title: "Plastic Line",
+    desc: "Sorting, washing and granulation in one continuous run, with every batch tested before it leaves the gate as production-grade material.",
+    items: ["Sorting conveyor", "Washing & drying unit", "Granulator & agglomerator", "Batch-wise quality testing"],
+  },
+  {
+    icon: Zap,
+    title: "Battery & Solar",
+    desc: "Kept physically apart from every other stream. Cells are discharged and dismantled in a dedicated area before channelling to authorised downstream processors.",
+    items: ["Dedicated segregated storage", "Discharge & dismantling area", "Authorised downstream channelling"],
+  },
+  {
+    icon: Factory,
+    title: "Support Infrastructure",
+    desc: "The equipment that makes the paperwork true — weighed at the gate, filmed in transit, and recorded from arrival to certificate.",
+    items: ["Electronic weighbridge", "CCTV-covered material movement", "Hazardous storage zones", "Data destruction room", "GPS-tracked collection vehicles"],
+  },
 ];
 
-const certifications = [
-  { name: "CPCB EPR Registration", icon: ShieldCheck },
-  { name: "GPCB Consent to Operate", icon: ShieldCheck },
-  { name: "E-Waste Management Authorisation", icon: CheckCircle },
-  { name: "Plastic Waste Management Authorisation", icon: CheckCircle },
-  { name: "ISO 9001:2015", icon: CheckCircle },
-  { name: "ISO 14001:2015", icon: CheckCircle },
-  { name: "ISO 45001:2018", icon: CheckCircle },
-  { name: "GST: 24ABECA2823M1ZQ", icon: ShieldCheck },
-];
 
 const csr = [
   { icon: GraduationCap, title: "Awareness Drives", desc: "At schools, colleges and residential societies on household e-waste segregation." },
   { icon: Users, title: "Collection Camps", desc: "With corporate partners, RWAs and municipal bodies." },
   { icon: Wrench, title: "Skill Training", desc: "For informal sector workers transitioning into formal recycling roles." },
   { icon: TreePine, title: "Facility Greening", desc: "Tree plantation and environmental restoration at our facility." },
+];
+
+/**
+ * Background media for the Vision & Mission band. Set to null to remove it.
+ * The supplied artwork is light, so the band is styled light: dark type on a
+ * soft white veil rather than white type on a dark one.
+ */
+const visionMissionBg = "/images/backgorund-img.png";
+
+const visionPoints = [
+  "A resource economy where reaching end-of-life is a stage in a material's journey — never the end of it.",
+  "Formal, authorised recycling at a scale that makes informal handling the exception in India, not the norm.",
+  "Compliance that proves itself — every tonne traceable from the weighbridge to the certificate.",
+];
+
+const missionPoints = [
+  "Give every waste generator a formal, fully documented and commercially fair channel for what they retire.",
+  "Recover the maximum from each consignment and send the minimum to landfill — measured, never estimated.",
+  "Make compliance straightforward for producers and importers, and create safe, skilled work in the process.",
+];
+
+/** Service catalogue mapped onto the horizontal showcase's item shape. */
+const serviceShowcase = services.map((svc) => ({
+  icon: svc.icon,
+  label: svc.title,
+  desc: svc.summary,
+  image: svc.image,
+  href: svc.href,
+}));
+
+
+
+/** Quick facts shown beneath the "Who We Are" narrative. */
+const whoWeAreFacts = [
+  { icon: MapPin, label: "Vamaj, Mahesana", sub: "Gujarat, India" },
+  { icon: ShieldCheck, label: "GPCB Authorised", sub: "E-waste & plastic waste" },
+  { icon: Building2, label: "Private Limited", sub: "Incorporated 2019" },
 ];
 
 const whyUs = [
@@ -68,7 +104,7 @@ const whyUs = [
   {
     icon: FileCheck,
     title: "Documentation as Standard",
-    desc: "Manifests, certificates of recycling and data destruction, and quarterly filings are part of the service — not an extra you have to chase after the truck leaves.",
+    desc: "Manifests, certificates of recycling and data destruction, and quarterly filings are part of the service - not an extra you have to chase after the truck leaves.",
   },
   {
     icon: Scale,
@@ -78,7 +114,7 @@ const whyUs = [
   {
     icon: Headset,
     title: "One Point of Contact",
-    desc: "A named account manager across every stream you hand us — e-waste, plastics, biomedical or solid waste — instead of four vendors and four escalation paths.",
+    desc: "A named account manager across every stream you hand us - e-waste, plastics, biomedical or solid waste - instead of four vendors and four escalation paths.",
   },
   {
     icon: Truck,
@@ -94,24 +130,135 @@ const glanceStats = [
   { value: "Pan-India", label: "Collection Coverage", icon: MapPin },
 ];
 
+
+
 /**
- * Installed processing capacity, shown unit-wise.
- * `XXX` values are placeholders pending confirmed figures from operations —
- * the same convention used for the homepage impact stats.
+ * Rotating hero. Replaces the previous single stock photo, which showed a road
+ * map and camera and had nothing to do with recycling.
  */
-const capacity = [
-  { unit: "E-Waste Processing Line", location: "Vamaj, Mahesana", rate: "XXX", uom: "MT / Month", icon: Cpu },
-  { unit: "Plastic Recycling Line", location: "Vamaj, Mahesana", rate: "500", uom: "MT / Month", icon: Recycle },
-  { unit: "Battery & Solar Handling", location: "Vamaj, Mahesana", rate: "XXX", uom: "MT / Month", icon: Zap },
-  { unit: "Storage & Segregation", location: "Vamaj, Mahesana", rate: "XXX", uom: "Sq. Ft.", icon: Factory },
+const heroSlides = [
+  {
+    image: "/images/E-West-Managment-2.jpg",
+    caption: "Skilled Manual De-Manufacturing",
+  },
+  {
+    image: "/images/E-West-Managment-5.jpg",
+    caption: "Material Handling at Scale",
+  },
+  {
+    image: "/images/E-West-Managment-1.jpg",
+    caption: "Recovering What Others Discard",
+  },
 ];
 
 /**
- * Leadership profiles. Left empty deliberately — the section below renders
- * nothing until real names, designations and credentials are supplied.
- * Shape: { name, role, credentials, bio }
+ * Infrastructure accordion. Opens on hover on pointer devices and on tap/click
+ * everywhere else, so it still works on touch where hover does not exist.
  */
-const leadership = [];
+function InfrastructureAccordion() {
+  const [active, setActive] = useState(0);
+
+  return (
+    <div>
+      {infrastructure.map((infra, i) => {
+        const open = active === i;
+        return (
+          <div
+            key={infra.title}
+            onMouseEnter={() => setActive(i)}
+            style={{ borderTop: "1px solid var(--color-secondary-200)" }}
+            className={i === infrastructure.length - 1 ? "border-b" : ""}
+          >
+            <button
+              type="button"
+              onClick={() => setActive(open ? -1 : i)}
+              aria-expanded={open}
+              className="w-full flex items-center gap-4 py-5 sm:py-6 text-left cursor-pointer"
+            >
+              <ChevronRight
+                size={18}
+                className="shrink-0 transition-transform duration-300"
+                style={{
+                  color: open ? "var(--color-accent-600)" : "var(--color-secondary-400)",
+                  transform: open ? "rotate(90deg)" : "rotate(0deg)",
+                }}
+                aria-hidden="true"
+              />
+              <span
+                className="font-heading text-lg sm:text-xl lg:text-2xl font-semibold tracking-tight transition-colors duration-300"
+                style={{ color: open ? "var(--color-primary-950)" : "var(--color-secondary-700)" }}
+              >
+                {infra.title}
+              </span>
+              <infra.icon
+                size={20}
+                strokeWidth={1.6}
+                className="ml-auto shrink-0 transition-opacity duration-300"
+                style={{ color: "var(--color-primary-500)", opacity: open ? 1 : 0.35 }}
+                aria-hidden="true"
+              />
+            </button>
+
+            <AnimatePresence initial={false}>
+              {open && (
+                <motion.div
+                  initial={{ height: 0, opacity: 0 }}
+                  animate={{ height: "auto", opacity: 1 }}
+                  exit={{ height: 0, opacity: 0 }}
+                  transition={{ duration: 0.34, ease: [0.2, 0, 0, 1] }}
+                  className="overflow-hidden"
+                >
+                  <div className="pl-[34px] pr-2 pb-6">
+                    <p className="text-sm leading-relaxed mb-4" style={{ color: "var(--color-secondary-600)" }}>
+                      {infra.desc}
+                    </p>
+                    <ul className="flex flex-wrap gap-2">
+                      {infra.items.map((item) => (
+                        <li
+                          key={item}
+                          className="inline-flex items-center gap-1.5 rounded-full border bg-white px-3 py-1.5 text-xs"
+                          style={{ borderColor: "var(--color-secondary-200)", color: "var(--color-secondary-700)" }}
+                        >
+                          <CheckCircle size={12} style={{ color: "var(--color-primary-500)" }} />
+                          {item}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </motion.div>
+              )}
+            </AnimatePresence>
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+/** Translucent card used by the Vision & Mission band. */
+function GlassCard({ text, index }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 22 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "0px 0px -40px 0px" }}
+      transition={{ duration: 0.45, delay: index * 0.09, ease: [0.2, 0, 0, 1] }}
+      className="rounded-xl p-5 sm:p-6 flex items-center transition-all duration-300 hover:-translate-y-1"
+      style={{
+        backgroundColor: "rgba(255,255,255,0.72)",
+        border: "1px solid var(--color-secondary-200)",
+        backdropFilter: "blur(10px)",
+        WebkitBackdropFilter: "blur(10px)",
+        boxShadow: "0 2px 6px rgba(1,63,93,0.05), 0 12px 30px rgba(1,63,93,0.06)",
+        minHeight: "170px",
+      }}
+    >
+      <p className="text-[13px] sm:text-sm leading-relaxed text-center w-full" style={{ color: "var(--color-secondary-700)" }}>
+        {text}
+      </p>
+    </motion.div>
+  );
+}
 
 const fadeUp = {
   hidden: { opacity: 0, y: 24 },
@@ -122,16 +269,35 @@ const fadeUp = {
 };
 
 export default function AboutPage() {
+  const [current, setCurrent] = useState(0);
+  const timerRef = useRef(null);
+
+  useEffect(() => {
+    timerRef.current = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % heroSlides.length);
+    }, 6000);
+    return () => clearInterval(timerRef.current);
+  }, []);
+
+  const activeSlide = heroSlides[current];
+
   return (
     <>
       {/* ── HERO ── */}
       <section className="relative h-screen min-h-[600px] bg-primary-950 overflow-hidden flex items-end sm:items-center pb-16 sm:pb-0">
-        {/* Background Image */}
-        <img
-          src="/images/about_hero_bg.png"
-          alt=""
-          className="absolute inset-0 w-full h-full object-cover"
-        />
+        {/* Background — cross-fading slides */}
+        <AnimatePresence mode="sync">
+          <motion.img
+            key={activeSlide.image}
+            src={activeSlide.image}
+            alt=""
+            initial={{ opacity: 0, scale: 1.06 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.1, ease: "easeInOut" }}
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        </AnimatePresence>
         {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/55" />
 
@@ -187,40 +353,158 @@ export default function AboutPage() {
                 Contact Us
               </Link>
             </motion.div>
+
+            {/* Slide indicators */}
+            <div className="flex items-center gap-3 mt-10">
+              <div className="flex gap-2">
+                {heroSlides.map((slide, i) => (
+                  <button
+                    key={slide.image}
+                    onClick={() => {
+                      setCurrent(i);
+                      clearInterval(timerRef.current);
+                      timerRef.current = setInterval(() => {
+                        setCurrent((prev) => (prev + 1) % heroSlides.length);
+                      }, 6000);
+                    }}
+                    aria-label={`Show slide ${i + 1}: ${slide.caption}`}
+                    aria-current={i === current}
+                    className={`h-[3px] rounded-full transition-all duration-500 ${
+                      i === current ? "w-10 bg-accent-400" : "w-5 bg-white/25 hover:bg-white/50"
+                    }`}
+                  />
+                ))}
+              </div>
+              <AnimatePresence mode="wait">
+                <motion.span
+                  key={activeSlide.caption}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.35 }}
+                  className="font-mono text-[10px] sm:text-[11px] uppercase tracking-[0.09em] text-white/55"
+                >
+                  {activeSlide.caption}
+                </motion.span>
+              </AnimatePresence>
+            </div>
           </div>
         </div>
       </section>
 
       {/* ── WHO WE ARE ── */}
-      <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "var(--color-secondary-50)" }}>
+      <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "#ffffff" }}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
-          <div className="max-w-[800px] mx-auto">
-            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>Who We Are</p>
-            <motion.h2
-              initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-              className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-6"
-              style={{ color: "var(--color-primary-950)" }}
+          <div className="grid lg:grid-cols-[1.1fr_1fr] gap-8 lg:gap-14 items-start lg:items-center">
+
+            {/* ── Left: the narrative ── */}
+            <div>
+              <p className="font-mono text-xs uppercase tracking-[0.09em] mb-4" style={{ color: "var(--color-accent-500)" }}>
+                Who We Are
+              </p>
+
+              <motion.h2
+                initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
+                className="font-heading text-[28px] sm:text-4xl lg:text-[3rem] font-semibold tracking-tight leading-[1.12] mb-4"
+                style={{ color: "var(--color-primary-950)" }}
+              >
+                A Recycling Company Built for India's Next Decade of Waste
+              </motion.h2>
+
+              <motion.p
+                initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={1}
+                className="font-heading text-base sm:text-lg font-bold mb-6"
+                style={{ color: "var(--color-primary-700)" }}
+              >
+                CPCB &amp; GPCB Authorised Recycler From Mahesana, Gujarat
+              </motion.p>
+
+              <motion.p
+                initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={2}
+                className="text-[15px] sm:text-base leading-relaxed mb-5"
+                style={{ color: "var(--color-secondary-700)" }}
+              >
+                Advait Green Recycling Private Limited was established with a clear intent — to build formal, traceable recycling capacity in a sector still dominated by informal handling.
+              </motion.p>
+
+              <motion.p
+                initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={3}
+                className="text-[15px] sm:text-base leading-relaxed mb-6"
+                style={{ color: "var(--color-secondary-700)" }}
+              >
+                Today we operate an integrated facility at Vamaj, Mahesana (Gujarat), authorised by the Gujarat Pollution Control Board to handle electronic waste and plastic waste. We serve organisations across India, from single-site SMEs to multi-location enterprises with quarterly decommissioning cycles.
+              </motion.p>
+
+              {/* The name's meaning — the brand's core idea */}
+              <motion.blockquote
+                initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={4}
+                className="relative rounded-xl p-5 sm:p-6 overflow-hidden"
+                style={{ backgroundColor: "var(--color-primary-700)" }}
+              >
+                <Quote
+                  size={64}
+                  strokeWidth={1}
+                  className="absolute -top-1 -right-1 pointer-events-none"
+                  style={{ color: "rgba(255,255,255,0.07)" }}
+                  aria-hidden="true"
+                />
+                <p className="relative font-heading text-lg sm:text-xl leading-snug font-semibold" style={{ color: "#ffffff" }}>
+                  Anyone can make waste disappear.{" "}
+                  <span style={{ color: "var(--color-accent-400)" }}>
+                    The work is proving where it went.
+                  </span>
+                </p>
+              </motion.blockquote>
+            </div>
+
+            {/* ── Right: brand mark ── */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.97 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6, ease: [0.2, 0, 0, 1] }}
+              className="relative flex flex-col items-center justify-center px-6 py-10 lg:py-14"
+              style={{ minHeight: "280px" }}
             >
-              A Recycling Company Built for India's Next Decade of Waste
-            </motion.h2>
-            <motion.p
-              initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={1}
-              className="text-base leading-relaxed mb-5" style={{ color: "var(--color-secondary-700)" }}
-            >
-              Advait Green Recycling Private Limited was established with a clear intent — to build formal, traceable recycling capacity in a sector still dominated by informal handling.
-            </motion.p>
-            <motion.p
-              initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={2}
-              className="text-base leading-relaxed mb-5" style={{ color: "var(--color-secondary-700)" }}
-            >
-              The name <em>Advait</em> means "not two" — the idea that industry and environment are not opposing interests. A recycling business that isn't commercially sound will not survive to protect anything; a recycling business that isn't environmentally rigorous doesn't deserve to.
-            </motion.p>
-            <motion.p
-              initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={3}
-              className="text-base leading-relaxed" style={{ color: "var(--color-secondary-700)" }}
-            >
-              Today we operate an integrated facility at Vamaj, Mahesana (Gujarat), authorised by the Gujarat Pollution Control Board to handle electronic waste and plastic waste. We serve organisations across India, from single-site SMEs to multi-location enterprises with quarterly decommissioning cycles.
-            </motion.p>
+              <img
+                src="/images/ADVAIT_Logo.png"
+                alt="Advait Green Recycling Private Limited"
+                className="relative w-[78%] max-w-[520px] object-contain"
+              />
+
+              <span
+                className="mt-5 font-mono text-[10px] uppercase tracking-[0.14em] text-center"
+                style={{ color: "var(--color-secondary-400)" }}
+              >
+                Incorporated 2019 · Vamaj, Mahesana
+              </span>
+            </motion.div>
+          </div>
+
+          {/* Quick facts */}
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mt-10 lg:mt-14">
+            {whoWeAreFacts.map((f, i) => (
+              <motion.div
+                key={f.label}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: i * 0.08 }}
+                className="flex items-center gap-3 rounded-xl border p-4"
+                style={{ borderColor: "var(--color-secondary-200)", backgroundColor: "var(--color-secondary-50)" }}
+              >
+                <div
+                  className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
+                  style={{ backgroundColor: "var(--color-primary-50)", border: "1px solid var(--color-primary-200)" }}
+                >
+                  <f.icon size={19} strokeWidth={1.7} style={{ color: "var(--color-primary-600)" }} />
+                </div>
+                <div>
+                  <p className="text-[13px] font-semibold leading-tight" style={{ color: "var(--color-primary-950)" }}>{f.label}</p>
+                  <p className="text-[11px] mt-0.5" style={{ color: "var(--color-secondary-500)" }}>{f.sub}</p>
+                </div>
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
@@ -252,392 +536,337 @@ export default function AboutPage() {
       </section>
 
       {/* ── WHY ADVAIT GREEN ── */}
-      <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "var(--color-secondary-50)" }}>
+      <section className="py-14 sm:py-16 lg:py-24" style={{ backgroundColor: "var(--color-secondary-50)" }}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
-          <div className="text-center max-w-[640px] mx-auto mb-10 sm:mb-14">
-            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>Why Advait Green</p>
-            <motion.h2
-              initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-              className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-4"
-              style={{ color: "var(--color-primary-950)" }}
-            >
-              What Actually Separates Us
-            </motion.h2>
-            <p className="text-sm sm:text-base leading-relaxed" style={{ color: "var(--color-secondary-600)" }}>
-              Plenty of operators will take your waste away. Fewer can show you where it went, what came out of it, and the authorisation that made it legal.
-            </p>
-          </div>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-[1100px] mx-auto">
-            {whyUs.map((item, i) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, y: 20 }}
+          {/* Floating white panel — matches the homepage "Why Choose Us" band */}
+          <div
+            className="rounded-[24px] sm:rounded-[32px] bg-white px-5 sm:px-10 lg:px-16 py-12 sm:py-14 lg:py-20"
+            style={{ boxShadow: "0 2px 6px rgba(1,63,93,0.05), 0 20px 50px rgba(1,63,93,0.07)" }}
+          >
+            <div className="text-center max-w-[860px] mx-auto mb-12 lg:mb-16">
+              <motion.p
+                initial={{ opacity: 0, y: 12 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
-                className="rounded-xl p-6 border transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
-                style={{ borderColor: "var(--color-secondary-200)", backgroundColor: "#ffffff" }}
+                transition={{ duration: 0.4 }}
+                className="font-mono text-xs uppercase tracking-[0.09em] mb-4"
+                style={{ color: "var(--color-accent-500)" }}
               >
-                <div
-                  className="w-11 h-11 rounded-lg flex items-center justify-center mb-4"
-                  style={{ backgroundColor: "var(--color-primary-50)", border: "1px solid var(--color-primary-200)" }}
+                Why Advait Green
+              </motion.p>
+
+              <motion.h2
+                initial={{ opacity: 0, y: 18 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.06 }}
+                className="font-heading text-[26px] sm:text-4xl lg:text-[2.9rem] font-semibold tracking-tight leading-[1.14]"
+                style={{ color: "var(--color-primary-950)" }}
+              >
+                What Actually{" "}
+                <span style={{ color: "var(--color-accent-600)" }}>Separates Us</span>
+              </motion.h2>
+
+              <motion.p
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.12 }}
+                className="text-sm sm:text-base leading-relaxed mt-5"
+                style={{ color: "var(--color-secondary-600)" }}
+              >
+                None of these are positioning statements. Each one shows up somewhere a client can check it — on a certificate, in a weighbridge record, or from the person whose name is on the manifest.
+              </motion.p>
+            </div>
+
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-x-8 lg:gap-x-10 gap-y-11 lg:gap-y-14 max-w-[1080px] mx-auto">
+              {whyUs.map((item, i) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 22 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, margin: "0px 0px -40px 0px" }}
+                  transition={{ duration: 0.45, delay: (i % 3) * 0.08, ease: [0.2, 0, 0, 1] }}
+                  className="group flex flex-col items-center text-center"
                 >
-                  <item.icon size={22} strokeWidth={1.6} style={{ color: "var(--color-primary-700)" }} />
-                </div>
-                <h4 className="text-sm font-semibold mb-2" style={{ color: "var(--color-primary-950)" }}>{item.title}</h4>
-                <p className="text-xs leading-relaxed" style={{ color: "var(--color-secondary-600)" }}>{item.desc}</p>
-              </motion.div>
-            ))}
+                  <div
+                    className="w-[68px] h-[68px] sm:w-[74px] sm:h-[74px] rounded-2xl flex items-center justify-center mb-5 transition-all duration-300 group-hover:-translate-y-1.5 group-hover:shadow-md"
+                    style={{
+                      backgroundColor: "var(--color-primary-50)",
+                      border: "1px solid var(--color-primary-100)",
+                    }}
+                  >
+                    <item.icon
+                      size={30}
+                      strokeWidth={1.6}
+                      className="transition-transform duration-300 group-hover:scale-110"
+                      style={{ color: "var(--color-primary-600)" }}
+                    />
+                  </div>
+
+                  <h4
+                    className="font-heading text-[17px] font-bold tracking-tight mb-2.5"
+                    style={{ color: "var(--color-primary-950)" }}
+                  >
+                    {item.title}
+                  </h4>
+
+                  <p
+                    className="text-sm leading-relaxed max-w-[300px]"
+                    style={{ color: "var(--color-secondary-600)" }}
+                  >
+                    {item.desc}
+                  </p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* ── VISION & MISSION ── */}
-      <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "#ffffff" }}>
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 sm:gap-8 max-w-[1000px] mx-auto">
+      <section className="relative py-16 sm:py-20 lg:py-28 overflow-hidden" style={{ backgroundColor: "#ffffff" }}>
+        {/* Background media slot — renders only when visionMissionBg is set */}
+        {visionMissionBg && (
+          <img
+            src={visionMissionBg}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 w-full h-full object-cover"
+          />
+        )}
+        {/* Light veil — keeps type legible over the busier corners of the artwork */}
+        <div aria-hidden="true" className="absolute inset-0 pointer-events-none" style={{ backgroundColor: "rgba(255,255,255,0.42)" }} />
+
+        <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6 space-y-12 lg:space-y-20">
+
+          {/* ── Vision: heading left, cards right ── */}
+          <div className="grid lg:grid-cols-[0.85fr_2fr] gap-8 lg:gap-12 items-center">
             <motion.div
-              initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-              className="rounded-xl p-6 sm:p-8 lg:p-10"
-              style={{ backgroundColor: "var(--color-primary-700)" }}
+              initial={{ opacity: 0, x: -24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, ease: [0.2, 0, 0, 1] }}
             >
-              <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-5" style={{ backgroundColor: "rgba(255,255,255,0.12)" }}>
-                <Eye size={24} style={{ color: "var(--color-primary-100)" }} />
+              <div
+                className="relative w-[76px] h-[76px] sm:w-[86px] sm:h-[86px] rounded-2xl flex items-center justify-center mb-6"
+                style={{
+                  background: "linear-gradient(145deg, #ffffff 0%, var(--color-primary-50) 100%)",
+                  border: "1px solid var(--color-primary-200)",
+                  boxShadow: "0 2px 6px rgba(1,63,93,0.06), 0 14px 34px rgba(1,63,93,0.10)",
+                }}
+              >
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-0 rounded-2xl"
+                  style={{ boxShadow: "inset 0 1px 0 rgba(255,255,255,0.9)" }}
+                />
+                <Eye size={38} strokeWidth={1.5} style={{ color: "var(--color-primary-600)" }} />
               </div>
-              <h3 className="font-heading text-xl font-semibold mb-4" style={{ color: "#ffffff" }}>Our Vision</h3>
-              <p className="text-sm leading-relaxed" style={{ color: "var(--color-primary-200)" }}>
-                A resource economy where end-of-life is simply a stage in a material's life — not the end of it.
+              <h3 className="font-heading text-[38px] sm:text-5xl lg:text-[4.1rem] font-semibold tracking-tight leading-[1.02]" style={{ color: "var(--color-primary-950)" }}>
+                Our Vision
+              </h3>
+              <p className="font-heading text-lg sm:text-xl mt-4" style={{ color: "var(--color-accent-600)" }}>
+                A Circular Economy, Made Practical
               </p>
             </motion.div>
+
+            <div className="grid sm:grid-cols-3 gap-4 lg:gap-5">
+              {visionPoints.map((text, i) => (
+                <GlassCard key={i} index={i} text={text} />
+              ))}
+            </div>
+          </div>
+
+          {/* ── Mission: cards left, heading right ── */}
+          <div className="grid lg:grid-cols-[2fr_0.85fr] gap-8 lg:gap-12 items-center">
+            <div className="grid sm:grid-cols-3 gap-4 lg:gap-5 order-2 lg:order-1">
+              {missionPoints.map((text, i) => (
+                <GlassCard key={i} index={i} text={text} />
+              ))}
+            </div>
+
             <motion.div
-              initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={1}
-              className="rounded-xl p-6 sm:p-8 lg:p-10"
-              style={{ backgroundColor: "#E4EBE6" }}
+              initial={{ opacity: 0, x: 24 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, ease: [0.2, 0, 0, 1] }}
+              className="order-1 lg:order-2 lg:text-right"
             >
-              <div className="w-12 h-12 rounded-lg flex items-center justify-center mb-5" style={{ backgroundColor: "var(--color-primary-100)" }}>
-                <Target size={24} style={{ color: "var(--color-primary-700)" }} />
+              <div
+                className="relative w-[76px] h-[76px] sm:w-[86px] sm:h-[86px] rounded-2xl flex items-center justify-center mb-6 lg:ml-auto"
+                style={{
+                  background: "linear-gradient(145deg, #ffffff 0%, var(--color-accent-50) 100%)",
+                  border: "1px solid var(--color-accent-200)",
+                  boxShadow: "0 2px 6px rgba(22,168,0,0.07), 0 14px 34px rgba(22,168,0,0.12)",
+                }}
+              >
+                <span
+                  aria-hidden="true"
+                  className="absolute inset-0 rounded-2xl"
+                  style={{ boxShadow: "inset 0 1px 0 rgba(255,255,255,0.9)" }}
+                />
+                <Target size={38} strokeWidth={1.5} style={{ color: "var(--color-accent-600)" }} />
               </div>
-              <h3 className="font-heading text-xl font-semibold mb-4" style={{ color: "var(--color-primary-950)" }}>Our Mission</h3>
-              <ul className="space-y-3">
-                {[
-                  "Provide waste generators with a formal, fully documented and commercially fair recycling channel.",
-                  "Maximise material recovery and minimise residue to landfill on every consignment.",
-                  "Make regulatory compliance straightforward for producers, importers and brand owners.",
-                  "Create safe, skilled and dignified employment in the recycling sector.",
-                ].map((item, i) => (
-                  <li key={i} className="flex gap-2.5 text-sm leading-relaxed" style={{ color: "var(--color-secondary-700)" }}>
-                    <CheckCircle size={16} className="shrink-0 mt-0.5" style={{ color: "var(--color-primary-700)" }} />
-                    {item}
-                  </li>
-                ))}
-              </ul>
+              <h3 className="font-heading text-[38px] sm:text-5xl lg:text-[4.1rem] font-semibold tracking-tight leading-[1.02]" style={{ color: "var(--color-primary-950)" }}>
+                Our Mission
+              </h3>
+              <p className="font-heading text-lg sm:text-xl mt-4" style={{ color: "var(--color-accent-600)" }}>
+                Documented Recovery, Every Consignment
+              </p>
             </motion.div>
           </div>
         </div>
       </section>
 
       {/* ── CORE VALUES ── */}
-      <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "var(--color-secondary-50)" }}>
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
-          <div className="text-center mb-10 sm:mb-14">
-            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>What Guides Us</p>
-            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight" style={{ color: "var(--color-primary-950)" }}>
-              Our Core Values
-            </h2>
-          </div>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 sm:gap-8 max-w-[1100px] mx-auto">
-            {values.map((val, i) => (
-              <motion.div
-                key={val.title}
-                initial={{ opacity: 0, y: 24 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.1 }}
-                className="flex flex-col items-center text-center"
-              >
-                <div
-                  className="w-[56px] h-[56px] sm:w-[70px] sm:h-[70px] rounded-full flex items-center justify-center mb-3 sm:mb-4"
-                  style={{ backgroundColor: "var(--color-primary-700)" }}
-                >
-                  <val.icon size={24} strokeWidth={1.5} className="sm:!w-7 sm:!h-7" style={{ color: "#ffffff" }} />
-                </div>
-                <h4 className="font-heading text-sm font-bold mb-1.5" style={{ color: "var(--color-primary-700)" }}>{val.title}</h4>
-                <p className="text-xs leading-relaxed" style={{ color: "var(--color-secondary-600)" }}>{val.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+      <section className="relative py-16 sm:py-20 lg:py-28 overflow-hidden" style={{ backgroundColor: "var(--color-primary-950)" }}>
+        {/* Faint grid texture */}
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 opacity-[0.05] pointer-events-none"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, #fff 1px, transparent 1px), linear-gradient(to bottom, #fff 1px, transparent 1px)",
+            backgroundSize: "64px 64px",
+          }}
+        />
 
-      {/* ── JOURNEY TIMELINE ── */}
-      <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "#ffffff" }}>
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
-          <div className="text-center mb-10 sm:mb-14">
-            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>Milestones</p>
-            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight" style={{ color: "var(--color-primary-950)" }}>
-              Our Journey
-            </h2>
+        <div className="relative">
+          {/* Heading — left aligned, display scale */}
+          <div className="max-w-[1400px] mx-auto px-4 sm:px-6 mb-10 lg:mb-14">
+            <motion.p
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.4 }}
+              className="font-mono text-xs uppercase tracking-[0.09em] mb-4"
+              style={{ color: "var(--color-accent-400)" }}
+            >
+              What Guides Us
+            </motion.p>
+            <motion.h2
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.55, delay: 0.06, ease: [0.2, 0, 0, 1] }}
+              className="font-heading text-[34px] sm:text-5xl lg:text-[4rem] font-semibold tracking-tight leading-[1.04] text-white max-w-[16ch]"
+            >
+              Our Core Values
+            </motion.h2>
           </div>
-          <div className="max-w-[700px] mx-auto relative">
-            <div className="absolute left-[19px] sm:left-[23px] top-0 bottom-0 w-px" style={{ backgroundColor: "var(--color-primary-100)" }} />
-            {timeline.map((item, i) => (
-              <motion.div
-                key={item.year}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
-                className="flex gap-4 sm:gap-5 mb-6 sm:mb-8 last:mb-0 relative"
-              >
-                <div
-                  className="shrink-0 w-[40px] h-[40px] sm:w-[48px] sm:h-[48px] rounded-full flex items-center justify-center font-mono text-[11px] sm:text-xs font-bold relative z-10"
-                  style={{ backgroundColor: "var(--color-primary-700)", color: "#ffffff" }}
-                >
-                  {item.year.slice(2)}
-                </div>
-                <div className="pt-2.5">
-                  <span className="font-heading text-sm font-bold" style={{ color: "var(--color-primary-950)" }}>{item.year}</span>
-                  <p className="text-sm leading-relaxed mt-1" style={{ color: "var(--color-secondary-600)" }}>{item.event}</p>
-                </div>
-              </motion.div>
-            ))}
+
+          {/* Card rail — duplicated once and translated -50%, so it loops seamlessly */}
+          <div className="relative">
+            <div className="overflow-hidden marquee-rail">
+              <div className="flex gap-4 sm:gap-5 w-max marquee-x pb-2">
+                {[...values, ...values].map((val, i) => (
+                  <article
+                    key={`${val.title}-${i}`}
+                    aria-hidden={i >= values.length}
+                    className="group relative shrink-0 rounded-2xl p-7 sm:p-8 flex flex-col overflow-hidden transition-colors duration-300 hover:border-white/30 w-[270px] sm:w-[320px] lg:w-[340px]"
+                    style={{
+                      border: "1px solid rgba(255,255,255,0.14)",
+                      minHeight: "380px",
+                    }}
+                  >
+                    {/* Soft fill that warms the card on hover */}
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
+                      style={{
+                        background:
+                          "radial-gradient(420px circle at 50% 0%, rgba(57,217,0,0.10), transparent 70%)",
+                      }}
+                    />
+                    <val.icon
+                      size={40}
+                      strokeWidth={1.1}
+                      className="relative transition-transform duration-300 group-hover:-translate-y-1"
+                      style={{ color: "var(--color-accent-400)" }}
+                    />
+
+                    <h3 className="relative font-heading text-xl sm:text-2xl font-semibold text-white mt-8 mb-4 leading-tight">
+                      {val.title}
+                    </h3>
+
+                    <p className="relative text-sm leading-relaxed" style={{ color: "rgba(255,255,255,0.62)" }}>
+                      {val.desc}
+                    </p>
+
+                    <span
+                      aria-hidden="true"
+                      className="relative mt-auto mb-0 block h-px w-10 transition-all duration-300 group-hover:w-20"
+                      style={{ backgroundColor: "var(--color-accent-500)" }}
+                    />
+                  </article>
+                ))}
+              </div>
+            </div>
+
+            {/* Edge fades on both sides */}
+            <div
+              aria-hidden="true"
+              className="hidden sm:block absolute inset-y-0 left-0 w-16 lg:w-28 pointer-events-none"
+              style={{ background: "linear-gradient(to right, var(--color-primary-950), transparent)" }}
+            />
+            <div
+              aria-hidden="true"
+              className="hidden sm:block absolute inset-y-0 right-0 w-16 lg:w-28 pointer-events-none"
+              style={{ background: "linear-gradient(to left, var(--color-primary-950), transparent)" }}
+            />
           </div>
+
+          <p
+            className="max-w-[1400px] mx-auto px-4 sm:px-6 mt-5 font-mono text-[11px] uppercase tracking-[0.09em]"
+            style={{ color: "rgba(255,255,255,0.32)" }}
+          >
+            Hover to pause
+          </p>
+
         </div>
       </section>
 
       {/* ── INFRASTRUCTURE ── */}
-      <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "var(--color-secondary-50)" }}>
+      <section className="py-14 sm:py-16 lg:py-24" style={{ backgroundColor: "var(--color-secondary-50)" }}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
-          <div className="text-center mb-10 sm:mb-14">
-            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>Capability</p>
-            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight" style={{ color: "var(--color-primary-950)" }}>
-              Infrastructure & Facility
-            </h2>
-            <p className="text-sm mt-3 max-w-[500px] mx-auto" style={{ color: "var(--color-secondary-600)" }}>
-              Engineered for recovery, not just disposal — different fractions need different treatment to retain their value.
-            </p>
-          </div>
-          <div className="grid sm:grid-cols-2 gap-5 max-w-[1000px] mx-auto">
-            {infrastructure.map((infra, i) => {
-              const isDark = i % 2 === 1;
-              return (
-                <motion.div
-                  key={infra.title}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  className="rounded-xl p-7"
-                  style={{ backgroundColor: isDark ? "var(--color-primary-700)" : "#E4EBE6" }}
-                >
-                  <div
-                    className="w-11 h-11 rounded-lg flex items-center justify-center mb-4"
-                    style={{ backgroundColor: isDark ? "rgba(255,255,255,0.12)" : "var(--color-primary-100)" }}
-                  >
-                    <infra.icon size={22} strokeWidth={1.8} style={{ color: isDark ? "var(--color-primary-100)" : "var(--color-primary-700)" }} />
-                  </div>
-                  <h3 className="font-heading text-base font-semibold mb-3" style={{ color: isDark ? "#ffffff" : "var(--color-primary-950)" }}>
-                    {infra.title}
-                  </h3>
-                  <div className="w-7 h-[3px] rounded-full mb-4" style={{ backgroundColor: "var(--color-accent-400)" }} />
-                  <ul className="space-y-2">
-                    {infra.items.map((item) => (
-                      <li key={item} className="flex items-start gap-2 text-sm" style={{ color: isDark ? "var(--color-primary-200)" : "var(--color-secondary-700)" }}>
-                        <CheckCircle size={13} className="shrink-0 mt-0.5" style={{ color: isDark ? "var(--color-accent-400)" : "var(--color-primary-700)" }} />
-                        {item}
-                      </li>
-                    ))}
-                  </ul>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
+          <div className="grid lg:grid-cols-[0.9fr_1.2fr] gap-10 lg:gap-16 items-start">
 
-      {/* ── PROCESSING CAPACITY ── */}
-      <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "#ffffff" }}>
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
-          <div className="text-center mb-10 sm:mb-14">
-            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>Installed Capacity</p>
-            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight" style={{ color: "var(--color-primary-950)" }}>
-              Processing Capacity, Unit by Unit
-            </h2>
-            <p className="text-sm mt-3 max-w-[560px] mx-auto" style={{ color: "var(--color-secondary-600)" }}>
-              Capacity is what turns an authorisation into an actual service. These are the lines running at our Mahesana facility.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 max-w-[1100px] mx-auto">
-            {capacity.map((c, i) => (
-              <motion.div
-                key={c.unit}
-                initial={{ opacity: 0, y: 20 }}
+            {/* Left: heading */}
+            <div className="lg:sticky lg:top-28">
+              <p className="font-mono text-xs uppercase tracking-[0.09em] mb-4" style={{ color: "var(--color-accent-500)" }}>
+                Capability
+              </p>
+              <motion.h2
+                initial={{ opacity: 0, y: 18 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.45, delay: i * 0.08 }}
-                className="rounded-xl border p-6 flex flex-col"
-                style={{ borderColor: "var(--color-secondary-200)", backgroundColor: "var(--color-secondary-50)" }}
+                transition={{ duration: 0.55, ease: [0.2, 0, 0, 1] }}
+                className="font-heading text-[32px] sm:text-4xl lg:text-[3.2rem] font-semibold tracking-tight leading-[1.06] mb-5"
+                style={{ color: "var(--color-primary-950)" }}
               >
-                <div
-                  className="w-11 h-11 rounded-lg flex items-center justify-center mb-4"
-                  style={{ backgroundColor: "var(--color-primary-50)", border: "1px solid var(--color-primary-200)" }}
-                >
-                  <c.icon size={22} strokeWidth={1.6} style={{ color: "var(--color-primary-700)" }} />
-                </div>
-                <h4 className="text-sm font-semibold mb-1" style={{ color: "var(--color-primary-950)" }}>{c.unit}</h4>
-                <p className="text-xs mb-4" style={{ color: "var(--color-secondary-500)" }}>{c.location}</p>
-                <div className="mt-auto">
-                  <span className="font-heading text-3xl font-bold tracking-tight" style={{ color: "var(--color-primary-800)" }}>
-                    {c.rate}
-                  </span>
-                  <span className="font-mono text-[11px] uppercase tracking-[0.09em] ml-2" style={{ color: "var(--color-secondary-500)" }}>
-                    {c.uom}
-                  </span>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
+                Infrastructure &amp; Facility
+              </motion.h2>
+              <p className="text-[15px] sm:text-base leading-relaxed max-w-[42ch]" style={{ color: "var(--color-secondary-600)" }}>
+                Engineered for recovery, not just disposal — different fractions need different treatment to retain their value.
+              </p>
+            </div>
 
-      {/* ── CERTIFICATIONS ── */}
-      <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "var(--color-secondary-50)" }}>
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
-          <div className="text-center mb-10 sm:mb-14">
-            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>Trust & Compliance</p>
-            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight" style={{ color: "var(--color-primary-950)" }}>
-              Certifications & Authorisations
-            </h2>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 max-w-[1000px] mx-auto">
-            {certifications.map((cert, i) => (
-              <motion.div
-                key={cert.name}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.06 }}
-                className="rounded-xl p-4 sm:p-5 flex sm:flex-col items-center sm:text-center gap-3 sm:gap-0"
-                style={{ backgroundColor: "var(--color-primary-50)", border: "1px solid var(--color-primary-100)" }}
-              >
-                <div className="w-10 h-10 shrink-0 rounded-full flex items-center justify-center sm:mb-3" style={{ backgroundColor: "var(--color-primary-100)" }}>
-                  <cert.icon size={18} style={{ color: "var(--color-primary-700)" }} />
-                </div>
-                <p className="text-xs font-semibold leading-snug" style={{ color: "var(--color-primary-950)" }}>{cert.name}</p>
-              </motion.div>
-            ))}
+            {/* Right: hover-to-open accordion */}
+            <InfrastructureAccordion />
           </div>
         </div>
       </section>
 
       {/* ── WHAT WE DO ── */}
-      <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "#ffffff" }}>
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
-          <div className="text-center max-w-[640px] mx-auto mb-10 sm:mb-12">
-            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>What We Do</p>
-            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-4" style={{ color: "var(--color-primary-950)" }}>
-              Eight Streams, One Authorisation Trail
-            </h2>
-            <p className="text-sm sm:text-base leading-relaxed" style={{ color: "var(--color-secondary-600)" }}>
-              Whatever your organisation is accountable for, it is handled under the same documentation discipline.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-[1100px] mx-auto">
-            {services.map((svc, i) => (
-              <motion.div
-                key={svc.slug}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: (i % 4) * 0.07 }}
-              >
-                <Link
-                  href={svc.href}
-                  className="group flex items-center gap-3 h-full rounded-xl border p-4 transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
-                  style={{ borderColor: "var(--color-secondary-200)", backgroundColor: "var(--color-secondary-50)" }}
-                >
-                  <div
-                    className="w-10 h-10 rounded-lg flex items-center justify-center shrink-0"
-                    style={{ backgroundColor: "var(--color-primary-50)", border: "1px solid var(--color-primary-200)" }}
-                  >
-                    <svc.icon size={20} strokeWidth={1.6} style={{ color: "var(--color-primary-700)" }} />
-                  </div>
-                  <span className="text-[13px] font-semibold leading-snug" style={{ color: "var(--color-primary-950)" }}>
-                    {svc.title}
-                  </span>
-                  <ChevronRight
-                    size={16}
-                    className="ml-auto shrink-0 transition-transform duration-300 group-hover:translate-x-1"
-                    style={{ color: "var(--color-secondary-400)" }}
-                  />
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ── OUR PEOPLE ── */}
-      <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "var(--color-secondary-50)" }}>
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
-          <div className="max-w-[800px] mx-auto text-center">
-            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>Our Team</p>
-            <motion.h2
-              initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}
-              className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-6"
-              style={{ color: "var(--color-primary-950)" }}
-            >
-              The People Behind Every Tonne
-            </motion.h2>
-            <motion.p
-              initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={1}
-              className="text-base leading-relaxed" style={{ color: "var(--color-secondary-700)" }}
-            >
-              Behind every tonne processed is a team of dismantlers, line operators, drivers, compliance officers and coordinators. We invest in them because manual de-manufacturing is skilled work, and skilled work deserves training, protective equipment, health checks and a career path.
-            </motion.p>
-          </div>
-
-          {/* Leadership — renders only once `leadership` is populated. */}
-          {leadership.length > 0 && (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 max-w-[1100px] mx-auto mt-12 sm:mt-16">
-              {leadership.map((person, i) => (
-                <motion.div
-                  key={person.name}
-                  initial={{ opacity: 0, y: 20 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.45, delay: i * 0.08 }}
-                  className="bg-white rounded-xl border p-6 text-left"
-                  style={{ borderColor: "var(--color-secondary-200)" }}
-                >
-                  <div
-                    className="w-12 h-12 rounded-full flex items-center justify-center mb-4"
-                    style={{ backgroundColor: "var(--color-primary-700)" }}
-                  >
-                    <Users size={22} strokeWidth={1.6} style={{ color: "#ffffff" }} />
-                  </div>
-                  <h4 className="font-heading text-base font-semibold mb-1" style={{ color: "var(--color-primary-950)" }}>
-                    {person.name}
-                  </h4>
-                  <p className="font-mono text-[11px] uppercase tracking-[0.09em] mb-1" style={{ color: "var(--color-accent-600)" }}>
-                    {person.role}
-                  </p>
-                  {person.credentials && (
-                    <p className="text-xs mb-3" style={{ color: "var(--color-secondary-500)" }}>{person.credentials}</p>
-                  )}
-                  <p className="text-xs leading-relaxed" style={{ color: "var(--color-secondary-600)" }}>{person.bio}</p>
-                </motion.div>
-              ))}
-            </div>
-          )}
-        </div>
-      </section>
+      <HorizontalShowcase
+        eyebrow="What We Do"
+        title="Seven Streams, One Authorisation Trail"
+        items={serviceShowcase}
+      />
 
       {/* ── CSR ── */}
-      <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "#ffffff" }}>
+      <section className="py-12 sm:py-16 lg:py-24" style={{ backgroundColor: "var(--color-secondary-50)" }}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
           <div className="text-center mb-10 sm:mb-14">
             <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>Giving Back</p>

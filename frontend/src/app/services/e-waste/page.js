@@ -4,41 +4,36 @@ import { useState, useEffect, useRef } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  ArrowRight, ArrowDown, Cpu, Monitor, Server, Smartphone, Cable,
-  Printer, CircuitBoard, Radio, ShieldCheck, FileCheck,
-  Truck, Eye, DollarSign, ClipboardCheck, ChevronRight,
-  PackageCheck, Wrench, RotateCcw, Award, Scale, Search,
-  Magnet, Zap, FlaskConical, Container, Flame, TrendingUp,
-  Boxes, SlidersHorizontal, Globe, AlertTriangle, Lightbulb,
-  Building2, Factory, GraduationCap, Landmark, ShoppingCart,
-  Stethoscope, Lock, MapPin, Phone, Clock,
+  ArrowRight, ArrowDown, Cpu, Monitor, Server, Smartphone, Cable, Printer, CircuitBoard, Radio, ShieldCheck, Truck, Eye, ChevronRight, PackageCheck, Wrench, RotateCcw, Scale, Search, Magnet, Zap, FlaskConical, Container, Flame, TrendingUp, Boxes, SlidersHorizontal, Globe, AlertTriangle, Lightbulb, Building2, Lock, MapPin, Phone, Clock,
 } from "lucide-react";
 import ProcessTimeline from "@/components/sections/ProcessTimeline";
+import WhyAdvaitGreen from "@/components/sections/WhyAdvaitGreen";
+import HorizontalShowcase from "@/components/sections/HorizontalShowcase";
 
 const heroSlides = [
   {
     image: "/images/E-West-Managment-1.jpg",
     title: "Recover the Metal.",
     highlight: "Spare the Mountain.",
-    desc: "Every discarded laptop, server and handset holds recoverable gold, copper and rare earths. We extract them responsibly — so the earth doesn't have to be dug up again.",
+    desc: "Every discarded laptop, server and handset holds recoverable gold, copper and rare earths. We extract them responsibly - so the earth doesn't have to be dug up again.",
   },
   {
     image: "/images/E-West-Managment-2.jpg",
     title: "From Circuit Boards",
     highlight: "to Clean Commodities.",
-    desc: "Our mechanised lines shred, separate and recover copper, aluminium, steel and precious metals from printed circuit boards — returning clean secondary raw material to industry.",
+    desc: "Our mechanised lines shred, separate and recover copper, aluminium, steel and precious metals from printed circuit boards - returning clean secondary raw material to industry.",
   },
   {
     image: "/images/E-West-Managment-3.jpg",
     title: "Authorised. Auditable.",
     highlight: "Liability Transferred.",
-    desc: "CPCB and GPCB authorised processing means your e-waste liability actually transfers — backed by Certificates of Recycling and full chain-of-custody documentation.",
+    desc: "CPCB and GPCB authorised processing means your e-waste liability actually transfers - backed by Certificates of Recycling and full chain-of-custody documentation.",
   },
   {
     image: "/images/E-West-Managment-4.jpg",
     title: "Manual Precision Meets",
     highlight: "Mechanical Scale.",
-    desc: "Skilled de-manufacturing teams disassemble each device by hand before mechanical shredding and separation extract every recoverable fraction — ferrous, non-ferrous, plastics, glass and hazardous components.",
+    desc: "Skilled de-manufacturing teams disassemble each device by hand before mechanical shredding and separation extract every recoverable fraction - ferrous, non-ferrous, plastics, glass and hazardous components.",
   },
   {
     image: "/images/E-West-Managment-5.jpg",
@@ -52,7 +47,7 @@ const wasteItems = [
   {
     icon: Monitor,
     label: "Computers & Workstations",
-    desc: "Desktops, laptops, workstations and thin clients — including all internal components such as motherboards, RAM, processors, hard drives and power supplies. We handle individual units as well as bulk IT refresh disposals.",
+    desc: "Desktops, laptops, workstations and thin clients - including all internal components such as motherboards, RAM, processors, hard drives and power supplies. We handle individual units as well as bulk IT refresh disposals.",
     image: "/images/computer-workstation.jpg",
   },
   {
@@ -82,7 +77,7 @@ const wasteItems = [
   {
     icon: CircuitBoard,
     label: "Circuit Boards (PCBs)",
-    desc: "Populated and bare printed circuit boards from any source — computers, telecom, industrial controls, consumer electronics. PCBs contain the highest concentration of precious metals and are processed for gold, silver, palladium and copper recovery.",
+    desc: "Populated and bare printed circuit boards from any source - computers, telecom, industrial controls, consumer electronics. PCBs contain the highest concentration of precious metals and are processed for gold, silver, palladium and copper recovery.",
     image: "/images/Circuit-Boards-PCBs.jpg",
   },
   {
@@ -160,7 +155,7 @@ const journeySteps = [
     icon: AlertTriangle,
     num: "01",
     title: "The Problem",
-    desc: "India generates over 1.7 million tonnes of e-waste annually, yet less than a third reaches formal recycling — the rest poisons communities and ecosystems through soil and groundwater contamination.",
+    desc: "India generates over 1.7 million tonnes of e-waste annually, yet less than a third reaches formal recycling - the rest poisons communities and ecosystems through soil and groundwater contamination.",
   },
   {
     icon: Globe,
@@ -190,105 +185,10 @@ const journeySteps = [
     icon: Smartphone,
     num: "06",
     title: "For Individuals",
-    desc: "Follow Reduce, Reuse, Recycle. Buy electronics based on need. Never hand devices to informal scrap dealers — use authorised recycling channels for safe, legal disposal.",
+    desc: "Follow Reduce, Reuse, Recycle. Buy electronics based on need. Never hand devices to informal scrap dealers - use authorised recycling channels for safe, legal disposal.",
   },
 ];
 
-function WhatWeHandleTabs() {
-  const [activeTab, setActiveTab] = useState(0);
-  const active = wasteItems[activeTab];
-
-  return (
-    <section className="py-16 lg:py-24 bg-white">
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
-        <div className="text-center mb-10">
-          <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>
-            Accepted Categories
-          </p>
-          <h2 className="font-heading text-2xl sm:text-3xl font-semibold tracking-tight" style={{ color: "var(--color-primary-950)" }}>
-            What We Handle
-          </h2>
-        </div>
-
-        {/* Tab pills — scrollable on mobile */}
-        <div className="flex justify-center mb-8">
-          <div className="flex flex-wrap justify-center gap-2 sm:gap-3">
-            {wasteItems.map((item, i) => (
-              <button
-                key={item.label}
-                onClick={() => setActiveTab(i)}
-                className="flex items-center gap-2 px-4 sm:px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 border whitespace-nowrap "
-                style={{
-                  backgroundColor: activeTab === i ? "var(--color-primary-700)" : "transparent",
-                  color: activeTab === i ? "#ffffff" : "var(--color-secondary-700)",
-                  borderColor: activeTab === i ? "var(--color-primary-700)" : "var(--color-secondary-200)",
-                  boxShadow: activeTab === i ? "0 4px 12px rgba(0,26,43,0.15)" : "none",
-                }}
-              >
-                <item.icon size={16} strokeWidth={1.8} />
-                <span className="hidden sm:inline">{item.label}</span>
-                <span className="sm:hidden">{item.label.split(" ")[0]}</span>
-              </button>
-            ))}
-          </div>
-        </div>
-
-        {/* Active tab content */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeTab}
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -12 }}
-            transition={{ duration: 0.3, ease: [0.2, 0, 0, 1] }}
-          >
-            {/* Description */}
-            <p
-              className="text-center text-[15px] sm:text-base leading-relaxed max-w-3xl mx-auto mb-8"
-              style={{ color: "var(--color-secondary-600)" }}
-            >
-              {active.desc}
-            </p>
-
-            {/* Image */}
-            <div className="relative rounded-2xl overflow-hidden max-w-5xl mx-auto" style={{ aspectRatio: "16/7" }}>
-              <img
-                src={active.image}
-                alt={active.label}
-                className="w-full h-full object-cover"
-              />
-              <div
-                className="absolute inset-0"
-                style={{ background: "linear-gradient(to top, rgba(0,26,43,0.5) 0%, transparent 40%)" }}
-              />
-              <div className="absolute bottom-0 left-0 right-0 p-6 sm:p-8 flex items-end justify-between">
-                <div>
-                  <div className="flex items-center gap-3 mb-2">
-                    <div
-                      className="w-10 h-10 rounded-lg flex items-center justify-center"
-                      style={{ backgroundColor: "rgba(255,255,255,0.15)", backdropFilter: "blur(8px)" }}
-                    >
-                      <active.icon size={20} strokeWidth={1.8} className="text-white" />
-                    </div>
-                    <h3 className="font-heading text-lg sm:text-xl font-semibold text-white">
-                      {active.label}
-                    </h3>
-                  </div>
-                </div>
-                <span
-                  className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium"
-                  style={{ backgroundColor: "rgba(255,255,255,0.15)", backdropFilter: "blur(8px)", color: "#ffffff" }}
-                >
-                  <ShieldCheck size={12} /> CPCB Authorised
-                </span>
-              </div>
-            </div>
-          </motion.div>
-        </AnimatePresence>
-      </div>
-    </section>
-  );
-}
 
 export default function EWastePage() {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -438,10 +338,10 @@ export default function EWastePage() {
                   India generates over 1.7 million tonnes of electronic waste annually, yet less than a third reaches a formal recycling channel. The rest ends up in landfills, informal dismantling yards, or acid-leaching operations that poison groundwater and soil.
                 </p>
                 <p>
-                  Advait Green Recycling bridges that gap. As a GPCB-authorised recycler, we process end-of-life electronics through our mechanised facility at Mahesana, Gujarat — recovering valuable metals and materials while ensuring hazardous fractions never reach the environment.
+                  Advait Green Recycling bridges that gap. As a GPCB-authorised recycler, we process end-of-life electronics through our mechanised facility at Mahesana, Gujarat - recovering valuable metals and materials while ensuring hazardous fractions never reach the environment.
                 </p>
                 <p>
-                  Our processing line includes manual de-manufacturing bays, a primary shredder, magnetic and eddy-current separators, and density-based sorting systems. Recoverable metals — copper, aluminium, steel, gold, silver and palladium — are extracted and returned to the secondary raw material market.
+                  Our processing line includes manual de-manufacturing bays, a primary shredder, magnetic and eddy-current separators, and density-based sorting systems. Recoverable metals - copper, aluminium, steel, gold, silver and palladium - are extracted and returned to the secondary raw material market.
                 </p>
               </motion.div>
             </div>
@@ -464,14 +364,14 @@ export default function EWastePage() {
                 style={{ background: "linear-gradient(to top, rgba(0,26,43,0.85), transparent)" }}
               >
                 <p className="font-mono text-xs text-white/70 uppercase tracking-wider">GPCB Authorised Facility</p>
-                <p className="text-sm text-white mt-1">Vamaj, Mahesana — Gujarat</p>
+                <p className="text-sm text-white mt-1">Vamaj, Mahesana - Gujarat</p>
               </div>
             </motion.div>
           </div>
         </div>
       </section>
 
-      {/* ── UNDERSTANDING E-WASTE (E-Know) — Horizontal Journey ── */}
+      {/* ── UNDERSTANDING E-WASTE (E-Know) - Horizontal Journey ── */}
       <ProcessTimeline
         subtitle="E-Know"
         title="Understanding E-Waste"
@@ -479,7 +379,11 @@ export default function EWastePage() {
       />
 
       {/* ── WHAT WE HANDLE ── */}
-      <WhatWeHandleTabs />
+      <HorizontalShowcase
+        eyebrow="Accepted Categories"
+        title="What We Handle"
+        items={wasteItems}
+      />
 
       {/* ── E-WASTE RECYCLING PROCESS (Horizontal Visual Flow) ── */}
       <section className="bg-white py-16 lg:py-24 overflow-hidden">
@@ -498,7 +402,7 @@ export default function EWastePage() {
             </div>
           </div>
 
-          {/* Horizontal flow — desktop */}
+          {/* Horizontal flow - desktop */}
           <div className="hidden lg:flex items-start justify-between gap-0 relative">
             {processSteps.map((step, i) => (
               <motion.div
@@ -551,7 +455,7 @@ export default function EWastePage() {
             </motion.div>
           </div>
 
-          {/* Mobile/Tablet — vertical cards */}
+          {/* Mobile/Tablet - vertical cards */}
           <div className="lg:hidden grid sm:grid-cols-2 gap-4">
             {processSteps.map((step, i) => (
               <motion.div
@@ -666,7 +570,7 @@ export default function EWastePage() {
               ))}
             </div>
 
-            {/* Turn connector — down from Magnetic Separation */}
+            {/* Turn connector - down from Magnetic Separation */}
             <motion.div
               initial={{ opacity: 0 }}
               whileInView={{ opacity: 1 }}
@@ -962,7 +866,7 @@ export default function EWastePage() {
                 style={{ color: "var(--color-secondary-600)" }}
               >
                 <p>
-                  E-waste is collected from your premises in sealed, GPS-tracked vehicles under a valid transport manifest. Weighment is recorded at pickup and verified again at our facility gate — ensuring full accountability from the moment material leaves your hands.
+                  E-waste is collected from your premises in sealed, GPS-tracked vehicles under a valid transport manifest. Weighment is recorded at pickup and verified again at our facility gate - ensuring full accountability from the moment material leaves your hands.
                 </p>
                 <p>
                   We operate our own fleet of collection vehicles and maintain partnerships with authorised logistics providers to cover locations across Gujarat and beyond. Whether you're a corporate office disposing of 500 laptops or a household clearing out old electronics, we handle the logistics end to end.
@@ -1043,7 +947,7 @@ export default function EWastePage() {
               Treatment of Hazardous Substances
             </motion.h2>
             <p className="text-[15px] leading-relaxed" style={{ color: "var(--color-secondary-600)" }}>
-              Electronic waste contains substances that are toxic to humans and the environment. We carefully separate and dispose of every hazardous fraction per CPCB guidelines — never dumped in landfills.
+              Electronic waste contains substances that are toxic to humans and the environment. We carefully separate and dispose of every hazardous fraction per CPCB guidelines - never dumped in landfills.
             </p>
           </div>
 
@@ -1113,7 +1017,7 @@ export default function EWastePage() {
       <section className="py-16 lg:py-24 bg-white">
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
-            {/* Left — Content */}
+            {/* Left - Content */}
             <motion.div
               initial={{ opacity: 0, x: -24 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -1137,15 +1041,15 @@ export default function EWastePage() {
               </p>
 
               <Link
-                href="/services/others"
+                href="/contact"
                 className="inline-flex items-center gap-2 px-6 py-3 rounded-lg text-sm font-semibold text-white transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5"
                 style={{ backgroundColor: "var(--color-primary-700)" }}
               >
-                Learn More About Data Destruction <ArrowRight size={15} />
+                Talk to Us About Data Destruction <ArrowRight size={15} />
               </Link>
             </motion.div>
 
-            {/* Right — Methods grid */}
+            {/* Right - Methods grid */}
             <motion.div
               initial={{ opacity: 0, x: 24 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -1169,7 +1073,7 @@ export default function EWastePage() {
                 {
                   icon: SlidersHorizontal,
                   title: "NIST 800-88 Wiping",
-                  desc: "Multi-pass overwrite with verification — compliant with global data destruction standards",
+                  desc: "Multi-pass overwrite with verification - compliant with global data destruction standards",
                   accent: "var(--color-primary-700)",
                 },
                 {
@@ -1225,72 +1129,13 @@ export default function EWastePage() {
         </div>
       </section>
 
-      {/* ── WHY ADVAIT GREEN — INFINITE SCROLL STATS ── */}
-      <section className="py-16 lg:py-24 overflow-hidden" style={{ backgroundColor: "var(--color-secondary-50)" }}>
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
-          <motion.div
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true }}
-            variants={fadeUp}
-            className="text-center mb-12"
-          >
-            <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-semibold tracking-tight mb-4" style={{ color: "var(--color-primary-950)" }}>
-              Why Advait Green Is the Right Choice for{" "}
-              <span style={{ color: "var(--color-accent-600)" }}>Responsible E-Waste Recycling</span>
-            </h2>
-            <p className="text-[15px] sm:text-base leading-relaxed max-w-2xl mx-auto" style={{ color: "var(--color-secondary-600)" }}>
-              CPCB & GPCB authorised recycler trusted by enterprises across India for compliant, transparent and accountable e-waste processing.
-            </p>
-          </motion.div>
-        </div>
-
-        {/* Infinite scroll track */}
-        <div className="relative">
-          <div className="flex animate-scroll-left">
-            {[...statCards, ...statCards].map((card, i) => (
-              <div
-                key={`${card.label}-${i}`}
-                className="shrink-0 w-[200px] sm:w-[230px] aspect-square mx-2 sm:mx-3 rounded-xl flex flex-col items-center justify-center text-center border"
-                style={{
-                  backgroundColor: card.dark ? "var(--color-primary-900)" : "#ffffff",
-                  borderColor: card.dark ? "var(--color-primary-800)" : "var(--color-secondary-200)",
-                }}
-              >
-                <span
-                  className="font-heading text-4xl sm:text-5xl font-bold tracking-tight mb-3"
-                  style={{ color: card.dark ? "#ffffff" : "var(--color-primary-800)" }}
-                >
-                  {card.stat}
-                </span>
-                <div
-                  className="w-8 h-[3px] rounded-full mb-3"
-                  style={{ backgroundColor: "var(--color-accent-500)" }}
-                />
-                <p
-                  className="text-sm font-semibold leading-snug"
-                  style={{ color: card.dark ? "var(--color-secondary-300)" : "var(--color-secondary-700)" }}
-                >
-                  {card.label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        <style jsx>{`
-          @keyframes scrollLeft {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-          }
-          .animate-scroll-left {
-            animation: scrollLeft 7s linear infinite;
-          }
-          .animate-scroll-left:hover {
-            animation-play-state: paused;
-          }
-        `}</style>
-      </section>
+      {/* ── WHY ADVAIT GREEN ── */}
+      <WhyAdvaitGreen
+        title="Why Advait Green for"
+        highlight="E-Waste Recycling"
+        desc="CPCB and GPCB authorised processing at our own facility — with asset-level reporting and certificates issued for every consignment."
+        stats={statCards}
+      />
 
       {/* ── CTA BAND ── */}
       <section className="bg-primary-900 py-14 lg:py-20 relative overflow-hidden">

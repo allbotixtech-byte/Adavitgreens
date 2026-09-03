@@ -276,7 +276,7 @@ export default function BlogPostPage() {
       <section style={{ backgroundColor: "var(--color-secondary-50)" }}>
         <div className="max-w-[1400px] mx-auto px-4 sm:px-6 pb-12 lg:pb-16">
           <div className="flex flex-col lg:flex-row gap-8 lg:gap-12">
-            {/* TOC Sidebar — LEFT on desktop, TOP on mobile */}
+            {/* TOC Sidebar - LEFT on desktop, TOP on mobile */}
             {headings.length > 0 && (
               <aside className="w-full lg:w-[30%] shrink-0">
                 <div
@@ -328,7 +328,7 @@ export default function BlogPostPage() {
               </aside>
             )}
 
-            {/* Main Content — RIGHT on desktop */}
+            {/* Main Content - RIGHT on desktop */}
             <motion.article
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
