@@ -120,14 +120,14 @@ const whyChoose = [
 ];
 
 const sectors = [
-  { icon: Cpu, label: "IT & ITES", image: "/images/IT-ITES.png" },
-  { icon: Building2, label: "Banking & Financial Services", image: "/images/banking.png" },
-  { icon: Factory, label: "Manufacturing & Automotive", image: "/images/manufactring-automotive.png" },
-  { icon: Stethoscope, label: "Pharmaceuticals & Healthcare", image: "/images/pharma-healthcare.png" },
-  { icon: Smartphone, label: "Telecom & Data Centres", image: "/images/telecom-data.png" },
-  { icon: GraduationCap, label: "Educational Institutions", image: "/images/educational-institute.png" },
-  { icon: Landmark, label: "Government & PSUs", image: "/images/goverment-psu.png" },
-  { icon: ShoppingCart, label: "Retail & E-Commerce", image: "/images/retail-e-commrace.png" },
+  { icon: Cpu, label: "IT & ITES", image: "/images/IT-ITES.webp" },
+  { icon: Building2, label: "Banking & Financial Services", image: "/images/banking.webp" },
+  { icon: Factory, label: "Manufacturing & Automotive", image: "/images/manufactring-automotive.webp" },
+  { icon: Stethoscope, label: "Pharmaceuticals & Healthcare", image: "/images/pharma-healthcare.webp" },
+  { icon: Smartphone, label: "Telecom & Data Centres", image: "/images/telecom-data.webp" },
+  { icon: GraduationCap, label: "Educational Institutions", image: "/images/educational-institute.webp" },
+  { icon: Landmark, label: "Government & PSUs", image: "/images/goverment-psu.webp" },
+  { icon: ShoppingCart, label: "Retail & E-Commerce", image: "/images/retail-e-commrace.webp" },
 ];
 
 const fadeUp = {
@@ -1140,7 +1140,7 @@ export default function HomePage() {
           }}
         >
           <img
-            src="/images/transparent-bg.png"
+            src="/images/transparent-bg.webp"
             alt=""
             aria-hidden="true"
             style={{

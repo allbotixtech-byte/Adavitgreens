@@ -17,37 +17,37 @@ const wasteItems = [
     icon: Package,
     label: "Post-Consumer Packaging",
     desc: "Bottles, containers, pouches, carry bags and food packaging collected from households, commercial establishments and municipal channels. Sorted by polymer type before processing.",
-    image: "/images/Post-Consumer-Packaging.jpg",
+    image: "/images/Post-Consumer-Packaging.webp",
   },
   {
     icon: Factory,
     label: "Post-Industrial Waste",
     desc: "Manufacturing offcuts, rejects, runners, sprues and edge trims from injection moulding, blow moulding and extrusion plants. Clean, single-polymer streams ideal for direct granulation.",
-    image: "/images/Post-Industrial-Waste.jpg",
+    image: "/images/Post-Industrial-Waste.webp",
   },
   {
     icon: Layers,
     label: "Multi-Layered Packaging",
     desc: "Chip packets, tetra-style cartons and laminated pouches that combine plastic with aluminium or paper. Channelled to authorised co-processing partners for energy or material recovery.",
-    image: "/images/Multi-Layered-Packaging.jpg",
+    image: "/images/Multi-Layered-Packaging.webp",
   },
   {
     icon: Container,
     label: "Rigid Plastics",
     desc: "HDPE drums, PP crates, PET bottles, LDPE containers and PVC pipes. Cleaned, shredded and granulated into production-grade pellets with batch-wise quality testing.",
-    image: "/images/Rigid-Plastics.jpg",
+    image: "/images/Rigid-Plastics.webp",
   },
   {
     icon: Recycle,
     label: "Flexible Films & Wraps",
     desc: "Stretch wrap, shrink film, agricultural mulch film and packaging liners. Washed, dried and agglomerated into dense granules suitable for re-extrusion into new film or moulded products.",
-    image: "/images/Flexible-Films-Wraps.jpg",
+    image: "/images/Flexible-Films-Wraps.webp",
   },
   {
     icon: Leaf,
     label: "Agricultural Plastic",
     desc: "Mulch films, drip irrigation pipes, greenhouse covers and fertiliser bags. Often contaminated with soil and chemicals - our wash line removes contaminants before recycling.",
-    image: "/images/Agricultural-Plastic.jpg",
+    image: "/images/Agricultural-Plastic.webp",
   },
 ];
 
@@ -247,7 +247,7 @@ export default function PlasticWastePage() {
               style={{ aspectRatio: "4/3" }}
             >
               <img
-                src="/images/India'sPlasticCrisisNeedsaCircularSolution.jpg"
+                src="/images/India'sPlasticCrisisNeedsaCircularSolution.webp"
                 alt="Plastic waste recycling facility"
                 className="w-full h-full object-cover"
               />

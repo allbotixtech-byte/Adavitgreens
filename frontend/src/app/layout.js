@@ -62,7 +62,7 @@ export const metadata = {
       "Authorised recycling for e-waste, plastics, biomedical and solid waste - with the certificates, manifests and EPR filings your compliance file needs.",
     images: [
       {
-        url: "/images/og-default.png",
+        url: "/images/og-default.webp",
         width: 1200,
         height: 630,
         alt: "Advait Green Recycling Private Limited",
@@ -74,7 +74,7 @@ export const metadata = {
     title: "Advait Green Recycling | CPCB Authorised Recycler",
     description:
       "Authorised recycling for e-waste, plastics, biomedical and solid waste - documented, traceable and audit-ready.",
-    images: ["/images/og-default.png"],
+    images: ["/images/og-default.webp"],
   },
   robots: {
     index: true,
@@ -88,7 +88,7 @@ export const metadata = {
     },
   },
   // Icons are emitted from the app/ file conventions:
-  // app/favicon.ico, app/icon.png, app/apple-icon.png
+  // app/favicon.ico, app/icon.webp, app/apple-icon.webp
   formatDetection: { telephone: true, address: true, email: true },
 };
 

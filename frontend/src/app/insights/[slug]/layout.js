@@ -17,7 +17,7 @@ export async function generateMetadata({ params }) {
     };
   }
 
-  const image = post.thumbnail || "/images/og-default.png";
+  const image = post.thumbnail || "/images/og-default.webp";
 
   return {
     title: post.title,

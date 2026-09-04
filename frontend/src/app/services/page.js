@@ -10,12 +10,12 @@ export const metadata = {
     description:
       "Eight waste streams handled under valid CPCB and GPCB authorisation, with the documentation your audit file needs.",
     url: "/services",
-    images: [{ url: "/images/og-default.png", width: 1200, height: 630, alt: "Advait Green Recycling services" }],
+    images: [{ url: "/images/og-default.webp", width: 1200, height: 630, alt: "Advait Green Recycling services" }],
   },
   twitter: {
     title: "Services | Advait Green Recycling",
     description: "Eight waste streams handled under valid CPCB and GPCB authorisation.",
-    images: ["/images/og-default.png"],
+    images: ["/images/og-default.webp"],
   },
 };
 

@@ -18,7 +18,7 @@ export default function ServicesIndex() {
     <>
       {/* ── HERO ── */}
       <section className="relative h-screen min-h-[600px] bg-primary-950 overflow-hidden flex items-end sm:items-center pb-16 sm:pb-0">
-        <img src="/images/E-West-Managment-4.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" />
+        <img src="/images/E-West-Managment-4.webp" alt="" className="absolute inset-0 w-full h-full object-cover" />
         <div className="absolute inset-0 bg-black/60" />
 
         <div className="relative max-w-[1400px] mx-auto px-4 sm:px-6 w-full pt-28 sm:pt-0">

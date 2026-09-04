@@ -13,7 +13,7 @@ export default function BenefitsMarquee({ eyebrow, title, items }) {
   return (
     <section className="relative py-16 sm:py-20 lg:py-28 overflow-hidden" style={{ backgroundColor: "#ffffff" }}>
       <img
-        src="/images/backgorund-img.png"
+        src="/images/backgorund-img.webp"
         alt=""
         aria-hidden="true"
         className="absolute inset-0 w-full h-full object-cover"

@@ -152,7 +152,7 @@ export default function SchedulePickupPage() {
       {/* ── HERO ── */}
       <section className="relative h-screen min-h-[600px] bg-primary-950 overflow-hidden flex items-end sm:items-center pb-16 sm:pb-0">
         <img
-          src="/images/E-West-Managment-4.jpg"
+          src="/images/E-West-Managment-4.webp"
           alt=""
           className="absolute inset-0 w-full h-full object-cover"
         />

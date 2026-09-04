@@ -31,7 +31,7 @@ Our GPCB-authorised facility at Mahesana, Gujarat processes e-waste through manu
 - Transparent recovery-based valuation and asset buyback
 - Quarterly EPR compliance filing support included
 
-**Image:** /images/e-west.png
+**Image:** /images/e-west.webp
 **Icon:** Cpu
 **Href:** /services/e-waste
 
@@ -64,7 +64,7 @@ Our plastic waste processing line includes sorting conveyors, washing and drying
 - Auditable trail from collection to recycled output
 - Reduces virgin plastic dependency and landfill burden
 
-**Image:** /images/plastic-west.png
+**Image:** /images/plastic-west.webp
 **Icon:** Recycle
 **Href:** /services/plastic-waste
 
@@ -99,7 +99,7 @@ Advait Green Recycling offers a single-window EPR service. We assist with CPCB p
 - Dedicated compliance desk for quarterly filings
 - Pan-India collection network through authorised partners
 
-**Image:** /images/epr.png
+**Image:** /images/epr.webp
 **Icon:** FileCheck
 **Href:** /services/epr
 
@@ -138,7 +138,7 @@ Advait Green Recycling provides secure, certified data destruction services. We 
 - Compliant with IT Act, RBI, SEBI and HIPAA data disposal guidelines
 - CCTV-monitored destruction room with restricted access
 
-**Image:** /images/secure-data.png
+**Image:** /images/secure-data.webp
 **Icon:** ShieldCheck
 **Href:** /services/data-destruction
 
@@ -172,7 +172,7 @@ Advait Green Recycling holds authorisation for battery and solar module waste pr
 - EPR fulfilment support for battery producers and importers
 - Safe, documented decommissioning for solar farm operators
 
-**Image:** /images/solar-planet-recycle.png
+**Image:** /images/solar-planet-recycle.webp
 **Icon:** Zap
 **Href:** /services/battery-recycling
 
@@ -207,7 +207,7 @@ Advait Green Recycling operates a managed reverse logistics service across India
 - One point of contact for multi-location rollouts
 - Environmentally responsible channel for retired inventory
 
-**Image:** /images/reverse-logistic.png
+**Image:** /images/reverse-logistic.webp
 **Icon:** Truck
 **Href:** /services/reverse-logistics
 
@@ -242,7 +242,7 @@ Advait Green Recycling's consulting arm works with organisations to assess their
 - Identifies cost savings through waste reduction and recovery
 - Single partner for both operational recycling and strategic advisory
 
-**Image:** /images/esg.png
+**Image:** /images/esg.webp
 **Icon:** Leaf
 **Href:** /services/sustainability
 

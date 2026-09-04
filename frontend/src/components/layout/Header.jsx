@@ -88,7 +88,7 @@ export default function Header() {
         {/* Logo */}
         <Link href="/" className="shrink-0 flex items-center">
           <Image
-            src="/images/ADVAIT_Logo.png"
+            src="/images/ADVAIT_Logo.webp"
             alt="Advait Green Recycling"
             width={120}
             height={40}

@@ -104,7 +104,7 @@ function LoginForm({ onSuccess }) {
               border: "1px solid rgba(255,255,255,0.12)",
             }}
           >
-            <img src="/images/advait-mark.png" alt="" className="w-10 h-10 object-contain" />
+            <img src="/images/advait-mark.webp" alt="" className="w-10 h-10 object-contain" />
           </div>
           <h1 className="font-heading text-[26px] font-bold text-white mb-1.5 tracking-tight">
             Admin Console

@@ -15,7 +15,7 @@ export default function Footer() {
           <div className="sm:col-span-2 lg:col-span-1">
             <div className="mb-4">
               <Image
-                src="/images/ADVAIT_Logo.png"
+                src="/images/ADVAIT_Logo.webp"
                 alt="Advait Green Recycling"
                 width={160}
                 height={48}

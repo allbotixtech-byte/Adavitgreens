@@ -90,7 +90,7 @@ export default function ContactPage() {
       {/* ── HERO ── */}
       <section className="relative h-screen min-h-[600px] bg-primary-950 overflow-hidden flex items-end sm:items-center pb-16 sm:pb-0">
         <img
-          src="/images/contact-us.png"
+          src="/images/contact-us.webp"
           alt=""
           className="absolute inset-0 w-full h-full object-cover"
         />

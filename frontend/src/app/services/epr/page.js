@@ -10,12 +10,12 @@ export const metadata = {
     description:
       "EPR registration, target planning and certificate generation for producers, importers and brand owners - backed by verified recycling at our own authorised facility.",
     url: "/services/epr",
-    images: [{ url: "/images/epr.png", alt: "Extended Producer Responsibility (EPR) - Advait Green Recycling" }],
+    images: [{ url: "/images/epr.webp", alt: "Extended Producer Responsibility (EPR) - Advait Green Recycling" }],
   },
   twitter: {
     title: "Extended Producer Responsibility (EPR) | Advait Green Recycling",
     description: "EPR registration, target planning and certificate generation for producers, importers and brand owners - backed by verified recycling at our own authorised facility.",
-    images: ["/images/epr.png"],
+    images: ["/images/epr.webp"],
   },
 };
 

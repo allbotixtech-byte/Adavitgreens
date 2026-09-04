@@ -61,7 +61,7 @@ export default function AdminShell({ children }) {
                 border: "1px solid rgba(255,255,255,0.12)",
               }}
             >
-              <img src="/images/advait-mark.png" alt="" className="w-7 h-7 object-contain" />
+              <img src="/images/advait-mark.webp" alt="" className="w-7 h-7 object-contain" />
             </div>
             <div>
               <p className="font-heading font-bold text-sm text-white leading-tight">Advait Green</p>
@@ -123,7 +123,7 @@ export default function AdminShell({ children }) {
 
           {/* Brand mark — the sidebar logo is off-screen on mobile */}
           <Link href="/admin" className="lg:hidden flex items-center gap-2">
-            <img src="/images/advait-mark.png" alt="Advait Green" className="w-7 h-7 object-contain" />
+            <img src="/images/advait-mark.webp" alt="Advait Green" className="w-7 h-7 object-contain" />
             <span className="font-heading font-bold text-sm" style={{ color: "var(--color-primary-950)" }}>
               Advait Green
             </span>

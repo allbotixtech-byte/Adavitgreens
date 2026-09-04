@@ -58,7 +58,7 @@ const csr = [
  * The supplied artwork is light, so the band is styled light: dark type on a
  * soft white veil rather than white type on a dark one.
  */
-const visionMissionBg = "/images/backgorund-img.png";
+const visionMissionBg = "/images/backgorund-img.webp";
 
 const visionPoints = [
   "A resource economy where reaching end-of-life is a stage in a material's journey — never the end of it.",
@@ -138,15 +138,15 @@ const glanceStats = [
  */
 const heroSlides = [
   {
-    image: "/images/E-West-Managment-2.jpg",
+    image: "/images/E-West-Managment-2.webp",
     caption: "Skilled Manual De-Manufacturing",
   },
   {
-    image: "/images/E-West-Managment-5.jpg",
+    image: "/images/E-West-Managment-5.webp",
     caption: "Material Handling at Scale",
   },
   {
-    image: "/images/E-West-Managment-1.jpg",
+    image: "/images/E-West-Managment-1.webp",
     caption: "Recovering What Others Discard",
   },
 ];
@@ -467,7 +467,7 @@ export default function AboutPage() {
               style={{ minHeight: "280px" }}
             >
               <img
-                src="/images/ADVAIT_Logo.png"
+                src="/images/ADVAIT_Logo.webp"
                 alt="Advait Green Recycling Private Limited"
                 className="relative w-[78%] max-w-[520px] object-contain"
               />

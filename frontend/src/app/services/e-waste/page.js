@@ -12,31 +12,31 @@ import HorizontalShowcase from "@/components/sections/HorizontalShowcase";
 
 const heroSlides = [
   {
-    image: "/images/E-West-Managment-1.jpg",
+    image: "/images/E-West-Managment-1.webp",
     title: "Recover the Metal.",
     highlight: "Spare the Mountain.",
     desc: "Every discarded laptop, server and handset holds recoverable gold, copper and rare earths. We extract them responsibly - so the earth doesn't have to be dug up again.",
   },
   {
-    image: "/images/E-West-Managment-2.jpg",
+    image: "/images/E-West-Managment-2.webp",
     title: "From Circuit Boards",
     highlight: "to Clean Commodities.",
     desc: "Our mechanised lines shred, separate and recover copper, aluminium, steel and precious metals from printed circuit boards - returning clean secondary raw material to industry.",
   },
   {
-    image: "/images/E-West-Managment-3.jpg",
+    image: "/images/E-West-Managment-3.webp",
     title: "Authorised. Auditable.",
     highlight: "Liability Transferred.",
     desc: "CPCB and GPCB authorised processing means your e-waste liability actually transfers - backed by Certificates of Recycling and full chain-of-custody documentation.",
   },
   {
-    image: "/images/E-West-Managment-4.jpg",
+    image: "/images/E-West-Managment-4.webp",
     title: "Manual Precision Meets",
     highlight: "Mechanical Scale.",
     desc: "Skilled de-manufacturing teams disassemble each device by hand before mechanical shredding and separation extract every recoverable fraction - ferrous, non-ferrous, plastics, glass and hazardous components.",
   },
   {
-    image: "/images/E-West-Managment-5.jpg",
+    image: "/images/E-West-Managment-5.webp",
     title: "Zero Waste.",
     highlight: "Maximum Recovery.",
     desc: "Our target is complete diversion from landfill. Every processed consignment yields clean metal, reusable plastic, and documented evidence for your EPR and ESG reporting.",
@@ -48,49 +48,49 @@ const wasteItems = [
     icon: Monitor,
     label: "Computers & Workstations",
     desc: "Desktops, laptops, workstations and thin clients - including all internal components such as motherboards, RAM, processors, hard drives and power supplies. We handle individual units as well as bulk IT refresh disposals.",
-    image: "/images/computer-workstation.jpg",
+    image: "/images/computer-workstation.webp",
   },
   {
     icon: Server,
     label: "Servers & Networking",
     desc: "Rack-mount servers, blade servers, routers, switches, modems, PBX systems and telecom exchange equipment. From data centre decommissions to branch-office cleanouts, every piece is inventoried and processed.",
-    image: "/images/server-networking.jpg",
+    image: "/images/server-networking.webp",
   },
   {
     icon: Cpu,
     label: "UPS & Power Systems",
     desc: "Uninterruptible power supplies, voltage regulators, power distribution units and battery backup systems. Batteries are safely separated and channelled to authorised recyclers; electronics enter our shredding line.",
-    image: "/images/ups-power-station.jpg",
+    image: "/images/ups-power-station.webp",
   },
   {
     icon: Printer,
     label: "Monitors & Peripherals",
     desc: "CRT and flat-panel monitors, printers, scanners, copiers, projectors, keyboards, mice and other peripherals. CRT monitors receive special treatment due to leaded glass and phosphor coatings.",
-    image: "/images/Monitors-Peripherals.jpg",
+    image: "/images/Monitors-Peripherals.webp",
   },
   {
     icon: Cable,
     label: "Cables & Connectors",
     desc: "Power cables, data cables, wiring harness, connectors and cable assemblies. Copper and aluminium are recovered through mechanical stripping and granulation for return to the secondary metal market.",
-    image: "/images/Cables-Connectors.jpg",
+    image: "/images/Cables-Connectors.webp",
   },
   {
     icon: CircuitBoard,
     label: "Circuit Boards (PCBs)",
     desc: "Populated and bare printed circuit boards from any source - computers, telecom, industrial controls, consumer electronics. PCBs contain the highest concentration of precious metals and are processed for gold, silver, palladium and copper recovery.",
-    image: "/images/Circuit-Boards-PCBs.jpg",
+    image: "/images/Circuit-Boards-PCBs.webp",
   },
   {
     icon: Smartphone,
     label: "Consumer Electronics",
     desc: "Televisions, audio systems, home appliances, smartphones, tablets and gaming consoles. Items are dismantled, hazardous components (batteries, capacitors, mercury lamps) are separated, and recyclable fractions enter the recovery stream.",
-    image: "/images/Consumer-Electronics.jpg",
+    image: "/images/Consumer-Electronics.webp",
   },
   {
     icon: Radio,
     label: "Industrial Equipment",
     desc: "PLC controllers, SCADA systems, sensors, relays, instrumentation panels and factory automation components. Industrial e-waste often contains specialised alloys and rare earth elements that we channel to authorised downstream processors.",
-    image: "/images/Industrial-Equipment.jpg",
+    image: "/images/Industrial-Equipment.webp",
   },
 ];
 
@@ -134,11 +134,11 @@ const processSteps = [
 ];
 
 const galleryImages = [
-  { src: "/images/E-West-Managment-1.jpg", alt: "E-waste collection and sorting" },
-  { src: "/images/E-West-Managment-2.jpg", alt: "Circuit board recovery process" },
-  { src: "/images/E-West-Managment-3.jpg", alt: "Metal separation and recovery" },
-  { src: "/images/E-West-Managment-4.jpg", alt: "Dismantling and de-manufacturing" },
-  { src: "/images/E-West-Managment-5.jpg", alt: "Processed materials ready for reuse" },
+  { src: "/images/E-West-Managment-1.webp", alt: "E-waste collection and sorting" },
+  { src: "/images/E-West-Managment-2.webp", alt: "Circuit board recovery process" },
+  { src: "/images/E-West-Managment-3.webp", alt: "Metal separation and recovery" },
+  { src: "/images/E-West-Managment-4.webp", alt: "Dismantling and de-manufacturing" },
+  { src: "/images/E-West-Managment-5.webp", alt: "Processed materials ready for reuse" },
 ];
 
 const fadeUp = {
@@ -355,7 +355,7 @@ export default function EWastePage() {
               style={{ aspectRatio: "4/3" }}
             >
               <img
-                src="/images/E-West-Managment-2.jpg"
+                src="/images/E-West-Managment-2.webp"
                 alt="E-waste recycling facility"
                 className="w-full h-full object-cover"
               />
@@ -913,7 +913,7 @@ export default function EWastePage() {
               style={{ aspectRatio: "4/3" }}
             >
               <img
-                src="/images/E-Waste-Collection-Logistics.jpg"
+                src="/images/E-Waste-Collection-Logistics.webp"
                 alt="E-waste collection and transport"
                 className="w-full h-full object-cover"
               />
