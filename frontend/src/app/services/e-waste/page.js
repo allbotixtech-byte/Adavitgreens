@@ -385,106 +385,37 @@ export default function EWastePage() {
         items={wasteItems}
       />
 
-      {/* ── E-WASTE RECYCLING PROCESS (Horizontal Visual Flow) ── */}
-      <section className="bg-white py-16 lg:py-24 overflow-hidden">
-        <div className="max-w-[1400px] mx-auto px-4 sm:px-6">
-          <div className="text-center mb-14">
-            <p className="font-mono text-xs uppercase tracking-[0.09em] mb-3" style={{ color: "var(--color-accent-500)" }}>
-              How It Works
-            </p>
-            <h2 className="font-heading text-2xl sm:text-3xl lg:text-[2.5rem] font-semibold tracking-tight" style={{ color: "var(--color-primary-950)" }}>
-              E-Waste Recycling Process
-            </h2>
-            <div className="flex items-center justify-center gap-2 mt-4">
-              <div className="w-12 h-[3px] rounded-full" style={{ backgroundColor: "var(--color-accent-500)" }} />
-              <div className="w-2 h-2 rounded-full" style={{ backgroundColor: "var(--color-primary-500)" }} />
-              <div className="w-12 h-[3px] rounded-full" style={{ backgroundColor: "var(--color-accent-500)" }} />
-            </div>
-          </div>
-
-          {/* Horizontal flow - desktop */}
-          <div className="hidden lg:flex items-start justify-between gap-0 relative">
-            {processSteps.map((step, i) => (
-              <motion.div
-                key={step.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.12 }}
-                className="flex flex-col items-center text-center relative"
-                style={{ flex: "1 1 0", maxWidth: "200px" }}
-              >
-                <div
-                  className="w-20 h-20 rounded-2xl flex items-center justify-center mb-4 relative"
-                  style={{ backgroundColor: "var(--color-primary-50)", border: "2px solid var(--color-primary-200)" }}
-                >
-                  <step.icon size={36} strokeWidth={1.4} style={{ color: "var(--color-primary-700)" }} />
-                </div>
-                <h4 className="font-heading text-base font-semibold mb-1.5" style={{ color: "var(--color-primary-950)" }}>
-                  {step.title}
-                </h4>
-                <p className="text-xs leading-relaxed px-1" style={{ color: "var(--color-secondary-500)" }}>
-                  {step.desc}
-                </p>
-
-                {i < processSteps.length - 1 && (
-                  <div className="absolute top-10 left-[calc(50%+48px)] flex items-center" style={{ width: "calc(100% - 96px)" }}>
-                    <div className="flex-1 h-0" style={{ borderTop: "2px dashed var(--color-secondary-300)" }} />
-                    <ArrowRight size={18} className="shrink-0 -ml-1" style={{ color: "var(--color-accent-500)" }} />
-                  </div>
-                )}
-              </motion.div>
-            ))}
-
-            {/* Output materials */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.6 }}
-              className="flex flex-col items-start gap-2 pl-3 pt-2"
-              style={{ minWidth: "140px" }}
+      {/* ── E-WASTE RECYCLING PROCESS ── */}
+      <ProcessTimeline
+        subtitle="How It Works"
+        title="E-Waste Recycling Process"
+        steps={processSteps}
+        variant="light"
+        footer={
+          <div className="flex flex-wrap items-center justify-center gap-3">
+            <p
+              className="font-mono text-[10px] uppercase tracking-[0.09em] mr-1"
+              style={{ color: "var(--color-secondary-500)" }}
             >
-              <p className="font-mono text-[10px] uppercase tracking-wider mb-1" style={{ color: "var(--color-secondary-500)" }}>Output</p>
-              {["Aluminium", "Copper", "Plastic", "Iron", "Gold & Silver"].map((mat) => (
-                <div key={mat} className="flex items-center gap-2">
-                  <div className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "var(--color-accent-500)" }} />
-                  <span className="text-sm font-medium" style={{ color: "var(--color-primary-700)" }}>{mat}</span>
-                </div>
-              ))}
-            </motion.div>
-          </div>
-
-          {/* Mobile/Tablet - vertical cards */}
-          <div className="lg:hidden grid sm:grid-cols-2 gap-4">
-            {processSteps.map((step, i) => (
-              <motion.div
-                key={step.title}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
-                className="flex items-start gap-4 p-4 rounded-lg border"
-                style={{ borderColor: "var(--color-secondary-100)", backgroundColor: "var(--color-secondary-25)" }}
+              Recovered Output
+            </p>
+            {["Aluminium", "Copper", "Plastic", "Iron", "Gold & Silver"].map((mat) => (
+              <span
+                key={mat}
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium"
+                style={{
+                  backgroundColor: "var(--color-secondary-50)",
+                  border: "1px solid var(--color-secondary-200)",
+                  color: "var(--color-primary-700)",
+                }}
               >
-                <div
-                  className="w-12 h-12 rounded-xl flex items-center justify-center shrink-0"
-                  style={{ backgroundColor: "var(--color-primary-50)" }}
-                >
-                  <step.icon size={24} strokeWidth={1.5} style={{ color: "var(--color-primary-700)" }} />
-                </div>
-                <div>
-                  <div className="flex items-center gap-2 mb-1">
-                    <span className="font-mono text-[10px] font-bold" style={{ color: "var(--color-accent-600)" }}>0{i + 1}</span>
-                    <h4 className="font-heading text-[15px] font-semibold" style={{ color: "var(--color-primary-950)" }}>{step.title}</h4>
-                  </div>
-                  <p className="text-sm leading-relaxed" style={{ color: "var(--color-secondary-600)" }}>{step.desc}</p>
-                </div>
-              </motion.div>
+                <span className="w-1.5 h-1.5 rounded-full" style={{ backgroundColor: "var(--color-accent-500)" }} />
+                {mat}
+              </span>
             ))}
           </div>
-        </div>
-      </section>
+        }
+      />
 
       {/* ── PROCESS FLOW DIAGRAM ── */}
       <section className="py-16 lg:py-24 relative overflow-hidden" style={{ backgroundColor: "var(--color-secondary-50)" }}>
