@@ -84,15 +84,15 @@ export default function Header() {
       </div>
 
       {/* Main Nav */}
-      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 flex items-center justify-between h-[64px] sm:h-[72px] lg:h-[80px]">
+      <div className="max-w-[1400px] mx-auto px-4 sm:px-6 flex items-center justify-between h-[70px] sm:h-[80px] lg:h-[92px]">
         {/* Logo */}
         <Link href="/" className="shrink-0 flex items-center">
           <Image
             src="/images/ADVAIT_Logo.webp"
             alt="Advait Green Recycling"
-            width={120}
-            height={40}
-            className="h-[32px] sm:h-[38px] lg:h-[46px] w-auto transition-all duration-300 object-contain"
+            width={320}
+            height={180}
+            className="h-[46px] sm:h-[56px] lg:h-[66px] w-auto transition-all duration-300 object-contain"
             style={{ filter: logoFilter }}
             priority
           />
@@ -183,7 +183,7 @@ export default function Header() {
       {/* Mobile Nav */}
       {mobileOpen && (
         <div className="lg:hidden" style={{ borderTop: "1px solid var(--color-secondary-100)", backgroundColor: "#FAF9F6" }}>
-          <div className="px-4 py-3 space-y-1 max-h-[calc(100vh-64px)] overflow-y-auto">
+          <div className="px-4 py-3 space-y-1 max-h-[calc(100vh-70px)] overflow-y-auto">
             {navLinks.map((link) => (
               <div key={link.label}>
                 {link.children ? (

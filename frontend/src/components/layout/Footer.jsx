@@ -17,9 +17,9 @@ export default function Footer() {
               <Image
                 src="/images/ADVAIT_Logo.webp"
                 alt="Advait Green Recycling"
-                width={160}
-                height={48}
-                className="h-[44px] w-auto"
+                width={320}
+                height={180}
+                className="h-[58px] w-auto"
               />
             </div>
             <p className="text-sm leading-relaxed max-w-[280px]" style={{ color: "var(--color-secondary-600)" }}>
