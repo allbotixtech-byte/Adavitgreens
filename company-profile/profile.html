@@ -1,0 +1,1096 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Advait Green Recycling — Company Profile</title>
+<style>
+/* ═══════════════════════════════════════════════════════════════════
+   ADVAIT GREEN RECYCLING — A4 COMPANY PROFILE
+   Tokens mirror frontend/src/app/globals.css (@theme inline).
+   Render: build.sh  →  Advait_Green_Company_Profile.pdf
+   ═══════════════════════════════════════════════════════════════════ */
+
+@font-face { font-family:'Archivo'; src:url('assets/fonts/Archivo.ttf') format('truetype-variations');
+             font-weight:400 700; font-stretch:100% 125%; font-display:block; }
+@font-face { font-family:'Instrument Sans'; src:url('assets/fonts/InstrumentSans.ttf') format('truetype-variations');
+             font-weight:400 700; font-display:block; }
+@font-face { font-family:'JetBrains Mono'; src:url('assets/fonts/JetBrainsMono.ttf') format('truetype-variations');
+             font-weight:400 700; font-display:block; }
+
+:root{
+  /* Primary — deep teal */
+  --p50:#E8F4F9; --p100:#C8E5F2; --p200:#94CEE5; --p300:#5AB3D4; --p400:#2D99C2;
+  --p500:#087FA5; --p600:#065F85; --p700:#013F5D; --p800:#01334D; --p900:#01283E; --p950:#001A2B;
+  /* Secondary — neutral */
+  --s0:#FFFFFF; --s25:#FAFCFC; --s50:#F4F7F8; --s100:#E8EDF0; --s200:#D4DCE0; --s300:#B8C4CA;
+  --s400:#8E9EA6; --s500:#6A7C85; --s600:#516169; --s700:#3D4A51; --s800:#2C363B; --s900:#1E2529; --s950:#12191C;
+  /* Accent — green */
+  --a50:#EDFCE5; --a100:#D5F8C5; --a200:#AEF192; --a300:#7DE559; --a400:#53D62B;
+  --a500:#39D900; --a600:#16A800; --a700:#128A00; --a800:#0F6D00; --a900:#0B5200;
+  /* Signal — amber */
+  --g50:#FDF6E7; --g100:#FAEAC4; --g300:#F3C766; --g500:#E0A126; --g600:#BB8118; --g700:#8E6011; --g900:#4E350A;
+
+  --font-heading:'Archivo','Helvetica Neue',Arial,sans-serif;
+  --font-body:'Instrument Sans',system-ui,-apple-system,'Segoe UI',Roboto,sans-serif;
+  --font-data:'JetBrains Mono',ui-monospace,'SF Mono',Menlo,monospace;
+
+  --pad:17mm;              /* page inset */
+}
+
+*,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+
+@page{ size:A4; margin:0; }
+
+html{ -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+
+body{
+  font-family:var(--font-body);
+  color:var(--s900);
+  background:var(--s200);
+  font-size:9.6pt;
+  line-height:1.62;
+  -webkit-font-smoothing:antialiased;
+  font-variant-ligatures:common-ligatures;
+}
+
+/* ── page shell ─────────────────────────────────────────────────── */
+.page{
+  position:relative;
+  width:210mm; height:297mm;
+  background:var(--s0);
+  overflow:hidden;
+  page-break-after:always;
+  break-after:page;
+  margin:0 auto;
+}
+.page:last-child{ page-break-after:auto; break-after:auto; }
+.page.dark{ background:var(--p950); color:var(--s0); }
+.page.tint{ background:var(--s50); }
+
+.body{ position:absolute; inset:var(--pad) var(--pad) 20mm var(--pad); }
+
+/* running foot */
+.foot{
+  position:absolute; left:var(--pad); right:var(--pad); bottom:11mm;
+  display:flex; justify-content:space-between; align-items:center;
+  font-family:var(--font-data); font-size:6.4pt; letter-spacing:.10em;
+  text-transform:uppercase; color:var(--s400);
+  padding-top:2.6mm; border-top:.4pt solid var(--s200);
+}
+.dark .foot{ color:rgba(255,255,255,.42); border-top-color:rgba(255,255,255,.16); }
+.foot .n{ font-weight:700; color:var(--s600); }
+.dark .foot .n{ color:rgba(255,255,255,.72); }
+
+/* ── type ───────────────────────────────────────────────────────── */
+.eyebrow{
+  font-family:var(--font-data); font-size:6.6pt; font-weight:500;
+  letter-spacing:.14em; text-transform:uppercase; color:var(--a600);
+  display:flex; align-items:center; gap:2.4mm; margin-bottom:4.5mm;
+}
+.eyebrow::after{ content:''; flex:1; height:.4pt; background:var(--s200); }
+.dark .eyebrow{ color:var(--a400); }
+.dark .eyebrow::after{ background:rgba(255,255,255,.18); }
+.eyebrow.plain::after{ display:none; }
+
+h1,h2,h3,h4{ font-family:var(--font-heading); font-weight:600; letter-spacing:-.02em; line-height:1.1; color:var(--p950); }
+.dark h1,.dark h2,.dark h3,.dark h4{ color:var(--s0); }
+
+h2{ font-size:23pt; line-height:1.08; letter-spacing:-.028em; margin-bottom:4.5mm; }
+h3{ font-size:13pt; letter-spacing:-.016em; margin-bottom:2.4mm; }
+h4{ font-size:10pt; letter-spacing:-.008em; margin-bottom:1.6mm; }
+h2 em{ font-style:normal; color:var(--a700); }
+.dark h2 em{ color:var(--a400); }
+
+p{ margin-bottom:3mm; color:var(--s700); }
+.dark p{ color:rgba(255,255,255,.74); }
+p:last-child{ margin-bottom:0; }
+.lead{ font-size:11pt; line-height:1.58; color:var(--s700); letter-spacing:-.004em; }
+.dark .lead{ color:rgba(255,255,255,.80); }
+.small{ font-size:8.4pt; line-height:1.55; color:var(--s600); }
+.dark .small{ color:rgba(255,255,255,.62); }
+strong{ font-weight:600; color:var(--p900); }
+.dark strong{ color:var(--s0); }
+
+/* bracketed placeholder — deliberately loud so the fill-in pass can't miss it */
+.ph{
+  font-family:var(--font-data); font-size:.88em; font-weight:500;
+  color:var(--g700); background:var(--g50);
+  border-bottom:.5pt dashed var(--g500);
+  padding:0 .9mm; border-radius:1px; white-space:nowrap;
+}
+.dark .ph{ color:var(--g300); background:rgba(224,161,38,.13); border-bottom-color:var(--g500); }
+
+/* ── rules & lists ──────────────────────────────────────────────── */
+.rule{ height:.4pt; background:var(--s200); margin:5mm 0; }
+.dark .rule{ background:rgba(255,255,255,.16); }
+
+ul.ticks{ list-style:none; }
+ul.ticks li{
+  position:relative; padding-left:5.4mm; margin-bottom:2.1mm;
+  color:var(--s700); font-size:9.2pt; line-height:1.52;
+}
+ul.ticks li::before{
+  content:''; position:absolute; left:0; top:1.55mm;
+  width:2mm; height:2mm; border-radius:.4mm;
+  background:var(--a600);
+}
+.dark ul.ticks li{ color:rgba(255,255,255,.74); }
+.dark ul.ticks li::before{ background:var(--a500); }
+
+/* hairline-divided spec rows — the WhyAdvaitGreen pattern */
+.rows{ border-top:.4pt solid var(--s200); }
+.rows .row{
+  display:flex; align-items:baseline; gap:5mm;
+  padding:2.9mm 0; border-bottom:.4pt solid var(--s200);
+}
+.rows .row .k{
+  font-family:var(--font-heading); font-weight:700; font-size:11.5pt;
+  color:var(--p700); font-variant-numeric:tabular-nums;
+  flex:0 0 30mm; letter-spacing:-.02em;
+}
+.rows .row .v{ font-size:9pt; color:var(--s700); line-height:1.45; }
+.dark .rows{ border-top-color:rgba(255,255,255,.16); }
+.dark .rows .row{ border-bottom-color:rgba(255,255,255,.16); }
+.dark .rows .row .k{ color:var(--a400); }
+.dark .rows .row .v{ color:rgba(255,255,255,.74); }
+
+/* ── grids ──────────────────────────────────────────────────────── */
+.g2{ display:grid; grid-template-columns:1fr 1fr; gap:7mm; }
+.g3{ display:grid; grid-template-columns:repeat(3,1fr); gap:6mm; }
+.g2u{ display:grid; grid-template-columns:1fr 1.25fr; gap:9mm; }
+
+.card{
+  background:var(--s0); border:.4pt solid var(--s200);
+  border-top:1.6pt solid var(--p700);
+  padding:5mm 5mm 5.4mm;
+}
+.card .num{
+  font-family:var(--font-data); font-size:6.8pt; font-weight:700;
+  letter-spacing:.12em; color:var(--a600); display:block; margin-bottom:2.2mm;
+}
+.card p{ font-size:8.6pt; line-height:1.5; color:var(--s600); margin:0; }
+.card.accent{ border-top-color:var(--a600); }
+
+/* stat tiles */
+.stats{ display:grid; grid-template-columns:repeat(4,1fr); gap:0; border-left:.4pt solid var(--s200); }
+.stat{ padding:4.5mm 4mm; border-right:.4pt solid var(--s200); border-top:.4pt solid var(--s200); border-bottom:.4pt solid var(--s200); }
+.stat .fig{
+  font-family:var(--font-heading); font-weight:700; font-size:17pt; letter-spacing:-.03em;
+  color:var(--p700); font-variant-numeric:tabular-nums; line-height:1; display:block; margin-bottom:1.8mm;
+}
+.stat .lab{ font-size:7.4pt; line-height:1.35; color:var(--s500); }
+.dark .stats{ border-left-color:rgba(255,255,255,.16); }
+.dark .stat{ border-color:rgba(255,255,255,.16); }
+.dark .stat .fig{ color:var(--a400); }
+.dark .stat .lab{ color:rgba(255,255,255,.60); }
+
+/* chips */
+.chips{ display:flex; flex-wrap:wrap; gap:1.8mm; }
+.chip{
+  font-family:var(--font-data); font-size:7.2pt; letter-spacing:.03em;
+  padding:1.5mm 2.8mm; border:.4pt solid var(--s200); background:var(--s0);
+  color:var(--s700); border-radius:1px;
+}
+.dark .chip{ border-color:rgba(255,255,255,.20); background:transparent; color:rgba(255,255,255,.78); }
+
+/* table */
+table{ width:100%; border-collapse:collapse; font-size:8.4pt; }
+th{
+  font-family:var(--font-data); font-size:6.6pt; font-weight:700; letter-spacing:.11em;
+  text-transform:uppercase; color:var(--s500); text-align:left;
+  padding:0 3mm 2.2mm 0; border-bottom:.8pt solid var(--p700);
+}
+td{ padding:2.5mm 3mm 2.5mm 0; border-bottom:.4pt solid var(--s200); color:var(--s700); vertical-align:top; }
+td:first-child{ color:var(--p900); font-weight:500; }
+td.ref{ font-family:var(--font-data); font-size:7.6pt; }
+
+/* imagery */
+.figure{ position:relative; overflow:hidden; background:var(--p950); }
+.figure img{ width:100%; height:100%; object-fit:cover; display:block; }
+.figure.duo::after{
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(115deg, rgba(1,40,62,.82) 0%, rgba(1,63,93,.46) 55%, rgba(22,168,0,.20) 100%);
+}
+</style>
+</head>
+<body>
+
+<!-- ══ 01 · COVER ═══════════════════════════════════════════════════ -->
+<section class="page dark" style="padding:0;">
+  <div class="figure duo" style="position:absolute; inset:0;">
+    <img src="assets/img/cover.jpg" alt="">
+  </div>
+  <div style="position:absolute; inset:0; background:linear-gradient(180deg, rgba(0,26,43,.55) 0%, rgba(0,26,43,.30) 38%, rgba(0,26,43,.93) 78%, rgba(0,26,43,.99) 100%);"></div>
+
+  <!-- accent hairline down the right edge -->
+  <div style="position:absolute; top:0; right:0; width:2.2mm; height:100%;
+              background:linear-gradient(180deg,var(--a500) 0%,var(--p500) 62%,var(--p900) 100%);"></div>
+
+  <div style="position:absolute; top:20mm; left:var(--pad); right:calc(var(--pad) + 6mm);">
+    <img src="assets/img/logo-full.png" alt="Advait Green Recycling"
+         style="width:52mm; filter:brightness(0) invert(1); opacity:.97;">
+  </div>
+
+  <div style="position:absolute; left:var(--pad); right:calc(var(--pad) + 10mm); bottom:44mm;">
+    <p style="font-family:var(--font-data); font-size:7pt; letter-spacing:.20em; text-transform:uppercase;
+              color:var(--a400); margin-bottom:7mm;">Company Profile &nbsp;·&nbsp; FY <span class="ph">2025–26</span></p>
+
+    <h1 style="font-size:38pt; line-height:1.02; letter-spacing:-.035em; font-weight:600; color:#fff; margin-bottom:6mm;">
+      Nothing Is Waste<br>Until It Is <em style="font-style:normal; color:var(--a400);">Wasted.</em>
+    </h1>
+
+    <div style="width:26mm; height:1.6pt; background:var(--a500); margin-bottom:6mm;"></div>
+
+    <p style="font-size:11pt; line-height:1.55; color:rgba(255,255,255,.80); max-width:112mm; margin:0;">
+      An authorised, integrated recycler recovering value from electronic,
+      plastic and battery waste — with the documentation to prove it.
+    </p>
+  </div>
+
+  <div style="position:absolute; left:var(--pad); right:var(--pad); bottom:15mm;
+              display:flex; justify-content:space-between; align-items:flex-end;
+              padding-top:4mm; border-top:.5pt solid rgba(255,255,255,.20);
+              font-family:var(--font-data); font-size:6.8pt; letter-spacing:.10em;
+              text-transform:uppercase; color:rgba(255,255,255,.55);">
+    <span>Advait Green Recycling Private Limited</span>
+    <span><span class="ph">Location</span>, Gujarat, India</span>
+  </div>
+</section>
+
+
+<!-- ══ 02 · WHO WE ARE ══════════════════════════════════════════════ -->
+<section class="page">
+  <div class="body">
+    <div class="eyebrow">01 &nbsp;/&nbsp; Who We Are</div>
+    <h2>A Recycling Company Built for<br>India's Next Decade of <em>Waste</em></h2>
+
+    <div class="g2u" style="margin-top:7mm;">
+      <div>
+        <p class="lead" style="margin-bottom:4mm;">
+          India generates over <span class="ph">1.7 million</span> tonnes of electronic waste every
+          year, and less than a third of it reaches a formal recycling channel. The rest is burned,
+          buried or broken apart by hand.
+        </p>
+        <p class="lead" style="color:var(--p700); font-weight:500;">
+          Advait Green Recycling exists to change that ratio.
+        </p>
+      </div>
+      <div>
+        <p>
+          We are a <span class="ph">GPCB</span> authorised recycler operating an integrated facility at
+          <span class="ph">Location, Gujarat</span>, processing electronic waste, plastic waste, battery
+          waste and industrial scrap through mechanical and chemical recovery lines. Our work sits at the
+          intersection of three outcomes that usually get treated separately — <strong>environmental
+          compliance, data security, and material recovery.</strong>
+        </p>
+        <p>
+          For our clients, that means one partner, one documentation trail, and one accountable point of
+          contact from collection to certificate.
+        </p>
+        <p>
+          The name <strong>Advait</strong> means “not two” — the idea that industry and environment are not
+          opposing interests. A recycling business that isn't commercially sound will not survive to protect
+          anything; one that isn't environmentally rigorous doesn't deserve to.
+        </p>
+      </div>
+    </div>
+
+    <div class="rule" style="margin:8mm 0 7mm;"></div>
+
+    <div class="eyebrow plain" style="margin-bottom:3.5mm;">Authorised &amp; Certified</div>
+    <div class="chips" style="margin-bottom:8mm;">
+      <span class="chip">CPCB Registered Recycler</span>
+      <span class="chip">GPCB Authorisation</span>
+      <span class="chip">ISO 9001:2015</span>
+      <span class="chip">ISO 14001:2015</span>
+      <span class="chip">ISO 45001:2018</span>
+      <span class="chip">E-Waste Rules Authorisation</span>
+      <span class="chip">PWM Authorisation</span>
+      <span class="chip">BWM Registration</span>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><span class="fig"><span class="ph">XX,XXX</span></span><span class="lab">sq. ft. integrated facility</span></div>
+      <div class="stat"><span class="fig"><span class="ph">XXX</span></span><span class="lab">MT e-waste authorised p.a.</span></div>
+      <div class="stat"><span class="fig"><span class="ph">XXX</span>+</span><span class="lab">organisations served</span></div>
+      <div class="stat"><span class="fig"><span class="ph">XXX</span></span><span class="lab">people on the team</span></div>
+    </div>
+
+    <div class="figure" style="height:46mm; margin-top:7mm;">
+      <img src="assets/img/ewaste.jpg" alt="">
+    </div>
+    <p class="small" style="margin-top:2.5mm; font-family:var(--font-data); font-size:6.6pt;
+       letter-spacing:.10em; text-transform:uppercase; color:var(--s400);">
+      Recovered circuit board fraction, pre-shredding
+    </p>
+  </div>
+  <div class="foot"><span>Advait Green Recycling — Company Profile</span><span class="n">02</span></div>
+</section>
+
+
+<!-- ══ 03 · VISION, MISSION, VALUES ═════════════════════════════════ -->
+<section class="page tint">
+  <div class="body">
+    <div class="eyebrow">02 &nbsp;/&nbsp; Vision, Mission &amp; Values</div>
+    <h2>What We Are <em>Building</em></h2>
+
+    <div style="background:var(--p950); color:#fff; padding:8mm 9mm; margin:6mm 0 7mm;
+                border-left:2.4mm solid var(--a500);">
+      <p style="font-family:var(--font-data); font-size:6.6pt; letter-spacing:.14em; text-transform:uppercase;
+                color:var(--a400); margin-bottom:3mm;">Our Vision</p>
+      <p style="font-family:var(--font-heading); font-weight:600; font-size:15pt; line-height:1.28;
+                letter-spacing:-.02em; color:#fff; margin:0;">
+        A resource economy where end-of-life is simply a stage in a material's life — not the end of it.
+      </p>
+    </div>
+
+    <div class="g2u" style="gap:10mm;">
+      <div>
+        <h3>Our Mission</h3>
+        <ul class="ticks">
+          <li>To provide waste generators with a formal, fully documented and commercially fair recycling channel.</li>
+          <li>To maximise material recovery and minimise residue to landfill on every consignment we accept.</li>
+          <li>To make regulatory compliance straightforward for producers, importers and brand owners.</li>
+          <li>To create safe, skilled and dignified employment in a sector historically defined by the opposite.</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Our Core Values</h3>
+        <div class="rows">
+          <div class="row"><span class="k" style="flex:0 0 34mm; font-size:9.4pt;">Legitimacy First</span><span class="v">We only do what our authorisations permit us to do. No exceptions, whatever the tonnage.</span></div>
+          <div class="row"><span class="k" style="flex:0 0 34mm; font-size:9.4pt;">Traceability</span><span class="v">Every kilogram that enters our gate can be accounted for on its way out.</span></div>
+          <div class="row"><span class="k" style="flex:0 0 34mm; font-size:9.4pt;">Safety</span><span class="v">PPE, training and handling protocols are not overheads; they are the licence to operate.</span></div>
+          <div class="row"><span class="k" style="flex:0 0 34mm; font-size:9.4pt;">Transparency</span><span class="v">Our clients see the recovery logic behind our pricing.</span></div>
+          <div class="row"><span class="k" style="flex:0 0 34mm; font-size:9.4pt;">Continuous Recovery</span><span class="v">Every process line is reviewed against one question: what are we still losing?</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="rule" style="margin:8mm 0 6mm;"></div>
+
+    <div class="g3">
+      <div class="card accent">
+        <span class="num">01 · THE DISCIPLINE</span>
+        <h4>What Waste Management Is</h4>
+        <p>Collecting, transporting, treating and recovering material that has reached the end of its first useful life — safely, legally, and with the maximum possible value returned to the economy.</p>
+      </div>
+      <div class="card accent">
+        <span class="num">02 · THE ARITHMETIC</span>
+        <h4>Why Recovery Matters</h4>
+        <p>Recycling one tonne of circuit boards recovers more gold than 17 tonnes of mined ore. Recovery isn't charity for the planet — it is the cheaper, cleaner and increasingly the only legal way to source secondary raw material.</p>
+      </div>
+      <div class="card accent">
+        <span class="num">03 · THE RETURN</span>
+        <h4>The Business Case</h4>
+        <p>Beyond compliance, recycling reduces landfill liability, protects brand reputation, unlocks scrap value from written-off assets, and delivers the documented evidence your ESG and CSR reporting now demands.</p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Vision, Mission &amp; Values</span><span class="n">03</span></div>
+</section>
+
+
+<!-- ══ 04 · OUR JOURNEY ═════════════════════════════════════════════ -->
+<section class="page">
+  <div class="body">
+    <div class="eyebrow">03 &nbsp;/&nbsp; Our Journey</div>
+    <h2>From a Single Authorisation to an<br>Integrated <em>Recovery Facility</em></h2>
+
+    <p class="lead" style="max-width:135mm; margin:5mm 0 8mm;">
+      Advait Green Recycling was established in <span class="ph">Year</span> with a clear intent — to build
+      formal, traceable recycling capacity in a sector still dominated by informal handling.
+    </p>
+
+    <div class="rows">
+      <div class="row"><span class="k"><span class="ph">2019</span></span><span class="v">Advait Green Recycling incorporated at <span class="ph">City</span>, Gujarat.</span></div>
+      <div class="row"><span class="k"><span class="ph">2020</span></span><span class="v">GPCB authorisation received for e-waste collection, dismantling and recycling.</span></div>
+      <div class="row"><span class="k"><span class="ph">2021</span></span><span class="v">First <span class="ph">XX,XXX</span> sq. ft. processing facility commissioned at <span class="ph">Location</span>.</span></div>
+      <div class="row"><span class="k"><span class="ph">2022</span></span><span class="v">Plastic waste recycling line added; PWM authorisation obtained.</span></div>
+      <div class="row"><span class="k"><span class="ph">2023</span></span><span class="v">CPCB EPR registration; EPR advisory vertical launched.</span></div>
+      <div class="row"><span class="k"><span class="ph">2024</span></span><span class="v">ISO 9001, 14001 and 45001 certifications achieved.</span></div>
+      <div class="row"><span class="k"><span class="ph">2025</span></span><span class="v">Battery and solar module waste handling capability commissioned.</span></div>
+      <div class="row"><span class="k"><span class="ph">2026</span></span><span class="v">Crossed <span class="ph">XXX</span> MT processed and <span class="ph">XXX</span>+ client organisations.</span></div>
+    </div>
+
+    <div class="figure" style="height:62mm; margin-top:9mm;">
+      <img src="assets/img/plastic.jpg" alt="Sorting line">
+    </div>
+    <p class="small" style="margin-top:2.5mm; font-family:var(--font-data); font-size:6.6pt;
+       letter-spacing:.10em; text-transform:uppercase; color:var(--s400);">
+      Mechanical segregation line — <span class="ph">Location</span> facility
+    </p>
+  </div>
+  <div class="foot"><span>Our Journey</span><span class="n">04</span></div>
+</section>
+
+
+<!-- ══ 05 · SERVICES OVERVIEW ═══════════════════════════════════════ -->
+<section class="page dark">
+  <div class="body">
+    <div class="eyebrow">04 &nbsp;/&nbsp; Our Services</div>
+    <h2>One Partner Across the<br>Full Waste <em>Lifecycle</em></h2>
+
+    <p class="lead" style="max-width:130mm; margin:5mm 0 9mm;">
+      Most organisations end up with three vendors — one for IT disposal, one for plastic, one for
+      compliance paperwork — and three sets of documentation that don't reconcile. We built our
+      service lines to remove that problem.
+    </p>
+
+    <div class="g2" style="gap:6mm 8mm;">
+      <div style="border-top:1.2pt solid var(--a500); padding-top:3.5mm;">
+        <span style="font-family:var(--font-data); font-size:6.6pt; font-weight:700; letter-spacing:.13em; color:var(--a400);">01</span>
+        <h4 style="margin:1.8mm 0 1.6mm;">E-Waste Recycling &amp; Management</h4>
+        <p class="small">End-to-end collection, de-manufacturing, segregation and material recovery for IT assets, consumer electronics, telecom equipment and industrial electronics.</p>
+      </div>
+      <div style="border-top:1.2pt solid var(--a500); padding-top:3.5mm;">
+        <span style="font-family:var(--font-data); font-size:6.6pt; font-weight:700; letter-spacing:.13em; color:var(--a400);">02</span>
+        <h4 style="margin:1.8mm 0 1.6mm;">Plastic Waste Management</h4>
+        <p class="small">Collection, sorting, shredding and granulation of post-consumer and post-industrial plastic waste, with full PWM Rules documentation.</p>
+      </div>
+      <div style="border-top:1.2pt solid var(--a500); padding-top:3.5mm;">
+        <span style="font-family:var(--font-data); font-size:6.6pt; font-weight:700; letter-spacing:.13em; color:var(--a400);">03</span>
+        <h4 style="margin:1.8mm 0 1.6mm;">Extended Producer Responsibility</h4>
+        <p class="small">Registration, target planning, channel partner mapping, quarterly filing and certificate issuance for producers, importers and brand owners.</p>
+      </div>
+      <div style="border-top:1.2pt solid var(--a500); padding-top:3.5mm;">
+        <span style="font-family:var(--font-data); font-size:6.6pt; font-weight:700; letter-spacing:.13em; color:var(--a400);">04</span>
+        <h4 style="margin:1.8mm 0 1.6mm;">Secure Data Destruction</h4>
+        <p class="small">Onsite and offsite media sanitisation and physical destruction, with serial-wise Certificates of Destruction for every device.</p>
+      </div>
+      <div style="border-top:1.2pt solid var(--a500); padding-top:3.5mm;">
+        <span style="font-family:var(--font-data); font-size:6.6pt; font-weight:700; letter-spacing:.13em; color:var(--a400);">05</span>
+        <h4 style="margin:1.8mm 0 1.6mm;">Battery &amp; Solar Panel Recycling</h4>
+        <p class="small">Handling of lithium-ion, lead-acid and end-of-life solar module waste under the Battery Waste Management Rules.</p>
+      </div>
+      <div style="border-top:1.2pt solid var(--a500); padding-top:3.5mm;">
+        <span style="font-family:var(--font-data); font-size:6.6pt; font-weight:700; letter-spacing:.13em; color:var(--a400);">06</span>
+        <h4 style="margin:1.8mm 0 1.6mm;">Reverse Logistics &amp; Asset Buyback</h4>
+        <p class="small">PAN-India collection network, transparent scrap valuation and buyback for bulk decommissioning and refresh cycles.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:10mm; padding:6mm 7mm; border:.5pt solid rgba(255,255,255,.20);
+                border-left:2.4mm solid var(--a500); background:rgba(255,255,255,.03);">
+      <h4 style="margin-bottom:2mm;">Also offered</h4>
+      <p class="small" style="margin:0;">
+        <strong style="font-weight:600;">Refurbishment &amp; Asset Reuse</strong> — grading, testing, data-wiped
+        refurbishment and buyback credit for equipment with usable life left.
+        &nbsp;·&nbsp;
+        <strong style="font-weight:600;">Industrial &amp; Other Streams</strong> — segregated dry waste, metal and
+        cable scrap recovery, packaging recycling, onsite segregation programme design, waste audits and
+        zero-landfill consulting.
+      </p>
+    </div>
+
+    <div class="figure" style="height:38mm; margin-top:8mm;">
+      <img src="assets/img/data.jpg" alt="">
+    </div>
+    <p class="small" style="margin-top:2.5mm; font-family:var(--font-data); font-size:6.6pt;
+       letter-spacing:.10em; text-transform:uppercase; color:rgba(255,255,255,.40);">
+      Manual de-manufacturing bay — every asset logged by serial before teardown
+    </p>
+  </div>
+  <div class="foot"><span>Our Services</span><span class="n">05</span></div>
+</section>
+
+
+<!-- ══ 06 · E-WASTE ═════════════════════════════════════════════════ -->
+<section class="page">
+  <div class="body">
+    <div class="eyebrow">Service 01</div>
+    <h2>E-Waste Recycling<br>&amp; <em>Management</em></h2>
+    <p style="font-family:var(--font-heading); font-size:11.5pt; font-weight:500; color:var(--p600);
+              letter-spacing:-.012em; margin:3mm 0 5mm;">Recover the value. Retire the liability.</p>
+
+    <div class="g2u" style="gap:9mm; align-items:start;">
+      <div>
+        <div class="figure" style="height:46mm; margin-bottom:5mm;">
+          <img src="assets/img/ewaste.jpg" alt="">
+        </div>
+        <p class="small">
+          Electronic waste is the fastest-growing waste stream in the country, and the most legally
+          sensitive to dispose of carelessly. Under the E-Waste (Management) Rules, the generator's
+          responsibility does not end at handover — it ends at documented, authorised treatment.
+          <strong>We take over that entire chain.</strong>
+        </p>
+      </div>
+      <div>
+        <h4 style="margin-bottom:2.6mm;">What we handle</h4>
+        <ul class="ticks" style="margin-bottom:5mm;">
+          <li><strong>IT equipment</strong> — desktops, laptops, servers, monitors, printers, networking hardware</li>
+          <li><strong>Consumer electronics</strong> — televisions, air conditioners, refrigerators, washing machines</li>
+          <li><strong>Telecom infrastructure</strong> — switches, routers, base station equipment, cabling</li>
+          <li><strong>Industrial electronics</strong> — control panels, PLCs, instrumentation, UPS systems</li>
+          <li><strong>Medical electronics</strong> <span class="ph">if authorised</span></li>
+          <li><strong>Mobile devices</strong>, tablets, accessories and batteries</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="rule" style="margin:7mm 0 6mm;"></div>
+
+    <h4 style="margin-bottom:3.5mm;">Our process</h4>
+    <div class="g2" style="gap:0 9mm;">
+      <div class="rows" style="border-top:none;">
+        <div class="row" style="padding:2.2mm 0;"><span class="k" style="flex:0 0 8mm; font-size:9pt;">01</span><span class="v">Waste audit and category-wise classification</span></div>
+        <div class="row" style="padding:2.2mm 0;"><span class="k" style="flex:0 0 8mm; font-size:9pt;">02</span><span class="v">Quotation with transparent recovery-based valuation</span></div>
+        <div class="row" style="padding:2.2mm 0;"><span class="k" style="flex:0 0 8mm; font-size:9pt;">03</span><span class="v">Sealed collection under valid manifest, GPS-tracked transport</span></div>
+        <div class="row" style="padding:2.2mm 0;"><span class="k" style="flex:0 0 8mm; font-size:9pt;">04</span><span class="v">Gate-entry weighment and photographic record</span></div>
+      </div>
+      <div class="rows" style="border-top:none;">
+        <div class="row" style="padding:2.2mm 0;"><span class="k" style="flex:0 0 8mm; font-size:9pt;">05</span><span class="v">Manual de-manufacturing and hazardous fraction segregation</span></div>
+        <div class="row" style="padding:2.2mm 0;"><span class="k" style="flex:0 0 8mm; font-size:9pt;">06</span><span class="v">Mechanical shredding and metal recovery</span></div>
+        <div class="row" style="padding:2.2mm 0;"><span class="k" style="flex:0 0 8mm; font-size:9pt;">07</span><span class="v">Downstream channelling of PCBs to authorised smelters</span></div>
+        <div class="row" style="padding:2.2mm 0;"><span class="k" style="flex:0 0 8mm; font-size:9pt;">08</span><span class="v">Issue of Certificate of Recycling and Form-wise records</span></div>
+      </div>
+    </div>
+
+    <div style="margin-top:7mm; background:var(--p50); border-left:2.4mm solid var(--p700); padding:5mm 6mm;">
+      <h4 style="margin-bottom:2.2mm;">What you receive</h4>
+      <p class="small" style="margin:0;">
+        Certificate of Recycling &nbsp;·&nbsp; Weighment and manifest records &nbsp;·&nbsp; Serial-wise asset
+        destruction list &nbsp;·&nbsp; Environmental impact summary &nbsp;·&nbsp; EPR credit documentation
+        where applicable
+      </p>
+    </div>
+  </div>
+  <div class="foot"><span>Service 01 — E-Waste Recycling &amp; Management</span><span class="n">06</span></div>
+</section>
+
+
+<!-- ══ 07 · PLASTIC ═════════════════════════════════════════════════ -->
+<section class="page tint">
+  <div class="body">
+    <div class="eyebrow">Service 02</div>
+    <h2>Plastic Waste<br><em>Management</em></h2>
+    <p style="font-family:var(--font-heading); font-size:11.5pt; font-weight:500; color:var(--p600);
+              letter-spacing:-.012em; margin:3mm 0 5mm;">From discarded packaging back to usable polymer.</p>
+
+    <p class="lead" style="max-width:145mm; margin-bottom:7mm;">
+      We collect, sort and reprocess post-consumer and post-industrial plastic waste into clean granulate
+      that can re-enter manufacturing — supporting brand owners and importers in meeting their PWM
+      recycling targets with verifiable evidence.
+    </p>
+
+    <div class="figure" style="height:60mm; margin-bottom:7mm;">
+      <img src="assets/img/plastic.jpg" alt="">
+    </div>
+
+    <div class="g2" style="gap:9mm;">
+      <div>
+        <h4 style="margin-bottom:2.6mm;">Categories handled</h4>
+        <div class="rows">
+          <div class="row" style="padding:2.4mm 0;"><span class="k" style="flex:0 0 16mm; font-size:9pt;">Cat I</span><span class="v">Rigid packaging — PET, HDPE, PP containers</span></div>
+          <div class="row" style="padding:2.4mm 0;"><span class="k" style="flex:0 0 16mm; font-size:9pt;">Cat II</span><span class="v">Flexible packaging — single-layer films, pouches, sachets</span></div>
+          <div class="row" style="padding:2.4mm 0;"><span class="k" style="flex:0 0 16mm; font-size:9pt;">Cat III</span><span class="v">Multi-layered packaging (MLP)</span></div>
+          <div class="row" style="padding:2.4mm 0;"><span class="k" style="flex:0 0 16mm; font-size:9pt;">Cat IV</span><span class="v">Compostable plastics <span class="ph">if applicable</span></span></div>
+        </div>
+      </div>
+      <div>
+        <h4 style="margin-bottom:2.6mm;">Capabilities</h4>
+        <ul class="ticks">
+          <li>Segregation by polymer type and colour</li>
+          <li>Washing, drying, shredding and granulation</li>
+          <li>Agglomeration for film waste</li>
+          <li>Batch-wise quality testing before dispatch</li>
+          <li>Capacity: <span class="ph">XXX</span> MT/Month</li>
+        </ul>
+      </div>
+    </div>
+
+    <div style="margin-top:7mm; background:var(--s0); border:.4pt solid var(--s200);
+                border-left:2.4mm solid var(--a600); padding:5mm 6mm;">
+      <h4 style="margin-bottom:2.2mm;">Documentation provided</h4>
+      <p class="small" style="margin:0;">
+        PWM recycling certificates &nbsp;·&nbsp; Category-wise processing records &nbsp;·&nbsp;
+        Quarterly reconciliation against EPR targets
+      </p>
+    </div>
+
+    <div class="rule" style="margin:7mm 0 5mm;"></div>
+
+    <h4 style="margin-bottom:3mm;">Output specification</h4>
+    <div class="g3">
+      <div><span style="font-family:var(--font-data); font-size:6.6pt; font-weight:700; letter-spacing:.12em; color:var(--a600);">GRANULATE</span>
+        <p class="small" style="font-size:8.2pt; margin-top:1.6mm;">Washed, dried and size-graded pellets, dispatched batch-wise against a test report.</p></div>
+      <div><span style="font-family:var(--font-data); font-size:6.6pt; font-weight:700; letter-spacing:.12em; color:var(--a600);">AGGLOMERATE</span>
+        <p class="small" style="font-size:8.2pt; margin-top:1.6mm;">Densified film waste, suitable for re-extrusion into secondary film and moulded goods.</p></div>
+      <div><span style="font-family:var(--font-data); font-size:6.6pt; font-weight:700; letter-spacing:.12em; color:var(--a600);">TRACEABILITY</span>
+        <p class="small" style="font-size:8.2pt; margin-top:1.6mm;">Every batch carries a lot number tying output back to the inbound consignment and its manifest.</p></div>
+    </div>
+  </div>
+  <div class="foot"><span>Service 02 — Plastic Waste Management</span><span class="n">07</span></div>
+</section>
+
+
+<!-- ══ 08 · EPR ═════════════════════════════════════════════════════ -->
+<section class="page">
+  <div class="body">
+    <div class="eyebrow">Service 03</div>
+    <h2>Extended Producer<br><em>Responsibility</em></h2>
+    <p style="font-family:var(--font-heading); font-size:11.5pt; font-weight:500; color:var(--p600);
+              letter-spacing:-.012em; margin:3mm 0 5mm;">The compliance is mandatory. The complexity doesn't have to be yours.</p>
+
+    <p class="lead" style="max-width:145mm; margin-bottom:7mm;">
+      If you manufacture, import or brand a product that eventually becomes electronic, plastic or battery
+      waste, EPR obligations apply to you — and the filing requirements have only tightened. We act as your
+      compliance partner end to end.
+    </p>
+
+    <div class="g2u" style="gap:9mm; align-items:start;">
+      <div>
+        <div class="figure" style="height:52mm; margin-bottom:5mm;">
+          <img src="assets/img/epr.jpg" alt="">
+        </div>
+        <h4 style="margin-bottom:2.6mm;">Who this is for</h4>
+        <div class="chips">
+          <span class="chip">Producers</span>
+          <span class="chip">Manufacturers</span>
+          <span class="chip">Importers</span>
+          <span class="chip">Brand owners</span>
+          <span class="chip">E-commerce sellers</span>
+          <span class="chip">Refurbishers</span>
+          <span class="chip">Bulk consumers</span>
+        </div>
+      </div>
+      <div>
+        <h4 style="margin-bottom:2.6mm;">Scope of engagement</h4>
+        <div class="rows">
+          <div class="row" style="padding:2.4mm 0;"><span class="k" style="flex:0 0 8mm; font-size:9pt;">01</span><span class="v">Applicability assessment and category determination</span></div>
+          <div class="row" style="padding:2.4mm 0;"><span class="k" style="flex:0 0 8mm; font-size:9pt;">02</span><span class="v">CPCB EPR registration and portal onboarding</span></div>
+          <div class="row" style="padding:2.4mm 0;"><span class="k" style="flex:0 0 8mm; font-size:9pt;">03</span><span class="v">Annual target computation from placement-on-market data</span></div>
+          <div class="row" style="padding:2.4mm 0;"><span class="k" style="flex:0 0 8mm; font-size:9pt;">04</span><span class="v">Collection channel design and authorised partner mapping</span></div>
+          <div class="row" style="padding:2.4mm 0;"><span class="k" style="flex:0 0 8mm; font-size:9pt;">05</span><span class="v">Physical collection execution against targets</span></div>
+          <div class="row" style="padding:2.4mm 0;"><span class="k" style="flex:0 0 8mm; font-size:9pt;">06</span><span class="v">Quarterly and annual return filing</span></div>
+          <div class="row" style="padding:2.4mm 0;"><span class="k" style="flex:0 0 8mm; font-size:9pt;">07</span><span class="v">EPR certificate procurement and reconciliation</span></div>
+          <div class="row" style="padding:2.4mm 0;"><span class="k" style="flex:0 0 8mm; font-size:9pt;">08</span><span class="v">Audit support and query response handling</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div style="margin-top:7mm; background:var(--g50); border-left:2.4mm solid var(--g500); padding:5mm 6mm;">
+      <p class="small" style="margin:0; color:var(--g900);">
+        <strong style="color:var(--g900);">Filing deadlines are not negotiable.</strong>
+        Quarterly returns and annual reconciliation carry penalties for late or unsupported submission.
+        We track your calendar and file against evidence we have physically collected.
+      </p>
+    </div>
+
+    <div class="rule" style="margin:7mm 0 5mm;"></div>
+
+    <div class="g2u" style="gap:9mm;">
+      <div>
+        <h4 style="margin-bottom:2.6mm;">Your compliance calendar</h4>
+        <div class="rows">
+          <div class="row" style="padding:2.2mm 0;"><span class="k" style="flex:0 0 18mm; font-size:8.4pt;">Q1–Q4</span><span class="v">Quarterly return filing against collected and certified tonnage</span></div>
+          <div class="row" style="padding:2.2mm 0;"><span class="k" style="flex:0 0 18mm; font-size:8.4pt;">Annual</span><span class="v">Target reconciliation and annual return submission</span></div>
+          <div class="row" style="padding:2.2mm 0;"><span class="k" style="flex:0 0 18mm; font-size:8.4pt;">Ongoing</span><span class="v">Certificate procurement, portal queries and audit response</span></div>
+        </div>
+      </div>
+      <div>
+        <h4 style="margin-bottom:2.6mm;">What you receive</h4>
+        <p class="small">
+          A single compliance file per financial year — registration certificate, category-wise target
+          computation, collection evidence with manifests and weighment records, procured EPR certificates,
+          filed returns with acknowledgement numbers, and a reconciliation statement showing target against
+          achievement. Everything an auditor asks for, in the order they ask for it.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Service 03 — Extended Producer Responsibility</span><span class="n">08</span></div>
+</section>
+
+
+<!-- ══ 09 · DATA DESTRUCTION ════════════════════════════════════════ -->
+<section class="page tint">
+  <div class="body">
+    <div class="eyebrow">Service 04</div>
+    <h2>Secure Data<br><em>Destruction</em></h2>
+    <p style="font-family:var(--font-heading); font-size:11.5pt; font-weight:500; color:var(--p600);
+              letter-spacing:-.012em; margin:3mm 0 5mm;">Retired hardware carries live risk. We remove both.</p>
+
+    <p class="lead" style="max-width:145mm; margin-bottom:6mm;">
+      Formatting is not erasure. Any decommissioned drive that leaves your premises with recoverable data
+      is a breach waiting to be discovered — and under the DPDP Act, an expensive one.
+    </p>
+
+    <div class="figure" style="height:44mm; margin-bottom:6mm;">
+      <img src="assets/img/data.jpg" alt="">
+    </div>
+
+    <h4 style="margin-bottom:3.5mm;">Options available</h4>
+    <div class="g2" style="gap:5mm; margin-bottom:6mm;">
+      <div class="card"><span class="num">ONSITE</span><h4>At your premises</h4><p>Our team performs sanitisation or physical destruction on site, witnessed by your IT or security officer.</p></div>
+      <div class="card"><span class="num">OFFSITE</span><h4>Sealed transport</h4><p>Tamper-evident transport to our dedicated destruction room, with client-witnessed or CCTV-recorded processing.</p></div>
+      <div class="card"><span class="num">SOFTWARE</span><h4>Sanitisation</h4><p>Multi-pass overwriting to recognised wiping standards, with per-device logs.</p></div>
+      <div class="card"><span class="num">PHYSICAL</span><h4>Destruction</h4><p>Degaussing, drilling, crushing or shredding of drives and media.</p></div>
+    </div>
+
+    <div class="g2u" style="gap:9mm;">
+      <div>
+        <h4 style="margin-bottom:2.6mm;">Media covered</h4>
+        <div class="chips">
+          <span class="chip">HDDs</span><span class="chip">SSDs</span><span class="chip">Magnetic tapes</span>
+          <span class="chip">Optical media</span><span class="chip">USB drives</span><span class="chip">Memory cards</span>
+          <span class="chip">Mobile devices</span><span class="chip">Servers &amp; NAS</span>
+        </div>
+      </div>
+      <div style="background:var(--s0); border:.4pt solid var(--s200); border-left:2.4mm solid var(--p700); padding:4.5mm 5.5mm;">
+        <h4 style="margin-bottom:2.2mm;">Deliverables</h4>
+        <p class="small" style="margin:0;">
+          Serial-wise Certificate of Data Destruction &nbsp;·&nbsp; Video or photographic evidence on request
+          &nbsp;·&nbsp; Chain-of-custody documentation
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Service 04 — Secure Data Destruction</span><span class="n">09</span></div>
+</section>
+
+
+<!-- ══ 10 · BATTERY / SOLAR + REVERSE LOGISTICS ═════════════════════ -->
+<section class="page">
+  <div class="body">
+    <div class="eyebrow">Services 05 &amp; 06</div>
+    <h2>The Energy Transition Creates<br>Its Own <em>Waste Stream</em></h2>
+
+    <div class="g2u" style="gap:9mm; margin:6mm 0 7mm; align-items:start;">
+      <div class="figure" style="height:58mm;">
+        <img src="assets/img/solar.jpg" alt="">
+      </div>
+      <div>
+        <h3 style="font-size:11.5pt;">Battery &amp; Solar Panel Recycling</h3>
+        <p class="small" style="margin-bottom:3.5mm;">
+          <strong>Battery waste</strong> — lithium-ion (EV, laptop, handset, energy storage), lead-acid
+          (automotive, inverter, UPS), nickel-cadmium and other industrial chemistries. Handled with
+          dedicated discharge, storage and segregation protocols under the Battery Waste Management
+          Rules, <span class="ph">2022</span>.
+        </p>
+        <p class="small" style="margin:0;">
+          <strong>Solar module waste</strong> — end-of-life and damaged photovoltaic panels, dismantled for
+          aluminium frame, glass, junction box and cell recovery, with residues channelled to authorised
+          processors.
+        </p>
+        <div class="chips" style="margin-top:3.5mm;">
+          <span class="chip">Li-ion</span><span class="chip">Lead-acid</span><span class="chip">Ni-Cd</span>
+          <span class="chip">EV packs</span><span class="chip">UPS &amp; inverter</span><span class="chip">PV modules</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="rule" style="margin:0 0 7mm;"></div>
+
+    <div class="g2u" style="gap:9mm; align-items:start;">
+      <div>
+        <h3 style="font-size:11.5pt;">Reverse Logistics &amp; Asset Buyback</h3>
+        <p style="font-family:var(--font-heading); font-size:10pt; font-weight:500; color:var(--p600);
+                  letter-spacing:-.01em; margin-bottom:3mm;">Multi-site collection, single reconciliation.</p>
+        <p class="small">
+          For organisations decommissioning across several locations, the hard part isn't recycling — it's
+          coordination. We manage collection scheduling, packaging, transport documentation and consolidated
+          reporting so you close the cycle with one set of numbers.
+        </p>
+      </div>
+      <div>
+        <ul class="ticks">
+          <li>PAN-India collection through owned and partner networks</li>
+          <li>Bulk decommissioning and refresh-cycle support</li>
+          <li>Transparent scrap valuation with recovery-basis breakup</li>
+          <li>Buyback against functional and non-functional assets</li>
+          <li>Consolidated multi-site reporting and single-point invoicing</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="figure" style="height:66mm; margin-top:7mm;">
+      <img src="assets/img/logistics.jpg" alt="">
+    </div>
+    <p class="small" style="margin-top:2.5mm; font-family:var(--font-data); font-size:6.6pt;
+       letter-spacing:.10em; text-transform:uppercase; color:var(--s400);">
+      GPS-tracked collection fleet — <span class="ph">XX</span> vehicles
+    </p>
+  </div>
+  <div class="foot"><span>Services 05 &amp; 06 — Battery, Solar &amp; Reverse Logistics</span><span class="n">10</span></div>
+</section>
+
+
+<!-- ══ 11 · OUR PROCESS ═════════════════════════════════════════════ -->
+<section class="page dark">
+  <div class="body">
+    <div class="eyebrow">05 &nbsp;/&nbsp; Our Process</div>
+    <h2>Gate to <em>Certificate</em></h2>
+
+    <p class="lead" style="max-width:130mm; margin:5mm 0 9mm;">
+      Five stages, each with its own record. The documentation isn't produced at the end — it accumulates
+      as the consignment moves.
+    </p>
+
+    <div style="display:grid; grid-template-columns:repeat(5,1fr); gap:0; margin-bottom:10mm;">
+      <div style="border-top:1.6pt solid var(--a500); padding:4mm 4mm 0 0; display:flex; flex-direction:column;">
+        <span style="font-family:var(--font-data); font-size:17pt; font-weight:700; color:var(--a400); letter-spacing:-.02em; display:block; margin-bottom:3mm;">01</span>
+        <h4 style="font-size:9.8pt; margin-bottom:2.2mm;">Assess</h4>
+        <p class="small" style="font-size:7.8pt; line-height:1.45; margin-bottom:3.5mm; flex:1;">We audit your waste stream, categorise it under the applicable rules, and quote against actual recoverable value.</p>
+        <span style="font-family:var(--font-data); font-size:5.9pt; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:rgba(255,255,255,.40); display:block; margin-bottom:1.4mm;">Record produced</span>
+        <p class="small" style="font-size:7.2pt; line-height:1.42; color:rgba(255,255,255,.62); margin:0;">Waste audit report · Category sheet · Recovery-based quotation</p>
+      </div>
+      <div style="border-top:1.6pt solid var(--a500); padding:4mm 4mm 0 0; display:flex; flex-direction:column;">
+        <span style="font-family:var(--font-data); font-size:17pt; font-weight:700; color:var(--a400); letter-spacing:-.02em; display:block; margin-bottom:3mm;">02</span>
+        <h4 style="font-size:9.8pt; margin-bottom:2.2mm;">Collect</h4>
+        <p class="small" style="font-size:7.8pt; line-height:1.45; margin-bottom:3.5mm; flex:1;">Sealed, GPS-tracked transport under a valid manifest. Weighment recorded at pickup and at gate entry.</p>
+        <span style="font-family:var(--font-data); font-size:5.9pt; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:rgba(255,255,255,.40); display:block; margin-bottom:1.4mm;">Record produced</span>
+        <p class="small" style="font-size:7.2pt; line-height:1.42; color:rgba(255,255,255,.62); margin:0;">Movement manifest · Pickup weighment slip · Transport log</p>
+      </div>
+      <div style="border-top:1.6pt solid var(--a500); padding:4mm 4mm 0 0; display:flex; flex-direction:column;">
+        <span style="font-family:var(--font-data); font-size:17pt; font-weight:700; color:var(--a400); letter-spacing:-.02em; display:block; margin-bottom:3mm;">03</span>
+        <h4 style="font-size:9.8pt; margin-bottom:2.2mm;">Sort &amp; Dismantle</h4>
+        <p class="small" style="font-size:7.8pt; line-height:1.45; margin-bottom:3.5mm; flex:1;">Manual de-manufacturing followed by mechanical segregation into ferrous, non-ferrous, plastics, glass, PCB and hazardous fractions.</p>
+        <span style="font-family:var(--font-data); font-size:5.9pt; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:rgba(255,255,255,.40); display:block; margin-bottom:1.4mm;">Record produced</span>
+        <p class="small" style="font-size:7.2pt; line-height:1.42; color:rgba(255,255,255,.62); margin:0;">Gate-entry weighbridge slip · Serial-wise teardown list · Photographic record</p>
+      </div>
+      <div style="border-top:1.6pt solid var(--a500); padding:4mm 4mm 0 0; display:flex; flex-direction:column;">
+        <span style="font-family:var(--font-data); font-size:17pt; font-weight:700; color:var(--a400); letter-spacing:-.02em; display:block; margin-bottom:3mm;">04</span>
+        <h4 style="font-size:9.8pt; margin-bottom:2.2mm;">Recover</h4>
+        <p class="small" style="font-size:7.8pt; line-height:1.45; margin-bottom:3.5mm; flex:1;">Shredding, density separation and metal recovery lines return clean secondary raw material to industry.</p>
+        <span style="font-family:var(--font-data); font-size:5.9pt; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:rgba(255,255,255,.40); display:block; margin-bottom:1.4mm;">Record produced</span>
+        <p class="small" style="font-size:7.2pt; line-height:1.42; color:rgba(255,255,255,.62); margin:0;">Fraction-wise yield record · Downstream channelling documents</p>
+      </div>
+      <div style="border-top:1.6pt solid var(--a500); padding:4mm 0 0 0; display:flex; flex-direction:column;">
+        <span style="font-family:var(--font-data); font-size:17pt; font-weight:700; color:var(--a400); letter-spacing:-.02em; display:block; margin-bottom:3mm;">05</span>
+        <h4 style="font-size:9.8pt; margin-bottom:2.2mm;">Certify</h4>
+        <p class="small" style="font-size:7.8pt; line-height:1.45; margin-bottom:3.5mm; flex:1;">Certificate of Recycling, Certificate of Data Destruction where applicable, and quarterly EPR filing support.</p>
+        <span style="font-family:var(--font-data); font-size:5.9pt; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:rgba(255,255,255,.40); display:block; margin-bottom:1.4mm;">Record produced</span>
+        <p class="small" style="font-size:7.2pt; line-height:1.42; color:rgba(255,255,255,.62); margin:0;">Certificate of Recycling · Certificate of Data Destruction · Form-wise records</p>
+      </div>
+    </div>
+
+    <div class="rule" style="margin-bottom:7mm;"></div>
+
+    <div class="eyebrow">Why Advait Green</div>
+    <div class="g2" style="gap:6mm 9mm;">
+      <div><h4 style="font-size:9.4pt; margin-bottom:1.4mm;">Fully authorised</h4><p class="small" style="font-size:8.2pt;">Every consignment moves and is treated under valid CPCB/SPCB authorisation, so your liability actually transfers.</p></div>
+      <div><h4 style="font-size:9.4pt; margin-bottom:1.4mm;">Zero landfill commitment</h4><p class="small" style="font-size:8.2pt;">Our target is complete diversion of processed material from landfill.</p></div>
+      <div><h4 style="font-size:9.4pt; margin-bottom:1.4mm;">Audit-ready documentation</h4><p class="small" style="font-size:8.2pt;">Manifests, weighbridge slips, destruction certificates and Form-wise records, issued as standard, not on request.</p></div>
+      <div><h4 style="font-size:9.4pt; margin-bottom:1.4mm;">Data security by default</h4><p class="small" style="font-size:8.2pt;">Chain-of-custody sealing and witnessed destruction available for regulated industries.</p></div>
+      <div><h4 style="font-size:9.4pt; margin-bottom:1.4mm;">Transparent valuation</h4><p class="small" style="font-size:8.2pt;">You see the recovery basis behind every buyback number we quote.</p></div>
+      <div><h4 style="font-size:9.4pt; margin-bottom:1.4mm;">Single accountable partner</h4><p class="small" style="font-size:8.2pt;">E-waste, plastic, battery and compliance handled by one team.</p></div>
+    </div>
+
+    <div class="rule" style="margin:8mm 0 6mm;"></div>
+
+    <div class="g2" style="gap:9mm;">
+      <div style="border-left:1.2pt solid var(--a500); padding-left:5mm;">
+        <p style="font-family:var(--font-heading); font-size:10.4pt; font-weight:500; line-height:1.42;
+                  letter-spacing:-.012em; color:#fff; margin-bottom:3mm;">
+          “Advait handled the decommissioning of <span class="ph">XXX</span> machines across three of our
+          sites without a single documentation gap. The certificates were with us before the invoice was.”
+        </p>
+        <p style="font-family:var(--font-data); font-size:6.6pt; letter-spacing:.11em; text-transform:uppercase;
+                  color:rgba(255,255,255,.46); margin:0;"><span class="ph">Name, Designation, Company</span></p>
+      </div>
+      <div style="border-left:1.2pt solid var(--a500); padding-left:5mm;">
+        <p style="font-family:var(--font-heading); font-size:10.4pt; font-weight:500; line-height:1.42;
+                  letter-spacing:-.012em; color:#fff; margin-bottom:3mm;">
+          “We came to them for EPR filing and stayed for the whole waste programme. They understand the
+          rules better than most consultants we've worked with.”
+        </p>
+        <p style="font-family:var(--font-data); font-size:6.6pt; letter-spacing:.11em; text-transform:uppercase;
+                  color:rgba(255,255,255,.46); margin:0;"><span class="ph">Name, Designation, Company</span></p>
+      </div>
+    </div>
+  </div>
+  <div class="foot"><span>Our Process</span><span class="n">11</span></div>
+</section>
+
+
+<!-- ══ 12 · INFRASTRUCTURE ══════════════════════════════════════════ -->
+<section class="page">
+  <div class="body">
+    <div class="eyebrow">06 &nbsp;/&nbsp; Infrastructure &amp; Capability</div>
+    <h2>Engineered for Recovery,<br>Not Just <em>Disposal</em></h2>
+
+    <p class="lead" style="max-width:145mm; margin:5mm 0 7mm;">
+      Our facility is built as a series of connected recovery stages rather than a single shredding
+      operation — because different fractions need different treatment to retain their value.
+    </p>
+
+    <div class="g2" style="gap:5mm; margin-bottom:6mm;">
+      <div class="card accent">
+        <span class="num">LINE 01</span>
+        <h4>E-Waste Line</h4>
+        <p>Manual de-manufacturing bays · Primary shredder · Magnetic and eddy-current separation ·
+           Density-based sorting · PCB segregation and storage</p>
+        <p style="margin-top:2.4mm; font-family:var(--font-data); font-size:7.4pt; color:var(--p700); font-weight:500;">
+          Capacity <span class="ph">XXX</span> MT/Month</p>
+      </div>
+      <div class="card accent">
+        <span class="num">LINE 02</span>
+        <h4>Plastic Line</h4>
+        <p>Sorting conveyor · Washing and drying unit · Granulator and agglomerator ·
+           Batch-wise quality testing</p>
+        <p style="margin-top:2.4mm; font-family:var(--font-data); font-size:7.4pt; color:var(--p700); font-weight:500;">
+          Capacity <span class="ph">XXX</span> MT/Month</p>
+      </div>
+      <div class="card accent">
+        <span class="num">LINE 03</span>
+        <h4>Battery &amp; Solar</h4>
+        <p>Dedicated segregated storage · Discharge and dismantling area · Onward channelling to
+           authorised downstream processors</p>
+        <p style="margin-top:2.4mm; font-family:var(--font-data); font-size:7.4pt; color:var(--p700); font-weight:500;">
+          Capacity <span class="ph">XX</span> MT/Month</p>
+      </div>
+      <div class="card">
+        <span class="num" style="color:var(--p600);">SUPPORT</span>
+        <h4>Support Infrastructure</h4>
+        <p>Electronic weighbridge · CCTV-covered material movement · Bonded and hazardous storage zones ·
+           Dedicated data destruction room · Effluent and air pollution control systems ·
+           Fleet of <span class="ph">XX</span> GPS-tracked collection vehicles</p>
+      </div>
+    </div>
+
+    <div class="figure" style="height:54mm; margin-bottom:6mm;">
+      <img src="assets/img/facility.jpg" alt="">
+    </div>
+
+    <div class="eyebrow plain" style="margin-bottom:3mm;">Our People</div>
+    <p class="small">
+      Behind every tonne processed is a team of <span class="ph">XXX</span> people — dismantlers, line
+      operators, drivers, compliance officers and coordinators. We invest in them because manual
+      de-manufacturing is skilled work, and skilled work deserves training, protective equipment,
+      health checks and a career path.
+    </p>
+  </div>
+  <div class="foot"><span>Infrastructure &amp; Capability</span><span class="n">12</span></div>
+</section>
+
+
+<!-- ══ 13 · CREDENTIALS, IMPACT, SECTORS ════════════════════════════ -->
+<section class="page tint">
+  <div class="body">
+    <div class="eyebrow">07 &nbsp;/&nbsp; Credentials &amp; Impact</div>
+    <h2>Authorisations, on the <em>Record</em></h2>
+
+    <table style="margin:6mm 0 8mm;">
+      <thead>
+        <tr><th style="width:52%;">Certification / Authorisation</th><th style="width:26%;">Reference</th><th style="width:22%;">Validity</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>CPCB EPR Registration</td><td class="ref"><span class="ph">No.</span></td><td class="ref"><span class="ph">Date</span></td></tr>
+        <tr><td>GPCB Consent to Operate</td><td class="ref"><span class="ph">No.</span></td><td class="ref"><span class="ph">Date</span></td></tr>
+        <tr><td>E-Waste (Management) Rules Authorisation</td><td class="ref"><span class="ph">No.</span></td><td class="ref"><span class="ph">Date</span></td></tr>
+        <tr><td>Plastic Waste Management Authorisation</td><td class="ref"><span class="ph">No.</span></td><td class="ref"><span class="ph">Date</span></td></tr>
+        <tr><td>Battery Waste Management Registration</td><td class="ref"><span class="ph">No.</span></td><td class="ref"><span class="ph">Date</span></td></tr>
+        <tr><td>ISO 9001:2015 — Quality Management</td><td class="ref"><span class="ph">No.</span></td><td class="ref"><span class="ph">Date</span></td></tr>
+        <tr><td>ISO 14001:2015 — Environmental Management</td><td class="ref"><span class="ph">No.</span></td><td class="ref"><span class="ph">Date</span></td></tr>
+        <tr><td>ISO 45001:2018 — Occupational Health &amp; Safety</td><td class="ref"><span class="ph">No.</span></td><td class="ref"><span class="ph">Date</span></td></tr>
+        <tr><td>GST / CIN</td><td class="ref"><span class="ph">No.</span></td><td class="ref">—</td></tr>
+      </tbody>
+    </table>
+
+    <div class="eyebrow">Our Impact</div>
+    <div class="stats" style="margin-bottom:2.5mm;">
+      <div class="stat"><span class="fig"><span class="ph">XXX</span></span><span class="lab">MT e-waste processed annually</span></div>
+      <div class="stat"><span class="fig"><span class="ph">XXX</span></span><span class="lab">MT plastic recycled monthly</span></div>
+      <div class="stat"><span class="fig"><span class="ph">X,XXX</span></span><span class="lab">kg material recovered daily</span></div>
+      <div class="stat"><span class="fig"><span class="ph">XX</span>%</span><span class="lab">waste diverted from landfill</span></div>
+    </div>
+    <div class="stats" style="margin-bottom:3mm;">
+      <div class="stat"><span class="fig"><span class="ph">XXX</span>+</span><span class="lab">corporate clients served</span></div>
+      <div class="stat"><span class="fig"><span class="ph">XX</span></span><span class="lab">districts covered</span></div>
+      <div class="stat"><span class="fig"><span class="ph">XXX</span></span><span class="lab">team members</span></div>
+      <div class="stat"><span class="fig"><span class="ph">X,XXX</span></span><span class="lab">tonnes CO₂e emissions avoided</span></div>
+    </div>
+    <p class="small" style="font-family:var(--font-data); font-size:6.6pt; letter-spacing:.08em;
+       text-transform:uppercase; color:var(--s400); margin-bottom:8mm;">
+      Numbers verified for FY <span class="ph">2025–26</span>
+    </p>
+
+    <div class="eyebrow">Sectors We Serve</div>
+    <div class="chips">
+      <span class="chip">IT &amp; ITES</span><span class="chip">Banking &amp; Financial Services</span>
+      <span class="chip">Manufacturing &amp; Automotive</span><span class="chip">Pharmaceuticals &amp; Healthcare</span>
+      <span class="chip">Telecom &amp; Data Centres</span><span class="chip">Educational Institutions</span>
+      <span class="chip">Government &amp; PSUs</span><span class="chip">Retail &amp; E-Commerce</span>
+      <span class="chip">Real Estate &amp; Facility Management</span><span class="chip">Textiles</span>
+    </div>
+  </div>
+  <div class="foot"><span>Credentials &amp; Impact</span><span class="n">13</span></div>
+</section>
+
+
+<!-- ══ 14 · CSR + CONTACT / BACK COVER ══════════════════════════════ -->
+<section class="page dark" style="padding:0;">
+  <div style="position:absolute; top:0; left:0; width:2.2mm; height:100%;
+              background:linear-gradient(180deg,var(--a500) 0%,var(--p500) 62%,var(--p900) 100%);"></div>
+
+  <div style="position:absolute; inset:var(--pad) var(--pad) 14mm calc(var(--pad) + 4mm);">
+    <div class="eyebrow">08 &nbsp;/&nbsp; Community &amp; Contact</div>
+
+    <h2 style="font-size:20pt;">Beyond the <em>Gate</em></h2>
+    <div class="g2" style="gap:4mm 8mm; margin:5mm 0 8mm;">
+      <div><h4 style="font-size:9.4pt; margin-bottom:1.4mm;">Awareness drives</h4><p class="small" style="font-size:8.2pt;">At schools, colleges and residential societies on household e-waste segregation.</p></div>
+      <div><h4 style="font-size:9.4pt; margin-bottom:1.4mm;">Collection camps</h4><p class="small" style="font-size:8.2pt;">With corporate partners, RWAs and municipal bodies.</p></div>
+      <div><h4 style="font-size:9.4pt; margin-bottom:1.4mm;">Skill training</h4><p class="small" style="font-size:8.2pt;">For informal sector workers transitioning into formal recycling roles.</p></div>
+      <div><h4 style="font-size:9.4pt; margin-bottom:1.4mm;">Facility greening</h4><p class="small" style="font-size:8.2pt;">Tree plantation and green cover at <span class="ph">Location</span>.</p></div>
+    </div>
+
+    <div class="rule" style="margin:0 0 7mm;"></div>
+
+    <h2 style="font-size:20pt; margin-bottom:3mm;">Want to See How<br>It Actually <em>Works?</em></h2>
+    <p class="lead" style="max-width:118mm; margin-bottom:8mm;">
+      We welcome client and institutional visits. Book a walkthrough and follow a consignment from
+      gate to granulate. Or tell us what you have and where it is — we'll come back within one working
+      day with a collection plan and an indicative valuation.
+    </p>
+
+    <div class="rows" style="border-top-color:rgba(255,255,255,.20);">
+      <div class="row" style="padding:3mm 0;">
+        <span class="k" style="flex:0 0 34mm; font-size:8pt; font-family:var(--font-data); font-weight:500; letter-spacing:.10em; text-transform:uppercase; color:rgba(255,255,255,.50);">Toll Free</span>
+        <span class="v" style="font-family:var(--font-data); font-size:9.6pt; color:#fff;"><span class="ph">1800 XXX XXXX</span></span>
+      </div>
+      <div class="row" style="padding:3mm 0;">
+        <span class="k" style="flex:0 0 34mm; font-size:8pt; font-family:var(--font-data); font-weight:500; letter-spacing:.10em; text-transform:uppercase; color:rgba(255,255,255,.50);">E-Waste Desk</span>
+        <span class="v" style="font-family:var(--font-data); font-size:9.6pt; color:#fff;"><span class="ph">+91 XXXXX XXXXX</span></span>
+      </div>
+      <div class="row" style="padding:3mm 0;">
+        <span class="k" style="flex:0 0 34mm; font-size:8pt; font-family:var(--font-data); font-weight:500; letter-spacing:.10em; text-transform:uppercase; color:rgba(255,255,255,.50);">Plastic Desk</span>
+        <span class="v" style="font-family:var(--font-data); font-size:9.6pt; color:#fff;"><span class="ph">+91 XXXXX XXXXX</span></span>
+      </div>
+      <div class="row" style="padding:3mm 0;">
+        <span class="k" style="flex:0 0 34mm; font-size:8pt; font-family:var(--font-data); font-weight:500; letter-spacing:.10em; text-transform:uppercase; color:rgba(255,255,255,.50);">Email</span>
+        <span class="v" style="font-family:var(--font-data); font-size:9.6pt; color:#fff;">info@<span class="ph">advaitgreen.com</span></span>
+      </div>
+      <div class="row" style="padding:3mm 0;">
+        <span class="k" style="flex:0 0 34mm; font-size:8pt; font-family:var(--font-data); font-weight:500; letter-spacing:.10em; text-transform:uppercase; color:rgba(255,255,255,.50);">Corporate Office</span>
+        <span class="v" style="color:rgba(255,255,255,.86);"><span class="ph">Address, City, Gujarat – PIN</span></span>
+      </div>
+      <div class="row" style="padding:3mm 0;">
+        <span class="k" style="flex:0 0 34mm; font-size:8pt; font-family:var(--font-data); font-weight:500; letter-spacing:.10em; text-transform:uppercase; color:rgba(255,255,255,.50);">Recycling Facility</span>
+        <span class="v" style="color:rgba(255,255,255,.86);"><span class="ph">Survey No., Village, Taluka, District, Gujarat</span></span>
+      </div>
+      <div class="row" style="padding:3mm 0;">
+        <span class="k" style="flex:0 0 34mm; font-size:8pt; font-family:var(--font-data); font-weight:500; letter-spacing:.10em; text-transform:uppercase; color:rgba(255,255,255,.50);">Web</span>
+        <span class="v" style="font-family:var(--font-data); font-size:9.6pt; color:#fff;">www.<span class="ph">advaitgreen.com</span></span>
+      </div>
+    </div>
+
+    <div style="position:absolute; left:0; right:0; bottom:0;
+                display:flex; justify-content:space-between; align-items:flex-end;">
+      <div>
+        <img src="assets/img/logo-full.png" alt="Advait Green Recycling"
+             style="width:40mm; filter:brightness(0) invert(1); opacity:.95; margin-bottom:4mm;">
+        <p style="font-family:var(--font-data); font-size:6.4pt; letter-spacing:.10em;
+                  text-transform:uppercase; color:rgba(255,255,255,.42); margin:0;">
+          © <span class="ph">2026</span> Advait Green Recycling Private Limited
+        </p>
+      </div>
+      <p style="font-family:var(--font-heading); font-size:11pt; font-weight:600; letter-spacing:-.015em;
+                color:var(--a400); text-align:right; margin:0; line-height:1.3;">
+        Recycle Today.<br>Rebuild Tomorrow.
+      </p>
+    </div>
+  </div>
+</section>
+
+</body>
+</html>
