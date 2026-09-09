@@ -100,7 +100,10 @@ export default function Footer() {
               </li>
               <li className="flex items-start gap-2.5">
                 <MapPin size={14} className="mt-0.5 shrink-0" style={{ color: "var(--color-accent-600)" }} />
-                <span className="text-xs leading-relaxed" style={{ color: "var(--color-secondary-600)" }}>{companyInfo.address.corporate}</span>
+                <div>
+                  <p className="font-mono text-[10px] uppercase tracking-[0.09em]" style={{ color: "var(--color-secondary-500)" }}>Registered Office</p>
+                  <span className="text-xs leading-relaxed" style={{ color: "var(--color-secondary-600)" }}>{companyInfo.address.corporate}</span>
+                </div>
               </li>
             </ul>
           </div>

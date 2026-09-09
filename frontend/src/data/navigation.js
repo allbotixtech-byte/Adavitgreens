@@ -24,13 +24,13 @@ export const companyInfo = {
   legalName: "ADVAIT GREEN RECYCLING PRIVATE LIMITED",
   tagline: "Responsible Recycling. Measurable Impact.",
   constitution: "Private Limited Company",
-  tollFree: "1800 XXX XXXX",
-  phoneEWaste: "+91 XXXXX XXXXX",
-  phonePlastic: "+91 XXXXX XXXXX",
+  tollFree: "+91 90163 33760",
+  phoneEWaste: "+91 90163 33760",
+  phonePlastic: "+91 90163 33760",
   email: "info@advaitgreen.com",
   address: {
-    corporate: "No. 2016 B/2, Vamaj Road, Vamaj, Mahesana, Gujarat – 382728",
-    facility: "No. 2016 B/2, Vamaj Road, Vamaj, Mahesana, Gujarat – 382728",
+    corporate: "No. 2016 (New Survey No. 2103)/B/2, Vamaj Road, Vamaj, Mahesana, Gujarat – 382728",
+    facility: "No. 2016 (New Survey No. 2103)/B/2, Vamaj Road, Vamaj, Mahesana, Gujarat – 382728",
   },
   social: {
     facebook: "#",
