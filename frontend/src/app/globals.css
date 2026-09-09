@@ -6,7 +6,7 @@
   --font-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-data: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
-  /* ---- Primary (Deep Teal) - headings, navbar, structure ---- */
+  /* ---- Primary (Deep Teal) ---- */
   --color-primary-50: #E8F4F9;
   --color-primary-100: #C8E5F2;
   --color-primary-200: #94CEE5;
@@ -19,7 +19,7 @@
   --color-primary-900: #01283E;
   --color-primary-950: #001A2B;
 
-  /* ---- Secondary (Neutral) - backgrounds, borders, muted text ---- */
+  /* ---- Secondary (Neutral) ---- */
   --color-secondary-0: #FFFFFF;
   --color-secondary-25: #FAFCFC;
   --color-secondary-50: #F4F7F8;
@@ -34,7 +34,7 @@
   --color-secondary-900: #1E2529;
   --color-secondary-950: #12191C;
 
-  /* ---- Accent (Green) - CTA buttons, highlights ---- */
+  /* ---- Accent (Green) ---- */
   --color-accent-50: #EDFCE5;
   --color-accent-100: #D5F8C5;
   --color-accent-200: #AEF192;
@@ -47,7 +47,7 @@
   --color-accent-900: #0B5200;
   --color-accent-950: #073500;
 
-  /* ---- Signal (Amber) ---- */
+  /* ---- Signal (Regulatory Amber) ---- */
   --color-signal-50: #FDF6E7;
   --color-signal-100: #FAEAC4;
   --color-signal-300: #F3C766;
@@ -68,7 +68,7 @@
   --shadow-button-hover: 0 1px 3px rgba(1, 63, 93, 0.06), 0 6px 16px rgba(1, 63, 93, 0.07);
   --shadow-header: 0 1px 0 rgba(1, 63, 93, 0.07);
 
-  /* ---- Animations ---- */
+  /* ---- Custom Animations ---- */
   --animate-fade-in: fade-in 0.3s ease-out;
   --animate-slide-in-from-top: slide-in-from-top 0.3s ease-out;
 }

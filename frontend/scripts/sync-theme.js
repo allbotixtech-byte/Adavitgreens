@@ -26,9 +26,9 @@ function buildThemeBlock() {
   lines.push("");
 
   const colorMap = [
-    { source: "pcb", target: "primary", label: "Primary (PCB / Solder-mask Green)" },
-    { source: "aluminium", target: "secondary", label: "Secondary (Aluminium / Neutrals)" },
-    { source: "copper", target: "accent", label: "Accent (Copper)" },
+    { source: "pcb", target: "primary", label: "Primary (Deep Teal)" },
+    { source: "aluminium", target: "secondary", label: "Secondary (Neutral)" },
+    { source: "copper", target: "accent", label: "Accent (Green)" },
     { source: "signal", target: "signal", label: "Signal (Regulatory Amber)" },
   ];
 

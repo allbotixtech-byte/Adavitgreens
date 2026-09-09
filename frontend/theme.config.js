@@ -30,61 +30,59 @@
 
 const palette = {
   /**
-   * PCB - primary. Solder-mask green: deeper and cooler than the usual
-   * "leaf green" every recycler on the internet uses.
+   * PRIMARY - deep teal. Used for headings, navbar and structural surfaces.
    */
   pcb: {
-    50: '#EDF5F1',
-    100: '#D6E9E0',
-    200: '#ADD2C2',
-    300: '#7EB6A0',
-    400: '#4F977E',
-    500: '#2E7A61',
-    600: '#1F624D',
-    700: '#184E3E',
-    800: '#123C30',
-    900: '#0E2F26',
-    950: '#08201A',
+    50: '#E8F4F9',
+    100: '#C8E5F2',
+    200: '#94CEE5',
+    300: '#5AB3D4',
+    400: '#2D99C2',
+    500: '#087FA5',
+    600: '#065F85',
+    700: '#013F5D',
+    800: '#01334D',
+    900: '#01283E',
+    950: '#001A2B',
   },
 
   /**
-   * COPPER - accent. The single most valuable fraction recovered from e-waste,
-   * and the reason urban mining is commercially viable. Used sparingly: CTAs,
-   * data emphasis, the fraction bar. Never as a background wash.
+   * ACCENT - green. Used sparingly: CTAs, data emphasis, the fraction bar.
+   * Never as a background wash.
    */
   copper: {
-    50: '#FBF2EC',
-    100: '#F5E1D2',
-    200: '#E9C0A3',
-    300: '#DB9C72',
-    400: '#CC7C4A',
-    500: '#B4682F',
-    600: '#995427',
-    700: '#7A4220',
-    800: '#5F341A',
-    900: '#4A2915',
-    950: '#2B170C',
+    50: '#EDFCE5',
+    100: '#D5F8C5',
+    200: '#AEF192',
+    300: '#7DE559',
+    400: '#53D62B',
+    500: '#39D900',
+    600: '#16A800',
+    700: '#128A00',
+    800: '#0F6D00',
+    900: '#0B5200',
+    950: '#073500',
   },
 
   /**
-   * ALUMINIUM - neutrals. Cool grey with a faint green cast so it sits with the
-   * primary instead of fighting it. 50 is the page background; 950 is graphite,
-   * the colour of shredded ferrous output, used for dark sections and footer.
+   * NEUTRALS - cool grey tuned to sit with the teal primary instead of fighting
+   * it. 50 is the page background; 950 is graphite, used for dark sections
+   * and footer.
    */
   aluminium: {
     0: '#FFFFFF',
-    25: '#FAFBFA',
-    50: '#F4F6F3',
-    100: '#EAEEEA',
-    200: '#DBE1DC',
-    300: '#C2CBC4',
-    400: '#9AA69D',
-    500: '#78857A',
-    600: '#5C6961',
-    700: '#47524B',
-    800: '#333B36',
-    900: '#232925',
-    950: '#14181A',
+    25: '#FAFCFC',
+    50: '#F4F7F8',
+    100: '#E8EDF0',
+    200: '#D4DCE0',
+    300: '#B8C4CA',
+    400: '#8E9EA6',
+    500: '#6A7C85',
+    600: '#516169',
+    700: '#3D4A51',
+    800: '#2C363B',
+    900: '#1E2529',
+    950: '#12191C',
   },
 
   /**
@@ -527,16 +525,16 @@ const layout = {
 
 const elevation = {
   none: 'none',
-  xs: '0 1px 2px rgba(14, 47, 38, 0.05)',
-  sm: '0 1px 2px rgba(14, 47, 38, 0.05), 0 2px 6px rgba(14, 47, 38, 0.05)',
-  md: '0 1px 3px rgba(14, 47, 38, 0.06), 0 6px 16px rgba(14, 47, 38, 0.07)',
-  lg: '0 2px 6px rgba(14, 47, 38, 0.06), 0 14px 32px rgba(14, 47, 38, 0.09)',
-  xl: '0 4px 10px rgba(14, 47, 38, 0.07), 0 26px 56px rgba(14, 47, 38, 0.12)',
+  xs: '0 1px 2px rgba(1, 63, 93, 0.05)',
+  sm: '0 1px 2px rgba(1, 63, 93, 0.05), 0 2px 6px rgba(1, 63, 93, 0.05)',
+  md: '0 1px 3px rgba(1, 63, 93, 0.06), 0 6px 16px rgba(1, 63, 93, 0.07)',
+  lg: '0 2px 6px rgba(1, 63, 93, 0.06), 0 14px 32px rgba(1, 63, 93, 0.09)',
+  xl: '0 4px 10px rgba(1, 63, 93, 0.07), 0 26px 56px rgba(1, 63, 93, 0.12)',
   /** Inset hairline - carries card definition so shadows can stay quiet. */
-  hairline: 'inset 0 0 0 1px rgba(14, 47, 38, 0.07)',
+  hairline: 'inset 0 0 0 1px rgba(1, 63, 93, 0.07)',
   hairlineInverse: 'inset 0 0 0 1px rgba(255, 255, 255, 0.10)',
-  header: '0 1px 0 rgba(14, 47, 38, 0.07)',
-  headerScrolled: '0 1px 0 rgba(14, 47, 38, 0.09), 0 8px 24px rgba(14, 47, 38, 0.06)',
+  header: '0 1px 0 rgba(1, 63, 93, 0.07)',
+  headerScrolled: '0 1px 0 rgba(1, 63, 93, 0.09), 0 8px 24px rgba(1, 63, 93, 0.06)',
   focusRing: '0 0 0 3px rgba(46, 122, 97, 0.32)',
   focusRingAccent: '0 0 0 3px rgba(180, 104, 47, 0.32)',
   focusRingInverse: '0 0 0 3px rgba(255, 255, 255, 0.45)',
@@ -621,7 +619,7 @@ const signature = {
   /** Weighbridge grid - 1px background grid on dark sections, at 6% opacity. */
   grid: {
     size: '56px',
-    lineLight: 'rgba(14, 47, 38, 0.045)',
+    lineLight: 'rgba(1, 63, 93, 0.045)',
     lineDark: 'rgba(255, 255, 255, 0.05)',
   },
 };
