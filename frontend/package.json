@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "next build --webpack",
     "sync-theme": "node scripts/sync-theme.js",
     "prebuild": "node scripts/sync-theme.js",
     "start": "next start",

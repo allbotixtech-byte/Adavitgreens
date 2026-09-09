@@ -6,48 +6,48 @@
   --font-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
   --font-data: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
 
-  /* ---- Primary (Deep Teal) - headings, navbar, structure ---- */
-  --color-primary-50: #E8F4F9;
-  --color-primary-100: #C8E5F2;
-  --color-primary-200: #94CEE5;
-  --color-primary-300: #5AB3D4;
-  --color-primary-400: #2D99C2;
-  --color-primary-500: #087FA5;
-  --color-primary-600: #065F85;
-  --color-primary-700: #013F5D;
-  --color-primary-800: #01334D;
-  --color-primary-900: #01283E;
-  --color-primary-950: #001A2B;
+  /* ---- Primary (PCB / Solder-mask Green) ---- */
+  --color-primary-50: #EDF5F1;
+  --color-primary-100: #D6E9E0;
+  --color-primary-200: #ADD2C2;
+  --color-primary-300: #7EB6A0;
+  --color-primary-400: #4F977E;
+  --color-primary-500: #2E7A61;
+  --color-primary-600: #1F624D;
+  --color-primary-700: #184E3E;
+  --color-primary-800: #123C30;
+  --color-primary-900: #0E2F26;
+  --color-primary-950: #08201A;
 
-  /* ---- Secondary (Neutral) - backgrounds, borders, muted text ---- */
+  /* ---- Secondary (Aluminium / Neutrals) ---- */
   --color-secondary-0: #FFFFFF;
-  --color-secondary-25: #FAFCFC;
-  --color-secondary-50: #F4F7F8;
-  --color-secondary-100: #E8EDF0;
-  --color-secondary-200: #D4DCE0;
-  --color-secondary-300: #B8C4CA;
-  --color-secondary-400: #8E9EA6;
-  --color-secondary-500: #6A7C85;
-  --color-secondary-600: #516169;
-  --color-secondary-700: #3D4A51;
-  --color-secondary-800: #2C363B;
-  --color-secondary-900: #1E2529;
-  --color-secondary-950: #12191C;
+  --color-secondary-25: #FAFBFA;
+  --color-secondary-50: #F4F6F3;
+  --color-secondary-100: #EAEEEA;
+  --color-secondary-200: #DBE1DC;
+  --color-secondary-300: #C2CBC4;
+  --color-secondary-400: #9AA69D;
+  --color-secondary-500: #78857A;
+  --color-secondary-600: #5C6961;
+  --color-secondary-700: #47524B;
+  --color-secondary-800: #333B36;
+  --color-secondary-900: #232925;
+  --color-secondary-950: #14181A;
 
-  /* ---- Accent (Green) - CTA buttons, highlights ---- */
-  --color-accent-50: #EDFCE5;
-  --color-accent-100: #D5F8C5;
-  --color-accent-200: #AEF192;
-  --color-accent-300: #7DE559;
-  --color-accent-400: #53D62B;
-  --color-accent-500: #39D900;
-  --color-accent-600: #16A800;
-  --color-accent-700: #128A00;
-  --color-accent-800: #0F6D00;
-  --color-accent-900: #0B5200;
-  --color-accent-950: #073500;
+  /* ---- Accent (Copper) ---- */
+  --color-accent-50: #FBF2EC;
+  --color-accent-100: #F5E1D2;
+  --color-accent-200: #E9C0A3;
+  --color-accent-300: #DB9C72;
+  --color-accent-400: #CC7C4A;
+  --color-accent-500: #B4682F;
+  --color-accent-600: #995427;
+  --color-accent-700: #7A4220;
+  --color-accent-800: #5F341A;
+  --color-accent-900: #4A2915;
+  --color-accent-950: #2B170C;
 
-  /* ---- Signal (Amber) ---- */
+  /* ---- Signal (Regulatory Amber) ---- */
   --color-signal-50: #FDF6E7;
   --color-signal-100: #FAEAC4;
   --color-signal-300: #F3C766;
@@ -57,18 +57,18 @@
   --color-signal-900: #4E350A;
 
   /* ---- Shadows ---- */
-  --shadow-xs: 0 1px 2px rgba(1, 63, 93, 0.05);
-  --shadow-sm: 0 1px 2px rgba(1, 63, 93, 0.05), 0 2px 6px rgba(1, 63, 93, 0.05);
-  --shadow-md: 0 1px 3px rgba(1, 63, 93, 0.06), 0 6px 16px rgba(1, 63, 93, 0.07);
-  --shadow-lg: 0 2px 6px rgba(1, 63, 93, 0.06), 0 14px 32px rgba(1, 63, 93, 0.09);
-  --shadow-xl: 0 4px 10px rgba(1, 63, 93, 0.07), 0 26px 56px rgba(1, 63, 93, 0.12);
-  --shadow-card: 0 1px 2px rgba(1, 63, 93, 0.05), 0 2px 6px rgba(1, 63, 93, 0.05);
-  --shadow-card-hover: 0 2px 6px rgba(1, 63, 93, 0.06), 0 14px 32px rgba(1, 63, 93, 0.09);
-  --shadow-button: 0 1px 2px rgba(1, 63, 93, 0.05), 0 2px 6px rgba(1, 63, 93, 0.05);
-  --shadow-button-hover: 0 1px 3px rgba(1, 63, 93, 0.06), 0 6px 16px rgba(1, 63, 93, 0.07);
-  --shadow-header: 0 1px 0 rgba(1, 63, 93, 0.07);
+  --shadow-xs: 0 1px 2px rgba(14, 47, 38, 0.05);
+  --shadow-sm: 0 1px 2px rgba(14, 47, 38, 0.05), 0 2px 6px rgba(14, 47, 38, 0.05);
+  --shadow-md: 0 1px 3px rgba(14, 47, 38, 0.06), 0 6px 16px rgba(14, 47, 38, 0.07);
+  --shadow-lg: 0 2px 6px rgba(14, 47, 38, 0.06), 0 14px 32px rgba(14, 47, 38, 0.09);
+  --shadow-xl: 0 4px 10px rgba(14, 47, 38, 0.07), 0 26px 56px rgba(14, 47, 38, 0.12);
+  --shadow-card: 0 1px 2px rgba(14, 47, 38, 0.05), 0 2px 6px rgba(14, 47, 38, 0.05);
+  --shadow-card-hover: 0 2px 6px rgba(14, 47, 38, 0.06), 0 14px 32px rgba(14, 47, 38, 0.09);
+  --shadow-button: 0 1px 2px rgba(14, 47, 38, 0.05), 0 2px 6px rgba(14, 47, 38, 0.05);
+  --shadow-button-hover: 0 1px 3px rgba(14, 47, 38, 0.06), 0 6px 16px rgba(14, 47, 38, 0.07);
+  --shadow-header: 0 1px 0 rgba(14, 47, 38, 0.07);
 
-  /* ---- Animations ---- */
+  /* ---- Custom Animations ---- */
   --animate-fade-in: fade-in 0.3s ease-out;
   --animate-slide-in-from-top: slide-in-from-top 0.3s ease-out;
 }
