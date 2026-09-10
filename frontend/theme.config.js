@@ -278,37 +278,46 @@ const semantic = {
 
 const typography = {
   families: {
-    /** Display - Archivo. Grotesque with signage DNA; variable width axis lets
-     *  hero type go expanded without a second family. */
+    /** Display - Bricolage Grotesque. Headings run at a light weight with tight
+     *  tracking; the optical-size and width axes keep hero type from going brittle. */
     display: {
-      stack: '"Archivo", "Helvetica Neue", Arial, sans-serif',
+      stack: '"Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif',
       variable: true,
-      axes: { wght: [400, 700], wdth: [100, 125] },
-      google: 'Archivo:wdth,wght@100..125,400..700',
+      axes: { wght: [400, 700], wdth: [75, 100], opsz: [12, 96] },
+      google: 'Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..700',
     },
-    /** Body - Instrument Sans. Humanist, quiet, high x-height at small sizes. */
+    /** Body - Geist. Neutral, high x-height, reads cleanly at small sizes. */
     body: {
-      stack:
-        '"Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif',
+      stack: '"Geist", ui-sans-serif, system-ui, sans-serif',
       variable: true,
-      axes: { wght: [400, 600] },
-      google: 'Instrument+Sans:wght@400;500;600',
+      axes: { wght: [400, 700] },
+      google: 'Geist:wght@400;500;600;700',
     },
-    /** Data - JetBrains Mono. Tonnage, authorisation numbers, manifest IDs,
+    /** Data - Geist Mono. Tonnage, authorisation numbers, manifest IDs,
      *  certificate references. A recycler's credibility is its documentation;
      *  giving numbers their own face makes that legible at a glance. */
     data: {
-      stack: '"JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace',
-      google: 'JetBrains+Mono:wght@400;500;700',
+      stack: '"Geist Mono", ui-monospace, "SF Mono", Menlo, monospace',
+      variable: true,
+      axes: { wght: [400, 700] },
+      google: 'Geist+Mono:wght@400;500;700',
+    },
+    /** Serif - Instrument Serif italic. Reserved for the emphasised word inside
+     *  a heading (`<em>`), set in the accent colour. Never for body copy. */
+    serif: {
+      stack: '"Instrument Serif", ui-serif, Georgia, serif',
+      google: 'Instrument+Serif:ital@0;1',
     },
   },
 
-  /** One Google Fonts request for all three. */
+  /** One Google Fonts request for all four. The app itself loads these through
+   *  next/font in app/layout.js; this href is the fallback for static exports. */
   googleFontsHref:
     'https://fonts.googleapis.com/css2' +
-    '?family=Archivo:wdth,wght@100..125,400..700' +
-    '&family=Instrument+Sans:wght@400;500;600' +
-    '&family=JetBrains+Mono:wght@400;500;700' +
+    '?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400..700' +
+    '&family=Geist:wght@400;500;600;700' +
+    '&family=Geist+Mono:wght@400;500;700' +
+    '&family=Instrument+Serif:ital@0;1' +
     '&display=swap',
 
   /**

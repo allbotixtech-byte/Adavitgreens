@@ -1,18 +1,37 @@
-import { Archivo, Instrument_Sans } from "next/font/google";
+import { Bricolage_Grotesque, Geist, Geist_Mono, Instrument_Serif } from "next/font/google";
 import "./globals.css";
 import ConditionalLayout from "@/components/layout/ConditionalLayout";
 
-const archivo = Archivo({
+/** Display - Bricolage Grotesque. Headings, at a light weight with tight tracking. */
+const bricolage = Bricolage_Grotesque({
   variable: "--font-heading",
   subsets: ["latin"],
   weight: ["400", "500", "600", "700"],
   display: "swap",
 });
 
-const instrumentSans = Instrument_Sans({
+/** Body - Geist. */
+const geist = Geist({
   variable: "--font-body",
   subsets: ["latin"],
-  weight: ["400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+});
+
+/** Data - Geist Mono. Tonnage, authorisation numbers, manifest IDs. */
+const geistMono = Geist_Mono({
+  variable: "--font-data",
+  subsets: ["latin"],
+  weight: ["400", "500", "700"],
+  display: "swap",
+});
+
+/** Accent - Instrument Serif italic, for the emphasised word inside a heading. */
+const instrumentSerif = Instrument_Serif({
+  variable: "--font-serif",
+  subsets: ["latin"],
+  weight: "400",
+  style: ["normal", "italic"],
   display: "swap",
 });
 
@@ -103,7 +122,7 @@ export default function RootLayout({ children }) {
     <html
       lang="en"
       data-scroll-behavior="smooth"
-      className={`${archivo.variable} ${instrumentSans.variable}`}
+      className={`${bricolage.variable} ${geist.variable} ${geistMono.variable} ${instrumentSerif.variable}`}
     >
       <body className="min-h-screen flex flex-col antialiased">
         <ConditionalLayout>{children}</ConditionalLayout>

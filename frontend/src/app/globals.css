@@ -2,9 +2,10 @@
 
 @theme inline {
   /* ---- Fonts ---- */
-  --font-heading: "Archivo", "Helvetica Neue", Arial, sans-serif;
-  --font-body: "Instrument Sans", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
-  --font-data: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-heading: "Bricolage Grotesque", ui-sans-serif, system-ui, sans-serif;
+  --font-body: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-data: "Geist Mono", ui-monospace, "SF Mono", Menlo, monospace;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
 
   /* ---- Primary (Deep Teal) ---- */
   --color-primary-50: #E8F4F9;
@@ -85,6 +86,7 @@ html {
 }
 
 body {
+  font-family: var(--font-body);
   color: #1E2529;
   background-color: #F4F7F8;
   line-height: 1.75;
@@ -93,16 +95,45 @@ body {
   overflow-x: hidden;
 }
 
+/* Display type: Bricolage Grotesque at a light weight with tight tracking.
+   Larger headings run tighter; h4-h6 keep a readable line-height. */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 700;
-  line-height: 1.25;
-  letter-spacing: -0.01em;
+  font-family: var(--font-heading);
+  font-weight: 400;
+  letter-spacing: -0.035em;
+  line-height: 1.06;
+  text-wrap: balance;
 }
 
-h1 { font-size: clamp(2.25rem, 5vw, 3.5rem); }
-h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); }
-h3 { font-size: clamp(1.25rem, 3vw, 1.625rem); }
-h4 { font-size: 1.25rem; }
+h1 { font-size: clamp(2.25rem, 5vw, 3.5rem); line-height: 1.0; }
+h2 { font-size: clamp(1.75rem, 4vw, 2.5rem); line-height: 1.04; }
+h3 { font-size: clamp(1.25rem, 3vw, 1.625rem); letter-spacing: -0.02em; line-height: 1.18; }
+h4 { font-size: 1.25rem; letter-spacing: -0.02em; line-height: 1.25; }
+h5, h6 { letter-spacing: -0.015em; line-height: 1.3; }
+
+/* The emphasised word inside a heading switches to italic Instrument Serif in
+   the accent colour. This pairing is the whole personality of the type system —
+   reserve <em> in a heading for it, and never use it for body emphasis. */
+h1 em, h2 em, h3 em, h4 em {
+  font-family: var(--font-serif);
+  font-style: italic;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  color: var(--color-accent-600);
+}
+
+/* Wide-tracked mono label. Section eyebrows, stat captions, data callouts. */
+.micro {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-data);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--color-secondary-500);
+}
 
 p { line-height: 1.8; }
 

@@ -23,6 +23,9 @@ function buildThemeBlock() {
   lines.push(`  --font-heading: ${theme.typography.families.display.stack};`);
   lines.push(`  --font-body: ${theme.typography.families.body.stack};`);
   lines.push(`  --font-data: ${theme.typography.families.data.stack};`);
+  if (theme.typography.families.serif) {
+    lines.push(`  --font-serif: ${theme.typography.families.serif.stack};`);
+  }
   lines.push("");
 
   const colorMap = [
