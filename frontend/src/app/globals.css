@@ -165,6 +165,29 @@ a {
 }
 
 /* ============================================
+   SOCIAL LINKS
+   ============================================ */
+
+/* Footer brand marks. Neutral chip at rest, accent green on hover — the same
+   accent the primary CTAs use, so the footer reads as part of the same system. */
+.social-link {
+  background-color: var(--color-secondary-100);
+  color: var(--color-primary-800);
+  transition: background-color 200ms ease, color 200ms ease, transform 200ms ease;
+}
+
+.social-link:hover {
+  background-color: var(--color-accent-600);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.social-link:focus-visible {
+  background-color: var(--color-accent-600);
+  color: #ffffff;
+}
+
+/* ============================================
    BUTTONS
    ============================================ */
 

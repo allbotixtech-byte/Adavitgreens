@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Phone, Mail, MapPin } from "lucide-react";
 import { companyInfo, footerLinks } from "@/data/navigation";
+import SocialIcon, { SOCIAL_LABELS, hasSocialIcon } from "@/components/ui/SocialIcon";
 
 export default function Footer() {
   return (
@@ -25,19 +26,26 @@ export default function Footer() {
             <p className="text-sm leading-relaxed max-w-[280px]" style={{ color: "var(--color-secondary-600)" }}>
               {companyInfo.legalName} is an authorised recycler committed to responsible resource recovery from electronic, plastic and battery waste.
             </p>
-            <div className="flex items-center gap-3 mt-5">
-              {Object.entries(companyInfo.social).map(([name, href]) => (
-                <a
-                  key={name}
-                  href={href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-8 h-8 rounded-md flex items-center justify-center transition-colors text-[11px] font-mono uppercase"
-                  style={{ backgroundColor: "var(--color-secondary-100)", color: "var(--color-secondary-600)" }}
-                >
-                  {name[0].toUpperCase()}
-                </a>
-              ))}
+            <div className="flex items-center gap-2.5 mt-5">
+              {Object.entries(companyInfo.social)
+                .filter(([name]) => hasSocialIcon(name))
+                .map(([name, href]) => {
+                  // Placeholder hrefs must not open an empty tab.
+                  const isLive = href && href !== "#";
+                  return (
+                    <a
+                      key={name}
+                      href={href}
+                      aria-label={SOCIAL_LABELS[name] || name}
+                      {...(isLive
+                        ? { target: "_blank", rel: "noopener noreferrer" }
+                        : {})}
+                      className="social-link w-9 h-9 rounded-md flex items-center justify-center"
+                    >
+                      <SocialIcon name={name} size={16} />
+                    </a>
+                  );
+                })}
             </div>
           </div>
 
